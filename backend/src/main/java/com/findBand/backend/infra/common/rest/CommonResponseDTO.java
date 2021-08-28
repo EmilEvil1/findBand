@@ -1,4 +1,4 @@
-package com.findBand.backend.infra.adapters.common.rest;
+package com.findBand.backend.infra.common.rest;
 
 import java.io.Serializable;
 
