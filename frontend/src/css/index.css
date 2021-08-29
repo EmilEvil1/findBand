@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #272727;
+  color: white;
+  font-family: 'MA-Regular'
+}
+
+@font-face {
+  font-family: 'MA-Regular';
+  src: url('./../font/Montserrat_Alternates/MontserratAlternates-Regular.ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MA-Bold';
+  src: url('./../font/Montserrat_Alternates/MontserratAlternates-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
