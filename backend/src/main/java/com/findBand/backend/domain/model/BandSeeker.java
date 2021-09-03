@@ -5,8 +5,6 @@ import lombok.Data;
 
 @Data
 @Builder
-public class BandSeeker {
-    private String name;
-    private String phone;
-    private String email;
+public class BandSeeker extends User {
+
 }
