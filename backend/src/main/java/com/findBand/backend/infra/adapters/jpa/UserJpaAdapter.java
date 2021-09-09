@@ -1,6 +1,6 @@
 package com.findBand.backend.infra.adapters.jpa;
 
-import com.findBand.backend.domain.model.User;
+import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.port.UserPort;
 import com.findBand.backend.infra.adapters.jpa.entity.UserEntity;
 import com.findBand.backend.infra.adapters.jpa.repository.UserJpaRepository;
@@ -14,12 +14,12 @@ public class UserJpaAdapter implements UserPort {
     private UserJpaRepository userJpaRepository;
 
     @Override
-    public Optional<User> findUserByEmail(String email) {
+    public Optional<UserDomain> findUserByEmail(String email) {
         return userJpaRepository.findByEmail(email).map(this::toDomain);
     }
 
-    private User toDomain(UserEntity userEntity) {
-        return User.builder()
+    private UserDomain toDomain(UserEntity userEntity) {
+        return UserDomain.builder()
           .email(userEntity.getEmail())
           .password(userEntity.getPassword())
           .phone(userEntity.getPhone())

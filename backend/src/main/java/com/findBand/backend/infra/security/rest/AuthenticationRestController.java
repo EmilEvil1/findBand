@@ -1,5 +1,6 @@
 package com.findBand.backend.infra.security.rest;
 
+import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.useCase.UserCreate;
 import com.findBand.backend.infra.common.rest.BaseController;
 import com.findBand.backend.infra.common.rest.Response;
@@ -13,10 +14,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -31,17 +36,26 @@ public class AuthenticationRestController extends BaseController {
     }
 
     @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
     public Response<JWTToken> register(RegisterDTO registerDTO) {
         UserCreate userCreate = new UserCreate();
         userCreate.setUserName(registerDTO.getUsername());
         userCreate.setEmail(registerDTO.getEmail());
         userCreate.setPassword(registerDTO.getPassword());
-        publish();
+        UserDomain createdUser = publish(UserDomain.class, userCreate);
 
-        String jwt = tokenProvider.createToken(authentication, true);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                registerDTO.getUsername(),
+                registerDTO.getPassword(),
+                Collections.singleton(new SimpleGrantedAuthority(createdUser.getUserRole().toString())));
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+        String jwt = tokenProvider.createToken(authenticationToken, true);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+
+        return respond(new JWTToken(jwt));
     }
 
     @PostMapping("/authenticate")

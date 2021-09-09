@@ -1,8 +1,7 @@
 package com.findBand.backend.infra.security;
 
-import com.findBand.backend.domain.model.User;
+import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.port.UserPort;
-import com.findBand.backend.infra.adapters.jpa.repository.UserJpaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -39,7 +38,7 @@ public class UserModelDetailsService implements UserDetailsService {
 
    }
 
-   private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {
+   private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, UserDomain user) {
       if (!user.isActivated()) {
          throw new UserNotActivatedException("User " + lowercaseLogin + " was not activated");
       }
