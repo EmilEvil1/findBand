@@ -59,6 +59,7 @@ public class AuthenticationRestController extends BaseController {
     }
 
     @PostMapping("/authenticate")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<JWTToken> authorize(LoginDTO loginDTO) {
         UsernamePasswordAuthenticationToken authenticationToken =
           new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());

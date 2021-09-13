@@ -19,7 +19,7 @@ public class ResponseBuilder {
         return new Response<>(item);
     }
 
-    public static Response<ErrorResponse> build(ErrorResponse errorResponse) {
+    public static Response build(ErrorResponse errorResponse) {
         return new Response<>(errorResponse);
     }
 }
