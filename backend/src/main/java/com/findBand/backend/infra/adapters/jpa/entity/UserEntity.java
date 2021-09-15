@@ -5,10 +5,11 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data
-@Entity
-@Table(name = "user")
+@Entity(name = "user")
+@Table(name = "findband_user")
 public class UserEntity {
 
+    @Id
     @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
