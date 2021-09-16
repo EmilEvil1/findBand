@@ -14,6 +14,10 @@ public class UserJpaAdapter implements UserPort {
 
     private UserJpaRepository userJpaRepository;
 
+    public UserJpaAdapter(UserJpaRepository userJpaRepository) {
+        this.userJpaRepository = userJpaRepository;
+    }
+
     @Override
     public Optional<UserDomain> findUserByEmail(String email) {
         return userJpaRepository.findByEmail(email).map(this::toDomain);
