@@ -16,10 +16,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
@@ -37,7 +34,7 @@ public class AuthenticationRestController extends BaseController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response<JWTToken> register(RegisterDTO registerDTO) {
+    public Response<JWTToken> register(@RequestBody RegisterDTO registerDTO) {
         UserCreate userCreate = new UserCreate();
         userCreate.setUserName(registerDTO.getUsername());
         userCreate.setEmail(registerDTO.getEmail());
@@ -60,9 +57,9 @@ public class AuthenticationRestController extends BaseController {
 
     @PostMapping("/authenticate")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<JWTToken> authorize(LoginDTO loginDTO) {
+    public ResponseEntity<JWTToken> authorize(@RequestBody LoginDTO loginDTO) {
         UsernamePasswordAuthenticationToken authenticationToken =
-          new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());
+          new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
