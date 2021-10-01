@@ -1,13 +1,13 @@
 import React from 'react';
 import {Container, Grid} from "@material-ui/core";
-import SignForms from "../../components/common/SignForms";
+import SignForms from "../../components/Forms";
 
 const Auth = () => {
     return (
         <Grid>
-            <Container>
+            {/*<Container>*/}
                 <SignForms />
-            </Container>
+            {/*</Container>*/}
         </Grid>
     );
 };
