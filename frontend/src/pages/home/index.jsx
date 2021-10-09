@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {Box, Container, Grid} from "@material-ui/core";
+import {Box, Container, Grid, Typography} from "@material-ui/core";
 import {getTestInformation} from "../../store/thunks/thunks";
 import Sidebar from "../../components/common/Sidebar";
 
@@ -16,10 +16,10 @@ const Home = () => {
 
     return (
         <Grid>
+            <Sidebar />
             <Container>
                 <Box>
-                    HOME PAGE
-                    <Sidebar />
+                    <Typography variant='h2'>HOME PAGE</Typography>
                 </Box>
             </Container>
         </Grid>

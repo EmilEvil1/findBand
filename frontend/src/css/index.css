@@ -4,7 +4,9 @@
 body {
   margin: 0;
   background: #272727;
-  color: white;
+}
+
+a {
   font-family: 'MA-Regular'
 }
 

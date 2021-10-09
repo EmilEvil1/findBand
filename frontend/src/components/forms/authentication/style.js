@@ -18,12 +18,14 @@ export const useStyles = makeStyles({
     signUp: {
         left: 0,
         width: '50%',
+        display: "flex",
+        justifyContent: "center",
         opacity: 1,
         zIndex: 1,
         transform: 'translateX(100%)'
     },
     signUpActive: {
-        transform: 'translateX(120%)',
+        transform: 'translateX(85%)',
         opacity: 0,
         zIndex: 5
     },
@@ -32,12 +34,13 @@ export const useStyles = makeStyles({
         justifyContent: "center",
         alignItems: "center",
         width: '50%',
-        // opacity: 1,
         zIndex: 2,
-        transform: 'translateX(0%)'
+        transform: 'translateX(0%)',
+        opacity: 1,
     },
     signInActive: {
-        transform: 'translateX(30%)'
+        transform: 'translateX(15%)',
+        opacity: 0
     },
     overlayContainer: {
         position: 'absolute',
@@ -48,9 +51,9 @@ export const useStyles = makeStyles({
         overflow: 'hidden',
         transition: 'transform 0.6s ease-in-out',
         zIndex: 100,
+        opacity: 1
     },
     overlay: {
-        background: 'linear-gradient(219.08deg, #0F5D62 -28.98%, #789F8B 132.22%);',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: '0 0',
@@ -75,13 +78,21 @@ export const useStyles = makeStyles({
         width: '50%',
         transform: 'translateX(0)',
         transition: 'transform 0.6s ease-in-out',
+        '&:nth-child(1)': {
+            background: 'linear-gradient(219.08deg, #0F5D62 -28.98%, #789F8B 132.22%)',
+            borderRadius: '0px 35px 35px 0px'
+        },
+        '&:nth-child(2)': {
+            background: 'linear-gradient(145.01deg, #E06B51 -25.24%, #DEB85B 136.14%)',
+            borderRadius: '35px 0px 0px 35px'
+        }
     },
     overlayLeftActive: {
-        transform: 'translateX(0)'
+        transform: 'translateX(0)',
     },
     overlayRight: {
         right: 0,
-        transform: 'translateX(0)'
+        transform: 'translateX(0)',
     },
     overlayContainerActive: {
         transform: 'translateX(-100%)'
@@ -90,6 +101,7 @@ export const useStyles = makeStyles({
         transform: 'translateX(50%)'
     },
     signUpWrapper : {
+        width: '50%',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -99,6 +111,59 @@ export const useStyles = makeStyles({
     inputsWrapper: {
         display: "flex",
         flexDirection: "column",
-        color: "white"
+        color: "white",
+    },
+    formWrapper: {
+        width: '50%'
+    },
+    formControl: {
+        width: '100%',
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column"
+    },
+    authServicesWrapper: {
+        marginTop: 50,
+        width: '100%',
+        display: "flex",
+        justifyContent: "space-around",
+        alignItems: "center"
+    },
+    iconServiceWrapper: {
+        cursor: "pointer"
+    },
+    field: {
+        marginTop: 35
+    },
+    forgotPasswordLink: {
+        margin: '50px 0 25px',
+        color: 'white',
+    },
+    signUpBtn: {
+        marginTop: 30
+    },
+    passwordField: {
+        position: "relative",
+        width: '100%'
+    },
+    passwordIcon: {
+        paddingRight: 20,
+        position: "absolute",
+        right: 0,
+        top: '50%',
+        cursor: "pointer"
+    },
+    passwordFieldWithHelper: {
+        top: '33%',
+    },
+    errorText: {
+        color: '#f44336',
+        position: "absolute"
+    },
+    selectField: {
+        background: 'black'
+    },
+    select: {
+        width: '100%'
     }
 });
