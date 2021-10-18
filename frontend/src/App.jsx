@@ -8,6 +8,7 @@ import {theme} from "./helpers/theme";
 import Home from "./pages/home";
 import Auth from "./pages/auth";
 
+import "./css/banner.css";
 
 const App = () => {
 

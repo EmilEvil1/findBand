@@ -1,0 +1,7 @@
+#root div .alice-carousel {
+    position: absolute;
+}
+
+#root div div div div .alice-carousel {
+    position: relative;
+}

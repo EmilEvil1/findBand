@@ -6,6 +6,7 @@ import {useStyles} from "../style";
 import AuthServices from "./AuthServices";
 import IconPassword from "../../../../assets/icons/password";
 import {eventToggle} from "../../../../helpers/utils";
+import {onSubmit} from "../../../../helpers/api";
 
 const SignIn = (props) => {
 
@@ -18,12 +19,10 @@ const SignIn = (props) => {
         reValidateMode: 'onChange',
         defaultValues: {
             email: '',
-            password: ''
+            password: '',
+
         },
     });
-
-    const onSubmit = data => alert(JSON.stringify(data));
-
 
     return (
         <Grid className={classes.formWrapper}>
@@ -34,36 +33,38 @@ const SignIn = (props) => {
             >
                 <Typography component={'span'} variant="h4">Вход</Typography>
                 <AuthServices />
-                <Typography
-                    component={'span'}
-                    style={{margin: '30px 0'}}>
-                    или
-                </Typography>
+                <Typography component={'span'} style={{margin: '30px 0'}}>или</Typography>
                 <TextField
                     type="email"
                     placeholder="Email или телефон"
                     variant="outlined"
-                    label='Логин'
+                    label='Email или телефон'
                     color='primary'
-                    name='email'
+                    // name='email'
                     fullWidth
-                    inputRef={register({
-                        required: 'Заполните поле',
+                    // inputRef={register({
+                    //     required: 'Заполните поле',
+                    //     pattern: {
+                    //         value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    //         message: 'Введите валидную почту',
+                    //     },
+                    // })}
+                    {...register('email', {
+                        required: 'Заполните поле' ,
                         pattern: {
                             value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                             message: 'Введите валидную почту',
                         },
                     })}
-                    autoComplete='email'
-                    error={!!errors.email}
-                    helperText={errors.email &&
-                        (<Typography
-                            component={'span'}
-                            className={classes.errorText}
-                        >
-                            {errors.email.message}
-                        </Typography>)
-                    }
+                    // error={!!errors.email}
+                    // helperText={errors.email &&
+                    //     (<Typography
+                    //         component={'span'}
+                    //         className={classes.errorText}
+                    //     >
+                    //         {errors.email.message}
+                    //     </Typography>)
+                    // }
                 />
                 <Box className={classes.passwordField}>
                     <TextField
@@ -73,24 +74,31 @@ const SignIn = (props) => {
                         variant="outlined"
                         label={'Пароль'}
                         color={'primary'}
-                        name='password'
+                        // name='password'
                         fullWidth
-                        inputRef={register({
-                            required: 'Заполните поле.',
+                        // inputRef={register({
+                        //     required: 'Заполните поле.',
+                        //     minLength: {
+                        //         value: 6,
+                        //         message: 'Пароль должен быть больше 6 символов',
+                        //     },
+                        // })}
+                        {...register('password', {
+                            required: 'Заполните поле' ,
                             minLength: {
                                 value: 6,
                                 message: 'Пароль должен быть больше 6 символов',
                             },
                         })}
-                        error={!!errors.password}
-                        helperText={errors.password &&
-                            (<Typography
-                                component={'span'}
-                                className={classes.errorText}
-                            >
-                                {errors.password.message}
-                            </Typography>)
-                        }
+                        // error={!!errors.password}
+                        // helperText={errors.password &&
+                        //     (<Typography
+                        //         component={'span'}
+                        //         className={classes.errorText}
+                        //     >
+                        //         {errors.password.message}
+                        //     </Typography>)
+                        // }
                     />
                     <Box
                         className={classes.passwordIcon}
