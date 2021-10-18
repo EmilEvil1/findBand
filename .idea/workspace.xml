@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66d654e7-e253-4411-8858-c9936f697db9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/findBand.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +86,7 @@
       <workItem from="1633932096148" duration="43000" />
       <workItem from="1634314787866" duration="18553000" />
       <workItem from="1634373452171" duration="8857000" />
-      <workItem from="1634538785335" duration="1012000" />
+      <workItem from="1634538785335" duration="1384000" />
     </task>
     <servers />
   </component>
