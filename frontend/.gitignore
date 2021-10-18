@@ -1,11 +1,8 @@
-
-
 # dependencies
-node_modules/
+*/node_modules/
 dist/
 target/
-.idea
-
+*.idea
 /.pnp
 .pnp.js
 
@@ -16,7 +13,7 @@ target/
 /build
 
 # misc
-.DS_Store
+*/.DS_Store
 .env.local
 .env.development.local
 .env.test.local
@@ -27,7 +24,7 @@ yarn-debug.log*
 yarn-error.log*
 
 ### IntelliJ IDEA ###
-frontend/.idea
+/frontend/.idea
 *.iws
 *.iml
 *.ipr
@@ -35,15 +32,15 @@ frontend/.idea
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
-/dist/
+*/dist/
 /nbdist/
 /.nb-gradle/
 /build/
 
 ### VS Code ###
-.vscode/
+*.vscode/
 target/
 node
 
 ### Build directory ###
-frontend/public
+*/frontend/public
