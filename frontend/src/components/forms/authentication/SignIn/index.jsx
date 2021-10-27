@@ -14,13 +14,12 @@ const SignIn = (props) => {
     const classes = useStyles()
     const [passwordShown, setPasswordShown] = useState(false);
 
-    const {register, handleSubmit, control, errors} = useForm({
-        mode: 'onChange',
+    const {handleSubmit, control} = useForm({
+        mode: 'onSubmit',
         reValidateMode: 'onChange',
         defaultValues: {
-            email: '',
+            login: '',
             password: '',
-
         },
     });
 
@@ -34,77 +33,66 @@ const SignIn = (props) => {
                 <Typography component={'span'} variant="h4">Вход</Typography>
                 <AuthServices />
                 <Typography component={'span'} style={{margin: '30px 0'}}>или</Typography>
-                <TextField
-                    type="email"
-                    placeholder="Email или телефон"
-                    variant="outlined"
-                    label='Email или телефон'
-                    color='primary'
-                    // name='email'
-                    fullWidth
-                    // inputRef={register({
-                    //     required: 'Заполните поле',
-                    //     pattern: {
-                    //         value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    //         message: 'Введите валидную почту',
-                    //     },
-                    // })}
-                    {...register('email', {
-                        required: 'Заполните поле' ,
-                        pattern: {
-                            value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                            message: 'Введите валидную почту',
-                        },
-                    })}
-                    // error={!!errors.email}
-                    // helperText={errors.email &&
-                    //     (<Typography
-                    //         component={'span'}
-                    //         className={classes.errorText}
-                    //     >
-                    //         {errors.email.message}
-                    //     </Typography>)
-                    // }
-                />
-                <Box className={classes.passwordField}>
-                    <TextField
-                        className={classes.field}
-                        type={passwordShown ? "text" : "password"}
-                        placeholder="Введите пароль"
-                        variant="outlined"
-                        label={'Пароль'}
-                        color={'primary'}
-                        // name='password'
-                        fullWidth
-                        // inputRef={register({
-                        //     required: 'Заполните поле.',
-                        //     minLength: {
-                        //         value: 6,
-                        //         message: 'Пароль должен быть больше 6 символов',
-                        //     },
-                        // })}
-                        {...register('password', {
-                            required: 'Заполните поле' ,
-                            minLength: {
-                                value: 6,
-                                message: 'Пароль должен быть больше 6 символов',
+                <Box>
+                <Box>
+                    <Controller
+                        name="login"
+                        control={control}
+                        defaultValue=""
+                        render={({ field: { onChange, value }, fieldState: { error } }) => (
+                            <TextField
+                                placeholder="Email или телефон"
+                                label="Email или телефон"
+                                variant='outlined'
+                                color='primary'
+                                value={value}
+                                onChange={onChange}
+                                fullWidth
+                                error={!!error}
+                                helperText={error ? error.message : null}
+                            />
+                        )}
+                        rules={{
+                            required: 'Заполните поле',
+                            pattern: {
+                                value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                message: 'Введите валидную почту',
                             },
-                        })}
-                        // error={!!errors.password}
-                        // helperText={errors.password &&
-                        //     (<Typography
-                        //         component={'span'}
-                        //         className={classes.errorText}
-                        //     >
-                        //         {errors.password.message}
-                        //     </Typography>)
-                        // }
+                        }}
                     />
-                    <Box
-                        className={classes.passwordIcon}
-                        onClick={() => eventToggle(passwordShown, setPasswordShown)}
-                    >
-                        <IconPassword />
+                </Box>
+                    <Box className={classes.passwordField}>
+                        <Controller
+                            name="password"
+                            control={control}
+                            defaultValue=""
+                            render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                <TextField
+                                    placeholder="Введите пароль"
+                                    label="Введите пароль"
+                                    variant='outlined'
+                                    color='primary'
+                                    value={value}
+                                    onChange={onChange}
+                                    error={!!error}
+                                    helperText={error ? error.message : null}
+                                    type={passwordShown ? "text" : "password"}
+                                />
+                            )}
+                            rules={{
+                                required: 'Введите пароль',
+                                minLength: {
+                                    value: 6,
+                                    message: 'Пароль должен быть больше 6 символов',
+                                },
+                            }}
+                        />
+                        <Box
+                            className={classes.passwordIcon}
+                            onClick={() => eventToggle(passwordShown, setPasswordShown)}
+                        >
+                            <IconPassword />
+                        </Box>
                     </Box>
                 </Box>
                 <Link
