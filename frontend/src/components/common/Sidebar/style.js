@@ -48,5 +48,11 @@ export const useStyles = makeStyles({
         display: 'flex',
         justifyContent: "space-between",
         alignItems: "center"
+    },
+    arrowRotated: {
+        cursor: "pointer",
+        '& svg': {
+            transform: 'rotate(180deg)'
+        }
     }
 });

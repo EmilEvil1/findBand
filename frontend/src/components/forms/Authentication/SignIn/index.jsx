@@ -1,26 +1,23 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
 import { useForm, Controller } from 'react-hook-form';
 import {Box, Button, Grid, TextField, Typography} from "@material-ui/core";
 import {useStyles} from "../style";
 import AuthServices from "./AuthServices";
 import IconPassword from "../../../../assets/icons/password";
-import {eventToggle} from "../../../../helpers/utils";
+import {eventToggle, openModal} from "../../../../helpers/utils";
 import {onSubmit} from "../../../../helpers/api";
+import ForgetPassword from "../../../modals/ForgetPassword";
 
 const SignIn = (props) => {
 
     const {} = props
     const classes = useStyles()
     const [passwordShown, setPasswordShown] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const {handleSubmit, control} = useForm({
         mode: 'onSubmit',
         reValidateMode: 'onChange',
-        defaultValues: {
-            login: '',
-            password: '',
-        },
     });
 
     return (
@@ -34,33 +31,33 @@ const SignIn = (props) => {
                 <AuthServices />
                 <Typography component={'span'} style={{margin: '30px 0'}}>или</Typography>
                 <Box>
-                <Box>
-                    <Controller
-                        name="login"
-                        control={control}
-                        defaultValue=""
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <TextField
-                                placeholder="Email или телефон"
-                                label="Email или телефон"
-                                variant='outlined'
-                                color='primary'
-                                value={value}
-                                onChange={onChange}
-                                fullWidth
-                                error={!!error}
-                                helperText={error ? error.message : null}
-                            />
-                        )}
-                        rules={{
-                            required: 'Заполните поле',
-                            pattern: {
-                                value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                message: 'Введите валидную почту',
-                            },
-                        }}
-                    />
-                </Box>
+                    <Box>
+                        <Controller
+                            name="login"
+                            control={control}
+                            defaultValue=""
+                            render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                <TextField
+                                    placeholder="Email или телефон"
+                                    label="Email или телефон"
+                                    variant='outlined'
+                                    color='primary'
+                                    value={value}
+                                    onChange={onChange}
+                                    fullWidth
+                                    error={!!error}
+                                    helperText={error ? error.message : null}
+                                />
+                            )}
+                            rules={{
+                                required: 'Заполните поле',
+                                pattern: {
+                                    value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                    message: 'Введите валидную почту',
+                                },
+                            }}
+                        />
+                    </Box>
                     <Box className={classes.passwordField}>
                         <Controller
                             name="password"
@@ -95,13 +92,12 @@ const SignIn = (props) => {
                         </Box>
                     </Box>
                 </Box>
-                <Link
+                <Typography
                     className={classes.forgotPasswordLink}
-                    to="#"
-                    underline="hover"
+                    onClick={() => openModal(setOpen, open)}
                 >
                     Забыли пароль?
-                </Link>
+                </Typography>
                 <Button
                     color={'primary'}
                     type="submit"
@@ -109,6 +105,7 @@ const SignIn = (props) => {
                     Войти
                 </Button>
             </form>
+            {open && (<ForgetPassword open={open} close={setOpen} />)}
         </Grid>
     );
 };

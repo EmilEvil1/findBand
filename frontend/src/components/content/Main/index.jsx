@@ -4,9 +4,10 @@ import {Box, Grid} from "@material-ui/core";
 import {useStyles} from "./style";
 import Quotes from "../../sliders/Quotes";
 import QuoteSymbolIcon from "../../../assets/icons/quoteSymbol";
+import GlobalSearch from "../../forms/GlobalSearch";
 
 
-const SearchBandPanel = (props) => {
+const MainContent = (props) => {
 
     const {} = props
     const dispatch = useDispatch()
@@ -17,11 +18,14 @@ const SearchBandPanel = (props) => {
         <Grid className={classes.formWrapper}>
             <Box className={classes.background} />
             <Box className={classes.quotesSliderWrapper}>
-                <QuoteSymbolIcon />
-                <Quotes />
+                <Box>
+                    <QuoteSymbolIcon />
+                    <Quotes />
+                </Box>
+                <GlobalSearch />
             </Box>
         </Grid>
     );
 };
 
-export default SearchBandPanel;
+export default MainContent;

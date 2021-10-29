@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {Box, Container, Grid, Typography} from "@material-ui/core";
+import {Box, Container, Grid} from "@material-ui/core";
 import {getTestInformation} from "../../store/thunks/thunks";
 import {useStyles} from "../../components/common/Sidebar/style";
 import Sidebar from "../../components/common/Sidebar";
 import Musicians from "../../components/sliders/Musicians";
-import SearchBandPanel from "../../components/forms/search";
+import Main from "../../components/content/Main";
 
 
 const Home = () => {
@@ -21,15 +21,15 @@ const Home = () => {
 
     return (
 
-        <Box className={classes.content}>
+        <Grid className={classes.content}>
             <Sidebar />
             <Musicians />
             <Container>
                 <Box className={classes.searchPanelWrapper}>
-                    <SearchBandPanel />
+                  <Main />
                 </Box>
             </Container>
-        </Box>
+        </Grid>
     );
 };
 

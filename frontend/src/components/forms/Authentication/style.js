@@ -137,7 +137,12 @@ export const useStyles = makeStyles({
     },
     forgotPasswordLink: {
         margin: '50px 0 25px',
-        color: 'white',
+        cursor: "pointer",
+        transition: 'all 0.3s',
+        '&:hover': {
+            transition: 'all 0.3s',
+            borderBottom: '1px solid white'
+        }
     },
     signUpBtn: {
         marginTop: 30
@@ -161,7 +166,7 @@ export const useStyles = makeStyles({
         position: "absolute"
     },
     selectField: {
-        background: 'black'
+        background: '#272727'
     },
     select: {
         width: '100%'

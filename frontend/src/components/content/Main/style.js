@@ -6,7 +6,7 @@ export const useStyles = makeStyles({
         marginTop: 20,
         marginBottom: 20,
         width: '100%',
-        maxWidth: '80%',
+        // maxWidth: '80%',
         zIndex: 2
     },
     background: {

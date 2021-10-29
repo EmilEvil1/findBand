@@ -1,13 +1,13 @@
 import React from 'react';
 import {Grid} from "@material-ui/core";
-import SignForms from "../../components/forms/authentication";
+import Authentication from "../../components/forms/Authentication";
 
 const Auth = () => {
 
     return (
 
         <Grid>
-            <SignForms />
+            <Authentication />
         </Grid>
 
     );
