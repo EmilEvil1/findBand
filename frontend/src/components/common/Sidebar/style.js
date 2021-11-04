@@ -23,9 +23,11 @@ export const useStyles = makeStyles({
         width: '13%',
     },
     sidebarMiddleItems: {
+        height: '100%',
+        width: '100%',
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-between",
         flexDirection: "column"
     },
     menuWrapper: {
@@ -35,7 +37,8 @@ export const useStyles = makeStyles({
     menuItem: {
         marginTop: 30,
         display: "flex",
-        whiteSpace: "nowrap"
+        alignItems: "center",
+        // whiteSpace: "nowrap"
     },
     searchPanelWrapper: {
         width: '100%',
@@ -47,12 +50,22 @@ export const useStyles = makeStyles({
         width: '100%',
         display: 'flex',
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        borderBottom: '2px solid black'
+    },
+    sidebarBottomItems: {
+        padding: '10px 20px',
+        width: '100%',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        borderTop: '2px solid black'
     },
     arrowRotated: {
         cursor: "pointer",
         '& svg': {
-            transform: 'rotate(180deg)'
+            transform: 'rotate(180deg)',
+            cursor: "pointer"
         }
-    }
+    },
 });

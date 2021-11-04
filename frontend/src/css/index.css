@@ -7,7 +7,10 @@ body {
 }
 
 a {
-  font-family: 'MA-Regular'
+  font-family: 'MA-Regular';
+  text-decoration: none;
+  color: black;
+
 }
 
 @font-face {

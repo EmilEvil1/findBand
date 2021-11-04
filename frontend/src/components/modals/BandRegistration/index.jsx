@@ -1,14 +1,16 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {Box, Dialog} from "@material-ui/core";
+import {Box, Button, Dialog, TextField} from "@material-ui/core";
 import {closeModal} from "../../../helpers/utils";
+import {Controller} from "react-hook-form";
+import {useStyles} from "./style";
 
 
 const BandRegistration = (props) => {
 
-    const {open, close} = props
+    const {checked, open, close, control} = props
     const dispatch = useDispatch()
-    // const classes = useStyles()
+    const classes = useStyles()
 
     return (
 
@@ -16,7 +18,51 @@ const BandRegistration = (props) => {
             open={open}
             onClose={() => closeModal(close)}
         >
-            <Box style={{padding: 50}}>ПОЛЯ ДЛЯ МУЗ ГРУППЫ</Box>
+            <Box className={classes.modalWrapper}>
+                <Box>
+                    <Box>
+                        <Controller
+                            name="bandName"
+                            control={control}
+                            defaultValue=""
+                            render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                <TextField
+                                    placeholder="Введите название группы"
+                                    label="Название группы"
+                                    variant='outlined'
+                                    color='primary'
+                                    value={value}
+                                    onChange={onChange}
+                                    fullWidth
+                                    error={!!error}
+                                    helperText={error ? error.message : null}
+                                    required
+                                />
+                            )}
+                        />
+                    </Box>
+                </Box>
+                <Box>
+                    <Button
+                        color='primary'
+                        onClick={() => {
+                            checked(true)
+                            closeModal(close)
+                        }}
+                    >
+                        Добавить
+                    </Button>
+                    <Button
+                        color='primary'
+                        onClick={() => {
+                            checked(false)
+                            closeModal(close)
+                        }}
+                    >
+                        Отменить
+                    </Button>
+                </Box>
+            </Box>
         </Dialog>
     );
 };

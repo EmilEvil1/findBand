@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import {Box, Button, Grid, TextField, Typography} from "@material-ui/core";
 import {useStyles} from "../style";
 import AuthServices from "./AuthServices";
-import IconPassword from "../../../../assets/icons/password";
+import IconPassword from "../../../../assets/icons/auth/password";
 import {eventToggle, openModal} from "../../../../helpers/utils";
 import {onSubmit} from "../../../../helpers/api";
 import ForgetPassword from "../../../modals/ForgetPassword";

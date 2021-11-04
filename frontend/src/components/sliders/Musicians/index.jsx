@@ -1,10 +1,10 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import photo1  from './../../../img/1.jpeg'
-import photo2  from './../../../img/2.jpeg'
-import photo3  from './../../../img/3.jpeg'
-import photo4  from './../../../img/4.jpeg'
-import phote6  from './../../../img/6.jpg'
+import photo1  from '../../../assets/img/1.jpeg'
+import photo2  from '../../../assets/img/2.jpeg'
+import photo3  from '../../../assets/img/3.jpeg'
+import photo4  from '../../../assets/img/4.jpeg'
+import phote6  from '../../../assets/img/6.jpg'
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import {Box} from "@material-ui/core";

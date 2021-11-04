@@ -1,14 +1,8 @@
 import React from 'react';
-import {Box, Typography} from "@material-ui/core";
+import {Grid, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
-
-import HomeIcon from "../../../../assets/icons/sidebar/home";
-import SettingsIcon from "../../../../assets/icons/sidebar/settings";
-import SearchIcon from "../../../../assets/icons/sidebar/search";
-import OptionIcon from "../../../../assets/icons/sidebar/option";
 import {useStyles} from "../style";
-
-
+import UsersIcon from "../../../../assets/icons/sidebar/users";
 
 const Menu = (props) => {
 
@@ -17,24 +11,16 @@ const Menu = (props) => {
 
     return (
 
-        <Box className={classes.menuWrapper}>
+        <Grid className={classes.menuWrapper}>
             <Link className={classes.menuItem} to={'#'}>
-                <SearchIcon />
-                {open && <Typography>Профиль</Typography>}
-            </Link>
-            <Link className={classes.menuItem} to={'#'}>
-                <HomeIcon />
-                {open && <Typography>Группа</Typography>}
+                <UsersIcon />
+                {open && <Typography>Профиль группы</Typography>}
             </Link>
             {/*<Link className={classes.menuItem} to={'#'}>*/}
-            {/*    <SettingsIcon />*/}
-            {/*    {open && <Typography>Настройки</Typography>}*/}
+            {/*    <HomeIcon />*/}
+            {/*    {open && <Typography>Группа</Typography>}*/}
             {/*</Link>*/}
-            {/*<Link className={classes.menuItem} to={'#'}>*/}
-            {/*    <OptionIcon />*/}
-            {/*    {open && <Typography>Поиск</Typography>}*/}
-            {/*</Link>*/}
-        </Box>
+        </Grid>
     );
 };
 

@@ -7,9 +7,8 @@ import {
     MenuItem, Select, InputLabel, Checkbox,
 } from "@material-ui/core";
 import {useStyles} from "../style";
-import IconPassword from "../../../../assets/icons/password";
+import IconPassword from "../../../../assets/icons/auth/password";
 import {Controller, useForm} from "react-hook-form";
-import InputMask from 'react-input-mask';
 import {onSubmit} from "../../../../helpers/api";
 import {eventToggle, handleCheckboxStatus} from "../../../../helpers/utils";
 import FormControl from "@material-ui/core/FormControl";
@@ -19,10 +18,11 @@ const SignUp = (props) => {
 
     const {} = props
     const classes = useStyles()
-    const [open, setOpen] = useState(false);
+
     const [passwordShown, setPasswordShown] = useState(false);
     const [instrument, setInstrument] = useState('');
     const [checked, setChecked] = useState(false);
+    const [confirm, setConfirm] = useState(checked);
 
     const {handleSubmit, control} = useForm({
         mode: 'onSubmit',
@@ -211,15 +211,17 @@ const SignUp = (props) => {
                                 <InputLabel style={{color: "white"}} id="title">
                                     {!value && <Typography style={{color: "white"}}>Регион</Typography>}
                                 </InputLabel>
-                                <Select
+                                <TextField
                                     labelId="title"
                                     value={value}
+                                    select
                                     onChange={onChange}
                                     variant='outlined'
                                     color='primary'
                                     fullWidth
                                     required
-                                    // error={!value}
+                                    error={!!error}
+                                    helperText={error ? error.message : null}
                                     rules={{
                                         required: 'Выберите регион'
                                     }}
@@ -230,7 +232,7 @@ const SignUp = (props) => {
                                     >
                                         Владимир
                                     </MenuItem>
-                                </Select>
+                                </TextField>
                             </FormControl>
                         )}
                     />
@@ -241,21 +243,24 @@ const SignUp = (props) => {
                         control={control}
                         defaultValue={''}
                         render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <FormControl fullWidth style={{display: "flex", alignItems: "center"}}>
+                            // <FormControl fullWidth style={{display: "flex", alignItems: "center"}}>
+                            <Box>
                                 <InputLabel id="title">
                                     {!value && <Typography>Иструмент</Typography>}
                                 </InputLabel>
-                                <Select
+                                <TextField
                                     labelId="title"
+                                    select
                                     value={value}
                                     onChange={onChange}
                                     variant='outlined'
                                     color='primary'
                                     fullWidth
-                                    // error={value}
+                                    required
+                                    error={!!error}
+                                    helperText={error ? error.message : null}
                                     rules={{
-                                        required: 'Потвердите пароль',
-                                        value: value,
+                                        required: 'Выберите',
                                     }}
                                 >
                                     {names.map((name, index) => (
@@ -267,16 +272,27 @@ const SignUp = (props) => {
                                             {name}
                                         </MenuItem>
                                     ))}
-                                </Select>
-                            </FormControl>
+                                </TextField>
+                            </Box>
+                            // </FormControl>
                         )}
                     />
                 </Box>
             </Box>
             <Box>
-                <Checkbox
-                    checked={checked}
-                    onChange={(event) => handleCheckboxStatus(event, setChecked)}
+                <Controller
+                    name="bandCreate"
+                    control={control}
+                    defaultValue={checked}
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <Checkbox
+                            checked={checked}
+                            onChange={(event) => {
+                                handleCheckboxStatus(event, setChecked)
+                                setConfirm(event.target.checked)
+                            }}
+                        />
+                    )}
                 />
                 <Typography>Добавить музыкальную группу</Typography>
             </Box>
@@ -287,7 +303,14 @@ const SignUp = (props) => {
             >
                 Зарегистрироваться
             </Button>
-            {checked && <BandRegistration open={checked} close={setChecked} />}
+            {confirm && (
+                <BandRegistration
+                    open={confirm}
+                    close={setConfirm}
+                    checked={setChecked}
+                    control={control}
+                />
+            )}
         </form>
     );
 };

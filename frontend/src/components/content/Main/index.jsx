@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import {Box, Grid} from "@material-ui/core";
 import {useStyles} from "./style";
 import Quotes from "../../sliders/Quotes";
-import QuoteSymbolIcon from "../../../assets/icons/quoteSymbol";
+import QuoteSymbolIcon from "../../../assets/icons/home/quoteSymbol";
 import GlobalSearch from "../../forms/GlobalSearch";
 
 

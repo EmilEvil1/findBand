@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Box, Container, Grid} from "@material-ui/core";
-import {getTestInformation} from "../../store/thunks/thunks";
+import {getTestInfo} from "../../store/thunks/thunks";
 import {useStyles} from "../../components/common/Sidebar/style";
 import Sidebar from "../../components/common/Sidebar";
 import Musicians from "../../components/sliders/Musicians";
@@ -13,11 +13,8 @@ const Home = () => {
     const info = useSelector(({ state }) => state.info);
     const dispatch = useDispatch()
     const classes = useStyles()
-    console.log('info', info)
 
-    useEffect(() => {
-        dispatch(getTestInformation('https://jsonplaceholder.typicode.com/users'))
-    }, [])
+    useEffect(() => dispatch(getTestInfo), [])
 
     return (
 
