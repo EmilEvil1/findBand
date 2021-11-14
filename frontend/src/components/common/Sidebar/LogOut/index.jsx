@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-// import LogOutIcon from "../../../assets/icons/logOut";
-import {Grid} from "@material-ui/core";
+import {Button} from "@material-ui/core";
+import LogOutIcon from "../../../../assets/icons/sidebar/logOut";
 
 const LogOut = (props) => {
 
@@ -10,10 +10,9 @@ const LogOut = (props) => {
     // const classes = useStyles()
 
     return (
-        <Grid>
-            {/*<LogOutIcon />*/}
-            LOG OUT BTN
-        </Grid>
+        <Button>
+            <LogOutIcon />
+        </Button>
 
     );
 };

@@ -7,11 +7,10 @@ import store from "./store/store";
 import {theme} from "./helpers/theme";
 import Home from "./pages/home";
 import Auth from "./pages/auth";
-
+import Profile from "./pages/profile";
 import "./css/banner.css";
 
 const App = () => {
-
     return (
         <CookiesProvider>
             <Provider store={store}>
@@ -20,6 +19,7 @@ const App = () => {
                         <Switch>
                             <Route exact path='/' component={Home} />
                             <Route exact path='/auth' component={Auth} />
+                            <Route exact path='/profile' component={Profile} />
                         </Switch>
                     </BrowserRouter>
                 </ThemeProvider>

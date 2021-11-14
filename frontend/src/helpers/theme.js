@@ -27,7 +27,12 @@ export const theme = createTheme({
                 // border: "1px solid #FFFFFF",
                 color: "#FFFFFF"
             }
-        }
+        },
+        MuiMenu: {
+            list: {
+                backgroundColor: "#cccccc",
+            },
+        },
     },
     typography: {
         fontFamily: 'MA-Regular',

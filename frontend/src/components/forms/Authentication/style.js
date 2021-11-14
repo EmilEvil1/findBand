@@ -109,9 +109,15 @@ export const useStyles = makeStyles({
         alignItems: 'center',
     },
     inputsWrapper: {
+        width: '100%',
         display: "flex",
         flexDirection: "column",
         color: "white",
+    },
+    inputWrapper: {
+        marginTop: 30,
+        display: "flex",
+        alignItems: "center"
     },
     formWrapper: {
         width: '50%'
@@ -148,6 +154,7 @@ export const useStyles = makeStyles({
         marginTop: 30
     },
     passwordField: {
+        marginTop: 30,
         position: "relative",
         width: '100%'
     },
@@ -155,7 +162,7 @@ export const useStyles = makeStyles({
         paddingRight: 20,
         position: "absolute",
         right: 0,
-        top: '50%',
+        top: '30%',
         cursor: "pointer"
     },
     passwordFieldWithHelper: {
@@ -166,9 +173,9 @@ export const useStyles = makeStyles({
         position: "absolute"
     },
     selectField: {
-        background: '#272727'
+        // background: '#272727'
     },
     select: {
         width: '100%'
-    }
+    },
 });
