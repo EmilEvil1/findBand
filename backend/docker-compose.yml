@@ -1,13 +1,17 @@
 services:
-  web:
+  findband_web:
     build: .
     container_name: findband
     ports:
       - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
     depends_on:
-      - redis
-  redis:
+      - findband_redis
+      - findband_db
+  findband_redis:
     image: redis:latest
+    container_name: findband_redis
     hostname: redis
     ports:
       - "6379:6379"
@@ -15,9 +19,7 @@ services:
     image: 'postgres:13.1-alpine'
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    container_name: db
-    #    ports:
-    #    - 5432:5432
+    container_name: findband_db
     environment:
       - POSTGRES_DB=debts
       - POSTGRES_USER=compose-postgres
