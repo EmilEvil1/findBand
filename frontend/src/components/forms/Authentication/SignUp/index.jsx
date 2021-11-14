@@ -4,15 +4,18 @@ import {
     Button,
     TextField,
     Typography,
-    MenuItem, Select, InputLabel, Checkbox,
+    Checkbox,
 } from "@material-ui/core";
 import {useStyles} from "../style";
 import IconPassword from "../../../../assets/icons/auth/password";
 import {Controller, useForm} from "react-hook-form";
 import {onSubmit} from "../../../../helpers/api";
 import {eventToggle, handleCheckboxStatus} from "../../../../helpers/utils";
-import FormControl from "@material-ui/core/FormControl";
 import BandRegistration from "../../../modals/BandRegistration";
+import ErrorFieldText from "../../../common/ErrorFieldText";
+import InputMask from 'react-input-mask';
+import RegionList from "../../../common/RegionList";
+import InstrumentList from "../../../common/InstrumentList";
 
 const SignUp = (props) => {
 
@@ -20,29 +23,16 @@ const SignUp = (props) => {
     const classes = useStyles()
 
     const [passwordShown, setPasswordShown] = useState(false);
-    const [instrument, setInstrument] = useState('');
     const [checked, setChecked] = useState(false);
     const [confirm, setConfirm] = useState(checked);
 
-    const {handleSubmit, control} = useForm({
+    const {watch, handleSubmit, control} = useForm({
         mode: 'onSubmit',
         reValidateMode: 'onChange',
     });
 
-    const names = [
-        'Гитара',
-        'Барабаны',
-        'Бас-гитара',
-        'Вокал',
-        'Фортепиано',
-        'Скрипка',
-        'Саксофон',
-        'Виолончель',
-        'Флейта',
-        'DJ-контроллер',
-        'Арфа',
-        'Синтезатор',
-    ];
+    // const password = watch("password");
+    // const confirmationPassword = watch("confirmationPassword");
 
     return (
         <form
@@ -52,12 +42,12 @@ const SignUp = (props) => {
         >
             <Typography variant={'h4'}>Регистрация</Typography>
             <Box className={classes.inputsWrapper}>
-                <Box>
+                <Box className={classes.inputWrapper}>
                     <Controller
                         name="name"
                         control={control}
                         defaultValue=""
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        render={({ field: { onChange, value }, fieldState: { error} }) => (
                             <TextField
                                 placeholder="Введите имя"
                                 label="Имя"
@@ -67,27 +57,24 @@ const SignUp = (props) => {
                                 onChange={onChange}
                                 fullWidth
                                 error={!!error}
-                                helperText={error ? error.message : null}
+                                helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
                                 required
-
                             />
                         )}
-                        rules={{
-                            required: 'Введите имя'
-                        }}
+                        rules={{required: 'Введите имя'}}
                     />
                 </Box>
-                <Box>
+                <Box className={classes.inputWrapper}>
                     <Controller
                         name="phone"
                         control={control}
                         defaultValue=""
                         render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            // <InputMask
-                            //     mask="+999999999999"
-                            //     value={value}
-                            //     onChange={onChange}
-                            // >
+                            <InputMask
+                                mask="+9(999)99999999"
+                                value={value}
+                                onChange={onChange}
+                            >
                                 <TextField
                                     placeholder="Телефон"
                                     label="Телефон"
@@ -97,10 +84,10 @@ const SignUp = (props) => {
                                     onChange={onChange}
                                     fullWidth
                                     error={!!error}
-                                    helperText={error ? error.message : null}
+                                    helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
                                     required
                                 />
-                            // </InputMask>
+                             </InputMask>
                         )}
                         rules={{
                             required: 'Заполните поле телефон',
@@ -111,7 +98,7 @@ const SignUp = (props) => {
                         }}
                     />
                 </Box>
-                <Box>
+                <Box className={classes.inputWrapper}>
                     <Controller
                         name="email"
                         control={control}
@@ -126,7 +113,7 @@ const SignUp = (props) => {
                                 onChange={onChange}
                                 fullWidth
                                 error={!!error}
-                                helperText={error ? error.message : null}
+                                helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
                                 required
                             />
                         )}
@@ -153,9 +140,10 @@ const SignUp = (props) => {
                                 value={value}
                                 onChange={onChange}
                                 error={!!error}
-                                helperText={error ? error.message : null}
+                                helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
                                 type={passwordShown ? "text" : "password"}
                                 required
+                                fullWidth
                             />
                         )}
                         rules={{
@@ -187,9 +175,10 @@ const SignUp = (props) => {
                                 value={value}
                                 onChange={onChange}
                                 error={!!error}
-                                helperText={error ? error.message : null}
+                                helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
                                 type="password"
                                 required
+                                fullWidth
                             />
                         )}
                         rules={{
@@ -201,85 +190,10 @@ const SignUp = (props) => {
                         }}
                     />
                 </Box>
-                <Box>
-                    <Controller
-                        name='region'
-                        control={control}
-                        defaultValue={''}
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <FormControl fullWidth style={{display: "flex", alignItems: "center"}}>
-                                <InputLabel style={{color: "white"}} id="title">
-                                    {!value && <Typography style={{color: "white"}}>Регион</Typography>}
-                                </InputLabel>
-                                <TextField
-                                    labelId="title"
-                                    value={value}
-                                    select
-                                    onChange={onChange}
-                                    variant='outlined'
-                                    color='primary'
-                                    fullWidth
-                                    required
-                                    error={!!error}
-                                    helperText={error ? error.message : null}
-                                    rules={{
-                                        required: 'Выберите регион'
-                                    }}
-                                >
-                                    <MenuItem
-                                        className={classes.selectField}
-                                        value={'Vladimir'}
-                                    >
-                                        Владимир
-                                    </MenuItem>
-                                </TextField>
-                            </FormControl>
-                        )}
-                    />
-                </Box>
-                <Box>
-                    <Controller
-                        name='select'
-                        control={control}
-                        defaultValue={''}
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            // <FormControl fullWidth style={{display: "flex", alignItems: "center"}}>
-                            <Box>
-                                <InputLabel id="title">
-                                    {!value && <Typography>Иструмент</Typography>}
-                                </InputLabel>
-                                <TextField
-                                    labelId="title"
-                                    select
-                                    value={value}
-                                    onChange={onChange}
-                                    variant='outlined'
-                                    color='primary'
-                                    fullWidth
-                                    required
-                                    error={!!error}
-                                    helperText={error ? error.message : null}
-                                    rules={{
-                                        required: 'Выберите',
-                                    }}
-                                >
-                                    {names.map((name, index) => (
-                                        <MenuItem
-                                            className={classes.selectField}
-                                            key={index}
-                                            value={name}
-                                        >
-                                            {name}
-                                        </MenuItem>
-                                    ))}
-                                </TextField>
-                            </Box>
-                            // </FormControl>
-                        )}
-                    />
-                </Box>
+                <RegionList control={control} />
+                <InstrumentList control={control} />
             </Box>
-            <Box>
+            <Box className={classes.inputWrapper}>
                 <Controller
                     name="bandCreate"
                     control={control}

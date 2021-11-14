@@ -7,6 +7,7 @@ import IconPassword from "../../../../assets/icons/auth/password";
 import {eventToggle, openModal} from "../../../../helpers/utils";
 import {onSubmit} from "../../../../helpers/api";
 import ForgetPassword from "../../../modals/ForgetPassword";
+import ErrorFieldText from "../../../common/ErrorFieldText";
 
 const SignIn = (props) => {
 
@@ -27,11 +28,11 @@ const SignIn = (props) => {
                 noValidate
                 onSubmit={handleSubmit(onSubmit)}
             >
-                <Typography component={'span'} variant="h4">Вход</Typography>
+                <Typography variant="h4">Вход</Typography>
                 <AuthServices />
                 <Typography component={'span'} style={{margin: '30px 0'}}>или</Typography>
-                <Box>
-                    <Box>
+                <Box style={{width: '100%'}}>
+                    <Box style={{width: '100%'}}>
                         <Controller
                             name="login"
                             control={control}
@@ -46,7 +47,7 @@ const SignIn = (props) => {
                                     onChange={onChange}
                                     fullWidth
                                     error={!!error}
-                                    helperText={error ? error.message : null}
+                                    helperText={error ? <ErrorFieldText errorText={error.message} />  : null}
                                 />
                             )}
                             rules={{
@@ -72,8 +73,9 @@ const SignIn = (props) => {
                                     value={value}
                                     onChange={onChange}
                                     error={!!error}
-                                    helperText={error ? error.message : null}
+                                    helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
                                     type={passwordShown ? "text" : "password"}
+                                    fullWidth
                                 />
                             )}
                             rules={{
