@@ -1,5 +1,4 @@
-FROM maven:3.8.1-openjdk-11
+FROM openjdk:11
 WORKDIR /findband
-COPY . .
-RUN mvn clean install -DskipTests
-ENTRYPOINT ["java", "-jar", "/findband/target/backend-0.0.1-SNAPSHOT.jar"]
+COPY target/backend-0.0.1-SNAPSHOT.jar .
+ENTRYPOINT ["java", "-jar", "/findband/backend-0.0.1-SNAPSHOT.jar"]
