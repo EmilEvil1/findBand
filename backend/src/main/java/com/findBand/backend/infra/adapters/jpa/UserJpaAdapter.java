@@ -36,6 +36,11 @@ public class UserJpaAdapter implements UserPort {
         return Optional.of(userJpaRepository.save(userEntity)).map(this::toDomain);
     }
 
+    @Override
+    public String createResetPasswordRequest(long userId) {
+        return null;
+    }
+
     private UserDomain toDomain(UserEntity userEntity) {
         return UserDomain.builder()
           .email(userEntity.getEmail())

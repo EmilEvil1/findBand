@@ -1,4 +1,4 @@
-package com.findBand.backend.infra.adapters.rest.dto;
+package com.findBand.backend.infra.adapters.rest.controller;
 
 import com.findBand.backend.domain.model.Region;
 import com.findBand.backend.domain.port.RegionsPort;

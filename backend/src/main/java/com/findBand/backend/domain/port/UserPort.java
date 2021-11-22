@@ -9,4 +9,6 @@ public interface UserPort {
     Optional<UserDomain> findUserByEmail(String email);
 
     Optional<UserDomain> createUser(UserCreate userCreate);
+
+    String createResetPasswordRequest(long userId);
 }
