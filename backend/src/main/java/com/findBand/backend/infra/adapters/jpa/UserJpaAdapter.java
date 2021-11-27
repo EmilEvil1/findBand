@@ -4,18 +4,22 @@ import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.model.UserRole;
 import com.findBand.backend.domain.port.UserPort;
 import com.findBand.backend.domain.useCase.UserCreate;
+import com.findBand.backend.infra.adapters.jpa.entity.ResetPasswordEntity;
 import com.findBand.backend.infra.adapters.jpa.entity.UserEntity;
+import com.findBand.backend.infra.adapters.jpa.repository.ResetPasswordJpaRepository;
 import com.findBand.backend.infra.adapters.jpa.repository.UserJpaRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class UserJpaAdapter implements UserPort {
 
     private UserJpaRepository userJpaRepository;
     private PasswordEncoder passwordEncoder;
+    private ResetPasswordJpaRepository passwordJpaRepository;
 
     public UserJpaAdapter(UserJpaRepository userJpaRepository, PasswordEncoder passwordEncoder) {
         this.userJpaRepository = userJpaRepository;
@@ -38,6 +42,9 @@ public class UserJpaAdapter implements UserPort {
 
     @Override
     public String createResetPasswordRequest(long userId) {
+        ResetPasswordEntity resetPasswordEntity = new ResetPasswordEntity(UUID.randomUUID().toString());
+        resetPasswordEntity.setUserId(userId);
+        passwordJpaRepository.save(resetPasswordEntity);
         return null;
     }
 

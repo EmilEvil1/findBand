@@ -1,22 +1,22 @@
 package com.findBand.backend.infra.adapters.jpa.entity;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@RequiredArgsConstructor
 @Table(name = "reset_password")
 public class ResetPasswordEntity {
 
     @Id
     @Column
-    private String id;
+    private final String id;
 
     @Column
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private long userId;
 
     @Column
-    private boolean activated;
+    private boolean activated = false;
 }
