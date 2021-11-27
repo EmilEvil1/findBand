@@ -5,7 +5,7 @@ import com.findBand.backend.domain.common.useCase.UseCaseHandler;
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.port.MailerPort;
 import com.findBand.backend.domain.port.UserPort;
-import com.findBand.backend.domain.useCase.UserResetPassword;
+import com.findBand.backend.domain.useCase.user.UserResetPassword;
 import com.findBand.backend.infra.adapters.common.NoSuchUserException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
-public class UserResetPasswordUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<UserDomain, UserResetPassword> {
+public class UserCreateResetPasswordUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<UserDomain, UserResetPassword> {
 
     @Value("email.from")
     private String EMAIL_FROM;
@@ -24,7 +24,7 @@ public class UserResetPasswordUseCaseHandler extends ObservableUseCasePublisher 
     private final UserPort userPort;
     private final MailerPort mailerPort;
 
-    public UserResetPasswordUseCaseHandler(UserPort userPort, MailerPort mailerPort) {
+    public UserCreateResetPasswordUseCaseHandler(UserPort userPort, MailerPort mailerPort) {
         this.userPort = userPort;
         this.mailerPort = mailerPort;
         register(UserResetPassword.class, this);

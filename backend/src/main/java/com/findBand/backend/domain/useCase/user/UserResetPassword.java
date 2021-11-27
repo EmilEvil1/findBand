@@ -1,4 +1,4 @@
-package com.findBand.backend.domain.useCase;
+package com.findBand.backend.domain.useCase.user;
 
 import com.findBand.backend.domain.common.model.UseCase;
 import lombok.Data;

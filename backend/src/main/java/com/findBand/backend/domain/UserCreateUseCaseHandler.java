@@ -4,7 +4,7 @@ import com.findBand.backend.domain.common.useCase.ObservableUseCasePublisher;
 import com.findBand.backend.domain.common.useCase.UseCaseHandler;
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.port.UserPort;
-import com.findBand.backend.domain.useCase.UserCreate;
+import com.findBand.backend.domain.useCase.user.UserCreate;
 import org.springframework.stereotype.Component;
 
 @Component
