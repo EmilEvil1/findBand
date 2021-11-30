@@ -22,6 +22,7 @@ const RegionList = (props) => {
                 rules={{ required: <ErrorFieldText errorText={'Выберите регион'} /> }}
                 render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <TextField
+                        style={{marginRight: 20}}
                         value={value}
                         select
                         label='Регион'

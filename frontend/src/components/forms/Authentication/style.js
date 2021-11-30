@@ -33,7 +33,7 @@ export const useStyles = makeStyles({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: '50%',
+        width: '53%',
         zIndex: 2,
         transform: 'translateX(0%)',
         opacity: 1,
@@ -101,7 +101,7 @@ export const useStyles = makeStyles({
         transform: 'translateX(50%)'
     },
     signUpWrapper : {
-        width: '50%',
+        width: '53%',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -116,6 +116,7 @@ export const useStyles = makeStyles({
     },
     inputWrapper: {
         marginTop: 30,
+        width: '100%',
         display: "flex",
         alignItems: "center"
     },
@@ -163,7 +164,7 @@ export const useStyles = makeStyles({
         position: "absolute",
         right: 0,
         top: '30%',
-        cursor: "pointer"
+        cursor: "pointer",
     },
     passwordFieldWithHelper: {
         top: '33%',
@@ -178,4 +179,8 @@ export const useStyles = makeStyles({
     select: {
         width: '100%'
     },
+    fieldsWrapper: {
+        display: "flex",
+        width: '100%'
+    }
 });

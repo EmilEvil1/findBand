@@ -14,7 +14,6 @@ const Sidebar = (props) => {
 
     const {} = props
     const classes = useStyles()
-    const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
 
     return (
@@ -27,16 +26,14 @@ const Sidebar = (props) => {
                 <UserData open={open} />
                 <Menu open={open}/>
                 <Box>
-                    <Button>
-                        <NotificationIcon />
-                    </Button>
+                    <Button><NotificationIcon /></Button>
                     <LogOut />
                 </Box>
             </Box>
             <Box className={classes.sidebarBottomItems}>
                 <Box
                     style={{cursor: "pointer"}}
-                    className={open && classes.arrowRotated}
+                    className={open ? classes.arrowRotated : ''}
                     onClick={() => eventToggle(open, setOpen)}
                 >
                     <ArrowIcon />

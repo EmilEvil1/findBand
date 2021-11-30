@@ -1,16 +1,28 @@
 import React from 'react';
-import {Container, Grid} from "@material-ui/core";
+import {useDispatch, useSelector} from "react-redux";
+import {Button, Container, Grid} from "@material-ui/core";
 import Sidebar from "../../components/common/Sidebar";
+import {useStyles} from "../../components/common/Sidebar/style";
+import {getTestingInfo} from "../../store/thunks/thunks";
+import {useJwt} from "react-jwt";
 
 const Profile = (props) => {
 
     const {} = props
+    const classes = useStyles()
+    const dispatch = useDispatch()
+    const regionList = useSelector(({ state }) => state.regions)
 
+    console.log('regionList', regionList)
+    // const { decodedToken, isExpired } = useJwt(token);
     return (
-        <Grid>
+        <Grid className={classes.content}>
             <Sidebar />
             <Container>
-                Profile page
+               <Button onClick={() => dispatch(getTestingInfo)}>
+                   POSTS
+               </Button>
+
             </Container>
         </Grid>
     );

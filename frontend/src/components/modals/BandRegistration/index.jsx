@@ -11,7 +11,7 @@ const BandRegistration = (props) => {
     const {checked, open, close, control} = props
     const dispatch = useDispatch()
     const classes = useStyles()
-
+    console.log('control', control)
     return (
 
         <Dialog
