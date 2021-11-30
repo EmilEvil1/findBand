@@ -38,7 +38,6 @@ export const useStyles = makeStyles({
         marginTop: 30,
         display: "flex",
         alignItems: "center",
-        // whiteSpace: "nowrap"
     },
     searchPanelWrapper: {
         width: '100%',

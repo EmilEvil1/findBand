@@ -9,24 +9,28 @@ import {
 import {useStyles} from "../style";
 import IconPassword from "../../../../assets/icons/auth/password";
 import {Controller, useForm} from "react-hook-form";
-import {onSubmit} from "../../../../helpers/api";
+import {useDispatch} from "react-redux";
+import {onSubmit, sendPostRequest} from "../../../../helpers/api";
 import {eventToggle, handleCheckboxStatus} from "../../../../helpers/utils";
 import BandRegistration from "../../../modals/BandRegistration";
 import ErrorFieldText from "../../../common/ErrorFieldText";
 import InputMask from 'react-input-mask';
 import RegionList from "../../../common/RegionList";
 import InstrumentList from "../../../common/InstrumentList";
+import {sendRegistrationForm} from "../../../../store/thunks/thunks";
+
 
 const SignUp = (props) => {
 
     const {} = props
     const classes = useStyles()
+    const dispatch = useDispatch()
 
     const [passwordShown, setPasswordShown] = useState(false);
     const [checked, setChecked] = useState(false);
     const [confirm, setConfirm] = useState(checked);
 
-    const {watch, handleSubmit, control} = useForm({
+    const {watch, handleSubmit, control, formState: { isSubmitting, isDirty, isValid }} = useForm({
         mode: 'onSubmit',
         reValidateMode: 'onChange',
     });
@@ -38,7 +42,8 @@ const SignUp = (props) => {
         <form
             className={classes.signUpWrapper}
             noValidate
-            onSubmit={handleSubmit(onSubmit)}
+            // onSubmit={() => dispatch(sendPostRequest(handleSubmit(dispatch(sendPostRequest())))}
+            onSubmit={handleSubmit(sendRegistrationForm)}
         >
             <Typography variant={'h4'}>Регистрация</Typography>
             <Box className={classes.inputsWrapper}>
@@ -71,7 +76,7 @@ const SignUp = (props) => {
                         defaultValue=""
                         render={({ field: { onChange, value }, fieldState: { error } }) => (
                             <InputMask
-                                mask="+9(999)99999999"
+                                mask="(999) 999-9999"
                                 value={value}
                                 onChange={onChange}
                             >
@@ -91,6 +96,7 @@ const SignUp = (props) => {
                         )}
                         rules={{
                             required: 'Заполните поле телефон',
+                            minLength: 11,
                             pattern: {
                                 value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
                                 message: 'Введите правильный формат телефона',
@@ -126,72 +132,76 @@ const SignUp = (props) => {
                         }}
                     />
                 </Box>
-                <Box className={classes.passwordField}>
-                    <Controller
-                        name="password"
-                        control={control}
-                        defaultValue=""
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <TextField
-                                placeholder="Введите пароль"
-                                label="Пароль"
-                                variant='outlined'
-                                color='primary'
-                                value={value}
-                                onChange={onChange}
-                                error={!!error}
-                                helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
-                                type={passwordShown ? "text" : "password"}
-                                required
-                                fullWidth
-                            />
-                        )}
-                        rules={{
-                            required: 'Введите пароль',
-                            minLength: {
-                                value: 6,
-                                message: 'Пароль должен быть больше 6 символов',
-                            },
-                        }}
-                    />
-                    <Box
-                        className={classes.passwordIcon}
-                        onClick={() => eventToggle(passwordShown, setPasswordShown)}
-                    >
-                        <IconPassword />
+                <Box className={classes.fieldsWrapper}>
+                    <Box className={classes.passwordField}>
+                        <Controller
+                            name="password"
+                            control={control}
+                            defaultValue=""
+                            render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                <TextField
+                                    placeholder="Введите пароль"
+                                    label="Пароль"
+                                    variant='outlined'
+                                    color='primary'
+                                    value={value}
+                                    onChange={onChange}
+                                    error={!!error}
+                                    helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
+                                    type={passwordShown ? "text" : "password"}
+                                    required
+                                    fullWidth
+                                />
+                            )}
+                            rules={{
+                                required: 'Введите пароль',
+                                minLength: {
+                                    value: 6,
+                                    message: 'Пароль должен быть больше 6 символов',
+                                },
+                            }}
+                        />
+                        <Box
+                            className={classes.passwordIcon}
+                            onClick={() => eventToggle(passwordShown, setPasswordShown)}
+                        >
+                            <IconPassword />
+                        </Box>
+                    </Box>
+                    <Box className={classes.passwordField}>
+                        <Controller
+                            name="confirmationPassword"
+                            control={control}
+                            defaultValue=""
+                            render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                <TextField
+                                    placeholder="Потвердите пароль"
+                                    label="Подтверждение"
+                                    variant='outlined'
+                                    color='primary'
+                                    value={value}
+                                    onChange={onChange}
+                                    error={!!error}
+                                    helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
+                                    type="password"
+                                    required
+                                    fullWidth
+                                />
+                            )}
+                            rules={{
+                                required: 'Потвердите пароль',
+                                minLength: {
+                                    value: 6,
+                                    message: 'Пароль должен быть больше 6 символов',
+                                },
+                            }}
+                        />
                     </Box>
                 </Box>
-                <Box className={classes.passwordField}>
-                    <Controller
-                        name="confirmationPassword"
-                        control={control}
-                        defaultValue=""
-                        render={({ field: { onChange, value }, fieldState: { error } }) => (
-                            <TextField
-                                placeholder="Потвердите пароль"
-                                label="Подтверждение"
-                                variant='outlined'
-                                color='primary'
-                                value={value}
-                                onChange={onChange}
-                                error={!!error}
-                                helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
-                                type="password"
-                                required
-                                fullWidth
-                            />
-                        )}
-                        rules={{
-                            required: 'Потвердите пароль',
-                            minLength: {
-                                value: 6,
-                                message: 'Пароль должен быть больше 6 символов',
-                            },
-                        }}
-                    />
+                <Box className={classes.fieldsWrapper}>
+                    <RegionList control={control} />
+                    <InstrumentList control={control} />
                 </Box>
-                <RegionList control={control} />
-                <InstrumentList control={control} />
             </Box>
             <Box className={classes.inputWrapper}>
                 <Controller
@@ -208,7 +218,7 @@ const SignUp = (props) => {
                         />
                     )}
                 />
-                <Typography>Добавить музыкальную группу</Typography>
+                <Typography>+ Добавить группу</Typography>
             </Box>
             <Button
                 type='submit'
