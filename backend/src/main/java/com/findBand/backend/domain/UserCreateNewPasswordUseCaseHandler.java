@@ -19,9 +19,9 @@ public class UserCreateNewPasswordUseCaseHandler extends ObservableUseCasePublis
 
     @Override
     public Boolean handle(UserCreateNewPassword useCase) {
-//        boolean isValidResetPassword = publish(new UserValidateResetPassword(useCase.get));
+        boolean isValidResetPassword = publish(Boolean.class, new UserValidateResetPassword(useCase.getResetPasswordId()));
 
-        if (!ValidationRulesUtil.validatePassword(useCase.getNewPassword())) {
+        if (isValidResetPassword || !ValidationRulesUtil.validatePassword(useCase.getNewPassword())) {
             return false;
         }
 
