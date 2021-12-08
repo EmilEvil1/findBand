@@ -25,7 +25,7 @@ public class UserCreateNewPasswordUseCaseHandler extends ObservableUseCasePublis
             return false;
         }
 
-        userPort.createNewPassword(useCase.getNewPassword(), useCase.getUserId());
+        userPort.createNewPassword(useCase.getNewPassword(), useCase.getResetPasswordId());
         return true;
     }
 }

@@ -28,8 +28,11 @@ public class UserController extends BaseController {
     public void createNewPassword(@RequestBody UserCreateNewPasswordRequestDTO newPasswordRequestDTO) {
         //TODO: HOW TO GET USER ID?
         publish(Boolean.class, new UserCreateNewPassword(
-//          newPasswordRequestDTO.getNewPassword(),
+          newPasswordRequestDTO.getNewPassword(),
+          newPasswordRequestDTO.getResetPasswordId()
         ));
+
+
     }
 
 }

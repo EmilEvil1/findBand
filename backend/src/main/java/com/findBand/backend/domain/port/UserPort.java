@@ -14,5 +14,5 @@ public interface UserPort {
 
     boolean validateResetPassword(String resetPasswordId);
 
-    void createNewPassword(String newPassword, long userId);
+    void createNewPassword(String newPassword, String resetPasswordId);
 }
