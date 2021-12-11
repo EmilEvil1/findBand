@@ -11,17 +11,17 @@ const Profile = (props) => {
     const {} = props
     const classes = useStyles()
     const dispatch = useDispatch()
-    const regionList = useSelector(({ state }) => state.regions)
+    // const regionList = useSelector(({ state }) => state.regions)
 
-    console.log('regionList', regionList)
+    // console.log('regionList', regionList)
     // const { decodedToken, isExpired } = useJwt(token);
     return (
         <Grid className={classes.content}>
             <Sidebar />
             <Container>
-               <Button onClick={() => dispatch(getTestingInfo)}>
-                   POSTS
-               </Button>
+               {/*<Button onClick={() => dispatch(getTestingInfo)}>*/}
+               {/*    POSTS*/}
+               {/*</Button>*/}
 
             </Container>
         </Grid>

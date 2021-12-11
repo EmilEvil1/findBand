@@ -1,16 +1,21 @@
-import React from 'react';
-import {useDispatch} from "react-redux";
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import {Box, MenuItem, TextField} from "@material-ui/core";
 import {Controller} from "react-hook-form";
 import ErrorFieldText from "../ErrorFieldText";
 import {useStyles} from "../../forms/Authentication/style";
-
+import {getTestingInfo} from "../../../store/thunks/thunks";
 
 const RegionList = (props) => {
 
     const {control} = props
+    const regionList = useSelector(({ state }) => state.regions)
     const dispatch = useDispatch()
     const classes = useStyles()
+
+    useEffect(() => {
+        dispatch(getTestingInfo)
+    }, [])
 
     return (
 
@@ -34,12 +39,17 @@ const RegionList = (props) => {
                         error={!!error}
                         helperText={error ? <ErrorFieldText errorText={error.message} /> : null}
                     >
-                        <MenuItem
-                            className={classes.selectField}
-                            value={'Vladimir'}
-                        >
-                            Владимир
-                        </MenuItem>
+                        {regionList.length > 1 && regionList.map((region, index) => {
+                            return (
+                                <MenuItem
+                                    key={index}
+                                    className={classes.selectField}
+                                    value={region.regionName}
+                                >
+                                    {region.regionName}
+                                </MenuItem>
+                            )
+                        })}
                     </TextField>
                 )}
             />

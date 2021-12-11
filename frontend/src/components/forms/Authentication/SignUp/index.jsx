@@ -10,14 +10,14 @@ import {useStyles} from "../style";
 import IconPassword from "../../../../assets/icons/auth/password";
 import {Controller, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import {onSubmit, sendPostRequest} from "../../../../helpers/api";
+import {onSubmit} from "../../../../helpers/api";
 import {eventToggle, handleCheckboxStatus} from "../../../../helpers/utils";
 import BandRegistration from "../../../modals/BandRegistration";
 import ErrorFieldText from "../../../common/ErrorFieldText";
 import InputMask from 'react-input-mask';
 import RegionList from "../../../common/RegionList";
 import InstrumentList from "../../../common/InstrumentList";
-import {sendRegistrationForm} from "../../../../store/thunks/thunks";
+import {signUpForm} from "../../../../store/thunks/thunks";
 
 
 const SignUp = (props) => {
@@ -42,8 +42,7 @@ const SignUp = (props) => {
         <form
             className={classes.signUpWrapper}
             noValidate
-            // onSubmit={() => dispatch(sendPostRequest(handleSubmit(dispatch(sendPostRequest())))}
-            onSubmit={handleSubmit(sendRegistrationForm)}
+            onSubmit={handleSubmit(signUpForm)}
         >
             <Typography variant={'h4'}>Регистрация</Typography>
             <Box className={classes.inputsWrapper}>
