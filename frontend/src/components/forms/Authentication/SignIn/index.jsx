@@ -8,6 +8,7 @@ import {eventToggle, openModal} from "../../../../helpers/utils";
 import {onSubmit} from "../../../../helpers/api";
 import ForgetPassword from "../../../modals/ForgetPassword";
 import ErrorFieldText from "../../../common/ErrorFieldText";
+import {signInForm} from "../../../../store/thunks/thunks";
 
 const SignIn = (props) => {
 
@@ -26,7 +27,7 @@ const SignIn = (props) => {
             <form
                 className={classes.formControl}
                 noValidate
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit(signInForm)}
             >
                 <Typography variant="h4">Вход</Typography>
                 <AuthServices />
