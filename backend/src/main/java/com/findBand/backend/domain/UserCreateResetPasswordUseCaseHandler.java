@@ -32,7 +32,7 @@ public class UserCreateResetPasswordUseCaseHandler extends ObservableUseCasePubl
 
     @Override
     public UserDomain handle(UserResetPassword useCase) {
-        UserDomain user = userPort.findUserByEmail(useCase.getEmailAddress()).orElseThrow(NoSuchUserException::new);
+        UserDomain user = userPort.findUserByEmail(useCase.getEmailAddress()).orElseThrow(() -> new NoSuchUserException("User with such email " + useCase.getEmailAddress() + " doesn't exist"));
         final String resetPasswordId = userPort.createResetPasswordRequest(user.getId());
         final String resetPasswordLink = generateResetPasswordLink(resetPasswordId);
         mailerPort.sendEmail(EMAIL_FROM, useCase.getEmailAddress(), resetPasswordLink);
