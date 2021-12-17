@@ -45,6 +45,7 @@ const BandRegistration = (props) => {
                 <Box>
                     <Button
                         color='primary'
+                        style={{border: '1px solid white'}}
                         onClick={() => {
                             checked(true)
                             closeModal(close)

@@ -79,11 +79,11 @@ export const useStyles = makeStyles({
         transform: 'translateX(0)',
         transition: 'transform 0.6s ease-in-out',
         '&:nth-child(1)': {
-            background: 'linear-gradient(219.08deg, #0F5D62 -28.98%, #789F8B 132.22%)',
+            background: 'linear-gradient(145.01deg, #4D16C9 -25.24%, #16003D 136.14%);',
             borderRadius: '0px 35px 35px 0px'
         },
         '&:nth-child(2)': {
-            background: 'linear-gradient(145.01deg, #E06B51 -25.24%, #DEB85B 136.14%)',
+            background: 'linear-gradient(219.08deg, #4D16C9 -28.98%, #16003D 132.22%)',
             borderRadius: '35px 0px 0px 35px'
         }
     },

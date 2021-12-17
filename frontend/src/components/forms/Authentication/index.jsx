@@ -8,7 +8,7 @@ const SignForms = (props) => {
 
     const {} = props
     const classes = useStyles()
-    const [active, setActive] = useState(true)
+    const [active, setActive] = useState(false)
 
     return (
         <Grid className={classes.wrapper}>
@@ -45,16 +45,28 @@ const SignForms = (props) => {
                     >
                         <Typography>Привет мой друг!!!</Typography>
                         <Typography>Тут будет красивый текст</Typography>
-                        <Button onClick={() => setActive(false)}>Войти</Button>
+                        <Button
+                            style={{border: '1px solid white'}}
+                            color='primary'
+                            onClick={() => setActive(false)}
+                        >
+                            Войти
+                        </Button>
                     </Box>
                     <Box className={
                             !!active ? `${classes.overlayPanel} ${classes.overlayRight}` :
                             `${classes.overlayPanel} ${classes.overlayRight}`
                         }
                     >
-                        <Typography>Привет мой друг!!!</Typography>
-                        <Typography>Тут будет какой-нибудь красивый текст</Typography>
-                        <Button onClick={() => setActive(true)}>Зарегистрипроваться</Button>
+                        {/*<Typography>Привет мой друг!!!</Typography>*/}
+                        <Typography>Впервые здесь?</Typography>
+                        <Button
+                            style={{border: '1px solid white'}}
+                            color='primary'
+                            onClick={() => setActive(true)}
+                        >
+                            Зарегистрироваться
+                        </Button>
                     </Box>
                 </Box>
             </Box>

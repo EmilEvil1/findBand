@@ -7,17 +7,17 @@ import Sidebar from "../../components/common/Sidebar";
 import Musicians from "../../components/sliders/Musicians";
 import Main from "../../components/content/Main";
 
-
 const Home = () => {
 
     const info = useSelector(({ state }) => state.info);
     const dispatch = useDispatch()
     const classes = useStyles()
 
-    useEffect(() => dispatch(getTestInfo), [])
+    useEffect(() => {
+        dispatch(getTestInfo)
+    }, [])
 
     return (
-
         <Grid className={classes.content}>
             <Sidebar />
             <Musicians />
