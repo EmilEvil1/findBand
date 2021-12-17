@@ -27,6 +27,7 @@ const SearchBand = (props) => {
             <RegionList control={control} />
 
             <Button
+                style={{border: '1px solid white'}}
                 type='submit'
                 className={classes.signUpBtn}
                 color='primary'

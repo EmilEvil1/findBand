@@ -221,6 +221,7 @@ const SignUp = (props) => {
             </Box>
             <Button
                 type='submit'
+                style={{border: '1px solid white'}}
                 className={classes.signUpBtn}
                 color='primary'
             >

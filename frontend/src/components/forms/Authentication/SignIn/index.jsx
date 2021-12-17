@@ -35,7 +35,7 @@ const SignIn = (props) => {
                 <Box style={{width: '100%'}}>
                     <Box style={{width: '100%'}}>
                         <Controller
-                            name="login"
+                            name="email"
                             control={control}
                             defaultValue=""
                             render={({ field: { onChange, value }, fieldState: { error } }) => (
@@ -102,8 +102,10 @@ const SignIn = (props) => {
                     Забыли пароль?
                 </Typography>
                 <Button
-                    color={'primary'}
-                    type="submit"
+
+                    style={{border: '1px solid white', width: '70%'}}
+                    color='primary'
+                    type='submit'
                 >
                     Войти
                 </Button>

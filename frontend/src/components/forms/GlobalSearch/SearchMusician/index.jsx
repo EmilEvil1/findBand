@@ -28,6 +28,7 @@ const SearchMusician = (props) => {
             <RegionList control={control} />
             <InstrumentList control={control} />
             <Button
+                style={{border: '1px solid white'}}
                 type='submit'
                 className={classes.signUpBtn}
                 color='primary'
