@@ -12,6 +12,7 @@ import com.findBand.backend.infra.adapters.jpa.repository.UserJpaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -47,7 +48,8 @@ public class UserJpaAdapter implements UserPort {
     @Override
     public String createResetPasswordRequest(long userId) {
         final String resetPasswordId = UUID.randomUUID().toString();
-        ResetPasswordEntity resetPasswordEntity = new ResetPasswordEntity(resetPasswordId);
+        ResetPasswordEntity resetPasswordEntity = new ResetPasswordEntity();
+        resetPasswordEntity.setId(resetPasswordId);
         resetPasswordEntity.setUserId(userId);
         passwordJpaRepository.save(resetPasswordEntity);
         return resetPasswordId;
@@ -61,13 +63,17 @@ public class UserJpaAdapter implements UserPort {
     }
 
     @Override
+    @Transactional
     public void createNewPassword(String newPassword, String resetPasswordId) {
         ResetPasswordEntity passwordEntity = passwordJpaRepository.findById(resetPasswordId).orElseThrow(() -> new NoSuchResetPasswordException("No reset password with id: " + resetPasswordId));
+        passwordEntity.setActivated(true);
+        passwordJpaRepository.save(passwordEntity);
         userJpaRepository.updatePassword(passwordEncoder.encode(newPassword), passwordEntity.getUserId());
     }
 
     private UserDomain toDomain(UserEntity userEntity) {
         return UserDomain.builder()
+          .id(userEntity.getId())
           .email(userEntity.getEmail())
           .password(userEntity.getPassword())
           .phone(userEntity.getPhone())

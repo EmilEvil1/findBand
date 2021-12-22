@@ -13,6 +13,7 @@ public class UserValidateResetPasswordUseCaseHandler extends ObservableUseCasePu
 
     public UserValidateResetPasswordUseCaseHandler(UserPort userPort) {
         this.userPort = userPort;
+        register(UserValidateResetPassword.class, this);
     }
 
     @Override

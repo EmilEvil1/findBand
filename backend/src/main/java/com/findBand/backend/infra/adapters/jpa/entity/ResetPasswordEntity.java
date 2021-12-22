@@ -6,13 +6,15 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@RequiredArgsConstructor
 @Table(name = "reset_password")
+@Entity(name = "resetPassword")
 public class ResetPasswordEntity {
+
+    public ResetPasswordEntity() {}
 
     @Id
     @Column
-    private final String id;
+    private String id;
 
     @Column
     private long userId;

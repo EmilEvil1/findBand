@@ -12,14 +12,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.InetAddress;
+
 @Component
 public class UserCreateResetPasswordUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<UserDomain, UserResetPassword> {
 
     @Value("email.from")
     private String EMAIL_FROM;
 
-    @Value("environment.host")
-    private String HOST;
+    private String HOST = InetAddress.getLoopbackAddress().getHostName();
+
 
     private final UserPort userPort;
     private final MailerPort mailerPort;
@@ -41,7 +43,9 @@ public class UserCreateResetPasswordUseCaseHandler extends ObservableUseCasePubl
 
     private String generateResetPasswordLink(String resetPasswordId) {
         UriBuilder uriBuilder = UriComponentsBuilder.newInstance();
-        return uriBuilder.host(HOST).path("/reset").port(80)
+        return uriBuilder.host(HOST)
+          .scheme("http")
+          .path("/reset").port(80)
           .queryParam("resetPasswordId", resetPasswordId)
           .build().toString();
     }
