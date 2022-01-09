@@ -2,9 +2,12 @@ package com.findBand.backend.infra.adapters.jpa;
 
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.model.UserRole;
+import com.findBand.backend.domain.model.UserRoleEnum;
 import com.findBand.backend.domain.port.UserPort;
 import com.findBand.backend.domain.useCase.user.UserCreate;
 import com.findBand.backend.infra.adapters.common.NoSuchResetPasswordException;
+import com.findBand.backend.infra.adapters.jpa.entity.BandOwnerEntity;
+import com.findBand.backend.infra.adapters.jpa.entity.BandSeekerEntity;
 import com.findBand.backend.infra.adapters.jpa.entity.ResetPasswordEntity;
 import com.findBand.backend.infra.adapters.jpa.entity.UserEntity;
 import com.findBand.backend.infra.adapters.jpa.repository.ResetPasswordJpaRepository;
@@ -38,7 +41,8 @@ public class UserJpaAdapter implements UserPort {
 
     @Override
     public Optional<UserDomain> createUser(UserCreate userCreate) {
-        UserEntity userEntity = new UserEntity();
+        UserEntity userEntity = userCreate.getUserRoleEnum() == UserRoleEnum.BAND_OWNER ?
+          new BandOwnerEntity() : new BandSeekerEntity();
         userEntity.setEmail(userCreate.getEmail());
         userEntity.setPassword(passwordEncoder.encode(userCreate.getPassword()));
         userEntity.setUsername(userCreate.getUserName());
