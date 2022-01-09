@@ -1,6 +1,7 @@
 package com.findBand.backend.infra.security.rest;
 
 import com.findBand.backend.domain.model.UserDomain;
+import com.findBand.backend.domain.model.UserRoleEnum;
 import com.findBand.backend.domain.useCase.user.UserCreate;
 import com.findBand.backend.infra.common.rest.BaseController;
 import com.findBand.backend.infra.common.rest.Response;
@@ -40,6 +41,7 @@ public class AuthenticationRestController extends BaseController {
         userCreate.setUserName(registerDTO.getUsername());
         userCreate.setEmail(registerDTO.getEmail());
         userCreate.setPassword(registerDTO.getPassword());
+        userCreate.setUserRoleEnum(registerDTO.getIsBandOwner() ? UserRoleEnum.BAND_OWNER : UserRoleEnum.BAND_SEEKER);
         UserDomain createdUser = publish(UserDomain.class, userCreate);
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
