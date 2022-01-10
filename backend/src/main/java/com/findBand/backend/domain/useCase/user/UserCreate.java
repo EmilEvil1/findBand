@@ -10,4 +10,5 @@ public class UserCreate implements UseCase {
     private String email;
     private String password;
     private UserRoleEnum userRoleEnum;
+    private String bandName;
 }
