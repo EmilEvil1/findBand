@@ -1,13 +1,15 @@
 package com.findBand.backend.infra.adapters.jpa.entity;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("BAND_OWNER")
+@Data
 public class BandOwnerEntity extends UserEntity {
 
-    @Column(name = "band_id")
-    private Long bandId;
+    @OneToOne
+    @JoinColumn(name = "band_id")
+    private BandEntity band;
 }
