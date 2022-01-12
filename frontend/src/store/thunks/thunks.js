@@ -18,7 +18,7 @@ export const sendSignInFormData = ( data ) => dispatch => {
         body: JSON.stringify(data)
     })
         .then((response) => response.json())
-        .then((response) => { response.data.token ?  document.cookie = `access_token=${response.data.token}`: document.cookie = `access_token=''`})
+        .then((response) => { response.token ?  document.cookie = `access_token=${response.token}`: document.cookie = `access_token=''`})
         .catch((err) => {
             console.log(err);
             throw new Error(err)

@@ -1,21 +1,30 @@
 import React, {useState} from 'react';
-import {Box, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
+import {useCookies} from "react-cookie";
+import {Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
 import {closeModal, eventToggle} from "../../../helpers/utils";
 import {useStyles} from "./style";
 import ShortLogo from "../../../assets/icons/logos/shortLogo";
 import ProfileIcon from "../../../assets/icons/sidebar/profile";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import NotificationIcon from "../../../assets/icons/sidebar/notification";
 import BandRoomIcon from "../../../assets/icons/sidebar/band";
 import ArrowIcon from "../../../assets/icons/sidebar/arrow";
 import LogOutIcon from "../../../assets/icons/sidebar/logOut";
 import LongLogo from "../../../assets/icons/logos/longLogo";
 
+
 const Sidebar = (props) => {
 
     const {} = props
     const classes = useStyles()
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
+    const [token, setToken, removeCookie] = useCookies(['access_token'])
+    const history = useHistory()
+
+    const logOut = () => {
+        removeCookie('access_token')
+        history.push('/auth')
+    }
 
     return (
         <Drawer
@@ -59,7 +68,10 @@ const Sidebar = (props) => {
                     </List>
                 </Box>
                 <Box className={classes.sidebarItems}>
-                    <ListItem button>
+                    <ListItem
+                        button
+                        onClick={logOut}
+                    >
                         <ListItemIcon>
                             <LogOutIcon />
                         </ListItemIcon>

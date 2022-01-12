@@ -10,12 +10,14 @@ import ForgetPassword from "../../../modals/ForgetPassword";
 import ErrorFieldText from "../../../common/ErrorFieldText";
 import {sendSignInFormData, signUpForm} from "../../../../store/thunks/thunks";
 import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 const SignIn = (props) => {
 
     const {} = props
     const dispatch = useDispatch()
     const classes = useStyles()
+    const history = useHistory()
     const [passwordShown, setPasswordShown] = useState(false);
     const [open, setOpen] = useState(false);
 
@@ -24,7 +26,10 @@ const SignIn = (props) => {
         reValidateMode: 'onChange',
     });
 
-    const onSubmit = data => dispatch(sendSignInFormData(data));
+    const onSubmit = async data => {
+        await dispatch(sendSignInFormData(data))
+        await history.push('/')
+    }
 
     return (
         <Grid className={classes.formWrapper}>
