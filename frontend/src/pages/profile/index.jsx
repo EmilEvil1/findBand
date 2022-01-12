@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button, Container, Grid} from "@material-ui/core";
 import Sidebar from "../../components/common/Sidebar";
 import {useStyles} from "../../components/common/Sidebar/style";
-import {getTestingInfo} from "../../store/thunks/thunks";
+
 import {useJwt} from "react-jwt";
 
 const Profile = (props) => {

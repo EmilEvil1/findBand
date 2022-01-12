@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
 import {Box, Grid} from "@material-ui/core";
-import UserIcon from "../../../../assets/icons/sidebar/user";
+import UserIcon from "../../../../assets/icons/sidebar/band";
 import {useStyles} from "./style";
 
 const UserData = (props) => {

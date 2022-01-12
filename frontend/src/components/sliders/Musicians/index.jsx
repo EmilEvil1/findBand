@@ -5,6 +5,9 @@ import photo2  from '../../../assets/img/2.jpeg'
 import photo3  from '../../../assets/img/3.jpeg'
 import photo4  from '../../../assets/img/4.jpeg'
 import phote6  from '../../../assets/img/6.jpg'
+import phote7  from '../../../assets/img/mainSlider/b-2.jpeg'
+import photo8  from '../../../assets/img/mainSlider/b-3.jpeg'
+
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import {Box} from "@material-ui/core";
@@ -24,11 +27,11 @@ const Musicians = (props) => {
         </Box>,
         <Box className={classes.sliderWrapper}>
             <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={photo1}  />,
+            <img className={classes.slideImg} src={phote7}  />,
         </Box>,
         <Box className={classes.sliderWrapper}>
             <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={photo2} />,
+            <img className={classes.slideImg} src={photo8} />,
         </Box>,
         <Box className={classes.sliderWrapper}>
             <Box className={classes.shadowBackground} />
@@ -52,8 +55,8 @@ const Musicians = (props) => {
             animationType={'fadeout'}
             autoPlay
             autoPlayStrategy="none"
-            autoPlayInterval={5000}
-            animationDuration={400}
+            autoPlayInterval={7000}
+            animationDuration={500}
             infinite
             touchTracking={false}
             touchMoveDefaultEvents={false}

@@ -1,12 +1,5 @@
-import {GET_INFO, REGIONS_LIST, SIGN_IN, SIGN_UP} from "../types/types";
+import {REGIONS_LIST, SET_QUOTES} from "../types/types";
 
-
-export const getInfo = (payload) => {
-    return {
-        type: GET_INFO,
-        payload
-    }
-}
 
 export const getListRegion = (payload) => {
     return {
@@ -15,16 +8,11 @@ export const getListRegion = (payload) => {
     }
 }
 
-export const sendSignInForm = (payload) => {
-    return {
-        type: SIGN_IN,
-        payload
-    }
-}
+// Home page
 
-export const sendSignUpForm = (payload) => {
+export const getQuotes = (payload) => {
     return {
-        type: SIGN_UP,
+        type: SET_QUOTES,
         payload
     }
 }

@@ -1,26 +1,20 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles({
-    content: {
-        position: "relative",
-        display: "flex",
-        width: '100vw',
-        height: '100vh',
-        overflow: "hidden"
-    },
+
     sidebarWrapper: {
-        height: '100vh',
-        width: 50,
+        width: '55px',
+        height: '100%',
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
         justifyContent: "space-between",
-        background: '#E2D9A5',
-        transition: 'width 0.3s ease-in-out',
-        zIndex: 10
+        transition: 'all .3s'
+    },
+    drawerSize: {
+        width: '240px'
     },
     sidebarOpened: {
-        width: '13%',
+        width: '240px',
     },
     sidebarMiddleItems: {
         height: '100%',
@@ -39,18 +33,10 @@ export const useStyles = makeStyles({
         display: "flex",
         alignItems: "center",
     },
-    searchPanelWrapper: {
+
+    sidebarItems: {
+        paddingTop: 10,
         width: '100%',
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center'
-    },
-    sidebarTopItems: {
-        width: '100%',
-        display: 'flex',
-        justifyContent: "space-between",
-        alignItems: "center",
-        borderBottom: '2px solid black'
     },
     sidebarBottomItems: {
         padding: '10px 20px',

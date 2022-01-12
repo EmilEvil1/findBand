@@ -17,7 +17,7 @@ import ErrorFieldText from "../../../common/ErrorFieldText";
 import InputMask from 'react-input-mask';
 import RegionList from "../../../common/RegionList";
 import InstrumentList from "../../../common/InstrumentList";
-import {signUpForm} from "../../../../store/thunks/thunks";
+import {sendSignUpFormData} from "../../../../store/thunks/thunks";
 
 
 const SignUp = (props) => {
@@ -35,6 +35,7 @@ const SignUp = (props) => {
         reValidateMode: 'onChange',
     });
 
+    const onSubmit = data => dispatch(sendSignUpFormData(data));
     // const password = watch("password");
     // const confirmationPassword = watch("confirmationPassword");
 
@@ -42,7 +43,7 @@ const SignUp = (props) => {
         <form
             className={classes.signUpWrapper}
             noValidate
-            onSubmit={handleSubmit(signUpForm)}
+            onSubmit={handleSubmit(onSubmit)}
         >
             <Typography variant={'h4'}>Регистрация</Typography>
             <Box className={classes.inputsWrapper}>

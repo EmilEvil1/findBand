@@ -4,7 +4,7 @@ import {Box, MenuItem, TextField} from "@material-ui/core";
 import {Controller} from "react-hook-form";
 import ErrorFieldText from "../ErrorFieldText";
 import {useStyles} from "../../forms/Authentication/style";
-import {getTestingInfo} from "../../../store/thunks/thunks";
+import {getRegionList} from "../../../store/thunks/thunks";
 
 const RegionList = (props) => {
 
@@ -14,7 +14,7 @@ const RegionList = (props) => {
     const classes = useStyles()
 
     useEffect(() => {
-        dispatch(getTestingInfo)
+        dispatch(getRegionList())
     }, [])
 
     return (

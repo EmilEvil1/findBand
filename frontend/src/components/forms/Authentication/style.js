@@ -182,5 +182,10 @@ export const useStyles = makeStyles({
     fieldsWrapper: {
         display: "flex",
         width: '100%'
+    },
+    welcomeTitle: {
+        marginBottom: 40,
+        fontSize: '3rem',
+        letterSpacing: '-0.094rem'
     }
 });

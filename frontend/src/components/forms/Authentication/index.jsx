@@ -43,8 +43,8 @@ const SignForms = (props) => {
                             `${classes.overlayPanel} ${classes.overlayLeftActive}`
                         }
                     >
-                        <Typography>Привет мой друг!!!</Typography>
-                        <Typography>Тут будет красивый текст</Typography>
+                        <Typography className={classes.welcomeTitle}>Добро пожаловать!</Typography>
+
                         <Button
                             style={{border: '1px solid white'}}
                             color='primary'
@@ -58,8 +58,7 @@ const SignForms = (props) => {
                             `${classes.overlayPanel} ${classes.overlayRight}`
                         }
                     >
-                        {/*<Typography>Привет мой друг!!!</Typography>*/}
-                        <Typography>Впервые здесь?</Typography>
+                        <Typography className={classes.welcomeTitle}>Впервые здесь?</Typography>
                         <Button
                             style={{border: '1px solid white'}}
                             color='primary'

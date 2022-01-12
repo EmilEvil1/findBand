@@ -14,17 +14,18 @@ const MainContent = (props) => {
     const classes = useStyles()
 
     return (
-
-        <Grid className={classes.formWrapper}>
-            <Box className={classes.background} />
-            <Box className={classes.quotesSliderWrapper}>
-                <Box>
-                    <QuoteSymbolIcon />
-                    <Quotes />
+        <Box className={classes.searchPanelWrapper}>
+            <Grid className={classes.formWrapper}>
+                <Box className={classes.background} />
+                <Box className={classes.quotesSliderWrapper}>
+                    <Box>
+                        <QuoteSymbolIcon />
+                        <Quotes />
+                    </Box>
+                    <GlobalSearch />
                 </Box>
-                <GlobalSearch />
-            </Box>
-        </Grid>
+            </Grid>
+        </Box>
     );
 };
 

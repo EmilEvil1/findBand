@@ -1,17 +1,19 @@
 import {createTheme} from "@material-ui/core";
 
+const white = '#FFFFFF'
+
 export const theme = createTheme({
     palette: {
         primary: {
-            main: '#FFFFFF',
-            contrastText: '#FFFFFF',
+            main: white,
+            contrastText: white,
         },
         secondary: {
             main: '#e57373'
         },
-        textColor: '#FFFFFF',
+        textColor: white,
         action: {
-            active: '#FFFFFF',
+            active: white,
             activeOpacity: 1,
             // hover: lightBlue[100],
             // hoverOpacity: 0.7,
@@ -25,19 +27,36 @@ export const theme = createTheme({
         MuiInputBase: {
             input: {
                 // border: "1px solid #FFFFFF",
-                color: "#FFFFFF"
+                color: white
             }
         },
         MuiMenu: {
             list: {
-                backgroundColor: "#cccccc",
+                backgroundColor: "#e57373",
             },
         },
+        MuiPaper: {
+            root: {
+                '&.MuiDrawer-paper': {
+                    background: 'linear-gradient(11.72deg, #3F00AE 18.92%, #1D004F 89.13%);'
+                },
+            },
+        },
+        MuiListItemText: {
+            root: {
+                whiteSpace: 'nowrap'
+            },
+        },
+        MuiButtonBase: {
+            root: {
+                color: white
+            },
+        }
     },
     typography: {
         fontFamily: 'MA-Regular',
         allVariants: {
-            color: '#FFFFFF'
+            color: white
         },
         fontSize: 16,
     }

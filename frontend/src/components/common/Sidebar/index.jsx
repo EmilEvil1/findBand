@@ -1,46 +1,80 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
-import {Box, Button, Grid} from "@material-ui/core";
-import {eventToggle} from "../../../helpers/utils";
+import {Box, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
+import {closeModal, eventToggle} from "../../../helpers/utils";
 import {useStyles} from "./style";
-import ShortLogo from "../../../assets/icons/home/shortLogo";
-import Menu from "./Menu";
-import ArrowIcon from "../../../assets/icons/sidebar/arrow";
-import LogOut from "./LogOut";
-import UserData from "./UserData";
+import ShortLogo from "../../../assets/icons/logos/shortLogo";
+import ProfileIcon from "../../../assets/icons/sidebar/profile";
+import {Link} from "react-router-dom";
 import NotificationIcon from "../../../assets/icons/sidebar/notification";
+import BandRoomIcon from "../../../assets/icons/sidebar/band";
+import ArrowIcon from "../../../assets/icons/sidebar/arrow";
+import LogOutIcon from "../../../assets/icons/sidebar/logOut";
+import LongLogo from "../../../assets/icons/logos/longLogo";
 
 const Sidebar = (props) => {
 
     const {} = props
     const classes = useStyles()
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
 
     return (
-
-        <Grid className={!open ? classes.sidebarWrapper : classes.sidebarWrapper + ' ' + classes.sidebarOpened}>
-            <Box className={classes.sidebarTopItems}>
-                <ShortLogo />
-            </Box>
-            <Box className={classes.sidebarMiddleItems}>
-                <UserData open={open} />
-                <Menu open={open}/>
+        <Drawer
+            open={open}
+            onClose={() => closeModal(setOpen)}
+            variant="permanent"
+            anchor="left"
+            className={open && classes.drawerSize}
+        >
+            <Box className={!open ? classes.sidebarWrapper : classes.sidebarWrapper + ' ' + classes.sidebarOpened}>
                 <Box>
-                    <Button><NotificationIcon /></Button>
-                    <LogOut />
+                    <Box className={classes.sidebarItems}>
+                        {!open ? (<ShortLogo />) : (<LongLogo />)}
+                        <Divider />
+                    </Box>
+                    <List>
+                        <Link to={'/profile'}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <ProfileIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={'Профиль'} />
+                            </ListItem>
+                        </Link>
+                        <Link to={'/notify'}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <NotificationIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={'Уведомления'} />
+                            </ListItem>
+                        </Link>
+                        <Link to={'/band'}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <BandRoomIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={'Моя группа'} />
+                            </ListItem>
+                        </Link>
+                    </List>
+                </Box>
+                <Box className={classes.sidebarItems}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <LogOutIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Выйти'} />
+                    </ListItem>
+                    <Divider />
+                    <ListItem onClick={() => eventToggle(open, setOpen)} button>
+                        <ListItemIcon className={open && classes.arrowRotated}>
+                            <ArrowIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Свернуть'} />
+                    </ListItem>
                 </Box>
             </Box>
-            <Box className={classes.sidebarBottomItems}>
-                <Box
-                    style={{cursor: "pointer"}}
-                    className={open ? classes.arrowRotated : ''}
-                    onClick={() => eventToggle(open, setOpen)}
-                >
-                    <ArrowIcon />
-                </Box>
-            </Box>
-        </Grid>
-
+        </Drawer>
     );
 };
 

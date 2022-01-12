@@ -8,11 +8,13 @@ import {eventToggle, openModal} from "../../../../helpers/utils";
 import {onSubmit} from "../../../../helpers/api";
 import ForgetPassword from "../../../modals/ForgetPassword";
 import ErrorFieldText from "../../../common/ErrorFieldText";
-import {signInForm} from "../../../../store/thunks/thunks";
+import {sendSignInFormData, signUpForm} from "../../../../store/thunks/thunks";
+import {useDispatch} from "react-redux";
 
 const SignIn = (props) => {
 
     const {} = props
+    const dispatch = useDispatch()
     const classes = useStyles()
     const [passwordShown, setPasswordShown] = useState(false);
     const [open, setOpen] = useState(false);
@@ -22,12 +24,14 @@ const SignIn = (props) => {
         reValidateMode: 'onChange',
     });
 
+    const onSubmit = data => dispatch(sendSignInFormData(data));
+
     return (
         <Grid className={classes.formWrapper}>
             <form
                 className={classes.formControl}
                 noValidate
-                onSubmit={handleSubmit(signInForm)}
+                onSubmit={handleSubmit(onSubmit)}
             >
                 <Typography variant="h4">Вход</Typography>
                 <AuthServices />
