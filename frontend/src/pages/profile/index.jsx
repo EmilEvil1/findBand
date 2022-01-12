@@ -13,7 +13,6 @@ const Profile = (props) => {
     const dispatch = useDispatch()
     // const regionList = useSelector(({ state }) => state.regions)
 
-    // console.log('regionList', regionList)
     // const { decodedToken, isExpired } = useJwt(token);
     return (
         <Grid className={classes.content}>
