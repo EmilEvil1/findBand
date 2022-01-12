@@ -1,36 +1,33 @@
-import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect} from 'react';
+import {useDispatch} from "react-redux";
 import {useCookies} from "react-cookie";
+import {useHistory} from "react-router-dom";
 import {Box, Grid} from "@material-ui/core";
 import {useStyles} from "./style";
 import Sidebar from "../../components/common/Sidebar";
 import Musicians from "../../components/sliders/Musicians";
 import Main from "../../components/content/Main";
-import {Redirect} from "react-router-dom";
-
+import {checkTokenValidate} from "../../helpers/utils";
 
 const Home = () => {
 
-    // const info = useSelector(({ state }) => state.info);
     const dispatch = useDispatch()
     const classes = useStyles()
-    const [token, setToken] = useCookies(['access_token']);
+    const [token, setToken] = useCookies(['access_token'])
+    const history = useHistory()
 
-
-    const emptyToken = Object.keys(token).length
+    useEffect(() => {
+        if (!!checkTokenValidate(token.access_token)) history.push('/auth')
+    }, [token.access_token])
 
     return (
-        <Grid>
-            {!emptyToken ? <Redirect to={'/auth'} /> : (
-                <Grid className={classes.content}>
-                    <Sidebar />
-                    <Musicians />
-                    <Box className={classes.container}>
-                        <Main />
-                    </Box>
-                </Grid>
-            )}
-        </Grid>
+        <Box className={classes.content}>
+            <Sidebar />
+            <Musicians />
+            <Box className={classes.container}>
+                <Main />
+            </Box>
+        </Box>
     )
 }
 

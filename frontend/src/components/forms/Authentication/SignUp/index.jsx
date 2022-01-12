@@ -6,12 +6,13 @@ import {
     Typography,
     Checkbox,
 } from "@material-ui/core";
+import {useHistory} from "react-router-dom";
 import {useStyles} from "../style";
-import IconPassword from "../../../../assets/icons/auth/password";
 import {Controller, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {onSubmit} from "../../../../helpers/api";
 import {eventToggle, handleCheckboxStatus} from "../../../../helpers/utils";
+import IconPassword from "../../../../assets/icons/auth/password";
 import BandRegistration from "../../../modals/BandRegistration";
 import ErrorFieldText from "../../../common/ErrorFieldText";
 import InputMask from 'react-input-mask';
@@ -19,12 +20,12 @@ import RegionList from "../../../common/RegionList";
 import InstrumentList from "../../../common/InstrumentList";
 import {sendSignUpFormData} from "../../../../store/thunks/thunks";
 
-
 const SignUp = (props) => {
 
     const {} = props
     const classes = useStyles()
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const [passwordShown, setPasswordShown] = useState(false);
     const [checked, setChecked] = useState(false);
@@ -35,7 +36,10 @@ const SignUp = (props) => {
         reValidateMode: 'onChange',
     });
 
-    const onSubmit = data => dispatch(sendSignUpFormData(data));
+    const onSubmit = async data => {
+        await dispatch(sendSignUpFormData(data))
+        await history.push('/')
+    }
     // const password = watch("password");
     // const confirmationPassword = watch("confirmationPassword");
 

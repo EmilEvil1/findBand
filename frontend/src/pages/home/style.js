@@ -6,7 +6,7 @@ export const useStyles = makeStyles({
       position: "relative",
       display: "flex",
       justifyContent: "center",
-      width: '100vw',
+      width: '100%',
       height: '100vh',
       overflow: "hidden",
       transition: 'all 1s easy'
