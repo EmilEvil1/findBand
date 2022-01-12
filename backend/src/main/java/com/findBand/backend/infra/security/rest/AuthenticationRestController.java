@@ -1,7 +1,7 @@
 package com.findBand.backend.infra.security.rest;
 
 import com.findBand.backend.domain.model.UserDomain;
-import com.findBand.backend.domain.useCase.UserCreate;
+import com.findBand.backend.domain.useCase.user.UserCreate;
 import com.findBand.backend.infra.common.rest.BaseController;
 import com.findBand.backend.infra.common.rest.Response;
 import com.findBand.backend.infra.security.jwt.JWTFilter;
@@ -27,7 +27,8 @@ public class AuthenticationRestController extends BaseController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public AuthenticationRestController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+    public AuthenticationRestController(TokenProvider tokenProvider,
+                                        AuthenticationManagerBuilder authenticationManagerBuilder) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }

@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class UserDomain {
+    private Long id;
     private String name;
     private String phone;
     private String email;
