@@ -14,6 +14,10 @@ public class BandEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "band_owner_id")
+    private BandOwnerEntity bandOwner;
+
     @Column
     private String name;
 

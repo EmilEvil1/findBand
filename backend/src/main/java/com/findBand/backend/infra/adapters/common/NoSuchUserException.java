@@ -1,12 +1,10 @@
 package com.findBand.backend.infra.adapters.common;
 
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import com.findBand.backend.infra.common.rest.ApiErrorException;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class NoSuchUserException extends RuntimeException{
-    public NoSuchUserException(String message) {
-        super(message);
+public class NoSuchUserException extends ApiErrorException {
+    public NoSuchUserException(String errorCode) {
+        super(errorCode);
     }
 }

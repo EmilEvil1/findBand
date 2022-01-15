@@ -10,6 +10,8 @@ public interface UserPort {
 
     Optional<UserDomain> createUser(UserCreate userCreate);
 
+    boolean doUserExists(String emailAddress);
+
     String createResetPasswordRequest(long userId);
 
     boolean validateResetPassword(String resetPasswordId);

@@ -43,25 +43,10 @@ public class UserJpaAdapter implements UserPort {
     }
 
     @Override
-    @Transactional
     public Optional<UserDomain> createUser(UserCreate userCreate) {
         boolean isBandOwner = userCreate.getUserRoleEnum() == UserRoleEnum.BAND_OWNER;
-        UserEntity userEntity;
-
-        if (isBandOwner) {
-            BandEntity newBand = new BandEntity();
-            newBand.setName(userCreate.getBandName());
-            bandJpaRepository.save(newBand);
-
-            BandOwnerEntity bandOwnerEntity = new BandOwnerEntity();
-            fillUserCommonFields(bandOwnerEntity, userCreate);
-            bandOwnerEntity.setBand(newBand);
-            userEntity = bandOwnerEntity;
-        } else {
-            BandSeekerEntity bandSeekerEntity = new BandSeekerEntity();
-            fillUserCommonFields(bandSeekerEntity, userCreate);
-            userEntity = bandSeekerEntity;
-        }
+        UserEntity userEntity = isBandOwner ? new BandOwnerEntity() : new BandSeekerEntity();
+        fillUserCommonFields(userEntity, userCreate);
         return Optional.of(userJpaRepository.save(userEntity)).map(this::toDomain);
     }
 
@@ -69,6 +54,11 @@ public class UserJpaAdapter implements UserPort {
         userEntity.setEmail(userCreate.getEmail());
         userEntity.setPassword(passwordEncoder.encode(userCreate.getPassword()));
         userEntity.setUsername(userCreate.getUserName());
+    }
+
+    @Override
+    public boolean doUserExists(String emailAddress) {
+        return userJpaRepository.existsByEmail(emailAddress);
     }
 
     @Override

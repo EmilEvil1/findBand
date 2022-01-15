@@ -1,5 +1,6 @@
 package com.findBand.backend.infra.security.rest;
 
+import com.findBand.backend.domain.exceptions.FindBandValidationException;
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.model.UserRoleEnum;
 import com.findBand.backend.domain.useCase.user.UserCreate;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -64,15 +66,20 @@ public class AuthenticationRestController extends BaseController {
         UsernamePasswordAuthenticationToken authenticationToken =
           new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
 
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
-        String jwt = tokenProvider.createToken(authentication, true);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+            String jwt = tokenProvider.createToken(authentication, true);
 
-        return new ResponseEntity<JWTToken>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+
+            return new ResponseEntity<JWTToken>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+        } catch (AuthenticationException e) {
+            throw new FindBandValidationException("authorization.email.or.password.wrong");
+        }
     }
 
     static class JWTToken {
