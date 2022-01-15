@@ -1,0 +1,1 @@
+ALTER TABLE band ADD COLUMN band_owner_id bigint references findband_user;

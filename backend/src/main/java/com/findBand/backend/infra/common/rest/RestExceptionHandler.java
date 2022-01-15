@@ -1,5 +1,6 @@
 package com.findBand.backend.infra.common.rest;
 
+import com.findBand.backend.domain.exceptions.FindBandValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,12 @@ public class RestExceptionHandler extends BaseController {
     public Response<ErrorResponse> handleException(Exception exception, Locale locale) {
         log.error("An error occurred! Details: ", exception);
         return createErrorResponseFromMessageSource("common.system.error.occurred", locale);
+    }
+
+    @ExceptionHandler(ApiErrorException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Response<ErrorResponse> handleFindBandValidationError(ApiErrorException e) {
+        return respond(new ErrorResponse(e.getErrorCode(), e.getErrorCode()));
     }
 
     @ExceptionHandler(WebExchangeBindException.class)

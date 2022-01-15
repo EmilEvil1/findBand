@@ -2,6 +2,7 @@ package com.findBand.backend.infra.security;
 
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.port.UserPort;
+import com.findBand.backend.infra.adapters.common.NoSuchUserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,7 +35,7 @@ public class UserModelDetailsService implements UserDetailsService {
 
       return daoUserPort.findUserByEmail(login)
         .map(user -> createSpringSecurityUser(login, user))
-        .orElseThrow(() -> new UsernameNotFoundException("User with email " + login + " was not found in the database"));
+        .orElseThrow(() -> new NoSuchUserException("authorization.email.not.exist"));
 
    }
 
