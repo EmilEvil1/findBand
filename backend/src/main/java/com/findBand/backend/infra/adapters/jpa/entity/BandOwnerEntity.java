@@ -9,7 +9,4 @@ import javax.persistence.*;
 @Data
 public class BandOwnerEntity extends UserEntity {
 
-    @OneToOne
-    @JoinColumn(name = "band_id")
-    private BandEntity band;
 }
