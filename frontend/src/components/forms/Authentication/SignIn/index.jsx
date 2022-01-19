@@ -8,7 +8,7 @@ import {eventToggle, openModal} from "../../../../helpers/utils";
 import {onSubmit} from "../../../../helpers/api";
 import ForgetPassword from "../../../modals/ForgetPassword";
 import ErrorFieldText from "../../../common/ErrorFieldText";
-import {sendSignInFormData, signUpForm} from "../../../../store/thunks/thunks";
+import {sendSignInFormData} from "../../../../store/thunks/thunks";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 

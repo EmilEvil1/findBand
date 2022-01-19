@@ -8,7 +8,9 @@ import {theme} from "./helpers/theme";
 import Home from "./pages/home";
 import Auth from "./pages/auth";
 import Profile from "./pages/profile";
+import SearchResult from "./pages/search";
 import "./css/banner.css";
+
 
 const App = () => {
     return (
@@ -20,6 +22,7 @@ const App = () => {
                             <Route exact path='/' component={Home} />
                             <Route exact path='/auth' component={Auth} />
                             <Route exact path='/profile' component={Profile} />
+                            <Route exact path='/search' component={SearchResult} />
                         </Switch>
                     </BrowserRouter>
                 </ThemeProvider>

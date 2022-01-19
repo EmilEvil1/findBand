@@ -2,7 +2,7 @@ import {GET_INFO, REGIONS_LIST, SET_QUOTES} from "../types/types";
 
 const initialState = {
     info: {},
-    regions: {},
+    regions: [],
     quotes: [
         {
             author: 'Jimmy Page Led Zeppelin',

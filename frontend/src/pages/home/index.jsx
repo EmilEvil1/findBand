@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
-import {Box, Grid} from "@material-ui/core";
+import {Box} from "@material-ui/core";
 import {useStyles} from "./style";
 import Sidebar from "../../components/common/Sidebar";
 import Musicians from "../../components/sliders/Musicians";

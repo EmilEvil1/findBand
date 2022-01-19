@@ -116,6 +116,7 @@ export const useStyles = makeStyles({
     },
     inputWrapper: {
         marginTop: 30,
+        position: "relative",
         width: '100%',
         display: "flex",
         alignItems: "center"

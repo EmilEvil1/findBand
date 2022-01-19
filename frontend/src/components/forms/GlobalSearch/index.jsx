@@ -8,7 +8,7 @@ import SearchMusician from "./SearchMusician";
 const GlobalSearch = (props) => {
 
     const {} = props
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     // const classes = useStyles()
 
     const [value, setValue] = useState('1');

@@ -1,4 +1,4 @@
-import {REGIONS_LIST, SET_QUOTES} from "../types/types";
+import {GET_LIST, REGIONS_LIST, SET_QUOTES} from "../types/types";
 
 
 export const getListRegion = (payload) => {
