@@ -1,8 +1,8 @@
 import React from 'react';
-import {Box, Container, Grid} from "@material-ui/core";
+import {Box, Grid} from "@material-ui/core";
 import Sidebar from "../../components/common/Sidebar";
-import {useStyles} from "./style";
-import ResultRow from "../../components/common/FoundMusician";
+import {useStyles} from "../style";
+import FoundMusician from "../../components/common/FoundMusician";
 
 const SearchResult = (props) => {
 
@@ -12,11 +12,7 @@ const SearchResult = (props) => {
     return (
         <Grid className={classes.layout}>
             <Sidebar />
-            {/*<Container>*/}
-                <Box className={classes.container}>
-                    <ResultRow />
-                </Box>
-            {/*</Container>*/}
+            <Box className={classes.container}><FoundMusician /></Box>
         </Grid>
     );
 };

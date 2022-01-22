@@ -1,21 +1,36 @@
-import React from 'react';
-// import {useDispatch} from "react-redux";
-import {Box, Container, Grid} from "@material-ui/core";
+import React, {useEffect} from 'react';
+import {Box, Grid, Typography} from "@material-ui/core";
+import {useStyles} from "../style";
 import Sidebar from "../../components/common/Sidebar";
-// import {useStyles} from "../../components/common/Sidebar/style";
+import {darkBlue} from "../../helpers/styles";
+import UploadPhoto from "../../components/common/UploadPhoto";
+import ProfileData from "../../components/forms/ProfileData";
+import {useCookies} from "react-cookie";
+import {useHistory} from "react-router-dom";
+import {checkTokenValidate} from "../../helpers/utils";
 
 const Profile = (props) => {
 
     const {} = props
-    // const classes = useStyles()
-    // const dispatch = useDispatch()
+    const classes = useStyles()
+
+    const [token, setToken] = useCookies(['access_token'])
+    const history = useHistory()
+
+    useEffect(() => {
+        if (!!checkTokenValidate(token.access_token)) history.push('/auth')
+    }, [token.access_token])
 
     return (
-        <Grid>
+        <Grid style={{background: darkBlue}} className={classes.content}>
             <Sidebar />
-            <Container>
-                <Box>123</Box>
-            </Container>
+            <Box className={classes.container}>
+                <Typography style={{marginTop: 35}} variant={'h4'}>Личные данные</Typography>
+                <Box className={classes.flexWrap} style={{marginTop: 35}}>
+                    <UploadPhoto />
+                    <ProfileData />
+                </Box>
+            </Box>
         </Grid>
     );
 };

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useCookies} from "react-cookie";
-import {Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
+import {Avatar, Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography} from "@material-ui/core";
 import {closeModal, eventToggle} from "../../../helpers/utils";
 import {useStyles} from "./style";
 import ShortLogo from "../../../assets/icons/logos/shortLogo";
@@ -11,6 +11,7 @@ import BandRoomIcon from "../../../assets/icons/sidebar/band";
 import ArrowIcon from "../../../assets/icons/sidebar/arrow";
 import LogOutIcon from "../../../assets/icons/sidebar/logOut";
 import LongLogo from "../../../assets/icons/logos/longLogo";
+import HomeIcon from "../../../assets/icons/sidebar/home";
 
 
 const Sidebar = (props) => {
@@ -36,11 +37,25 @@ const Sidebar = (props) => {
         >
             <Box className={!open ? classes.sidebarWrapper : classes.sidebarWrapper + ' ' + classes.sidebarOpened}>
                 <Box>
-                    <Box className={classes.sidebarItems}>
+                    <Box className={classes.logosWrapper}>
                         {!open ? (<ShortLogo />) : (<LongLogo />)}
                         <Divider />
                     </Box>
+                    <List className={classes.userInfo}>
+                        <ListItem>
+                            <ListItemIcon><Avatar style={{width: 25, height: 25}} alt={'И'} src={''} /></ListItemIcon>
+                            <ListItemText primary={'Иван'} />
+                        </ListItem>
+                    </List>
                     <List>
+                        <Link to={'/'}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <HomeIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={'Главная'} />
+                            </ListItem>
+                        </Link>
                         <Link to={'/profile'}>
                             <ListItem button>
                                 <ListItemIcon>

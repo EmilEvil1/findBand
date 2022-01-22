@@ -26,7 +26,6 @@ const RegionList = (props) => {
                 Регион
             </InputLabel>
             <Select
-                // style={{width: '50%'}}
                 labelId="label"
                 name='region'
                 value={values && values.region}

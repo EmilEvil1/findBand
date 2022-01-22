@@ -51,3 +51,25 @@ export const signUpValidation = yup.object({
         .string('Выберите инструмент')
         .required('Выберите инструмент'),
 });
+
+// profile
+
+export const profileFormValidation = yup.object({
+    name: yup
+        .string('Заполните поле')
+        .required('Заполните поле'),
+    phone: yup
+        .string('Заполните поле')
+        // .matches(phoneRegExp, 'Phone number is not valid')
+        .required('Заполните поле'),
+    email: yup
+        .string('Заполните поле')
+        .email('Введите корректную почту')
+        .required('Заполните поле'),
+    region: yup
+        .string('Выберите регион')
+        .required('Выберите регион'),
+    instrument: yup
+        .string('Выберите инструмент')
+        .required('Выберите инструмент'),
+});

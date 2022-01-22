@@ -9,6 +9,7 @@ const InstrumentList = (props) => {
 
     const {values, handleChange, touched, errors} = props
     const classes = useStyles()
+    console.log(values.region)
 
     return (
         <FormControl style={{marginLeft: 10}} variant="outlined" className={classes.inputWrapper}>
@@ -26,7 +27,7 @@ const InstrumentList = (props) => {
                 error={touched && touched.instrument && Boolean(errors.instrument)}
                 fullWidth
             >
-                {musicalInstrumentsList.length > 1 && musicalInstrumentsList.map((item, index) => {
+                {musicalInstrumentsList && musicalInstrumentsList.length > 1 && musicalInstrumentsList.map((item, index) => {
                     return <MenuItem key={index} value={item}>{item}</MenuItem>
                 })}
             </Select>
