@@ -11,28 +11,32 @@ export const getRegionList = () => dispatch => {
         });
 }
 
-export const sendSignInFormData = ( data ) => dispatch => {
+export const sendSignInFormData = ( data, setCookie ) => dispatch => {
     return fetch('http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/authenticate ', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
     })
         .then((response) => response.json())
-        .then((response) => { response.token ?  document.cookie = `access_token=${response.token}`: document.cookie = `access_token=''`})
+        .then((response) => {
+            if (response.token) setCookie('access_token', response.token);
+        })
         .catch((err) => {
             console.log(err);
             throw new Error(err)
         });
 }
 
-export const sendSignUpFormData = ( data ) => dispatch => {
+export const sendSignUpFormData = ( data, setCookie) => dispatch => {
     return fetch('http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/register ', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
     })
         .then((response) => response.json())
-        .then((response) => { response.data.token ?  document.cookie = `access_token=${response.data.token}`: document.cookie = `access_token=''`})
+        .then((response) => {
+            if (response.data.token) setCookie('access_token', response.data.token);
+        })
         .catch((err) => {
             console.log(err);
             throw new Error(err)

@@ -1,8 +1,9 @@
 import React from 'react';
-import {Box, MenuItem, Select} from "@material-ui/core";
+import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 import ErrorFieldText from "../ErrorFieldText";
 import {useStyles} from "../../forms/Authentication/style";
 import {musicalInstrumentsList} from "../../../helpers/mocks";
+import {red, white} from "../../../helpers/styles";
 
 const InstrumentList = (props) => {
 
@@ -10,21 +11,27 @@ const InstrumentList = (props) => {
     const classes = useStyles()
 
     return (
-        <Box className={classes.inputWrapper}>
+        <FormControl style={{marginLeft: 10}} variant="outlined" className={classes.inputWrapper}>
+            <InputLabel
+                id="label"
+                style={{color: (touched && touched.region && Boolean(errors.region)) ? red : white}}
+            >
+                Инструмент
+            </InputLabel>
             <Select
-                style={{width: '100%'}}
-                label="Добавить получателей"
+                labelId="label"
                 name='instrument'
                 value={values && values.instrument}
                 onChange={handleChange}
                 error={touched && touched.instrument && Boolean(errors.instrument)}
+                fullWidth
             >
                 {musicalInstrumentsList.length > 1 && musicalInstrumentsList.map((item, index) => {
                     return <MenuItem key={index} value={item}>{item}</MenuItem>
                 })}
             </Select>
-            <ErrorFieldText errorText={errors && errors.instrument}/>
-        </Box>
+            <ErrorFieldText errorText={(touched && touched.region && Boolean(errors.region)) && errors.instrument}/>
+        </FormControl>
     );
 };
 

@@ -11,11 +11,10 @@ const Auth = () => {
 
     useEffect(() => {
         if (!checkTokenValidate(token.access_token)) history.push('/')
-    }, [token.access_token])
+    }, [])
 
-    return (
-        <Authentication />
-    );
+
+    return (<Authentication />)
 };
 
 export default Auth;

@@ -38,6 +38,11 @@ export const useStyles = makeStyles({
         transform: 'translateX(0%)',
         opacity: 1,
     },
+    signInForm: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+    },
     signInActive: {
         transform: 'translateX(15%)',
         opacity: 0
@@ -113,13 +118,17 @@ export const useStyles = makeStyles({
         display: "flex",
         flexDirection: "column",
         color: "white",
+        '& p': {
+            position: "absolute",
+            bottom: -30
+        }
     },
     inputWrapper: {
-        marginTop: 30,
+        marginTop: 35,
         position: "relative",
         width: '100%',
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
     },
     formWrapper: {
         width: '50%'
@@ -153,7 +162,8 @@ export const useStyles = makeStyles({
         }
     },
     signUpBtn: {
-        marginTop: 30
+        marginTop: 20,
+        border: '1px solid white'
     },
     passwordField: {
         marginTop: 30,

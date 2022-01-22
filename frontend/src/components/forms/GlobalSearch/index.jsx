@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
+// import {useDispatch} from "react-redux";
 import {Box, Tab} from "@material-ui/core";
 import {TabContext, TabList, TabPanel} from "@material-ui/lab";
 import SearchBand from "./SearchBand";
@@ -27,7 +27,7 @@ const GlobalSearch = (props) => {
                 <SearchMusician />
             </TabPanel>
             <TabPanel value="2">
-                <SearchBand />
+                {/*<SearchBand />*/}
             </TabPanel>
         </TabContext>
     );

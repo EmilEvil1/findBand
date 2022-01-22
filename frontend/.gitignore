@@ -43,7 +43,6 @@ yarn-error.log*
 
 ### VS Code ###
 .vscode/
-target/
 node
 
 ### Build directory ###

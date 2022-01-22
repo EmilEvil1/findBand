@@ -1,7 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
+import {purple} from "../../../helpers/styles";
 
 export const useStyles = makeStyles({
     modalWrapper: {
-        backgroundColor: "#272727"
+        padding: 35,
+        backgroundColor: purple
     }
 });

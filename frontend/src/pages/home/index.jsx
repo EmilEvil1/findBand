@@ -11,7 +11,7 @@ import {checkTokenValidate} from "../../helpers/utils";
 
 const Home = () => {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const classes = useStyles()
     const [token, setToken] = useCookies(['access_token'])
     const history = useHistory()

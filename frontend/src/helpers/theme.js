@@ -1,6 +1,5 @@
 import {createTheme} from "@material-ui/core";
-
-const white = '#FFFFFF'
+import {purple, white} from "./styles";
 
 export const theme = createTheme({
     palette: {
@@ -32,7 +31,7 @@ export const theme = createTheme({
         },
         MuiMenu: {
             list: {
-                backgroundColor: "#e57373",
+                backgroundColor: purple,
             },
         },
         MuiPaper: {

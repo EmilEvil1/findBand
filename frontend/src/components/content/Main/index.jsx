@@ -10,7 +10,7 @@ import GlobalSearch from "../../forms/GlobalSearch";
 const MainContent = (props) => {
 
     const {} = props
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const classes = useStyles()
 
     return (

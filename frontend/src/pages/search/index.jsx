@@ -1,24 +1,22 @@
 import React from 'react';
-// import {useDispatch} from "react-redux";
 import {Box, Container, Grid} from "@material-ui/core";
 import Sidebar from "../../components/common/Sidebar";
 import {useStyles} from "./style";
-import ResultRow from "../../components/common/ResultRow";
+import ResultRow from "../../components/common/FoundMusician";
 
 const SearchResult = (props) => {
 
     const {} = props
     const classes = useStyles()
-    // const dispatch = useDispatch()
 
     return (
-        <Grid>
+        <Grid className={classes.layout}>
             <Sidebar />
-            <Container>
-                <Box className={classes.wrapper}>
+            {/*<Container>*/}
+                <Box className={classes.container}>
                     <ResultRow />
                 </Box>
-            </Container>
+            {/*</Container>*/}
         </Grid>
     );
 };
