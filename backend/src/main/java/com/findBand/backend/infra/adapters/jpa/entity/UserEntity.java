@@ -6,8 +6,10 @@ import javax.persistence.*;
 
 @Data
 @Entity(name = "user")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_role")
 @Table(name = "findband_user")
-public class UserEntity {
+public abstract class UserEntity {
 
     @Id
     @Column

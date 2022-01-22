@@ -11,6 +11,8 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByEmail(String email);
 
+    boolean existsByEmail(String email);
+
     @Query("UPDATE user u SET password = ?1 where u.id = ?2")
     @Modifying
     void updatePassword(String password, long userId);

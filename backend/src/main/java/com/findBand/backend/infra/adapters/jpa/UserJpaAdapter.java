@@ -2,11 +2,12 @@ package com.findBand.backend.infra.adapters.jpa;
 
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.model.UserRole;
+import com.findBand.backend.domain.model.UserRoleEnum;
 import com.findBand.backend.domain.port.UserPort;
 import com.findBand.backend.domain.useCase.user.UserCreate;
 import com.findBand.backend.infra.adapters.common.NoSuchResetPasswordException;
-import com.findBand.backend.infra.adapters.jpa.entity.ResetPasswordEntity;
-import com.findBand.backend.infra.adapters.jpa.entity.UserEntity;
+import com.findBand.backend.infra.adapters.jpa.entity.*;
+import com.findBand.backend.infra.adapters.jpa.repository.BandJpaRepository;
 import com.findBand.backend.infra.adapters.jpa.repository.ResetPasswordJpaRepository;
 import com.findBand.backend.infra.adapters.jpa.repository.UserJpaRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,11 +26,15 @@ public class UserJpaAdapter implements UserPort {
     private UserJpaRepository userJpaRepository;
     private PasswordEncoder passwordEncoder;
     private ResetPasswordJpaRepository passwordJpaRepository;
+    private BandJpaRepository bandJpaRepository;
 
-    public UserJpaAdapter(UserJpaRepository userJpaRepository, PasswordEncoder passwordEncoder, ResetPasswordJpaRepository passwordJpaRepository) {
+
+    public UserJpaAdapter(UserJpaRepository userJpaRepository, PasswordEncoder passwordEncoder,
+                          ResetPasswordJpaRepository passwordJpaRepository, BandJpaRepository bandJpaRepository) {
         this.userJpaRepository = userJpaRepository;
         this.passwordEncoder = passwordEncoder;
         this.passwordJpaRepository = passwordJpaRepository;
+        this.bandJpaRepository = bandJpaRepository;
     }
 
     @Override
@@ -38,11 +44,21 @@ public class UserJpaAdapter implements UserPort {
 
     @Override
     public Optional<UserDomain> createUser(UserCreate userCreate) {
-        UserEntity userEntity = new UserEntity();
+        boolean isBandOwner = userCreate.getUserRoleEnum() == UserRoleEnum.BAND_OWNER;
+        UserEntity userEntity = isBandOwner ? new BandOwnerEntity() : new BandSeekerEntity();
+        fillUserCommonFields(userEntity, userCreate);
+        return Optional.of(userJpaRepository.save(userEntity)).map(this::toDomain);
+    }
+
+    private void fillUserCommonFields(UserEntity userEntity, UserCreate userCreate) {
         userEntity.setEmail(userCreate.getEmail());
         userEntity.setPassword(passwordEncoder.encode(userCreate.getPassword()));
         userEntity.setUsername(userCreate.getUserName());
-        return Optional.of(userJpaRepository.save(userEntity)).map(this::toDomain);
+    }
+
+    @Override
+    public boolean doUserExists(String emailAddress) {
+        return userJpaRepository.existsByEmail(emailAddress);
     }
 
     @Override

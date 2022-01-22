@@ -1,6 +1,6 @@
 package com.findBand.backend.domain;
 
-import com.findBand.backend.infra.adapters.common.FindBandValidationException;
+import com.findBand.backend.domain.exceptions.FindBandValidationException;
 import com.findBand.backend.domain.common.useCase.ObservableUseCasePublisher;
 import com.findBand.backend.domain.common.useCase.UseCaseHandler;
 import com.findBand.backend.domain.port.UserPort;
@@ -24,7 +24,7 @@ public class UserCreateNewPasswordUseCaseHandler extends ObservableUseCasePublis
         boolean isValidResetPassword = publish(Boolean.class, new UserValidateResetPassword(useCase.getResetPasswordId()));
 
         if (!isValidResetPassword || !ValidationRulesUtil.validatePassword(useCase.getNewPassword())) {
-            throw new FindBandValidationException("newPassword");
+            throw new FindBandValidationException("create.new.password.invalid");
         }
 
         userPort.createNewPassword(useCase.getNewPassword(), useCase.getResetPasswordId());
