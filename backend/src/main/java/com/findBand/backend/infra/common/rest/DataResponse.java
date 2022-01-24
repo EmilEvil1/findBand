@@ -8,7 +8,7 @@ public class DataResponse<T> {
     private List<T> items = List.of();
     private Integer page;
     private Integer size;
-    private Long totalSize;
+    private int totalSize;
 
     public DataResponse() {
     }
@@ -17,7 +17,7 @@ public class DataResponse<T> {
         this.items = items;
     }
 
-    public DataResponse(List<T> items, Integer page, Integer size, Long totalSize) {
+    public DataResponse(List<T> items, Integer page, Integer size, int totalSize) {
         this.items = items;
         this.page = page;
         this.size = size;
@@ -36,7 +36,7 @@ public class DataResponse<T> {
         return Objects.nonNull(size) ? size : items.size();
     }
 
-    public Long getTotalSize() {
+    public int getTotalSize() {
         return totalSize;
     }
 
