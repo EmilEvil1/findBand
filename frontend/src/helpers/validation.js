@@ -15,7 +15,7 @@ export const signInValidation = yup.object({
 });
 
 export const forgetPassword = yup.object({
-    resetEmail: yup
+    emailAddress: yup
         .string('Заполните поле')
         .email('Введите корректную почту')
         .required('Заполните поле'),
@@ -66,6 +66,18 @@ export const profileFormValidation = yup.object({
         .string('Заполните поле')
         .email('Введите корректную почту')
         .required('Заполните поле'),
+    region: yup
+        .string('Выберите регион')
+        .required('Выберите регион'),
+    instrument: yup
+        .string('Выберите инструмент')
+        .required('Выберите инструмент'),
+});
+
+
+// home
+
+export const searchMusician = yup.object({
     region: yup
         .string('Выберите регион')
         .required('Выберите регион'),

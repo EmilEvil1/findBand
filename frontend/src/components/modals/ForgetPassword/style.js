@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles({
     wrapper: {
         padding: 50,
-        background: '#4D16C9'
+        // background: '#4D16C9'
     },
     text: {
         textAlign: "center",
@@ -11,17 +11,15 @@ export const useStyles = makeStyles({
         letterSpacing: '0.25px'
     },
     form: {
-        marginTop: 50,
+        marginTop: 40,
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        '& p': {
+            position: "absolute",
+            bottom: -30
+        }
     },
     btn: {
-        marginTop: 35,
-        borderRadius: 20,
-        border: '1px solid #FFFFFF',
-        filter: 'drop-shadow(0px 4px 8px rgba(39, 39, 39, 0.2))'
+        marginTop: 40
     },
-    btnText: {
-        padding: '20px 76px'
-    }
 });

@@ -1,6 +1,5 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
-import { Formik } from "formik";
+import {Formik} from "formik";
 import {
     Box,
     Button,
@@ -10,14 +9,15 @@ import {
 } from "@material-ui/core";
 import {useStyles} from "./style";
 import {closeModal} from "../../../helpers/utils";
-import {onSubmit} from "../../../helpers/api";
 import {forgetPassword} from "../../../helpers/validation";
+import {sendPassword} from "../../../store/thunks/thunks";
 
 const ForgetPassword = (props) => {
 
     const {open, close} = props
-    const dispatch = useDispatch()
     const classes = useStyles()
+
+    const onSubmit = email => sendPassword(email)
 
     return (
         <Dialog
@@ -27,11 +27,8 @@ const ForgetPassword = (props) => {
             <Box className={classes.wrapper}>
                 <Typography className={classes.text}>Забыли пароль?</Typography>
                 <Formik
-                    initialValues={{resetEmail: ''}}
-                    onSubmit={(values, { setSubmitting }) => {
-                        onSubmit(values)
-                        setSubmitting(false)
-                    }}
+                    initialValues={{emailAddress: ''}}
+                    onSubmit={values => onSubmit(values)}
                     validationSchema={forgetPassword}
                 >
                     {props => {
@@ -49,14 +46,14 @@ const ForgetPassword = (props) => {
                                 onSubmit={handleSubmit}
                             >
                                 <TextField
-                                    name='resetEmail'
-                                    label='Логин'
-                                    placeholder='Email'
+                                    name='emailAddress'
+                                    label='Email'
+                                    placeholder='Введите email'
                                     value={values.resetEmail}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    error={touched.resetEmail && Boolean(errors.resetEmail)}
-                                    helperText={touched.resetEmail && errors.resetEmail}
+                                    error={touched.emailAddress && Boolean(errors.emailAddress)}
+                                    helperText={touched.emailAddress && errors.emailAddress}
                                     variant='outlined'
                                     fullWidth
                                 />
@@ -65,7 +62,7 @@ const ForgetPassword = (props) => {
                                     color='primary'
                                     onClick={handleSubmit}
                                 >
-                                    <Typography className={classes.btnText}>восстановить пароль</Typography>
+                                    Восстановить пароль
                                 </Button>
                             </form>
                         )

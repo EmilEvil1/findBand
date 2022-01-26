@@ -1,27 +1,16 @@
 import React from 'react';
 import {useHistory} from "react-router-dom";
 import { Formik } from "formik";
-import * as yup from 'yup';
 import {Button} from "@material-ui/core";
 import RegionList from "../../../common/RegionList";
 import {onSubmit} from "../../../../helpers/api";
 import {useStyles} from "../../Authentication/style";
 import InstrumentList from "../../../common/InstrumentList";
+import {searchMusician} from "../../../../helpers/validation";
 
-const SearchMusician = (props) => {
+const SearchMusician = () => {
 
-    const {} = props
     const classes = useStyles()
-
-    const validationSchema = yup.object({
-        region: yup
-            .string('Выберите регион')
-            .required('Выберите регион'),
-        instrument: yup
-            .string('Выберите инструмент')
-            .required('Выберите инструмент'),
-    });
-
     const history = useHistory()
 
     return (
@@ -35,7 +24,7 @@ const SearchMusician = (props) => {
                 onSubmit(values)
                 setSubmitting(false);
             }}
-            validationSchema={validationSchema}
+            validationSchema={searchMusician}
         >
             {props => {
                 const {
@@ -68,8 +57,7 @@ const SearchMusician = (props) => {
                             errors={errors}
                         />
                         <Button
-                            style={{border: '1px solid white'}}
-                            className={classes.signUpBtn}
+                            style={{marginTop: 40}}
                             color='primary'
                             onClick={() => {
                                  handleSubmit()

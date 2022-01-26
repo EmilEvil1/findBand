@@ -7,11 +7,10 @@ export const getRegionList = () => dispatch => {
         .then((response) => dispatch(getListRegion(response)))
         .catch((err) => {
             console.log(err);
-            throw new Error(err)
         });
 }
 
-export const sendSignInFormData = ( data, setCookie ) => dispatch => {
+export const sendSignInFormData = ( data, setCookie ) => {
     return fetch('http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/authenticate ', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -23,11 +22,10 @@ export const sendSignInFormData = ( data, setCookie ) => dispatch => {
         })
         .catch((err) => {
             console.log(err);
-            throw new Error(err)
         });
 }
 
-export const sendSignUpFormData = ( data, setCookie) => dispatch => {
+export const sendSignUpFormData = ( data, setCookie) => {
     return fetch('http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/register ', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -39,6 +37,17 @@ export const sendSignUpFormData = ( data, setCookie) => dispatch => {
         })
         .catch((err) => {
             console.log(err);
-            throw new Error(err)
+        });
+}
+
+export const sendPassword = ( data ) => {
+    return fetch('http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/resetPassword', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+        .then((response) => response.json())
+        .catch((err) => {
+            console.log(err);
         });
 }

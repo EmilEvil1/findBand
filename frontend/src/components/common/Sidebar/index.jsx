@@ -39,8 +39,8 @@ const Sidebar = (props) => {
                 <Box>
                     <Box className={classes.logosWrapper}>
                         {!open ? (<ShortLogo />) : (<LongLogo />)}
-                        <Divider />
                     </Box>
+                    <Divider />
                     <List className={classes.userInfo}>
                         <ListItem>
                             <ListItemIcon><Avatar style={{width: 25, height: 25}} alt={'И'} src={''} /></ListItemIcon>
@@ -64,14 +64,14 @@ const Sidebar = (props) => {
                                 <ListItemText primary={'Профиль'} />
                             </ListItem>
                         </Link>
-                        <Link to={'/notify'}>
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <NotificationIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={'Уведомления'} />
-                            </ListItem>
-                        </Link>
+                        {/*<Link to={'/notify'}>*/}
+                        {/*    <ListItem button>*/}
+                        {/*        <ListItemIcon>*/}
+                        {/*            <NotificationIcon />*/}
+                        {/*        </ListItemIcon>*/}
+                        {/*        <ListItemText primary={'Уведомления'} />*/}
+                        {/*    </ListItem>*/}
+                        {/*</Link>*/}
                         <Link to={'/band'}>
                             <ListItem button>
                                 <ListItemIcon>

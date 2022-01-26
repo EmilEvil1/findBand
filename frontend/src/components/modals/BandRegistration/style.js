@@ -3,7 +3,10 @@ import {purple} from "../../../helpers/styles";
 
 export const useStyles = makeStyles({
     modalWrapper: {
-        padding: 35,
+        padding: 45,
         backgroundColor: purple
+    },
+    buttonsWrapper: {
+        marginTop: 35
     }
 });

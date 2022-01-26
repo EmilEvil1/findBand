@@ -154,16 +154,16 @@ export const useStyles = makeStyles({
     },
     forgotPasswordLink: {
         margin: '50px 0 25px',
+        height: 30,
         cursor: "pointer",
-        transition: 'all 0.3s',
+        transition: 'all 0.5s ease-out',
         '&:hover': {
-            transition: 'all 0.3s',
+            transition: 'all 0.5s ease-out',
             borderBottom: '1px solid white'
         }
     },
     signUpBtn: {
-        marginTop: 20,
-        border: '1px solid white'
+        marginTop: 20
     },
     passwordField: {
         marginTop: 30,
@@ -198,5 +198,20 @@ export const useStyles = makeStyles({
         marginBottom: 40,
         fontSize: '3rem',
         letterSpacing: '-0.094rem'
+    },
+    createBandButton: {
+        marginTop: 40,
+        border: 'none'
+    },
+    signInBtn: {
+        width: '70%'
+    },
+    addBandWrapper: {
+        display: "flex",
+        alignItems: "center",
+        '& > p': {
+            marginLeft: 10,
+            fontSize: '1rem'
+        }
     }
 });

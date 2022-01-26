@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useCookies} from "react-cookie";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import { Formik } from "formik";
@@ -10,7 +11,6 @@ import IconPassword from "../../../../assets/icons/auth/password";
 import {checkTokenValidate, eventToggle, openModal} from "../../../../helpers/utils";
 import ForgetPassword from "../../../modals/ForgetPassword";
 import {sendSignInFormData} from "../../../../store/thunks/thunks";
-import {useCookies} from "react-cookie";
 
 const SignIn = () => {
 
@@ -19,13 +19,13 @@ const SignIn = () => {
     const history = useHistory()
     const [open, setOpen] = useState(false);
     const [token, setToken] = useCookies(['access_token'])
-    const [passwordShown, setPasswordShown] = useState(false);
+    const [passwordShown, setPasswordShown] = useState(false)
+
+    const onSubmit = data => dispatch(sendSignInFormData(data, setToken))
 
     useEffect(() => {
         if (!checkTokenValidate(token.access_token)) history.push('/')
     }, [token.access_token])
-
-    const onSubmit = data => dispatch(sendSignInFormData(data, setToken))
 
     return (
         <Grid className={classes.formWrapper}>
@@ -34,10 +34,7 @@ const SignIn = () => {
                     email: '',
                     password: ''
                 }}
-                onSubmit={(values, { setSubmitting }) => {
-                    onSubmit(values)
-                    setSubmitting(false)
-                }}
+                onSubmit={(values) => onSubmit(values)}
                 validationSchema={signInValidation}
             >
                 {props => {
@@ -100,6 +97,7 @@ const SignIn = () => {
                                 style={{border: '1px solid white', width: '70%'}}
                                 color='primary'
                                 onClick={handleSubmit}
+                                className={classes.signInBtn}
                             >
                                 Войти
                             </Button>

@@ -19,6 +19,8 @@ import {sendSignUpFormData} from "../../../../store/thunks/thunks";
 import {signUpValidation} from "../../../../helpers/validation";
 import InputMask from 'react-input-mask';
 import IconPassword from "../../../../assets/icons/auth/password";
+import PlusIcon from "../../../../assets/icons/auth/plus";
+import EditIcon from "../../../../assets/icons/auth/edit";
 
 const SignUp = (props) => {
 
@@ -189,10 +191,20 @@ const SignUp = (props) => {
                         </Box>
                         <Button
                             color='primary'
-                            style={{marginTop: 40}}
                             onClick={() => setChecked(true)}
-                        >+
-                            Добавить группу
+                            className={classes.createBandButton}
+                        >
+                            {values.bandName ? (
+                                <Box className={classes.addBandWrapper}>
+                                    <EditIcon />
+                                    <Typography style={{color: '#0F5D62'}}>Изменить группу</Typography>
+                                </Box>
+                                ) : (
+                                <Box className={classes.addBandWrapper}>
+                                    <PlusIcon />
+                                    <Typography style={{color: '#0047FF'}} variant={"body1"}>Добавить группу</Typography>
+                                </Box>
+                            )}
                         </Button>
                         {checked && (
                             <BandRegistration

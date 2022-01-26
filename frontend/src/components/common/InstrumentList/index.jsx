@@ -9,10 +9,9 @@ const InstrumentList = (props) => {
 
     const {values, handleChange, touched, errors} = props
     const classes = useStyles()
-    console.log(values.region)
 
     return (
-        <FormControl style={{marginLeft: 10}} variant="outlined" className={classes.inputWrapper}>
+        <FormControl variant="outlined" className={classes.inputWrapper}>
             <InputLabel
                 id="label"
                 style={{color: (touched && touched.region && Boolean(errors.region)) ? red : white}}

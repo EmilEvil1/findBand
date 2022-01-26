@@ -1,5 +1,5 @@
 import {createTheme} from "@material-ui/core";
-import {purple, white} from "./styles";
+import {popUpColor, purple, white} from "./styles";
 
 export const theme = createTheme({
     palette: {
@@ -25,8 +25,8 @@ export const theme = createTheme({
     overrides: {
         MuiInputBase: {
             input: {
-                // border: "1px solid #FFFFFF",
-                color: white
+                color: white,
+                borderRadius: 4
             }
         },
         MuiMenu: {
@@ -34,12 +34,14 @@ export const theme = createTheme({
                 backgroundColor: purple,
             },
         },
-        MuiPaper: {
+        MuiDialog: {
             root: {
-                '&.MuiDrawer-paper': {
-                    background: 'linear-gradient(11.72deg, #3F00AE 18.92%, #1D004F 89.13%);'
-                },
-            },
+                '& .MuiPaper-root': {
+                    borderRadius: '44px !important',
+                    background: popUpColor
+                }
+            }
+
         },
         MuiListItemText: {
             root: {
@@ -50,13 +52,31 @@ export const theme = createTheme({
             root: {
                 color: white
             },
+        },
+        MuiButton: {
+            root: {
+                borderRadius: 20,
+                color: white,
+                padding: '6px 15px',
+                border: '1px solid white'
+            },
+        },
+        MuiDrawer: {
+            root: {
+                '& .MuiPaper-root': {
+                    background: 'linear-gradient(11.72deg, #3F00AE 18.92%, #1D004F 89.13%);'
+                }
+            }
+        },
+        MuiTabs: {
+            root: {
+                color: white,
+            }
         }
     },
     typography: {
         fontFamily: 'MA-Regular',
-        allVariants: {
-            color: white
-        },
+        allVariants: {color: white},
         fontSize: 16,
-    }
+    },
 })

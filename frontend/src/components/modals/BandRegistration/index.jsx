@@ -20,29 +20,26 @@ const BandRegistration = (props) => {
                     variant='outlined'
                     placeholder="Название группы"
                     values={values.bandName}
+                    defaultValue={values.bandName}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     error={touched.bandName && Boolean(errors.bandName)}
                     helperText={touched.bandName && errors.bandName}
                     fullWidth
                 />
-                <Box>
+                <Box className={classes.buttonsWrapper}>
                     <Button
                         color='primary'
-                        style={{border: '1px solid white'}}
-                        onClick={() => {
-                            // checked(true)
-                            closeModal(close)
-                        }}
+                        style={{border: '1px solid white', marginRight: 10}}
+                        disabled={!values.bandName}
+                        onClick={() => closeModal(close)}
                     >
-                        Добавить
+                        Сохранить
                     </Button>
                     <Button
                         color='primary'
-                        onClick={() => {
-                            // checked(false)
-                            closeModal(close)
-                        }}
+                        style={{border: '1px solid white'}}
+                        onClick={() => closeModal(close)}
                     >
                         Отменить
                     </Button>
