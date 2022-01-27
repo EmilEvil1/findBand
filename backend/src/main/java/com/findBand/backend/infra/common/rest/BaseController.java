@@ -10,7 +10,7 @@ public class BaseController extends BeanAwareUseCasePublisher {
         return ResponseBuilder.build(items);
     }
 
-    public <T> Response<DataResponse<T>> respond(List<T> items, int page, int size, Long totalSize) {
+    public <T> Response<DataResponse<T>> respond(List<T> items, int page, int size, int totalSize) {
         return ResponseBuilder.build(items, page, size, totalSize);
     }
 
