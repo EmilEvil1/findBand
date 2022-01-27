@@ -10,5 +10,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Data
 public class Region {
+	private final Long regionId;
 	private final String regionName;
 }
