@@ -28,7 +28,7 @@ public class SearchController extends BaseController {
     @GetMapping
     public DataResponse<FoundBand> doSearchForBand(SearchForBandRequestDTO request) {
         SearchForBand searchForBand = new SearchForBand(request.getRegionId(), request.getInstrumentsIds());
-        publish(List.class, searchForBand);
+        List<FoundBand> foundBands = publish(List.class, searchForBand);
         return null;
     }
 }

@@ -2,8 +2,13 @@ package com.findBand.backend.domain.port;
 
 import com.findBand.backend.domain.model.Band;
 
+import java.util.List;
+import java.util.Set;
+
 public interface BandPort {
     Band retrieveBand(final long id);
 
     Band createBand(String bandName, Long bandOwnerId);
+
+    List<Band> findBandsByInstrumentsIdsAndRegions(Set<Long> instrumentsIds, Set<Long> regionsIds);
 }
