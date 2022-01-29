@@ -25,6 +25,10 @@ public class BandEntity {
     @Column
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "region_id")
+    private RegionEntity region;
+
     @Column
     private Date createDate;
 }

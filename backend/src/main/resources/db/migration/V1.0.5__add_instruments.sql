@@ -1,7 +1,8 @@
 create table if not exists instruments(
     id bigserial not null,
-    name varchar(50) not null
-)
+    name varchar(50) not null,
+    PRIMARY KEY(id)
+);
 
 INSERT INTO instruments (name) VALUES ('Гитара');
 INSERT INTO instruments (name) VALUES ('Барабаны');
@@ -17,14 +18,13 @@ INSERT INTO instruments (name) VALUES ('Синтезатор');
 
 create table if not exists users_instruments(
     id bigserial not null,
-    user_id not null,
-    instrument_id not null,
+    user_id bigint not null,
+    instrument_id bigint not null,
+    PRIMARY KEY(id),
     constraint user_id_fk
-    foreign key(user_id)
-    references findband_user(id)
-    ON DELETE,
+      foreign key(user_id)
+        references findband_user(id),
     constraint instrumental_id_fk
-    foreign key(instrument_id)
-    references instruments(id)
-    ON DELETE
+      foreign key(instrument_id)
+        references instruments(id)
 );

@@ -1,6 +1,7 @@
 create table if not exists regions(
-    id bigserial not null,
-    name varchar(100) not null
+    id smallserial not null,
+    name varchar(100) not null,
+    PRIMARY KEY(id)
 );
 
 INSERT INTO regions (name) VALUES ('Вологодская область');
@@ -88,3 +89,15 @@ INSERT INTO regions (name) VALUES ('Ставропольский край');
 INSERT INTO regions (name) VALUES ('Дагестан');
 INSERT INTO regions (name) VALUES ('Алтай');
 INSERT INTO regions (name) VALUES ('Еврейская АО');
+
+ALTER TABLE findband_user ADD COLUMN region_id smallint
+constraint region_id_fk
+    foreign key(region_id)
+        references region(id)
+            ON DELETE RESTRICT;
+
+ALTER TABLE band ADD COLUMN region_id smallint
+constraint region_id_fk
+    foreign key(region_id)
+        references region(id)
+            ON DELETE RESTRICT;

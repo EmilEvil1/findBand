@@ -9,6 +9,9 @@ import com.findBand.backend.infra.adapters.jpa.repository.BandOwnerRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Set;
+
 @Component
 public class BandJpaAdapter implements BandPort {
 
@@ -34,6 +37,11 @@ public class BandJpaAdapter implements BandPort {
         BandOwnerEntity bandOwner = bandOwnerRepository.findById(bandOwnerId).orElseThrow(() -> new RuntimeException("No user exists with such id " + bandOwnerId));
         newBand.setBandOwner(bandOwner);
         return toDomain(bandJpaRepository.save(newBand));
+    }
+
+    @Override
+    public List<Band> findBandsByInstrumentsIdsAndRegions(Set<Long> instrumentsIds, Set<Long> regionsIds) {
+        return null;
     }
 
     private Band toDomain(BandEntity bandEntity) {
