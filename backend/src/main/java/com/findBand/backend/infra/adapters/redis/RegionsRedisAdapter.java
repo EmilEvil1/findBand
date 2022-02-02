@@ -1,8 +1,5 @@
 package com.findBand.backend.infra.adapters.redis;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.findBand.backend.domain.model.Region;
 import com.findBand.backend.domain.port.RegionsPort;
 import com.findBand.backend.infra.adapters.jpa.entity.RegionEntity;
@@ -12,10 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,7 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RegionsRedisAdapter implements RegionsPort {
 
-	private final RedisTemplate<String, RegionRedisEntity> redisTemplate;
+	private final RedisTemplate<String, Object> redisTemplate;
 
 	private final RegionsJpaRepository regionsJpaRepository;
 
@@ -62,7 +59,12 @@ public class RegionsRedisAdapter implements RegionsPort {
 			.build();
 	}
 
-	private Region toDomain(RegionRedisEntity regionRedisEntity) {
-		return new Region(regionRedisEntity.getRegiondId(), regionRedisEntity.getRegionName());
+	private Region toDomain(Object regionRedisEntity) {
+		try {
+			return new Region((Long) ReflectionUtils.findField(RegionRedisEntity.class, "regionId", Long.class).get(regionRedisEntity),
+			(String) ReflectionUtils.findField(RegionRedisEntity.class, "regionName", String.class).get(regionRedisEntity));
+		} catch (IllegalAccessException e) {
+			return null;
+		}
 	}
 }

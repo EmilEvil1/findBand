@@ -90,14 +90,15 @@ INSERT INTO regions (name) VALUES ('Дагестан');
 INSERT INTO regions (name) VALUES ('Алтай');
 INSERT INTO regions (name) VALUES ('Еврейская АО');
 
-ALTER TABLE findband_user ADD COLUMN region_id smallint
+ALTER TABLE findband_user ADD COLUMN region_id smallint;
+ALTER TABLE findband_user ADD
 constraint region_id_fk
     foreign key(region_id)
-        references region(id)
+        references regions(id)
             ON DELETE RESTRICT;
 
-ALTER TABLE band ADD COLUMN region_id smallint
-constraint region_id_fk
+ALTER TABLE band ADD COLUMN region_id smallint;
+ALTER TABLE band ADD constraint region_id_fk
     foreign key(region_id)
-        references region(id)
+        references regions(id)
             ON DELETE RESTRICT;
