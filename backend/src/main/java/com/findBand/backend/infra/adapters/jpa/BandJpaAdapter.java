@@ -41,7 +41,7 @@ public class BandJpaAdapter implements BandPort {
 
     @Override
     public List<Band> findBandsByInstrumentsIdsAndRegions(Set<Long> instrumentsIds, Set<Long> regionsIds) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     private Band toDomain(BandEntity bandEntity) {
