@@ -1,9 +1,11 @@
 package com.findBand.backend.domain.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class Instrument {
+@Builder
+public class InstrumentDomain {
     private long id;
     private String name;
 }
