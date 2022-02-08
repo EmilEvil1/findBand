@@ -2,16 +2,15 @@ package com.findBand.backend.domain.useCase.search;
 
 import com.findBand.backend.domain.common.model.UseCase;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @Builder
 @RequiredArgsConstructor
 public class SearchForVacancies implements UseCase {
-    private final Set<Long> instrumentIds;
+    private final long regionId;
+    private final Set<Long> instrumentsIds;
 }

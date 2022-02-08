@@ -3,10 +3,10 @@ CREATE TABLE IF NOT EXISTS vacancy(
     title varchar(100) not null,
     description text not null,
     band_id bigint not null,
-    instrument_id not null,
+    instrument_id bigint not null,
     PRIMARY KEY(id),
     constraint band_id_fk
         foreign key(band_id)
-            references band(id);
+            references band(id)
 );
 
