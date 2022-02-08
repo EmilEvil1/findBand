@@ -28,16 +28,14 @@ public class UserJpaAdapter implements UserPort {
     private PasswordEncoder passwordEncoder;
     private ResetPasswordJpaRepository passwordJpaRepository;
     private BandSeekerRepository bandSeekerRepository;
-    private BandJpaRepository bandJpaRepository;
 
 
     public UserJpaAdapter(UserJpaRepository userJpaRepository, PasswordEncoder passwordEncoder,
-                          ResetPasswordJpaRepository passwordJpaRepository, BandJpaRepository bandJpaRepository,
+                          ResetPasswordJpaRepository passwordJpaRepository,
                           BandSeekerRepository bandSeekerRepository) {
         this.userJpaRepository = userJpaRepository;
         this.passwordEncoder = passwordEncoder;
         this.passwordJpaRepository = passwordJpaRepository;
-        this.bandJpaRepository = bandJpaRepository;
         this.bandSeekerRepository = bandSeekerRepository;
     }
 

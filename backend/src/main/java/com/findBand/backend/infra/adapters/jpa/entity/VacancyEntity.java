@@ -20,12 +20,10 @@ public class VacancyEntity {
     @Column
     private String description;
 
-    @Column
     @ManyToOne
     @JoinColumn(name = "band_id")
     private BandEntity bandEntity;
 
-    @Column
     @OneToOne
     @JoinColumn(name = "instrument_id")
     private InstrumentalEntity instrumentalEntity;
