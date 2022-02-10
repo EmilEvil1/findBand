@@ -16,7 +16,7 @@ export const useStyles = makeStyles({
         flexDirection: "column",
         '& p': {
             position: "absolute",
-            bottom: -30
+            bottom: -25
         }
     },
     btn: {

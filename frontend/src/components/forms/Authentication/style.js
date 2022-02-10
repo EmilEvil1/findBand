@@ -106,7 +106,7 @@ export const useStyles = makeStyles({
         transform: 'translateX(50%)'
     },
     signUpWrapper : {
-        width: '53%',
+        width: 400,
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -120,7 +120,7 @@ export const useStyles = makeStyles({
         color: "white",
         '& p': {
             position: "absolute",
-            bottom: -30
+            bottom: -25
         }
     },
     inputWrapper: {
@@ -131,7 +131,7 @@ export const useStyles = makeStyles({
         alignItems: "center",
     },
     formWrapper: {
-        width: '50%'
+        width: 380
     },
     formControl: {
         width: '100%',
