@@ -64,14 +64,14 @@ const Sidebar = (props) => {
                                 <ListItemText primary={'Профиль'} />
                             </ListItem>
                         </Link>
-                        {/*<Link to={'/notify'}>*/}
-                        {/*    <ListItem button>*/}
-                        {/*        <ListItemIcon>*/}
-                        {/*            <NotificationIcon />*/}
-                        {/*        </ListItemIcon>*/}
-                        {/*        <ListItemText primary={'Уведомления'} />*/}
-                        {/*    </ListItem>*/}
-                        {/*</Link>*/}
+                        <Link to={'/notify'}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <NotificationIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={'Уведомления'} />
+                            </ListItem>
+                        </Link>
                         <Link to={'/band'}>
                             <ListItem button>
                                 <ListItemIcon>
