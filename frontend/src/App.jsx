@@ -5,10 +5,10 @@ import {CookiesProvider} from 'react-cookie';
 import {ThemeProvider} from "@material-ui/styles";
 import store from "./store/store";
 import {theme} from "./helpers/theme";
-import Home from "./pages/home";
-import Auth from "./pages/auth";
-import Profile from "./pages/profile";
-import SearchResult from "./pages/search";
+import Home from "./pages/Home/Home";
+import Auth from "./pages/Auth/Auth";
+import Profile from "./pages/MusicianProfile/MusicianProfile";
+import SearchResult from "./pages/MusicianSearchResult/MusicianSearchResult";
 import "./css/banner.css";
 
 

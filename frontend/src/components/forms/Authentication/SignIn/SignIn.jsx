@@ -6,10 +6,10 @@ import { Formik } from "formik";
 import {Box, Button, Grid, TextField, Typography} from "@material-ui/core";
 import {signInValidation} from "../../../../helpers/validation";
 import {useStyles} from "../style";
-import AuthServices from "./AuthServices";
+import AuthServices from "./AuthServices/AuthServices";
 import IconPassword from "../../../../assets/icons/auth/password";
 import {checkTokenValidate, eventToggle, openModal} from "../../../../helpers/utils";
-import ForgetPassword from "../../../modals/ForgetPassword";
+import ForgetPassword from "../../../modals/ForgetPassword/ForgetPassword";
 import {sendSignInFormData} from "../../../../store/thunks/thunks";
 
 const SignIn = () => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Box, Grid} from "@material-ui/core";
 import {useStyles} from "./style";
-import Quotes from "../../sliders/Quotes";
+import Quotes from "../../sliders/Quotes/Quotes";
 import QuoteSymbolIcon from "../../../assets/icons/home/quoteSymbol";
-import GlobalSearch from "../../forms/GlobalSearch";
+import GlobalSearch from "../../forms/GlobalSearch/GlobalSearch";
 
 const MainContent = (props) => {
 

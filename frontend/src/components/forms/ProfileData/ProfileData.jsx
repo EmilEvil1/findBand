@@ -4,8 +4,8 @@ import {useDispatch} from "react-redux";
 import {Grid, TextField} from "@material-ui/core";
 import {profileFormValidation} from "../../../helpers/validation";
 import InputMask from "react-input-mask";
-import RegionList from "../../common/RegionList";
-import InstrumentList from "../../common/InstrumentList";
+import RegionList from "../../common/RegionList/RegionList";
+import InstrumentList from "../../common/InstrumentList/InstrumentList";
 
 
 const ProfileData = (props) => {

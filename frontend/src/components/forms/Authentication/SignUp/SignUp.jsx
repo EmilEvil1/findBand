@@ -11,9 +11,9 @@ import {
 } from "@material-ui/core";
 
 import {useStyles} from "../style";
-import RegionList from "../../../common/RegionList";
-import InstrumentList from "../../../common/InstrumentList";
-import BandRegistration from "../../../modals/BandRegistration";
+import RegionList from "../../../common/RegionList/RegionList";
+import InstrumentList from "../../../common/InstrumentList/InstrumentList";
+import BandRegistration from "../../../modals/BandRegistration/BandRegistration";
 import {checkTokenValidate, eventToggle} from "../../../../helpers/utils";
 import {sendSignUpFormData} from "../../../../store/thunks/thunks";
 import {signUpValidation} from "../../../../helpers/validation";

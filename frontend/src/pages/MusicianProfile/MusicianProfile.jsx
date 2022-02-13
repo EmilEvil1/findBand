@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {Box, Grid, Typography} from "@material-ui/core";
 import {useStyles} from "../style";
-import Sidebar from "../../components/common/Sidebar";
+import Sidebar from "../../components/common/Sidebar/Sidebar";
 import {darkBlue} from "../../helpers/styles";
-import UploadPhoto from "../../components/common/UploadPhoto";
-import ProfileData from "../../components/forms/ProfileData";
+import UploadPhoto from "../../components/common/UploadPhoto/UploadPhoto";
+import ProfileData from "../../components/forms/ProfileData/ProfileData";
 import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
 import {checkTokenValidate} from "../../helpers/utils";
@@ -18,7 +18,7 @@ const Profile = (props) => {
     const history = useHistory()
 
     useEffect(() => {
-        if (!!checkTokenValidate(token.access_token)) history.push('/auth')
+        if (!!checkTokenValidate(token.access_token)) history.push('/Auth')
     }, [token.access_token])
 
     return (

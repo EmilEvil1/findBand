@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Grid} from "@material-ui/core";
-import Sidebar from "../Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import {useStyles} from "./style";
 
 const Layout = ({children}) => {

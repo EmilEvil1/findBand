@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Box, Button, Grid, Typography} from "@material-ui/core";
 import {useStyles} from "./style";
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
+import SignUp from "./SignUp/SignUp";
+import SignIn from "./SignIn/SignIn";
 
 const SignForms = (props) => {
 

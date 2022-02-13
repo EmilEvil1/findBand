@@ -2,10 +2,10 @@ import React from 'react';
 import {useHistory} from "react-router-dom";
 import { Formik } from "formik";
 import {Button} from "@material-ui/core";
-import RegionList from "../../../common/RegionList";
+import RegionList from "../../../common/RegionList/RegionList";
 import {onSubmit} from "../../../../helpers/api";
 import {useStyles} from "../../Authentication/style";
-import InstrumentList from "../../../common/InstrumentList";
+import InstrumentList from "../../../common/InstrumentList/InstrumentList";
 import {searchMusician} from "../../../../helpers/validation";
 
 const SearchMusician = () => {
@@ -62,7 +62,7 @@ const SearchMusician = () => {
                             onClick={() => {
                                  handleSubmit()
                                 if (values.region && values.instrument) {
-                                    history.push('/search')
+                                    history.push('/MusicianSearchResult')
                                 }
                             }}
                         >

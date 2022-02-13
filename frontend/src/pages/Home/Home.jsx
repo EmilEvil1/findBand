@@ -3,9 +3,9 @@ import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
 import {Box} from "@material-ui/core";
 import {useStyles} from "../style";
-import Sidebar from "../../components/common/Sidebar";
-import Musicians from "../../components/sliders/Musicians";
-import Main from "../../components/content/Main";
+import Sidebar from "../../components/common/Sidebar/Sidebar";
+import Musicians from "../../components/sliders/Musicians/Musicians";
+import Main from "../../components/content/Main/Main";
 import {checkTokenValidate} from "../../helpers/utils";
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
     const history = useHistory()
 
     useEffect(() => {
-        if (!!checkTokenValidate(token.access_token)) history.push('/auth')
+        if (!!checkTokenValidate(token.access_token)) history.push('/Auth')
     }, [token.access_token])
 
     return (

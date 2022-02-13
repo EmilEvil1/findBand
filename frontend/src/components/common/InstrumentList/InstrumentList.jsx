@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
-import ErrorFieldText from "../ErrorFieldText";
+import ErrorFieldText from "../ErrorFieldText/ErrorFieldText";
 import {useStyles} from "../../forms/Authentication/style";
 import {musicalInstrumentsList} from "../../../helpers/mocks";
 import {red, white} from "../../../helpers/styles";

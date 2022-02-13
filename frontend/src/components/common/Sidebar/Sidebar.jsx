@@ -24,7 +24,7 @@ const Sidebar = (props) => {
 
     const logOut = () => {
         removeCookie('access_token')
-        history.push('/auth')
+        history.push('/Auth')
     }
 
     return (
@@ -56,7 +56,7 @@ const Sidebar = (props) => {
                                 <ListItemText primary={'Главная'} />
                             </ListItem>
                         </Link>
-                        <Link to={'/profile'}>
+                        <Link to={'/MusicianProfile'}>
                             <ListItem button>
                                 <ListItemIcon>
                                     <ProfileIcon />

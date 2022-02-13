@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
-import ErrorFieldText from "../ErrorFieldText";
+import ErrorFieldText from "../ErrorFieldText/ErrorFieldText";
 import {useStyles} from "../../forms/Authentication/style";
 import {getRegionList} from "../../../store/thunks/thunks";
 import {red, white} from "../../../helpers/styles";

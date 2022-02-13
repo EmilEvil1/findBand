@@ -1,8 +1,8 @@
 import React from 'react';
 import {Box, Grid} from "@material-ui/core";
-import Sidebar from "../../components/common/Sidebar";
+import Sidebar from "../../components/common/Sidebar/Sidebar";
 import {useStyles} from "../style";
-import FoundMusician from "../../components/common/FoundMusician";
+import FoundMusician from "../../components/common/FoundMusician/FoundMusician";
 
 const SearchResult = (props) => {
 

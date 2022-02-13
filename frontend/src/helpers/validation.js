@@ -52,7 +52,7 @@ export const signUpValidation = yup.object({
         .required('Выберите инструмент'),
 });
 
-// profile
+// MusicianProfile
 
 export const profileFormValidation = yup.object({
     name: yup
@@ -75,7 +75,7 @@ export const profileFormValidation = yup.object({
 });
 
 
-// home
+// Home
 
 export const searchMusician = yup.object({
     region: yup

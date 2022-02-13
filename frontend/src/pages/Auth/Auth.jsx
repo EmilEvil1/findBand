@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
-import Authentication from "../../components/forms/Authentication";
+import Authentication from "../../components/forms/Authentication/Authentication";
 import {checkTokenValidate} from "../../helpers/utils";
 
 const Auth = () => {

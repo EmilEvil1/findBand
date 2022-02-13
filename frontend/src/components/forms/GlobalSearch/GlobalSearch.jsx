@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { Tab} from "@material-ui/core";
 import {TabContext, TabList, TabPanel} from "@material-ui/lab";
-import SearchBand from "./SearchBand";
-import SearchMusician from "./SearchMusician";
+import SearchBand from "./SearchBand/SearchBand";
+import SearchMusician from "./SearchMusician/SearchMusician";
 
 const GlobalSearch = () => {
 
