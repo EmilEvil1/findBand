@@ -1,41 +1,68 @@
-// import React from 'react';
-// import {useDispatch} from "react-redux";
-// import {Button} from "@material-ui/core";
-// import {useForm} from "react-hook-form";
-// import RegionList from "../../../common/RegionList";
-// import {onSubmit} from "../../../../helpers/api";
-// import InstrumentList from "../../../common/InstrumentList";
-// import {useStyles} from "../../Authentication/style";
-//
-// const SearchBand = (props) => {
-//
-//     const {} = props
-//     const dispatch = useDispatch()
-//     const classes = useStyles()
-//
-//     const {watch, handleSubmit, control} = useForm({
-//         mode: 'onSubmit',
-//         reValidateMode: 'onChange',
-//     });
-//
-//     return (
-//
-//         <form
-//             noValidate
-//             onSubmit={handleSubmit(onSubmit)}
-//         >
-//             <RegionList control={control} />
-//
-//             <Button
-//                 style={{border: '1px solid white'}}
-//                 type='submit'
-//                 className={classes.signUpBtn}
-//                 color='primary'
-//             >
-//                 Найти
-//             </Button>
-//         </form>
-//     );
-// };
-//
-// export default SearchBand;
+import React from 'react';
+import {useHistory} from "react-router-dom";
+import {Formik} from "formik";
+import {Button} from "@material-ui/core";
+import {onSubmit} from "../../../../helpers/api";
+import {searchMusician} from "../../../../helpers/validation";
+import RegionList from "../../../common/RegionList/RegionList";
+import InstrumentList from "../../../common/InstrumentList/InstrumentList";
+
+const SearchBand = () => {
+
+    const history = useHistory()
+
+    return (
+
+        <Formik
+            initialValues={{
+                region: '',
+                instrument: ''
+            }}
+            onSubmit={(values) => {onSubmit(values)}}
+            validationSchema={searchMusician}
+        >
+            {props => {
+                const {
+                    values,
+                    touched,
+                    errors,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                } = props;
+                return (
+                    <form onSubmit={handleSubmit}>
+                        <RegionList
+                            values={values}
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            touched={touched}
+                            errors={errors}
+                        />
+                        <InstrumentList
+                            values={values}
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            touched={touched}
+                            errors={errors}
+                        />
+                        <Button
+                            style={{marginTop: 40}}
+                            color='primary'
+                            onClick={() => {
+                                handleSubmit()
+                                if (values.region && values.instrument) {
+                                    history.push('/search')
+                                }
+                            }}
+                        >
+                            Найти
+                        </Button>
+                    </form>
+                )
+            }}
+        </Formik>
+    );
+};
+
+export default SearchBand;

@@ -4,7 +4,7 @@ import Sidebar from "../../components/common/Sidebar/Sidebar";
 import {useStyles} from "../style";
 import FoundMusician from "../../components/common/FoundMusician/FoundMusician";
 
-const SearchResult = (props) => {
+const MusicianSearchResult = (props) => {
 
     const {} = props
     const classes = useStyles()
@@ -17,4 +17,4 @@ const SearchResult = (props) => {
     );
 };
 
-export default SearchResult;
+export default MusicianSearchResult;

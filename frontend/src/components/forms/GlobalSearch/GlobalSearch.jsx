@@ -19,7 +19,7 @@ const GlobalSearch = () => {
                 <SearchMusician />
             </TabPanel>
             <TabPanel value="2">
-                {/*<SearchBand />*/}
+                <SearchBand />
             </TabPanel>
         </TabContext>
     );

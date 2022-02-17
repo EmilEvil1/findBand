@@ -62,7 +62,7 @@ const SearchMusician = () => {
                             onClick={() => {
                                  handleSubmit()
                                 if (values.region && values.instrument) {
-                                    history.push('/MusicianSearchResult')
+                                    history.push('/search')
                                 }
                             }}
                         >
