@@ -9,5 +9,5 @@ import java.util.Set;
 public interface BandSeekerPort {
     BandSeeker createBandSeeker(BandSeeker bandSeeker);
 
-    List<FoundMember> findByInstrumentsIds(Set<Long> instrumentsIds);
+    List<BandSeeker> findByInstrumentsIds(Set<Long> instrumentsIds);
 }

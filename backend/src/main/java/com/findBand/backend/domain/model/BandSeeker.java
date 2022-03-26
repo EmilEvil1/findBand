@@ -17,5 +17,5 @@ public class BandSeeker extends UserDomain{
       name = "users_instruments",
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "instrument_id"))
-    private List<InstrumentalEntity> instrumentalIds = new ArrayList<>();
+    private List<Instrument> instruments = new ArrayList<>();
 }

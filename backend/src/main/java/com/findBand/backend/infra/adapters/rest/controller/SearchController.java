@@ -1,7 +1,7 @@
 package com.findBand.backend.infra.adapters.rest.controller;
 
 import com.findBand.backend.domain.model.FoundMember;
-import com.findBand.backend.domain.model.VacancyDomain;
+import com.findBand.backend.domain.model.Vacancy;
 import com.findBand.backend.domain.useCase.search.SearchForMember;
 import com.findBand.backend.domain.useCase.search.SearchForVacancies;
 import com.findBand.backend.infra.adapters.rest.dto.search.SearchForBandRequestDTO;
@@ -26,9 +26,9 @@ public class SearchController extends BaseController {
     }
 
     @GetMapping(value = "searchForVacancies")
-    public DataResponse<VacancyDomain> doSearchForVacancies(SearchForBandRequestDTO request) {
+    public DataResponse<Vacancy> doSearchForVacancies(SearchForBandRequestDTO request) {
         SearchForVacancies searchForVacancies = new SearchForVacancies(request.getRegionId(), request.getInstrumentsIds());
-        List<VacancyDomain> foundVacancies = publish(List.class, searchForVacancies);
-        return new DataResponse<VacancyDomain>(foundVacancies, 1, 1, foundVacancies.size());
+        List<Vacancy> foundVacancies = publish(List.class, searchForVacancies);
+        return new DataResponse<Vacancy>(foundVacancies, 1, 1, foundVacancies.size());
     }
 }

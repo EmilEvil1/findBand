@@ -15,11 +15,7 @@ public interface UserPort {
 
     Optional<UserDomain> createUser(User userCreate);
 
+    void updateUserPassword(String password, long userId);
+
     boolean doUserExists(String emailAddress);
-
-    String createResetPasswordRequest(long userId);
-
-    boolean validateResetPassword(String resetPasswordId);
-
-    void createNewPassword(String newPassword, String resetPasswordId);
 }
