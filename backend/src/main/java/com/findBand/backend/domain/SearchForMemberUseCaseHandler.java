@@ -2,6 +2,7 @@ package com.findBand.backend.domain;
 
 import com.findBand.backend.domain.common.useCase.ObservableUseCasePublisher;
 import com.findBand.backend.domain.common.useCase.UseCaseHandler;
+import com.findBand.backend.domain.model.BandSeeker;
 import com.findBand.backend.domain.model.FoundMember;
 import com.findBand.backend.domain.port.BandSeekerPort;
 import com.findBand.backend.domain.useCase.search.SearchForMember;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class SearchForMemberUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<List<FoundMember>, SearchForMember> {
+public class SearchForMemberUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<List<BandSeeker>, SearchForMember> {
 
     private BandSeekerPort bandSeekerPort;
 
@@ -20,7 +21,7 @@ public class SearchForMemberUseCaseHandler extends ObservableUseCasePublisher im
     }
 
     @Override
-    public List<FoundMember> handle(SearchForMember useCase) {
+    public List<BandSeeker> handle(SearchForMember useCase) {
         return bandSeekerPort.findByInstrumentsIds(useCase.getInstrumentalIds());
     }
 }

@@ -48,7 +48,7 @@ public class UserJpaAdapter implements UserPort {
     }
 
     @Override
-    public List<FoundMember> findByInstrumentsIds(Set<Long> instrumentsIds) {
+    public List<FoundMember> findByInstrumentsIds(Set<Ins> instrumentsIds) {
         List<InstrumentalEntity> instrumentalEntities = instrumentsIds.stream().map(InstrumentalEntity::new).collect(Collectors.toList());
         List<BandSeekerEntity> bandSeekers = bandSeekerRepository.findByInstrumentalIdsIn(instrumentalEntities);
 
@@ -75,15 +75,6 @@ public class UserJpaAdapter implements UserPort {
         return userJpaRepository.existsByEmail(emailAddress);
     }
 
-    @Override
-    public String createResetPasswordRequest(long userId) {
-        final String resetPasswordId = UUID.randomUUID().toString();
-        ResetPasswordEntity resetPasswordEntity = new ResetPasswordEntity();
-        resetPasswordEntity.setId(resetPasswordId);
-        resetPasswordEntity.setUserId(userId);
-        passwordJpaRepository.save(resetPasswordEntity);
-        return resetPasswordId;
-    }
 
     @Override
     public boolean validateResetPassword(String resetPasswordId) {

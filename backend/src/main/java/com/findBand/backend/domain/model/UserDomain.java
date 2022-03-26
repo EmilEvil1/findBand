@@ -18,6 +18,7 @@ import javax.persistence.*;
 @Scope("prototype")
 public class UserDomain {
 
+    private static final int PASSWORD_LENGTH = 8;
     private PasswordEncoder passwordEncoder;
 
     @Id
@@ -47,6 +48,9 @@ public class UserDomain {
     public void setPassword(String password) {
         if (StringUtils.isEmpty(password)) {
             throw new FindBandValidationException("registration.password.empty");
+        }
+        if (password.length() < PASSWORD_LENGTH) {
+            throw new FindBandValidationException("create.new.password.invalid");
         }
         this.password = passwordEncoder.encode(password);
     }

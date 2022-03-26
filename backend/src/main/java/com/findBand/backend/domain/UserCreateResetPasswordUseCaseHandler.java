@@ -2,8 +2,10 @@ package com.findBand.backend.domain;
 
 import com.findBand.backend.domain.common.useCase.ObservableUseCasePublisher;
 import com.findBand.backend.domain.common.useCase.UseCaseHandler;
+import com.findBand.backend.domain.model.ResetPassword;
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.port.MailerPort;
+import com.findBand.backend.domain.port.ResetPasswordPort;
 import com.findBand.backend.domain.port.UserPort;
 import com.findBand.backend.domain.useCase.user.UserResetPassword;
 import com.findBand.backend.infra.adapters.common.NoSuchUserException;
@@ -13,6 +15,7 @@ import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.InetAddress;
+import java.util.UUID;
 
 @Component
 public class UserCreateResetPasswordUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<UserDomain, UserResetPassword> {
@@ -24,19 +27,24 @@ public class UserCreateResetPasswordUseCaseHandler extends ObservableUseCasePubl
 
 
     private final UserPort userPort;
+    private final ResetPasswordPort resetPasswordPort;
     private final MailerPort mailerPort;
 
-    public UserCreateResetPasswordUseCaseHandler(UserPort userPort, MailerPort mailerPort) {
+    public UserCreateResetPasswordUseCaseHandler(UserPort userPort, MailerPort mailerPort, ResetPasswordPort resetPasswordPort) {
         this.userPort = userPort;
         this.mailerPort = mailerPort;
+        this.resetPasswordPort = resetPasswordPort;
         register(UserResetPassword.class, this);
     }
 
     @Override
     public UserDomain handle(UserResetPassword useCase) {
         UserDomain user = userPort.findUserByEmail(useCase.getEmailAddress()).orElseThrow(() -> new NoSuchUserException("User with such email " + useCase.getEmailAddress() + " doesn't exist"));
-        final String resetPasswordId = userPort.createResetPasswordRequest(user.getId());
-        final String resetPasswordLink = generateResetPasswordLink(resetPasswordId);
+        ResetPassword resetPassword = new ResetPassword();
+        resetPassword.setUser(user);
+        resetPassword.setId(UUID.randomUUID().toString());
+        resetPasswordPort.createResetPasswordRequest(resetPassword);
+        final String resetPasswordLink = generateResetPasswordLink(resetPassword.getId());
         mailerPort.sendEmail(EMAIL_FROM, useCase.getEmailAddress(), resetPasswordLink);
         return user;
     }

@@ -34,26 +34,6 @@ public class UserCreateUseCaseHandler extends ObservableUseCasePublisher impleme
 
     @Override
     public UserDomain handle(UserCreate useCase) {
-        if (StringUtils.isEmpty(useCase.getEmail())) {
-            log.info("Email field is emplty");
-            throw new FindBandValidationException("registration.email.empty");
-        }
-
-        if (StringUtils.isEmpty(useCase.getUserName())) {
-            log.info("Username field is empty");
-            throw new FindBandValidationException("registration.username.empty");
-        }
-
-        if (StringUtils.isEmpty(useCase.getPassword())) {
-            log.info("Password field is empty");
-            throw new FindBandValidationException("registration.password.empty");
-        }
-
-        if (userPort.doUserExists(useCase.getEmail())) {
-            log.info("User with such email: {} already exists", useCase.getEmail());
-            throw new FindBandValidationException("registration.email.already.exists");
-        }
-
         UserDomain user = new UserDomain();
         user.setEmail(useCase.getEmail());
 

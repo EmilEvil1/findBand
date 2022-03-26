@@ -3,9 +3,12 @@ package com.findBand.backend.domain;
 import com.findBand.backend.domain.exceptions.FindBandValidationException;
 import com.findBand.backend.domain.common.useCase.ObservableUseCasePublisher;
 import com.findBand.backend.domain.common.useCase.UseCaseHandler;
+import com.findBand.backend.domain.model.ResetPassword;
+import com.findBand.backend.domain.port.ResetPasswordPort;
 import com.findBand.backend.domain.port.UserPort;
 import com.findBand.backend.domain.useCase.user.UserCreateNewPassword;
 import com.findBand.backend.domain.useCase.user.UserValidateResetPassword;
+import com.findBand.backend.infra.adapters.common.NoSuchResetPasswordException;
 import com.findBand.backend.infra.common.util.ValidationRulesUtil;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +16,11 @@ import org.springframework.stereotype.Component;
 public class UserCreateNewPasswordUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<Boolean, UserCreateNewPassword> {
 
     private UserPort userPort;
+    private ResetPasswordPort resetPasswordPort;
 
-    public UserCreateNewPasswordUseCaseHandler(UserPort userPort) {
+    public UserCreateNewPasswordUseCaseHandler(UserPort userPort, ResetPasswordPort resetPasswordPort) {
         this.userPort = userPort;
+        this.resetPasswordPort = resetPasswordPort;
         register(UserCreateNewPassword.class, this);
     }
 
@@ -23,11 +28,16 @@ public class UserCreateNewPasswordUseCaseHandler extends ObservableUseCasePublis
     public Boolean handle(UserCreateNewPassword useCase) {
         boolean isValidResetPassword = publish(Boolean.class, new UserValidateResetPassword(useCase.getResetPasswordId()));
 
-        if (!isValidResetPassword || !ValidationRulesUtil.validatePassword(useCase.getNewPassword())) {
+        if (!isValidResetPassword) {
             throw new FindBandValidationException("create.new.password.invalid");
         }
 
-        userPort.createNewPassword(useCase.getNewPassword(), useCase.getResetPasswordId());
+        ResetPassword resetPassword = resetPasswordPort.findResetPasswordById(useCase.getResetPasswordId())
+                .orElseThrow(() -> new NoSuchResetPasswordException("No reset password with id: " + useCase.getResetPasswordId()));
+        resetPassword.setActivated(true);
+        resetPassword.getUser().setPassword(useCase.getNewPassword());
+        resetPasswordPort.createNewPassword(resetPassword);
+
         return true;
     }
 }

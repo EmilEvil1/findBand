@@ -1,7 +1,7 @@
 package com.findBand.backend.infra.adapters.jpa;
 
-import com.findBand.backend.domain.model.InstrumentDomain;
-import com.findBand.backend.domain.model.VacancyDomain;
+import com.findBand.backend.domain.model.Instrument;
+import com.findBand.backend.domain.model.Vacancy;
 import com.findBand.backend.domain.port.VacanciesPort;
 import com.findBand.backend.infra.adapters.jpa.entity.InstrumentalEntity;
 import com.findBand.backend.infra.adapters.jpa.entity.VacancyEntity;
@@ -22,26 +22,9 @@ public class VacancyJpaAdapter implements VacanciesPort {
     }
 
     @Override
-    public List<VacancyDomain> findVacanciesByInstrumentIds(Set<Long> instrumentIds) {
-        List<VacancyEntity> vacancyEntities = vacancyJpaRepository.findByInstrumentalEntityIn(
-          instrumentIds.stream().map(InstrumentalEntity::new).collect(Collectors.toSet())
+    public List<Vacancy> findVacanciesByInstrumentIds(Set<Long> instrumentIds) {
+        return vacancyJpaRepository.findByInstrumentIn(
+          instrumentIds.stream().map(Instrument::new).collect(Collectors.toSet())
         );
-        return vacancyEntities.stream().map(this::toDomain).collect(Collectors.toList());
-    }
-
-    private VacancyDomain toDomain(VacancyEntity vacancyEntity) {
-        return VacancyDomain.builder()
-          .id(vacancyEntity.getId())
-          .title(vacancyEntity.getTitle())
-          .description(vacancyEntity.getDescription())
-          .instrument(toDomain(vacancyEntity.getInstrumentalEntity()))
-          .build();
-    }
-
-    private InstrumentDomain toDomain(InstrumentalEntity instrumentalEntity) {
-        return InstrumentDomain.builder()
-          .id(instrumentalEntity.getId())
-          .name(instrumentalEntity.getName())
-          .build();
     }
 }
