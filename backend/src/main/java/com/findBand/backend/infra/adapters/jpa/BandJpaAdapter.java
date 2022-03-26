@@ -9,6 +9,7 @@ import com.findBand.backend.infra.adapters.jpa.repository.BandOwnerRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public class BandJpaAdapter implements BandPort {
     private BandJpaRepository bandJpaRepository;
     private BandOwnerRepository bandOwnerRepository;
 
-    public BandJpaAdapter(BandJpaRepository bandJpaRepository, BandOwnerRepository bandOwnerRepository) {
+    public BandJpaAdapter(BandJpaRepository bandJpaRepository, BandOwnerRepository bandOwnerRepositoryN) {
         this.bandJpaRepository = bandJpaRepository;
         this.bandOwnerRepository = bandOwnerRepository;
     }
@@ -30,12 +31,9 @@ public class BandJpaAdapter implements BandPort {
 
     @Override
     @Transactional
-    public Band createBand(String bandName, Long bandOwnerId) {
-        BandEntity newBand = new BandEntity();
-        newBand.setName(bandName);
+    public Band createBand(Band band) {
+        return bandJpaRepository.save(band);
 
-        BandOwnerEntity bandOwner = bandOwnerRepository.findById(bandOwnerId).orElseThrow(() -> new RuntimeException("No user exists with such id " + bandOwnerId));
-        newBand.setBandOwner(bandOwner);
         return toDomain(bandJpaRepository.save(newBand));
     }
 

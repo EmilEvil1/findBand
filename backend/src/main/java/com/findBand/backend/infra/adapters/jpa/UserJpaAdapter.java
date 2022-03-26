@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,15 +29,17 @@ public class UserJpaAdapter implements UserPort {
     private PasswordEncoder passwordEncoder;
     private ResetPasswordJpaRepository passwordJpaRepository;
     private BandSeekerRepository bandSeekerRepository;
+    private EntityManager entityManager;
 
 
     public UserJpaAdapter(UserJpaRepository userJpaRepository, PasswordEncoder passwordEncoder,
                           ResetPasswordJpaRepository passwordJpaRepository,
-                          BandSeekerRepository bandSeekerRepository) {
+                          BandSeekerRepository bandSeekerRepository, EntityManager entityManager) {
         this.userJpaRepository = userJpaRepository;
         this.passwordEncoder = passwordEncoder;
         this.passwordJpaRepository = passwordJpaRepository;
         this.bandSeekerRepository = bandSeekerRepository;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -57,7 +60,8 @@ public class UserJpaAdapter implements UserPort {
         boolean isBandOwner = userCreate.getUserRoleEnum() == UserRoleEnum.BAND_OWNER;
         UserEntity userEntity = isBandOwner ? new BandOwnerEntity() : new BandSeekerEntity();
         fillUserCommonFields(userEntity, userCreate);
-        return Optional.of(userJpaRepository.save(userEntity)).map(this::toDomain);
+        entityManager.persist(userEntity);
+        return Optional.of(userEntity).map(this::toDomain);
     }
 
     private void fillUserCommonFields(UserEntity userEntity, UserCreate userCreate) {
