@@ -1,5 +1,6 @@
 package com.findBand.backend.infra.adapters.jpa.entity;
 
+import com.findBand.backend.domain.model.BandOwner;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ public class BandEntity {
 
     @OneToOne
     @JoinColumn(name = "band_owner_id")
-    private BandOwnerEntity bandOwner;
+    private BandOwner bandOwner;
 
     @Column
     private String name;
