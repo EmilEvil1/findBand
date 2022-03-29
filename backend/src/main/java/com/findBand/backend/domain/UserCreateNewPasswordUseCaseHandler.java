@@ -15,11 +15,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserCreateNewPasswordUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<Boolean, UserCreateNewPassword> {
 
-    private UserPort userPort;
     private ResetPasswordPort resetPasswordPort;
 
-    public UserCreateNewPasswordUseCaseHandler(UserPort userPort, ResetPasswordPort resetPasswordPort) {
-        this.userPort = userPort;
+    public UserCreateNewPasswordUseCaseHandler(ResetPasswordPort resetPasswordPort) {
         this.resetPasswordPort = resetPasswordPort;
         register(UserCreateNewPassword.class, this);
     }

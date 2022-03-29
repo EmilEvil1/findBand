@@ -5,6 +5,7 @@ import com.findBand.backend.domain.port.ResetPasswordPort;
 import com.findBand.backend.infra.adapters.jpa.repository.ResetPasswordJpaRepository;
 import com.findBand.backend.infra.adapters.jpa.repository.UserJpaRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -25,6 +26,7 @@ public class ResetPasswordJpaAdapter implements ResetPasswordPort {
 	}
 
 	@Override
+	@Transactional
 	public void createNewPassword(ResetPassword resetPassword) {
 		resetPasswordJpaRepository.save(resetPassword);
 		userJpaRepository.updatePassword(resetPassword.getUser().getPassword(), resetPassword.getUser().getId());

@@ -19,6 +19,12 @@ import javax.persistence.Table;
 @RequiredArgsConstructor
 @Data
 public class Region {
+
+	public Region(long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
 	@Column
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

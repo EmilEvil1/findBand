@@ -1,7 +1,5 @@
 package com.findBand.backend.domain.model;
 
-import com.findBand.backend.infra.adapters.jpa.entity.BandEntity;
-import com.findBand.backend.infra.adapters.jpa.entity.InstrumentalEntity;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -32,7 +30,7 @@ public class Vacancy {
 
     @ManyToOne
     @JoinColumn(name = "band_id")
-    private BandEntity bandEntity;
+    private Band bandEntity;
 
     @OneToOne
     @JoinColumn(name = "instrument_id")

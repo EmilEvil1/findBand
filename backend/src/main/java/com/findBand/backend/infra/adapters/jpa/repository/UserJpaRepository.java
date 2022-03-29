@@ -1,15 +1,15 @@
 package com.findBand.backend.infra.adapters.jpa.repository;
 
-import com.findBand.backend.infra.adapters.jpa.entity.UserEntity;
+import com.findBand.backend.domain.model.UserDomain;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
-public interface UserJpaRepository extends JpaRepository<UserEntity, Long> {
+public interface UserJpaRepository extends JpaRepository<UserDomain, Long> {
 
-    Optional<UserEntity> findByEmail(String email);
+    Optional<UserDomain> findByEmail(String email);
 
     boolean existsByEmail(String email);
 

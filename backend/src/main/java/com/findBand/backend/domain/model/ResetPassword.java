@@ -13,7 +13,6 @@ import javax.persistence.Table;
 @Entity(name = "resetPassword")
 public class ResetPassword {
 
-	public ResetPasswordEntity() {}
 
 	@Id
 	@Column
