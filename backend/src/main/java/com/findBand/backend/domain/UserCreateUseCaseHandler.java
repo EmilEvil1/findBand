@@ -2,18 +2,18 @@ package com.findBand.backend.domain;
 
 import com.findBand.backend.domain.common.useCase.ObservableUseCasePublisher;
 import com.findBand.backend.domain.common.useCase.UseCaseHandler;
-import com.findBand.backend.domain.model.*;
+import com.findBand.backend.domain.exceptions.FindBandValidationException;
+import com.findBand.backend.domain.model.Band;
+import com.findBand.backend.domain.model.BandOwner;
+import com.findBand.backend.domain.model.BandSeeker;
+import com.findBand.backend.domain.model.UserDomain;
+import com.findBand.backend.domain.model.UserRoleEnum;
 import com.findBand.backend.domain.port.BandOwnerPort;
 import com.findBand.backend.domain.port.BandPort;
 import com.findBand.backend.domain.port.BandSeekerPort;
 import com.findBand.backend.domain.port.UserPort;
 import com.findBand.backend.domain.useCase.user.UserCreate;
-import com.findBand.backend.domain.exceptions.FindBandValidationException;
-import com.findBand.backend.infra.adapters.jpa.entity.BandEntity;
-import com.findBand.backend.infra.adapters.jpa.entity.BandOwnerEntity;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,6 +34,12 @@ public class UserCreateUseCaseHandler extends ObservableUseCasePublisher impleme
 
     @Override
     public UserDomain handle(UserCreate useCase) {
+
+        if (userPort.doUserExists(useCase.getEmail())) {
+            log.info("User with such email: {} already exists", useCase.getEmail());
+            throw new FindBandValidationException("registration.email.already.exists");
+        }
+
         UserDomain user = new UserDomain();
         user.setEmail(useCase.getEmail());
 

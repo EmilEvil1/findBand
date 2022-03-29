@@ -1,9 +1,12 @@
 package com.findBand.backend.domain.model;
 
-import com.findBand.backend.infra.adapters.jpa.entity.InstrumentalEntity;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 

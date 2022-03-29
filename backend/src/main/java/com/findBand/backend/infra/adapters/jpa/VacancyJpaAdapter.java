@@ -3,8 +3,6 @@ package com.findBand.backend.infra.adapters.jpa;
 import com.findBand.backend.domain.model.Instrument;
 import com.findBand.backend.domain.model.Vacancy;
 import com.findBand.backend.domain.port.VacanciesPort;
-import com.findBand.backend.infra.adapters.jpa.entity.InstrumentalEntity;
-import com.findBand.backend.infra.adapters.jpa.entity.VacancyEntity;
 import com.findBand.backend.infra.adapters.jpa.repository.VacancyJpaRepository;
 import org.springframework.stereotype.Component;
 
