@@ -1,18 +1,26 @@
 import React from 'react';
-import {Box, Grid} from "@material-ui/core";
-import Sidebar from "../../components/common/Sidebar/Sidebar";
+import {Box, Container, Grid} from "@material-ui/core";
 import {useStyles} from "../style";
-import FoundMusician from "../../components/common/FoundMusician/FoundMusician";
+import Sidebar from "../../components/common/Sidebar/Sidebar";
+import MusicianCard from "../../components/common/MusicianCard/MusicianCard";
 
-const MusicianSearchResult = (props) => {
+const MusicianSearchResult = () => {
 
-    const {} = props
     const classes = useStyles()
 
     return (
         <Grid className={classes.layout}>
             <Sidebar />
-            <Box className={classes.container}><FoundMusician /></Box>
+            <Container>
+                <Box className={classes.wrapper}>
+                    <MusicianCard />
+                    <MusicianCard />
+                    <MusicianCard />
+                    <MusicianCard />
+                    <MusicianCard />
+                    <MusicianCard />
+                </Box>
+            </Container>
         </Grid>
     );
 };

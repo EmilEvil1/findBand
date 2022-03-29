@@ -21,5 +21,14 @@ export const useStyles = makeStyles({
     flexWrap: {
         width: '100%',
         display: "flex"
+    },
+    wrapper: {
+        padding: 40,
+        display: "flex",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
+        background: 'rgba(255, 255, 255, 0.6)',
+        borderRadius: 20,
+        backdropFilter: 'blur(30px)'
     }
 });
