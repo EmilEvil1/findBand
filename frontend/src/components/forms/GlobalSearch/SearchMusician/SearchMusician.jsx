@@ -3,27 +3,27 @@ import {useHistory} from "react-router-dom";
 import { Formik } from "formik";
 import {Button} from "@material-ui/core";
 import RegionList from "../../../common/RegionList/RegionList";
-import {onSubmit} from "../../../../helpers/api";
 import {useStyles} from "../../Authentication/style";
 import InstrumentList from "../../../common/InstrumentList/InstrumentList";
 import {searchMusician} from "../../../../helpers/validation";
+import {useDispatch} from "react-redux";
+import {makeSearchForMembers} from "../../../../store/thunks/thunks";
 
 const SearchMusician = () => {
 
     const classes = useStyles()
     const history = useHistory()
+    const dispatch = useDispatch()
+
+    const onSubmit = data => dispatch(makeSearchForMembers(data))
 
     return (
         <Formik
             initialValues={{
-                region: '',
-                instrument: ''
+                regionId: '',
+                instrumentsIds: ''
             }}
-            onSubmit={(values, { setSubmitting }) => {
-                // dispatch(sendNewMessage(newMessageData.data.ACTION, values))
-                onSubmit(values)
-                setSubmitting(false);
-            }}
+            onSubmit={values => onSubmit(values)}
             validationSchema={searchMusician}
         >
             {props => {
@@ -61,9 +61,10 @@ const SearchMusician = () => {
                             color='primary'
                             onClick={() => {
                                  handleSubmit()
-                                if (values.region && values.instrument) {
-                                    history.push('/search')
-                                }
+                                console.log(values)
+                                // if (values.region && values.instrument) {
+                                //     history.push('/search')
+                                // }
                             }}
                         >
                             Найти

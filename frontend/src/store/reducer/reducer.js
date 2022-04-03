@@ -1,4 +1,4 @@
-import {GET_INFO, REGIONS_LIST, SET_QUOTES} from "../types/types";
+import {GET_INFO, REGIONS_LIST, SEARCH_MUSICIAN, SET_QUOTES} from "../types/types";
 
 const initialState = {
     info: {},
@@ -32,7 +32,9 @@ const initialState = {
             author: 'Курт Кобейн, Nirvana',
             text: "«Лучше быть угрюмым мечтателем, чем безмозглым тусовщиком»"
         }
-    ]
+    ],
+    searchData: ''
+
 }
 
 export const reducer = (state = initialState, action) => {
@@ -43,6 +45,8 @@ export const reducer = (state = initialState, action) => {
             return {...state, regions: action.payload}
         case SET_QUOTES:
             return {...state, quotes: action.payload}
+        case SEARCH_MUSICIAN:
+            return {...state, searchData: action.payload}
         default:
             return state;
     }

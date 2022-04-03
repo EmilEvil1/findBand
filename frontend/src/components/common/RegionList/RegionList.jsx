@@ -28,7 +28,7 @@ const RegionList = (props) => {
             <Select
                 labelId="label"
                 name='region'
-                value={values && values.region}
+                value={values ? values.region : ''}
                 onChange={handleChange}
                 error={touched && touched.region && Boolean(errors.region)}
                 fullWidth

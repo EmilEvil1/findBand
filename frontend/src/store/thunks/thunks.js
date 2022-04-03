@@ -1,9 +1,9 @@
-import {getListRegion} from "../action/action";
+import {getListRegion, searchByMusicians} from "../action/action";
+import service from "../../helpers/api";
 
 export const getRegionList = () => dispatch => {
-    return fetch('http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/regions', {
+    return service.get('/api/v1/regions', {
     })
-        .then((response) => response.json())
         .then((response) => dispatch(getListRegion(response)))
         .catch((err) => {
             console.log(err);
@@ -11,12 +11,7 @@ export const getRegionList = () => dispatch => {
 }
 
 export const sendSignInFormData = ( data, setCookie ) => {
-    return fetch('http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/authenticate ', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-    })
-        .then((response) => response.json())
+    return service.post('/api/v1/authenticate ', {...data})
         .then((response) => {
             if (response.token) setCookie('access_token', response.token);
         })
@@ -26,12 +21,7 @@ export const sendSignInFormData = ( data, setCookie ) => {
 }
 
 export const sendSignUpFormData = ( data, setCookie) => {
-    return fetch('http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/register ', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-    })
-        .then((response) => response.json())
+    return service.post('/api/v1/resetPassword ', {...data})
         .then((response) => {
             if (response.data.token) setCookie('access_token', response.data.token);
         })
@@ -41,12 +31,23 @@ export const sendSignUpFormData = ( data, setCookie) => {
 }
 
 export const sendPassword = ( data ) => {
-    return fetch('http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/resetPassword', {
+    return fetch('http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/resetPassword', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
     })
         .then((response) => response.json())
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+export const makeSearchForMembers = ( data ) => dispatch => {
+    console.log('values', data)
+    return service.post('/api/v1/searchForMembers ', {...data})
+        .then((response) => {
+            dispatch(searchByMusicians(response))
+        })
         .catch((err) => {
             console.log(err);
         });
