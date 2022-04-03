@@ -2,10 +2,12 @@ import React from 'react';
 import {Box, Button, Typography} from "@material-ui/core";
 import {useStyles} from "./style";
 import ProfileIcon from "../../../assets/icons/sidebar/profile";
+import {useHistory} from "react-router-dom";
 
 const MusicianCard = () => {
 
     const classes = useStyles()
+    const history = useHistory()
 
     return (
         <Box className={classes.cardBackground}>
@@ -33,7 +35,12 @@ const MusicianCard = () => {
                     <Typography>Metallica</Typography>
                 </Box>
             </Box>
-            <Button className={classes.redirectBtn}>Перейти в профиль</Button>
+            <Button
+                className={classes.redirectBtn}
+                onClick={() => history.push('/detailed')}
+            >
+                Перейти в профиль
+            </Button>
         </Box>
     );
 };

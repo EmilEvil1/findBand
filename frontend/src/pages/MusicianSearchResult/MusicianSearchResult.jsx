@@ -3,6 +3,7 @@ import {Box, Container, Grid} from "@material-ui/core";
 import {useStyles} from "../style";
 import Sidebar from "../../components/common/Sidebar/Sidebar";
 import MusicianCard from "../../components/common/MusicianCard/MusicianCard";
+import SearchFilter from "../../components/filters/SearchFilter/SearchFilter";
 
 const MusicianSearchResult = () => {
 
@@ -11,6 +12,10 @@ const MusicianSearchResult = () => {
     return (
         <Grid className={classes.layout}>
             <Sidebar />
+            <Box>
+            <Container>
+                <SearchFilter />
+            </Container>
             <Container>
                 <Box className={classes.wrapper}>
                     <MusicianCard />
@@ -21,6 +26,7 @@ const MusicianSearchResult = () => {
                     <MusicianCard />
                 </Box>
             </Container>
+            </Box>
         </Grid>
     );
 };
