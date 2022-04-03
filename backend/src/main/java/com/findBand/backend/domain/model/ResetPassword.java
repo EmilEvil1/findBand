@@ -18,7 +18,6 @@ public class ResetPassword {
 	@Column
 	private String id;
 
-	@Column
 	@OneToOne
 	private UserDomain user;
 

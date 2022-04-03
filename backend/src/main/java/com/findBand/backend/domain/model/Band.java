@@ -25,7 +25,7 @@ public class Band {
 
     @OneToOne
     @JoinColumn(name = "band_owner_id")
-    private BandOwner bandOwner;
+    private UserDomain bandOwner;
 
     @Column
     private String name;

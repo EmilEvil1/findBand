@@ -30,7 +30,7 @@ public class Vacancy {
 
     @ManyToOne
     @JoinColumn(name = "band_id")
-    private Band bandEntity;
+    private Band band;
 
     @OneToOne
     @JoinColumn(name = "instrument_id")

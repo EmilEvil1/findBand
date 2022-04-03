@@ -1,25 +1,15 @@
 package com.findBand.backend.infra.adapters.jpa;
 
-import com.findBand.backend.domain.model.FoundMember;
+import com.findBand.backend.domain.model.Instrument;
 import com.findBand.backend.domain.model.UserDomain;
-import com.findBand.backend.domain.model.UserRole;
-import com.findBand.backend.domain.model.UserRoleEnum;
 import com.findBand.backend.domain.port.UserPort;
-import com.findBand.backend.domain.useCase.user.UserCreate;
-import com.findBand.backend.infra.adapters.common.NoSuchResetPasswordException;
-import com.findBand.backend.infra.adapters.jpa.entity.*;
-import com.findBand.backend.infra.adapters.jpa.repository.BandJpaRepository;
-import com.findBand.backend.infra.adapters.jpa.repository.BandSeekerRepository;
-import com.findBand.backend.infra.adapters.jpa.repository.ResetPasswordJpaRepository;
 import com.findBand.backend.infra.adapters.jpa.repository.UserJpaRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Component
 @Slf4j
@@ -36,10 +26,18 @@ public class UserJpaAdapter implements UserPort {
         return userJpaRepository.findByEmail(email);
     }
 
-
-
     @Override
     public boolean doUserExists(String emailAddress) {
         return userJpaRepository.existsByEmail(emailAddress);
+    }
+
+    @Override
+    public UserDomain createUser(UserDomain userDomain) {
+        return userJpaRepository.save(userDomain);
+    }
+
+    @Override
+    public List<UserDomain> findByInstrumentsIds(Set<Instrument> instrumentsIds) {
+        return userJpaRepository.findByInstrumentsIn(instrumentsIds);
     }
 }
