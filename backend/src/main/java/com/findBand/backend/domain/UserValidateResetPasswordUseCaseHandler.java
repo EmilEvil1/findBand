@@ -4,7 +4,6 @@ import com.findBand.backend.domain.common.useCase.ObservableUseCasePublisher;
 import com.findBand.backend.domain.common.useCase.UseCaseHandler;
 import com.findBand.backend.domain.model.ResetPassword;
 import com.findBand.backend.domain.port.ResetPasswordPort;
-import com.findBand.backend.domain.port.UserPort;
 import com.findBand.backend.domain.useCase.user.UserValidateResetPassword;
 import com.findBand.backend.infra.adapters.common.NoSuchResetPasswordException;
 import org.springframework.stereotype.Component;
@@ -22,6 +21,6 @@ public class UserValidateResetPasswordUseCaseHandler extends ObservableUseCasePu
     @Override
     public Boolean handle(UserValidateResetPassword useCase) {
        ResetPassword resetPassword = resetPasswordPort.findResetPasswordById(useCase.getResetPasswordId()).orElseThrow(() -> new NoSuchResetPasswordException("No such reset password exists with id: " + useCase.getResetPasswordId()));
-       return resetPassword.isActivated();
+       return !resetPassword.isActivated();
     }
 }

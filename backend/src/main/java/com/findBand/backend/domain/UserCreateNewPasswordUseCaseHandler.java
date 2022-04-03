@@ -10,15 +10,18 @@ import com.findBand.backend.domain.useCase.user.UserCreateNewPassword;
 import com.findBand.backend.domain.useCase.user.UserValidateResetPassword;
 import com.findBand.backend.infra.adapters.common.NoSuchResetPasswordException;
 import com.findBand.backend.infra.common.util.ValidationRulesUtil;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserCreateNewPasswordUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<Boolean, UserCreateNewPassword> {
 
     private ResetPasswordPort resetPasswordPort;
+    private PasswordEncoder passwordEncoder;
 
-    public UserCreateNewPasswordUseCaseHandler(ResetPasswordPort resetPasswordPort) {
+    public UserCreateNewPasswordUseCaseHandler(ResetPasswordPort resetPasswordPort, PasswordEncoder passwordEncoder) {
         this.resetPasswordPort = resetPasswordPort;
+        this.passwordEncoder = passwordEncoder;
         register(UserCreateNewPassword.class, this);
     }
 
@@ -33,7 +36,7 @@ public class UserCreateNewPasswordUseCaseHandler extends ObservableUseCasePublis
         ResetPassword resetPassword = resetPasswordPort.findResetPasswordById(useCase.getResetPasswordId())
                 .orElseThrow(() -> new NoSuchResetPasswordException("No reset password with id: " + useCase.getResetPasswordId()));
         resetPassword.setActivated(true);
-        resetPassword.getUser().setPassword(useCase.getNewPassword());
+        resetPassword.getUser().setPassword(useCase.getNewPassword(), passwordEncoder);
         resetPasswordPort.createNewPassword(resetPassword);
 
         return true;
