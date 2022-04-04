@@ -14,7 +14,9 @@ import java.util.Set;
 @Table(name = "findband_user")
 public class UserDomain {
 
-    private static final int PASSWORD_LENGTH = 8;
+    private static final int PASSWORD_LENGTH = 6;
+    private static final String REG_EMAIL = "^(.+)@(\\S+)$";
+    private static final String REG_PHONE = "^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$";
 
     @Id
     @Column
@@ -37,6 +39,10 @@ public class UserDomain {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
+    @OneToOne
+    @JoinColumn(name = "region_id")
+    private Region region;
+
     @ManyToMany
     @JoinTable(
       name = "users_instruments",
@@ -51,17 +57,33 @@ public class UserDomain {
         if (StringUtils.isEmpty(email)) {
             throw new FindBandValidationException("registration.email.already.exists");
         }
+        if (!email.matches(REG_EMAIL)) {
+            throw new FindBandValidationException("registration.email.invalid");
+        }
         this.email = email;
     }
 
-    public void setPassword(String password, PasswordEncoder passwordEncoder) {
+    public void setPassword(String password, PasswordEncoder passwordEncoder, String confirmationPassword) {
         if (StringUtils.isEmpty(password)) {
             throw new FindBandValidationException("registration.password.empty");
         }
         if (password.length() < PASSWORD_LENGTH) {
             throw new FindBandValidationException("create.new.password.invalid");
         }
+        if (!password.equals(confirmationPassword)) {
+            throw new FindBandValidationException("create.new.password.invalid");
+        }
         this.password = passwordEncoder.encode(password);
+    }
+
+    public void setPhone(String phone) {
+        if (StringUtils.isEmpty(phone)) {
+            throw new FindBandValidationException("registration.phone.empty");
+        }
+        if (!phone.matches(REG_PHONE)) {
+            throw new FindBandValidationException("registration.phone.invalid");
+        }
+        this.phone = phone;
     }
 
     public void setUsername(String username) {

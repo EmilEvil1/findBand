@@ -36,7 +36,7 @@ public class UserCreateNewPasswordUseCaseHandler extends ObservableUseCasePublis
         ResetPassword resetPassword = resetPasswordPort.findResetPasswordById(useCase.getResetPasswordId())
                 .orElseThrow(() -> new NoSuchResetPasswordException("No reset password with id: " + useCase.getResetPasswordId()));
         resetPassword.setActivated(true);
-        resetPassword.getUser().setPassword(useCase.getNewPassword(), passwordEncoder);
+        resetPassword.getUser().setPassword(useCase.getNewPassword(), passwordEncoder, useCase.getConfirmationNewPassword());
         resetPasswordPort.createNewPassword(resetPassword);
 
         return true;

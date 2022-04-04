@@ -8,5 +8,6 @@ import lombok.RequiredArgsConstructor;
 @Data
 public class UserCreateNewPassword implements UseCase {
     private final String newPassword;
+    private final String confirmationNewPassword;
     private final String resetPasswordId;
 }
