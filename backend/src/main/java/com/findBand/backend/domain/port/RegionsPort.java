@@ -6,4 +6,6 @@ import java.util.Set;
 
 public interface RegionsPort {
 	Set<Region> findAllRegions();
+
+	Region findById(long id);
 }

@@ -23,4 +23,8 @@ public class RegionsJpaAdapter implements RegionsPort {
         return new HashSet<>(regionsJpaRepository.findAll());
     }
 
+    @Override
+    public Region findById(long id) {
+        return null;
+    }
 }

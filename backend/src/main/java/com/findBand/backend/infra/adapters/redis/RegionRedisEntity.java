@@ -6,6 +6,6 @@ import lombok.Data;
 @Builder
 @Data
 public class RegionRedisEntity {
-    private Long regiondId;
+    private Long regionId;
     private String regionName;
 }
