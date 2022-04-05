@@ -19,6 +19,7 @@ export const useStyles = makeStyles({
         flexGrow: 1
     },
     flexWrap: {
+        marginTop: 35,
         width: '100%',
         display: "flex"
     },

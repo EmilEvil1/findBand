@@ -12,11 +12,13 @@ import ArrowIcon from "../../../assets/icons/sidebar/arrow";
 import LogOutIcon from "../../../assets/icons/sidebar/logOut";
 import LongLogo from "../../../assets/icons/logos/longLogo";
 import HomeIcon from "../../../assets/icons/sidebar/home";
+import Notification from "../../notification/Notification";
 
 const Sidebar = () => {
 
     const classes = useStyles()
     const [open, setOpen] = useState(false)
+    const [openNotification, setOpenNotification] = useState(false)
     const [token, setToken, removeCookie] = useCookies(['access_token'])
     const history = useHistory()
 
@@ -25,83 +27,90 @@ const Sidebar = () => {
         history.push('/auth')
     }
 
+
     return (
-        <Drawer
-            open={open}
-            onClose={() => closeModal(setOpen)}
-            variant="permanent"
-            anchor="left"
-            className={open ? classes.drawerSize : ''}
-        >
-            <Box className={!open ? classes.sidebarWrapper : classes.sidebarWrapper + ' ' + classes.sidebarOpened}>
-                <Box>
-                    <Box className={classes.logosWrapper}>
-                        {!open ? (<ShortLogo />) : (<LongLogo />)}
+        <>
+            <Drawer
+                open={open}
+                onClose={() => closeModal(setOpen)}
+                variant="permanent"
+                anchor="left"
+                className={open ? classes.drawerSize : ''}
+            >
+                <Box className={!open ? classes.sidebarWrapper : classes.sidebarWrapper + ' ' + classes.sidebarOpened}>
+                    <Box>
+                        <Box className={classes.logosWrapper}>
+                            {!open ? (<ShortLogo />) : (<LongLogo />)}
+                        </Box>
+                        <Divider />
+                        <List className={classes.userInfo}>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <Avatar style={{width: 25, height: 25}} alt={'И'} src={''} />
+                                </ListItemIcon>
+                                <ListItemText primary={'Иван'} />
+                            </ListItem>
+                        </List>
+                        <List>
+                            <Link to={'/'}>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <HomeIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={'Главная'} />
+                                </ListItem>
+                            </Link>
+                            <Link to={'/profile'}>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <ProfileIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={'Профиль'} />
+                                </ListItem>
+                            </Link>
+                            <Link to={'/profile-band'}>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <BandRoomIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={'Моя группа'} />
+                                </ListItem>
+                            </Link>
+                        </List>
                     </Box>
-                    <Divider />
-                    <List className={classes.userInfo}>
-                        <ListItem>
-                            <ListItemIcon>
-                                <Avatar style={{width: 25, height: 25}} alt={'И'} src={''} />
-                            </ListItemIcon>
-                            <ListItemText primary={'Иван'} />
-                        </ListItem>
-                    </List>
-                    <List>
-                        <Link to={'/'}>
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <HomeIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={'Главная'} />
-                            </ListItem>
-                        </Link>
-                        <Link to={'/profile'}>
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <ProfileIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={'Профиль'} />
-                            </ListItem>
-                        </Link>
-                        <Link to={'/profile-band'}>
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <BandRoomIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={'Моя группа'} />
-                            </ListItem>
-                        </Link>
-                    </List>
-                </Box>
-                <Box className={classes.sidebarItems}>
-                    <Link to={'/notify'}>
-                        <ListItem button>
+                    <Box className={classes.sidebarItems}>
+                        <ListItem button onClick={() => setOpenNotification(true)}>
                             <ListItemIcon>
                                 <NotificationIcon />
                             </ListItemIcon>
                             <ListItemText primary={'Уведомления'} />
                         </ListItem>
-                    </Link>
-                    <ListItem
-                        button
-                        onClick={logOut}
-                    >
-                        <ListItemIcon>
-                            <LogOutIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={'Выйти'} />
-                    </ListItem>
-                    <Divider />
-                    <ListItem onClick={() => eventToggle(open, setOpen)} button>
-                        <ListItemIcon className={open ? classes.arrowRotated : ''}>
-                            <ArrowIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={'Свернуть'} />
-                    </ListItem>
+                        <ListItem
+                            button
+                            onClick={logOut}
+                        >
+                            <ListItemIcon>
+                                <LogOutIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'Выйти'} />
+                        </ListItem>
+                        <Divider />
+                        <ListItem onClick={() => eventToggle(open, setOpen)} button>
+                            <ListItemIcon className={open ? classes.arrowRotated : ''}>
+                                <ArrowIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'Свернуть'} />
+                        </ListItem>
+                    </Box>
                 </Box>
-            </Box>
-        </Drawer>
+            </Drawer>
+            {openNotification && (
+                <Notification
+                    openNotification={openNotification}
+                    setOpenNotification={setOpenNotification}
+                />
+            )}
+        </>
     );
 };
 

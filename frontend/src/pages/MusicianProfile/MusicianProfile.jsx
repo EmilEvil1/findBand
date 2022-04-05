@@ -16,15 +16,20 @@ const Profile = () => {
     const history = useHistory()
 
     useEffect(() => {
-        if (checkTokenValidate(token.access_token)) history.push('/Auth')
+        if (checkTokenValidate(token.access_token)) history.push('/auth')
     }, [token.access_token])
 
     return (
         <Grid style={{background: darkBlue}} className={classes.content}>
             <Sidebar />
             <Container>
-                <Typography style={{marginTop: 35}} variant={'h4'}>Личные данные</Typography>
-                <Box className={classes.flexWrap} style={{marginTop: 35}}>
+                <Typography
+                    style={{marginTop: 35}}
+                    variant={'h4'}
+                >
+                    Личные данные
+                </Typography>
+                <Box className={classes.flexWrap}>
                     <UploadPhoto />
                     <ProfileData />
                 </Box>
