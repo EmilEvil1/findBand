@@ -21,14 +21,14 @@ const RegionList = (props) => {
         <FormControl variant="outlined" className={classes.inputWrapper}>
             <InputLabel
                 id="label"
-                style={{color: (touched && touched.region && Boolean(errors.region)) ? red : white}}
+                style={{color: (touched && touched.regionid && Boolean(errors.region)) ? red : white}}
             >
                 Регион
             </InputLabel>
             <Select
                 labelId="label"
                 name='region'
-                value={values ? values.region : ''}
+                value={values.region || ''}
                 onChange={handleChange}
                 error={touched && touched.region && Boolean(errors.region)}
                 fullWidth

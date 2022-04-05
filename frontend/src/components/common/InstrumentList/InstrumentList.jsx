@@ -21,7 +21,7 @@ const InstrumentList = (props) => {
             <Select
                 labelId="label"
                 name='instrument'
-                value={values ? values.instrument : ''}
+                value={values.instrument || ''}
                 onChange={handleChange}
                 error={touched && touched.instrument && Boolean(errors.instrument)}
                 fullWidth

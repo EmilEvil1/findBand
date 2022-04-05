@@ -31,7 +31,7 @@ const Sidebar = () => {
             onClose={() => closeModal(setOpen)}
             variant="permanent"
             anchor="left"
-            className={open && classes.drawerSize}
+            className={open ? classes.drawerSize : ''}
         >
             <Box className={!open ? classes.sidebarWrapper : classes.sidebarWrapper + ' ' + classes.sidebarOpened}>
                 <Box>
@@ -41,7 +41,9 @@ const Sidebar = () => {
                     <Divider />
                     <List className={classes.userInfo}>
                         <ListItem>
-                            <ListItemIcon><Avatar style={{width: 25, height: 25}} alt={'И'} src={''} /></ListItemIcon>
+                            <ListItemIcon>
+                                <Avatar style={{width: 25, height: 25}} alt={'И'} src={''} />
+                            </ListItemIcon>
                             <ListItemText primary={'Иван'} />
                         </ListItem>
                     </List>
@@ -92,7 +94,7 @@ const Sidebar = () => {
                     </ListItem>
                     <Divider />
                     <ListItem onClick={() => eventToggle(open, setOpen)} button>
-                        <ListItemIcon className={open && classes.arrowRotated}>
+                        <ListItemIcon className={open ? classes.arrowRotated : ''}>
                             <ArrowIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Свернуть'} />
