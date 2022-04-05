@@ -1,7 +1,5 @@
 package com.findBand.backend.infra.adapters.redis;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.findBand.backend.domain.model.Region;
 import com.findBand.backend.domain.port.RegionsPort;
 import com.findBand.backend.infra.adapters.jpa.repository.RegionsJpaRepository;
@@ -9,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
