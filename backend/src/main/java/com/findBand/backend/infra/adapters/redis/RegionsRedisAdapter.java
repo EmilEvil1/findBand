@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import javax.annotation.PostConstruct;
+import java.lang.reflect.Field;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -59,12 +61,10 @@ public class RegionsRedisAdapter implements RegionsPort {
 			.build();
 	}
 
-	private Region toDomain(Object regionRedisEntity) {
-		try {
-			return new Region((Long) ReflectionUtils.findField(RegionRedisEntity.class, "regionId", Long.class).get(regionRedisEntity),
-			(String) ReflectionUtils.findField(RegionRedisEntity.class, "regionName", String.class).get(regionRedisEntity));
-		} catch (IllegalAccessException e) {
-			return null;
-		}
+	private Region toDomain(Object regionRedisObj) {
+		LinkedHashMap regionRedisMap = (LinkedHashMap) regionRedisObj;
+		log.info("RegionRedisEntity: {}", regionRedisMap);
+		return new Region((Integer) regionRedisMap.get("regionId"),
+		(String) regionRedisMap.get("regionName"));
 	}
 }

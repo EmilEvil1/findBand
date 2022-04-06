@@ -2,7 +2,7 @@ services:
   findband_web:
     build:
       context: .
-      dockerfile: .
+      dockerfile: ./docker-prod/Dockerfile
     container_name: findband_web
     ports:
       - 8080:8080
