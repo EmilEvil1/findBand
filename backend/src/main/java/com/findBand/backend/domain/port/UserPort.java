@@ -1,6 +1,5 @@
 package com.findBand.backend.domain.port;
 
-import com.findBand.backend.domain.model.Instrument;
 import com.findBand.backend.domain.model.UserDomain;
 
 import java.util.List;
@@ -14,5 +13,5 @@ public interface UserPort {
 
     UserDomain createUser(UserDomain userDomain);
 
-    List<UserDomain> findByInstrumentsIds(Set<Instrument> instrumentsIds);
+    List<UserDomain> findByInstrumentsIdsAndRegionId(Set<Long> instrumentsIds, long regionId);
 }

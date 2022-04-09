@@ -37,7 +37,7 @@ public class UserJpaAdapter implements UserPort {
     }
 
     @Override
-    public List<UserDomain> findByInstrumentsIds(Set<Instrument> instrumentsIds) {
-        return userJpaRepository.findByInstrumentsIn(instrumentsIds);
+    public List<UserDomain> findByInstrumentsIdsAndRegionId(Set<Long> instrumentsIds, long regionId) {
+        return userJpaRepository.findByInstrumentIdsAndRegionId(instrumentsIds, regionId);
     }
 }

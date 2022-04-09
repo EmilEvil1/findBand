@@ -1,6 +1,5 @@
 package com.findBand.backend.infra.adapters.jpa.repository;
 
-import com.findBand.backend.domain.model.Instrument;
 import com.findBand.backend.domain.model.UserDomain;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,5 +19,6 @@ public interface UserJpaRepository extends JpaRepository<UserDomain, Long> {
     @Modifying
     void updatePassword(String password, long userId);
 
-    List<UserDomain> findByInstrumentsIn(Set<Instrument> instruments);
+    @Query("SELECT u from user u join u.instruments i join u.region r where i.id in (:instrumentIds) and r.id = :regionId")
+    List<UserDomain> findByInstrumentIdsAndRegionId(Set<Long> instrumentIds, long regionId);
 }

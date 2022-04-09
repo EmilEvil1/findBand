@@ -39,7 +39,7 @@ public class UserDomain {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
 
