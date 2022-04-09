@@ -14,5 +14,5 @@ public interface UserPort {
 
     UserDomain createUser(UserDomain userDomain);
 
-    List<UserDomain> findByInstrumentsIds(Set<Instrument> instrumentsIds);
+    List<UserDomain> findByInstrumentsIds(Set<Instrument> instrumentsIds, long regionId);
 }

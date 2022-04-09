@@ -27,7 +27,7 @@ public class SearchController extends BaseController {
 
     @GetMapping(value = "searchForMembers")
     public DataResponse<BandSeekerDTO> doSearchForMember(SearchForMemberRequestDTO request) {
-        SearchForMember searchForMember = new SearchForMember(request.getInstrumentalIds());
+        SearchForMember searchForMember = new SearchForMember(request.getInstrumentalIds(), request.getRegionId());
         List<UserDomain> bandSeekers = publish(List.class, searchForMember);
         return new DataResponse<BandSeekerDTO>(bandSeekers.stream().map(this::toFoundMemberDTO).collect(Collectors.toList()), 1, 1,bandSeekers.size());
     }

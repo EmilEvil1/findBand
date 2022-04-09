@@ -12,4 +12,5 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class SearchForMember implements UseCase {
     private final Set<Long> instrumentalIds;
+    private final long regionId;
 }

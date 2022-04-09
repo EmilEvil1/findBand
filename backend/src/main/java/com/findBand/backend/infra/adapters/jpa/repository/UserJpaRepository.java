@@ -20,5 +20,5 @@ public interface UserJpaRepository extends JpaRepository<UserDomain, Long> {
     @Modifying
     void updatePassword(String password, long userId);
 
-    List<UserDomain> findByInstrumentsIn(Set<Instrument> instruments);
+    List<UserDomain> findByInstrumentsInAndRegion(Set<Instrument> instruments);
 }
