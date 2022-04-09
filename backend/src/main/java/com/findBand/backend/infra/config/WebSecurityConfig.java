@@ -87,6 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/v1/resetPassword").permitAll()
 				.antMatchers("/api/v1/validateResetPassword").permitAll()
 				.antMatchers("/api/v1/createNewPassword").permitAll()
+				.antMatchers("/api/v1/searchForMembers").hasAnyAuthority("BAND_OWNER")
 
 				// .antMatchers("/api/activate").permitAll()
 				// .antMatchers("/api/account/reset-password/init").permitAll()
