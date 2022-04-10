@@ -31,6 +31,7 @@ const SignUp = () => {
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
     const [checked, setChecked] = useState(false);
+    const [isOwner, setIsOwner] = useState(false)
 
 
     const onSubmit = data => dispatch(sendSignUpFormData(data, setToken))
@@ -49,10 +50,12 @@ const SignUp = () => {
                 confirmationPassword: '',
                 regionId: '',
                 instrument: '',
-                bandName: ''
+                bandName: '',
+                isBandOwner: isOwner
             }}
             onSubmit={values => onSubmit(values)}
             validationSchema={signUpValidation}
+            // enableReintialize
         >
             {props => {
                 const {
@@ -63,6 +66,7 @@ const SignUp = () => {
                     handleBlur,
                     handleSubmit,
                 } = props;
+                console.log(values.isBandOwner)
                 return (
                     <form
                         className={classes.signUpWrapper}
@@ -211,6 +215,7 @@ const SignUp = () => {
                                 handleChange={handleChange}
                                 errors={errors}
                                 values={values}
+                                setIsOwner={setIsOwner}
                             />
                         )}
                         <Button

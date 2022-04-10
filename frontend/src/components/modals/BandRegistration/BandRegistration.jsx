@@ -1,12 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Box, Button, Dialog, TextField} from "@material-ui/core";
 import {closeModal} from "../../../helpers/utils";
 import {useStyles} from "./style";
 
 const BandRegistration = (props) => {
 
-    const {open, close, handleChange, handleBlur, touched, errors, values} = props
+    const {open, close, handleChange, handleBlur, touched, errors, values, setIsOwner} = props
     const classes = useStyles()
+
+    // useEffect(() => {
+    //     return !!values.bandName ? setIsOwner(true) : setIsOwner(false)
+    // }, [values.bandName])
+
+    if (!!values.bandName) {
+        setIsOwner(true)
+    } else {
+        setIsOwner(false)
+    }
 
     return (
         <Dialog
@@ -32,7 +42,10 @@ const BandRegistration = (props) => {
                         color='primary'
                         style={{border: '1px solid white', marginRight: 10}}
                         disabled={!values.bandName}
-                        onClick={() => closeModal(close)}
+                        onClick={() => {
+                            closeModal(close)
+                            setIsOwner(true)
+                        }}
                     >
                         Сохранить
                     </Button>

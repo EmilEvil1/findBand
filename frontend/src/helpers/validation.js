@@ -49,6 +49,8 @@ export const signUpValidation = yup.object({
     instrument: yup
         .string('Выберите инструмент')
         .required('Выберите инструмент'),
+    isBandOwner: yup
+        .boolean().default(true)
 });
 
 // MusicianProfile

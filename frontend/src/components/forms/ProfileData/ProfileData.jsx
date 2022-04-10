@@ -25,10 +25,7 @@ const ProfileData = (props) => {
                     regionId: 'Владимир',
                     instrument: 'Гитара',
                 }}
-                onSubmit={( values) => {
-                    // onSubmit(values)
-                    console.log('sending Data', values)
-                }}
+                onSubmit={ values => console.log('sending Data', values)}
                 validationSchema={profileFormValidation}
             >
                 {props => {
