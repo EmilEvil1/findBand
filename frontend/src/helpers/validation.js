@@ -24,12 +24,11 @@ export const forgetPassword = yup.object({
 // sign up
 
 export const signUpValidation = yup.object({
-    name: yup
+    username: yup
         .string('Заполните поле')
         .required('Заполните поле'),
     phone: yup
         .string('Заполните поле')
-        // .matches(phoneRegExp, 'Phone number is not valid')
         .required('Заполните поле'),
     email: yup
         .string('Заполните поле')
@@ -44,7 +43,7 @@ export const signUpValidation = yup.object({
         .min(6, 'Минимум 6 символов')
         .oneOf([yup.ref('password'), null], 'Не совпадает')
         .required('Заполните поле'),
-    region: yup
+    regionId: yup
         .string('Выберите регион')
         .required('Выберите регион'),
     instrument: yup

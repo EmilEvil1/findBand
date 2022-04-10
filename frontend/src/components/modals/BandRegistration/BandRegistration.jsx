@@ -7,7 +7,7 @@ const BandRegistration = (props) => {
 
     const {open, close, handleChange, handleBlur, touched, errors, values} = props
     const classes = useStyles()
-    console.log('errors', errors)
+
     return (
         <Dialog
             open={open}

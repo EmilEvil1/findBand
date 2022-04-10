@@ -8,7 +8,7 @@ import {red, white} from "../../../helpers/styles";
 
 const RegionList = (props) => {
 
-    const {values, handleChange, touched, errors} = props
+    const { values, handleChange, touched, errors } = props
     const regionList = useSelector(({ state }) => state.regions)
     const classes = useStyles()
     const dispatch = useDispatch()
@@ -21,23 +21,23 @@ const RegionList = (props) => {
         <FormControl variant="outlined" className={classes.inputWrapper}>
             <InputLabel
                 id="label"
-                style={{color: (touched && touched.regionid && Boolean(errors.region)) ? red : white}}
+                style={{color: (touched && touched.regionId && Boolean(errors.regionId)) ? red : white}}
             >
                 Регион
             </InputLabel>
             <Select
                 labelId="label"
-                name='region'
-                value={values.region || ''}
+                name='regionId'
+                value={values.regionId || ''}
                 onChange={handleChange}
-                error={touched && touched.region && Boolean(errors.region)}
+                error={touched && touched.regionId && Boolean(errors.regionId)}
                 fullWidth
             >
-                {regionList && regionList.length > 1 && regionList.map((item, index) => {
-                    return <MenuItem key={index} value={item.regionName}>{item.regionName}</MenuItem>
+                {Array.isArray(regionList) && regionList.length > 0 && regionList.map((item, index) => {
+                    return <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
                 })}
             </Select>
-            <ErrorFieldText errorText={(touched && touched.region && Boolean(errors.region)) && errors.region}/>
+            <ErrorFieldText errorText={(touched && touched.regionId && Boolean(errors.regionId)) && errors.regionId}/>
         </FormControl>
     );
 };

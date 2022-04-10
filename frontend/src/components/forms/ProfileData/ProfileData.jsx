@@ -22,12 +22,12 @@ const ProfileData = (props) => {
                     name: 'Иван',
                     email: 'john@mail.ru',
                     phone: '+7 (999) 999 99 99',
-                    region: 'Владимир',
+                    regionId: 'Владимир',
                     instrument: 'Гитара',
                 }}
-                onSubmit={(values, { setSubmitting }) => {
+                onSubmit={( values) => {
                     // onSubmit(values)
-                    setSubmitting(false)
+                    console.log('sending Data', values)
                 }}
                 validationSchema={profileFormValidation}
             >

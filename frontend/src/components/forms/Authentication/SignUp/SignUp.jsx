@@ -22,9 +22,8 @@ import IconPassword from "../../../../assets/icons/auth/password";
 import PlusIcon from "../../../../assets/icons/auth/plus";
 import EditIcon from "../../../../assets/icons/auth/edit";
 
-const SignUp = (props) => {
+const SignUp = () => {
 
-    const {} = props
     const classes = useStyles()
     const dispatch = useDispatch()
     const history = useHistory()
@@ -43,19 +42,16 @@ const SignUp = (props) => {
     return (
         <Formik
             initialValues={{
-                name: '',
+                username: '',
                 phone: '',
                 email: '',
                 password: '',
                 confirmationPassword: '',
-                region: '',
+                regionId: '',
                 instrument: '',
                 bandName: ''
             }}
-            onSubmit={(values, { setSubmitting }) => {
-                onSubmit(values)
-                setSubmitting(false)
-            }}
+            onSubmit={values => onSubmit(values)}
             validationSchema={signUpValidation}
         >
             {props => {
@@ -81,14 +77,14 @@ const SignUp = (props) => {
                         <Box className={classes.inputsWrapper}>
                             <TextField
                                 style={{marginBottom: 35}}
-                                name='name'
+                                name='username'
                                 label='Имя'
                                 placeholder='Укажите имя'
                                 value={values.name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                error={touched.name && Boolean(errors.name)}
-                                helperText={touched.name && errors.name}
+                                error={touched.username && Boolean(errors.username)}
+                                helperText={touched.username && errors.username}
                                 variant='outlined'
                                 fullWidth
                             />

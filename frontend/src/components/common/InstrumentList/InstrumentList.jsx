@@ -14,7 +14,7 @@ const InstrumentList = (props) => {
         <FormControl variant="outlined" className={classes.inputWrapper}>
             <InputLabel
                 id="label"
-                style={{color: (touched && touched.region && Boolean(errors.region)) ? red : white}}
+                style={{color: (touched && touched.instrument && Boolean(errors.instrument)) ? red : white}}
             >
                 Инструмент
             </InputLabel>
@@ -26,11 +26,11 @@ const InstrumentList = (props) => {
                 error={touched && touched.instrument && Boolean(errors.instrument)}
                 fullWidth
             >
-                {musicalInstrumentsList && musicalInstrumentsList.length > 1 && musicalInstrumentsList.map((item, index) => {
+                {Array.isArray(musicalInstrumentsList) && musicalInstrumentsList.length > 0 && musicalInstrumentsList.map((item, index) => {
                     return <MenuItem key={index} value={item}>{item}</MenuItem>
                 })}
             </Select>
-            <ErrorFieldText errorText={(touched && touched.region && Boolean(errors.region)) && errors.instrument}/>
+            <ErrorFieldText errorText={(touched && touched.instrument && Boolean(errors.instrument)) && errors.instrument}/>
         </FormControl>
     );
 };

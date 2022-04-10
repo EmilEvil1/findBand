@@ -20,7 +20,7 @@ const SearchMusician = () => {
     return (
         <Formik
             initialValues={{
-                region: '',
+                regionId: '',
                 instrument: ''
             }}
             onSubmit={values => onSubmit(values)}
@@ -61,7 +61,7 @@ const SearchMusician = () => {
                             color='primary'
                             onClick={() => {
                                  handleSubmit()
-                                if (values.region && values.instrument) {
+                                if (values.regionId && values.instrument) {
                                     history.push('/search')
                                 }
                             }}
