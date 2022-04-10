@@ -4,7 +4,9 @@ import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.useCase.user.UserCreateNewPassword;
 import com.findBand.backend.domain.useCase.user.UserResetPassword;
 import com.findBand.backend.domain.useCase.user.UserValidateResetPassword;
+import com.findBand.backend.infra.adapters.rest.dto.user.ResetPasswordRequestDTO;
 import com.findBand.backend.infra.adapters.rest.dto.user.UserCreateNewPasswordRequestDTO;
+import com.findBand.backend.infra.adapters.rest.dto.user.ValidatePasswordRequestDTO;
 import com.findBand.backend.infra.adapters.rest.dto.user.ValidateResetPasswordDTO;
 import com.findBand.backend.infra.common.rest.BaseController;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController extends BaseController {
 
     @PostMapping("/resetPassword")
-    public void resetPassword(@RequestBody String emailAddress) {
-        publish(UserDomain.class, new UserResetPassword(emailAddress));
+    public void resetPassword(@RequestBody ResetPasswordRequestDTO resetPasswordRequest) {
+        publish(UserDomain.class, new UserResetPassword(resetPasswordRequest.getEmailAddress()));
     }
 
     @GetMapping("/validateResetPassword")
-    public ValidateResetPasswordDTO validateResetPassword(@RequestBody String resetPasswordId) {
-        boolean isValid = publish(Boolean.class, new UserValidateResetPassword(resetPasswordId));
+    public ValidateResetPasswordDTO validateResetPassword(@RequestBody ValidatePasswordRequestDTO validatePasswordRequest) {
+        boolean isValid = publish(Boolean.class, new UserValidateResetPassword(validatePasswordRequest.getResetPasswordId()));
         return new ValidateResetPasswordDTO(isValid);
     }
 
