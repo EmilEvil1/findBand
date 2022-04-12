@@ -1,30 +1,22 @@
-import React, {useEffect} from 'react';
-import {useCookies} from "react-cookie";
-import {useHistory} from "react-router-dom";
+import React from 'react';
 import {Box} from "@material-ui/core";
-import {useStyles} from "../style";
-import Sidebar from "../../components/common/Sidebar/Sidebar";
 import Musicians from "../../components/sliders/Musicians/Musicians";
 import Main from "../../components/content/Main/Main";
-import {checkTokenValidate} from "../../helpers/utils";
+import Layout from "../../components/common/Layout/Layout";
+import {useStyles} from "../style";
 
 const Home = () => {
 
     const classes = useStyles()
-    const [token, setToken] = useCookies(['access_token'])
-    const history = useHistory()
-
-    useEffect(() => {
-        if (!!checkTokenValidate(token.access_token)) history.push('/Auth')
-    }, [token.access_token])
 
     return (
         <Box className={classes.content}>
-            <Sidebar />
             <Musicians />
-            <Box className={classes.container}>
-                <Main />
-            </Box>
+            <Layout>
+                <Box className={classes.container}>
+                    <Main />
+                </Box>
+            </Layout>
         </Box>
     )
 }

@@ -1,28 +1,18 @@
-import React, {useEffect} from 'react';
-import {Box, Container, Grid, Typography} from "@material-ui/core";
-import {useStyles} from "../style";
-import Sidebar from "../../components/common/Sidebar/Sidebar";
-import {darkBlue} from "../../helpers/styles";
+import React from 'react';
+import {Box, Grid, Typography} from "@material-ui/core";
 import UploadPhoto from "../../components/common/UploadPhoto/UploadPhoto";
 import ProfileData from "../../components/forms/ProfileData/ProfileData";
-import {useCookies} from "react-cookie";
-import {useHistory} from "react-router-dom";
-import {checkTokenValidate} from "../../helpers/utils";
+import Layout from "../../components/common/Layout/Layout";
+import {darkBlue} from "../../helpers/styles";
+import {useStyles} from "../style";
 
 const Profile = () => {
 
     const classes = useStyles()
-    const [token, setToken] = useCookies(['access_token'])
-    const history = useHistory()
-
-    useEffect(() => {
-        if (checkTokenValidate(token.access_token)) history.push('/auth')
-    }, [token.access_token])
 
     return (
         <Grid style={{background: darkBlue}} className={classes.content}>
-            <Sidebar />
-            <Container>
+            <Layout>
                 <Typography
                     style={{marginTop: 35}}
                     variant={'h4'}
@@ -33,7 +23,7 @@ const Profile = () => {
                     <UploadPhoto />
                     <ProfileData />
                 </Box>
-            </Container>
+            </Layout>
         </Grid>
     );
 };

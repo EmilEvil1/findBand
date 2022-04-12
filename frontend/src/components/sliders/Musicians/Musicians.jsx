@@ -1,23 +1,16 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
-import photo1  from '../../../assets/img/1.jpeg'
-import photo2  from '../../../assets/img/2.jpeg'
+import {Box} from "@material-ui/core";
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 import photo3  from '../../../assets/img/3.jpeg'
 import photo4  from '../../../assets/img/4.jpeg'
 import phote6  from '../../../assets/img/6.jpg'
 import phote7  from '../../../assets/img/mainSlider/b-2.jpeg'
 import photo8  from '../../../assets/img/mainSlider/b-3.jpeg'
-
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
-import {Box} from "@material-ui/core";
 import {useStyles} from "./style";
 
+const Musicians = () => {
 
-const Musicians = (props) => {
-
-    const {} = props
-    const dispatch = useDispatch()
     const classes = useStyles()
 
     const items = [
@@ -45,21 +38,20 @@ const Musicians = (props) => {
 
     return (
         <AliceCarousel
-            className={classes.abstract}
-            mouseTracking={false}
             items={items}
-            disableDotsControls
-            disableSlideInfo
-            innerWidth
-            disableButtonsControls
             animationType={'fadeout'}
-            autoPlay
             autoPlayStrategy="none"
             autoPlayInterval={7000}
             animationDuration={500}
-            infinite
+            mouseTracking={false}
             touchTracking={false}
             touchMoveDefaultEvents={false}
+            disableButtonsControls
+            disableDotsControls
+            disableSlideInfo
+            infinite
+            autoPlay
+            innerWidth
         />
     );
 };

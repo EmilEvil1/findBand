@@ -9,8 +9,6 @@ export const useStyles = makeStyles({
     },
     formWrapper: {
         position: "relative",
-        marginTop: 20,
-        marginBottom: 20,
         width: '100%',
         zIndex: 2
     },
@@ -25,7 +23,7 @@ export const useStyles = makeStyles({
         zIndex: -1
     },
     quotesSliderWrapper: {
-        padding: '60px 30px',
+        padding: '30px 40px',
         zIndex: 2
     }
 });

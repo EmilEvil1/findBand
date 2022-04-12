@@ -10,9 +10,8 @@ import Auth from "./pages/Auth/Auth";
 import Profile from "./pages/MusicianProfile/MusicianProfile";
 import BandProfile from "./pages/BandProfile/BandProfile";
 import SearchResult from "./pages/MusicianSearchResult/MusicianSearchResult";
+import MusicianDetailed from "./pages/MusicanDetailed/MusicianDetailed";
 import "./css/banner.css";
-import Detailed from "./pages/Detailed/Detailed";
-
 
 const App = () => {
     return (
@@ -26,7 +25,7 @@ const App = () => {
                             <Route exact path='/profile' component={Profile} />
                             <Route exact path='/profile-band' component={BandProfile} />
                             <Route exact path='/search' component={SearchResult} />
-                            <Route exact path='/detailed' component={Detailed} />
+                            <Route exact path='/detailed' component={MusicianDetailed} />
                         </Switch>
                     </BrowserRouter>
                 </ThemeProvider>

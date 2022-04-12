@@ -1,9 +1,9 @@
 import React from 'react';
-import {Box, Container, Grid} from "@material-ui/core";
-import {useStyles} from "../style";
-import Sidebar from "../../components/common/Sidebar/Sidebar";
+import {Box, Grid} from "@material-ui/core";
 import MusicianCard from "../../components/common/MusicianCard/MusicianCard";
 import SearchFilter from "../../components/filters/SearchFilter/SearchFilter";
+import Layout from "../../components/common/Layout/Layout";
+import {useStyles} from "../style";
 
 const MusicianSearchResult = () => {
 
@@ -11,12 +11,8 @@ const MusicianSearchResult = () => {
 
     return (
         <Grid className={classes.layout}>
-            <Sidebar />
-            <Box>
-            <Container>
+            <Layout>
                 <SearchFilter />
-            </Container>
-            <Container>
                 <Box className={classes.wrapper}>
                     <MusicianCard />
                     <MusicianCard />
@@ -25,8 +21,7 @@ const MusicianSearchResult = () => {
                     <MusicianCard />
                     <MusicianCard />
                 </Box>
-            </Container>
-            </Box>
+            </Layout>
         </Grid>
     );
 };
