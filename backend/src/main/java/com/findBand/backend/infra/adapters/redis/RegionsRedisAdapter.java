@@ -27,7 +27,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RegionsRedisAdapter implements RegionsPort {
 
-	private final RedisTemplate<String, Object> redisTemplate;
+	private final RedisTemplate<String, List<Object>> redisTemplate;
+	private final String CACHE_REGIONS = "CACHE_REGIONS";
 
 	private final RegionsJpaRepository regionsJpaRepository;
 
@@ -38,9 +39,7 @@ public class RegionsRedisAdapter implements RegionsPort {
 
 	@Override
 	public Set<Region> findAllRegions() {
-		Set<String> keys = redisTemplate.keys("*");
-		log.info("All keys: {}", keys);
-		return redisTemplate.opsForValue().multiGet(keys).stream().map(this::toDomain).collect(Collectors.toSet());
+		return redisTemplate.opsForValue().get(CACHE_REGIONS).stream().map(this::toDomain).collect(Collectors.toSet());
 	}
 
 	@Override
@@ -51,7 +50,7 @@ public class RegionsRedisAdapter implements RegionsPort {
 
 	private void saveAllRegions() {
 		List<Region> regions = regionsJpaRepository.findAll();
-		redisTemplate.opsForValue().multiSet(regions.stream().collect(Collectors.toMap(reg -> String.valueOf(reg.getId()), this::toRedisEntity)));
+		redisTemplate.opsForValue().setIfAbsent(CACHE_REGIONS, regions.stream().map(this::toRedisEntity).collect(Collectors.toList()));
 	}
 
 	private RegionRedisEntity toRedisEntity(Region regionEntity) {
