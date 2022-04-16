@@ -3,6 +3,7 @@ package com.findBand.backend.infra.adapters.rest.controller;
 import com.findBand.backend.domain.model.Instrument;
 import com.findBand.backend.domain.port.InstrumentsPort;
 import com.findBand.backend.infra.adapters.rest.dto.InstrumentDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,11 @@ import java.util.stream.Collectors;
 public class InstrumentsController {
 
     private InstrumentsPort instrumentsPort;
+
+    @Autowired
+    public void setInstrumentsPort(InstrumentsPort instrumentsPort) {
+        this.instrumentsPort = instrumentsPort;
+    }
 
     @GetMapping("/instruments")
     public List<InstrumentDTO> getAllInstruments() {
