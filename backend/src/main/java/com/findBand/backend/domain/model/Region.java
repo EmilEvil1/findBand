@@ -16,9 +16,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "regions")
-@RequiredArgsConstructor
 @Data
 public class Region {
+
+	public Region() {}
 
 	public Region(long id, String name) {
 		this.id = id;
