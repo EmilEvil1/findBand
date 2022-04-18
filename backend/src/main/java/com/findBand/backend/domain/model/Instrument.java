@@ -1,6 +1,7 @@
 package com.findBand.backend.domain.model;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,11 @@ public class Instrument {
 
     public Instrument(long id) {
         this.id = id;
+    }
+
+    public Instrument(long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     @Id
