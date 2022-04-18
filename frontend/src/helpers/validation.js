@@ -46,8 +46,8 @@ export const signUpValidation = yup.object({
     regionId: yup
         .string('Выберите регион')
         .required('Выберите регион'),
-    instrument: yup
-        .string('Выберите инструмент')
+    instrumentIds: yup.array()
+        // .string('Выберите инструмент')
         .required('Выберите инструмент'),
     isBandOwner: yup
         .boolean().default(true)
@@ -70,7 +70,7 @@ export const profileFormValidation = yup.object({
     region: yup
         .string('Выберите регион')
         .required('Выберите регион'),
-    instrument: yup
+    instrumentsId: yup
         .string('Выберите инструмент')
         .required('Выберите инструмент'),
 });

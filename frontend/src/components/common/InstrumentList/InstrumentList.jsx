@@ -9,28 +9,29 @@ const InstrumentList = (props) => {
 
     const {values, handleChange, touched, errors} = props
     const classes = useStyles()
-
+    console.log('musicalInstrumentsList', musicalInstrumentsList)
+    console.log('values.instrumentId ', values.instrumentIds )
     return (
         <FormControl variant="outlined" className={classes.inputWrapper}>
             <InputLabel
                 id="label"
-                style={{color: (touched && touched.instrument && Boolean(errors.instrument)) ? red : white}}
+                style={{color: (touched && touched.instrumentIds && Boolean(errors.instrumentIds)) ? red : white}}
             >
                 Инструмент
             </InputLabel>
             <Select
                 labelId="label"
-                name='instrument'
-                value={values.instrument || ''}
+                name='instrumentIds'
+                value={values.instrumentIds || []}
                 onChange={handleChange}
-                error={touched && touched.instrument && Boolean(errors.instrument)}
+                error={touched && touched.instrumentIds && Boolean(errors.instrumentIds)}
                 fullWidth
             >
                 {Array.isArray(musicalInstrumentsList) && musicalInstrumentsList.length > 0 && musicalInstrumentsList.map((item, index) => {
-                    return <MenuItem key={index} value={item}>{item}</MenuItem>
+                    return <MenuItem key={index} value={[item.id]}>{item.name}</MenuItem>
                 })}
             </Select>
-            <ErrorFieldText errorText={(touched && touched.instrument && Boolean(errors.instrument)) && errors.instrument}/>
+            <ErrorFieldText errorText={(touched && touched.instrumentIds && Boolean(errors.instrumentIds)) && errors.instrumentIds}/>
         </FormControl>
     );
 };

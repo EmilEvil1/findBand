@@ -49,7 +49,7 @@ const SignUp = () => {
                 password: '',
                 confirmationPassword: '',
                 regionId: '',
-                instrument: '',
+                instrumentIds: [],
                 bandName: '',
                 isBandOwner: isOwner
             }}
@@ -66,7 +66,6 @@ const SignUp = () => {
                     handleBlur,
                     handleSubmit,
                 } = props;
-                console.log(values.isBandOwner)
                 return (
                     <form
                         className={classes.signUpWrapper}
