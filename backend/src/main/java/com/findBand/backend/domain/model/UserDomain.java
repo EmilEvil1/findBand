@@ -35,6 +35,12 @@ public class UserDomain {
     @Column
     private String phone;
 
+    @Column
+    private int age;
+
+    @Column
+    private int experienceAge;
+
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
