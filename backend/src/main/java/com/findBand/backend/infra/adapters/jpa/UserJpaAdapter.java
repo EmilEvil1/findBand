@@ -45,4 +45,9 @@ public class UserJpaAdapter implements UserPort {
     public Optional<UserDomain> findUserById(long id) {
         return userJpaRepository.findById(id);
     }
+
+    @Override
+    public UserDomain updateUser(UserDomain userDomain) {
+        return userJpaRepository.save()
+    }
 }
