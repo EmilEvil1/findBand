@@ -7,6 +7,7 @@ public class UserProfileRequestDTO {
     private long userId;
     private String userName;
     private String emailAddress;
+    private String phone;
     private int age;
     private int experienceAge;
     private String password;

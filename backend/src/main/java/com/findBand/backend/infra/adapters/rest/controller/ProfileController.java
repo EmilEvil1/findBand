@@ -20,7 +20,8 @@ public class ProfileController extends BaseController {
 
     @PutMapping
     public UserProfileResponseDTO updateProfile(@RequestBody UserProfileRequestDTO userProfileRequest) {
-        UserDomain user = publish(UserDomain.class, new UserUpdateProfile());
+        UserDomain user = publish(UserDomain.class, UserUpdateProfile.fromDTO(userProfileRequest));
+        return toDTO(user);
     }
 
     private UserProfileResponseDTO toDTO(UserDomain userDomain) {
