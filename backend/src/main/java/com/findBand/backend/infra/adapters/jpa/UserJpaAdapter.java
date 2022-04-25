@@ -48,6 +48,6 @@ public class UserJpaAdapter implements UserPort {
 
     @Override
     public UserDomain updateUser(UserDomain userDomain) {
-        return userJpaRepository.save()
+        return userJpaRepository.save(userDomain);
     }
 }

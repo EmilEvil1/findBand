@@ -1,12 +1,14 @@
 package com.findBand.backend.infra.adapters.rest.dto.user;
 
 import lombok.Builder;
+import lombok.Data;
 
 @Builder
+@Data
 public class UserProfileResponseDTO {
     private String userName;
     private String emailAddress;
     private String phone;
-    private int experienceAge;
-    private int age;
+    private Integer experienceAge;
+    private Integer age;
 }

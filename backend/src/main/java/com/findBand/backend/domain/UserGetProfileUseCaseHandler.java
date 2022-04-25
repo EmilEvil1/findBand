@@ -6,8 +6,10 @@ import com.findBand.backend.domain.exceptions.FindBandCommonException;
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.port.UserPort;
 import com.findBand.backend.domain.useCase.user.UserGetProfile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class UserGetProfileUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<UserDomain, UserGetProfile> {
 
@@ -21,6 +23,9 @@ public class UserGetProfileUseCaseHandler extends ObservableUseCasePublisher imp
 
     @Override
     public UserDomain handle(UserGetProfile useCase) {
-        return userPort.findUserById(useCase.getUserId()).orElseThrow(FindBandCommonException::new);
+        return userPort.findUserByEmail(useCase.getEmailAddress()).orElseThrow(() -> {
+            log.error("No user exists with email: {}", useCase.getEmailAddress());
+            return new FindBandCommonException();
+        });
     }
 }

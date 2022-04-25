@@ -7,5 +7,5 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class UserGetProfile implements UseCase {
-    private final long userId;
+    private final String emailAddress;
 }
