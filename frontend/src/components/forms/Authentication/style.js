@@ -192,7 +192,8 @@ export const useStyles = makeStyles({
     },
     fieldsWrapper: {
         display: "flex",
-        width: '100%'
+        width: '100%',
+        flexDirection: "column"
     },
     welcomeTitle: {
         marginBottom: 40,

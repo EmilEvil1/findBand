@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {useCookies} from "react-cookie";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import { Formik } from "formik";
+import {Formik, Field, Form} from "formik";
+import InputMask from 'react-input-mask';
 import {
     Box,
     Button,
     TextField,
     Typography,
 } from "@material-ui/core";
-
 import {useStyles} from "../style";
 import RegionList from "../../../common/RegionList/RegionList";
 import InstrumentList from "../../../common/InstrumentList/InstrumentList";
@@ -17,10 +17,10 @@ import BandRegistration from "../../../modals/BandRegistration/BandRegistration"
 import {checkTokenValidate, eventToggle} from "../../../../helpers/utils";
 import {sendSignUpFormData} from "../../../../store/thunks/thunks";
 import {signUpValidation} from "../../../../helpers/validation";
-import InputMask from 'react-input-mask';
 import IconPassword from "../../../../assets/icons/auth/password";
 import PlusIcon from "../../../../assets/icons/auth/plus";
 import EditIcon from "../../../../assets/icons/auth/edit";
+import {Autocomplete} from "@material-ui/lab";
 
 const SignUp = () => {
 
@@ -40,6 +40,16 @@ const SignUp = () => {
         if (!checkTokenValidate(token.access_token)) history.push('/')
     }, [token.access_token])
 
+
+    const [instrumentStatus, setInstrumentStatus] = useState([])
+    console.log('instrumentStatus', instrumentStatus)
+
+    const cities = [
+        { name: "New York", value: 1, state: "NY" },
+        { name: "San Francisco", value: 2, state: "CA" },
+        { name: "Los Angeles", value: 3, state: "CA" }
+    ];
+
     return (
         <Formik
             initialValues={{
@@ -49,13 +59,13 @@ const SignUp = () => {
                 password: '',
                 confirmationPassword: '',
                 regionId: '',
-                instrumentIds: [],
+                instrumentId: '',
                 bandName: '',
                 isBandOwner: isOwner
             }}
             onSubmit={values => onSubmit(values)}
             validationSchema={signUpValidation}
-            // enableReintialize
+            enableReintialize
         >
             {props => {
                 const {
@@ -65,9 +75,11 @@ const SignUp = () => {
                     handleChange,
                     handleBlur,
                     handleSubmit,
+                    setFieldValue
                 } = props;
+                console.log('values', values)
                 return (
-                    <form
+                    <Form
                         className={classes.signUpWrapper}
                         onSubmit={handleSubmit}
                     >
@@ -98,7 +110,6 @@ const SignUp = () => {
                                 onBlur={handleBlur}
                                 error={touched.phone && Boolean(errors.phone)}
                                 helperText={touched.phone && errors.phone}
-
                             >
                                 <TextField
                                     style={{marginBottom: 35}}
@@ -179,12 +190,35 @@ const SignUp = () => {
                                     touched={touched}
                                     errors={errors}
                                 />
-                                <InstrumentList
-                                    values={values}
-                                    handleChange={handleChange}
-                                    handleBlur={handleBlur}
-                                    touched={touched}
-                                    errors={errors}
+                                {/*<InstrumentList*/}
+                                {/*    values={values}*/}
+                                {/*    handleChange={handleChange}*/}
+                                {/*    handleBlur={handleBlur}*/}
+                                {/*    touched={touched}*/}
+                                {/*    errors={errors}*/}
+                                {/*    Field={Field}*/}
+                                {/*    setInstrumentStatus={setInstrumentStatus}*/}
+                                {/*/>*/}
+                                <Autocomplete
+                                    id="instrumentId"
+                                    name="instrumentId"
+                                    options={cities}
+                                    groupBy={(option) => option.state}
+                                    getOptionLabel={(option) => option.name}
+                                    // style={{ width: 300 }}
+                                    onChange={(event, value) => {
+                                        setFieldValue("instrumentId", value.name);
+                                    }}
+                                    renderInput={(params) => (
+                                        <TextField
+                                            {...params}
+                                            onChange={handleChange}
+                                            margin="normal"
+                                            label="instrumentId"
+                                            fullWidth
+                                            value={values.instrumentId}
+                                        />
+                                    )}
                                 />
                             </Box>
                         </Box>
@@ -224,7 +258,7 @@ const SignUp = () => {
                         >
                             Зарегистрироваться
                         </Button>
-                    </form>
+                    </Form>
                 )
             }}
         </Formik>

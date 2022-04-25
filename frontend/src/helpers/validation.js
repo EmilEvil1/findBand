@@ -46,11 +46,18 @@ export const signUpValidation = yup.object({
     regionId: yup
         .string('Выберите регион')
         .required('Выберите регион'),
-    instrumentIds: yup.array()
-        // .string('Выберите инструмент')
-        .required('Выберите инструмент'),
+    // instrumentId: yup
+    //     .number('Выберите инструмент')
+    //     .required('Выберите инструмент'),
     isBandOwner: yup
-        .boolean().default(true)
+        .boolean().default(true),
+    instrumentId : yup
+        .array()
+        .required('At least one skill is required')
+
+
+
+
 });
 
 // MusicianProfile
