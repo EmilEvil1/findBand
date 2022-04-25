@@ -3,7 +3,11 @@ package com.findBand.backend.domain;
 import com.findBand.backend.domain.common.useCase.ObservableUseCasePublisher;
 import com.findBand.backend.domain.common.useCase.UseCaseHandler;
 import com.findBand.backend.domain.exceptions.FindBandValidationException;
-import com.findBand.backend.domain.model.*;
+import com.findBand.backend.domain.model.Band;
+import com.findBand.backend.domain.model.Instrument;
+import com.findBand.backend.domain.model.UserDomain;
+import com.findBand.backend.domain.model.UserRole;
+import com.findBand.backend.domain.model.UserRoleEnum;
 import com.findBand.backend.domain.port.BandPort;
 import com.findBand.backend.domain.port.RegionsPort;
 import com.findBand.backend.domain.port.UserPort;
@@ -12,7 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.HashSet;
 
 @Component
 @Slf4j
@@ -48,7 +53,7 @@ public class UserCreateUseCaseHandler extends ObservableUseCasePublisher impleme
         userDomain.setUsername(useCase.getUserName());
         userDomain.setPhone(useCase.getPhone());
         userDomain.setUserRole(isBandOwner ? UserRole.BAND_OWNER : UserRole.BAND_SEEKER);
-        userDomain.setInstruments(useCase.getInstrumentIds().stream().map(Instrument::new).collect(Collectors.toSet()));
+        userDomain.setInstruments(new HashSet<>(Arrays.asList(new Instrument(useCase.getInstrumentId()))));
         userDomain.setRegion(regionsPort.findById(useCase.getRegionId()));
         //TODO: CREATING USER METHOD SHOULD BE TRANSACTIONAL AND INCLUDES LOGIC OF BAND CREATION
         userPort.createUser(userDomain);

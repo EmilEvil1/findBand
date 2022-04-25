@@ -47,7 +47,7 @@ public class AuthenticationRestController extends BaseController {
         userCreate.setConfirmationPassword(registerDTO.getConfirmationPassword());
         userCreate.setBandName(registerDTO.getBandName());
         userCreate.setUserRoleEnum(registerDTO.getIsBandOwner() ? UserRoleEnum.BAND_OWNER : UserRoleEnum.BAND_SEEKER);
-        userCreate.setInstrumentIds(registerDTO.getInstrumentIds());
+        userCreate.setInstrumentId(registerDTO.getInstrumentId());
         userCreate.setRegionId(registerDTO.getRegionId());
         UserDomain createdUser = publish(UserDomain.class, userCreate);
 

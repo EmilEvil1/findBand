@@ -44,8 +44,10 @@ public class RegionsRedisAdapter implements RegionsPort {
 
 	@Override
 	public Region findById(long id) {
-//		return (Region) redisTemplate.opsForValue().get(String.valueOf(id));
-		return this.toDomain(redisTemplate.opsForValue().get(String.valueOf(id)));
+		return this.toDomain(redisTemplate.opsForValue().get(CACHE_REGIONS).stream().filter(reg -> {
+			LinkedHashMap regionRedisMap = (LinkedHashMap) reg;
+			return (Integer) regionRedisMap.get("regionId") == id;
+		}).findAny().orElseThrow(() -> new RuntimeException("Not found regionId: " + id)));
 	}
 
 	private void saveAllRegions() {

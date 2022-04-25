@@ -16,5 +16,5 @@ public class UserCreate implements UseCase {
     private UserRoleEnum userRoleEnum;
     private String bandName;
     private long regionId;
-    private List<Long> instrumentIds;
+    private Long instrumentId;
 }

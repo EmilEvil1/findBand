@@ -13,6 +13,6 @@ public class RegisterDTO {
     private String phone;
     private Boolean isBandOwner;
     private String bandName;
-    private List<Long> instrumentIds;
+    private Long instrumentId;
     private long regionId;
 }
