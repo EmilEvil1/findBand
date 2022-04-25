@@ -9,17 +9,19 @@ import com.findBand.backend.infra.common.rest.BaseController;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(name = "/api/v1/profile")
-public class ProfileController extends BaseController {
+@RequestMapping("/api/v1")
+public class UserProfileController extends BaseController {
 
-    @GetMapping
+    @GetMapping("/profile")
     public UserProfileResponseDTO getProfile(@RequestBody UserProfileRequestDTO userProfileRequest) {
-        UserDomain user = publish(UserDomain.class, new UserGetProfile(userProfileRequest.getUserId()));
+        checkUserByEmail(userProfileRequest.getEmailAddress());
+        UserDomain user = publish(UserDomain.class, new UserGetProfile(userProfileRequest.getEmailAddress()));
         return toDTO(user);
     }
 
-    @PutMapping
+    @PutMapping("/profile")
     public UserProfileResponseDTO updateProfile(@RequestBody UserProfileRequestDTO userProfileRequest) {
+        checkUserByEmail(userProfileRequest.getEmailAddress());
         UserDomain user = publish(UserDomain.class, UserUpdateProfile.fromDTO(userProfileRequest));
         return toDTO(user);
     }

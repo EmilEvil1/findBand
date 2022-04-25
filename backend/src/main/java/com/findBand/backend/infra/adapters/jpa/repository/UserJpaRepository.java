@@ -19,7 +19,6 @@ public interface UserJpaRepository extends JpaRepository<UserDomain, Long> {
     @Modifying
     void updatePassword(String password, long userId);
 
-    @Query
 
     @Query("SELECT u from user u join u.instruments i join u.region r where i.id in (:instrumentIds) and r.id = :regionId")
     List<UserDomain> findByInstrumentIdsAndRegionId(Set<Long> instrumentIds, long regionId);

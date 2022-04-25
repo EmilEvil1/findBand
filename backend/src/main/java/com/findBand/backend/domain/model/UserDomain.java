@@ -36,10 +36,10 @@ public class UserDomain {
     private String phone;
 
     @Column
-    private int age;
+    private Integer age;
 
     @Column
-    private int experienceAge;
+    private Integer experienceAge;
 
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
