@@ -1,8 +1,9 @@
-import {GET_INFO, REGIONS_LIST, SEARCH_MUSICIAN, SET_QUOTES} from "../types/types";
+import {GET_INFO, GET_INSTRUMENT_LIST, REGIONS_LIST, SEARCH_MUSICIAN, SET_QUOTES} from "../types/types";
 
 const initialState = {
     info: {},
     regions: [],
+    instruments: [],
     quotes: [
         {
             author: 'Jimmy Page Led Zeppelin',
@@ -33,8 +34,7 @@ const initialState = {
             text: "«Лучше быть угрюмым мечтателем, чем безмозглым тусовщиком»"
         }
     ],
-    searchData: ''
-
+    searchData: '',
 }
 
 export const reducer = (state = initialState, action) => {
@@ -43,10 +43,13 @@ export const reducer = (state = initialState, action) => {
             return {...state, info: action.payload}
         case REGIONS_LIST:
             return {...state, regions: action.payload}
+        case GET_INSTRUMENT_LIST:
+            return {...state, instruments: action.payload}
         case SET_QUOTES:
             return {...state, quotes: action.payload}
         case SEARCH_MUSICIAN:
             return {...state, searchData: action.payload}
+
         default:
             return state;
     }

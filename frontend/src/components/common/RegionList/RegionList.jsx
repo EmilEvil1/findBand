@@ -1,16 +1,15 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
-import ErrorFieldText from "../ErrorFieldText/ErrorFieldText";
-import {useStyles} from "../../forms/Authentication/style";
+import {TextField} from "@material-ui/core";
 import {getRegionList} from "../../../store/thunks/thunks";
-import {red, white} from "../../../helpers/styles";
+import {Autocomplete} from "@material-ui/lab";
+// import {useStyles} from "../../forms/Authentication/style";
 
 const RegionList = (props) => {
 
-    const { values, handleChange, touched, errors } = props
+    const { values, handleChange, touched, errors, handleBlur, setFieldValue } = props
     const regionList = useSelector(({ state }) => state.regions)
-    const classes = useStyles()
+    // const classes = useStyles()
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -18,27 +17,31 @@ const RegionList = (props) => {
     }, [])
 
     return (
-        <FormControl variant="outlined" className={classes.inputWrapper}>
-            <InputLabel
-                id="label"
-                style={{color: (touched && touched.regionId && Boolean(errors.regionId)) ? red : white}}
-            >
-                Регион
-            </InputLabel>
-            <Select
-                labelId="label"
-                name='regionId'
-                value={values.regionId || ''}
-                onChange={handleChange}
-                error={touched && touched.regionId && Boolean(errors.regionId)}
-                fullWidth
-            >
-                {Array.isArray(regionList) && regionList.length > 0 && regionList.map((item, index) => {
-                    return <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
-                })}
-            </Select>
-            <ErrorFieldText errorText={(touched && touched.regionId && Boolean(errors.regionId)) && errors.regionId}/>
-        </FormControl>
+        <Autocomplete
+            style={{marginTop: 35}}
+            id="regionId"
+            name="regionId"
+            noOptionsText='Регион не найден'
+            options={Array.isArray(regionList) && regionList.length> 0 && regionList || []}
+            getOptionLabel={option => option.name}
+            onChange={(event, value) => {
+                !!value ?  setFieldValue("regionId", value.id) : setFieldValue("regionId", 0)
+            }}
+            renderInput={(params) => (
+                <TextField
+                    {...params}
+                    label='Регион'
+                    placeholder='Введите название'
+                    onChange={handleChange}
+                    value={values.regionId || ''}
+                    onBlur={handleBlur}
+                    error={!!touched.regionId && Boolean(errors.regionId)}
+                    // helperText={touched.instrumentId && errors.instrumentId}
+                    variant='outlined'
+                    fullWidth
+                />
+            )}
+        />
     );
 };
 

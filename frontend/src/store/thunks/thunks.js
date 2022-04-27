@@ -30,7 +30,6 @@ export const sendPassword = ( data ) => {
 }
 
 export const makeSearchForMembers = ( data ) => dispatch => {
-    console.log('values', data)
     return service.post('searchForMembers ', {...data})
         .then(response => dispatch(searchByMusicians(response)))
         .catch(err => console.log(err))

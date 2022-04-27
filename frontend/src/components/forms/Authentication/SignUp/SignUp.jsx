@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useCookies} from "react-cookie";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {Formik, Field, Form} from "formik";
+import {Formik, Form} from "formik";
 import InputMask from 'react-input-mask';
 import {
     Box,
@@ -20,7 +20,6 @@ import {signUpValidation} from "../../../../helpers/validation";
 import IconPassword from "../../../../assets/icons/auth/password";
 import PlusIcon from "../../../../assets/icons/auth/plus";
 import EditIcon from "../../../../assets/icons/auth/edit";
-import {Autocomplete} from "@material-ui/lab";
 
 const SignUp = () => {
 
@@ -41,13 +40,10 @@ const SignUp = () => {
     }, [token.access_token])
 
 
-    const [instrumentStatus, setInstrumentStatus] = useState([])
-    console.log('instrumentStatus', instrumentStatus)
-
     const cities = [
-        { name: "New York", value: 1, state: "NY" },
-        { name: "San Francisco", value: 2, state: "CA" },
-        { name: "Los Angeles", value: 3, state: "CA" }
+        { name: "New York", value: 1 },
+        { name: "San Francisco", value: 2 },
+        { name: "Los Angeles", value: 3 }
     ];
 
     return (
@@ -58,8 +54,8 @@ const SignUp = () => {
                 email: '',
                 password: '',
                 confirmationPassword: '',
-                regionId: '',
-                instrumentId: '',
+                regionId: [],
+                instrumentId: [],
                 bandName: '',
                 isBandOwner: isOwner
             }}
@@ -77,7 +73,6 @@ const SignUp = () => {
                     handleSubmit,
                     setFieldValue
                 } = props;
-                console.log('values', values)
                 return (
                     <Form
                         className={classes.signUpWrapper}
@@ -189,36 +184,15 @@ const SignUp = () => {
                                     handleBlur={handleBlur}
                                     touched={touched}
                                     errors={errors}
+                                    setFieldValue={setFieldValue}
                                 />
-                                {/*<InstrumentList*/}
-                                {/*    values={values}*/}
-                                {/*    handleChange={handleChange}*/}
-                                {/*    handleBlur={handleBlur}*/}
-                                {/*    touched={touched}*/}
-                                {/*    errors={errors}*/}
-                                {/*    Field={Field}*/}
-                                {/*    setInstrumentStatus={setInstrumentStatus}*/}
-                                {/*/>*/}
-                                <Autocomplete
-                                    id="instrumentId"
-                                    name="instrumentId"
-                                    options={cities}
-                                    groupBy={(option) => option.state}
-                                    getOptionLabel={(option) => option.name}
-                                    // style={{ width: 300 }}
-                                    onChange={(event, value) => {
-                                        setFieldValue("instrumentId", value.name);
-                                    }}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            onChange={handleChange}
-                                            margin="normal"
-                                            label="instrumentId"
-                                            fullWidth
-                                            value={values.instrumentId}
-                                        />
-                                    )}
+                                <InstrumentList
+                                    values={cities}
+                                    handleChange={handleChange}
+                                    handleBlur={handleBlur}
+                                    touched={touched}
+                                    errors={errors}
+                                    setFieldValue={setFieldValue}
                                 />
                             </Box>
                         </Box>
