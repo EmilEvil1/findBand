@@ -4,9 +4,8 @@ import {useStyles} from "./style";
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
 
-const SignForms = (props) => {
+const SignForms = () => {
 
-    const {} = props
     const classes = useStyles()
     const [active, setActive] = useState(true)
 

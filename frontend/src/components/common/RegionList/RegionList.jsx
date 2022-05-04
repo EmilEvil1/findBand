@@ -12,9 +12,7 @@ const RegionList = (props) => {
     // const classes = useStyles()
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getRegionList())
-    }, [])
+    useEffect(() => dispatch(getRegionList()), [])
 
     return (
         <Autocomplete

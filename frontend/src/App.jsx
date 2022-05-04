@@ -12,6 +12,7 @@ import BandProfile from "./pages/BandProfile/BandProfile";
 import SearchResult from "./pages/MusicianSearchResult/MusicianSearchResult";
 import MusicianDetailed from "./pages/MusicanDetailed/MusicianDetailed";
 import "./css/banner.css";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 const App = () => {
     return (
@@ -26,6 +27,7 @@ const App = () => {
                             <Route exact path='/profile-band' component={BandProfile} />
                             <Route exact path='/search' component={SearchResult} />
                             <Route exact path='/detailed' component={MusicianDetailed} />
+                            <Route exact path='/reset' component={ResetPassword} />
                         </Switch>
                     </BrowserRouter>
                 </ThemeProvider>

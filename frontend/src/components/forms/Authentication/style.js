@@ -174,8 +174,10 @@ export const useStyles = makeStyles({
         paddingRight: 20,
         position: "absolute",
         right: 0,
-        top: '30%',
+        top: '50%',
         cursor: "pointer",
+        transform: 'translate(-50%, -50%)'
+
     },
     passwordFieldWithHelper: {
         top: '33%',
