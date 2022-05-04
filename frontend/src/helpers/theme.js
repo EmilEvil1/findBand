@@ -1,5 +1,5 @@
 import {createTheme} from "@material-ui/core";
-import {popUpColor, purple, white} from "./styles";
+import {darkBlue, popUpColor, purple, white} from "./styles";
 
 export const theme = createTheme({
     palette: {
@@ -72,7 +72,14 @@ export const theme = createTheme({
             root: {
                 color: white,
             }
-        }
+        },
+        MuiPaper: {
+            root: {
+                backgroundColor: darkBlue,
+                fontFamily: 'MA-Regular',
+                color: white
+            },
+        },
     },
     typography: {
         fontFamily: 'MA-Regular',

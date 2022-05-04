@@ -17,7 +17,6 @@ const SearchField = (props) => {
                 className={classes.input}
                 name='search'
                 variant='outlined'
-                // fullWidth
             />
             <IconButton className={classes.searchBtn}>
                 <SearchIcon />

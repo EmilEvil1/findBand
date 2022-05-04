@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import {darkBlue} from "../../../helpers/styles";
 
 export const useStyles = makeStyles({
     wrapper: {
@@ -171,10 +172,10 @@ export const useStyles = makeStyles({
         width: '100%'
     },
     passwordIcon: {
-        paddingRight: 20,
         position: "absolute",
         right: 0,
         top: '50%',
+        display: "flex",
         cursor: "pointer",
         transform: 'translate(-50%, -50%)'
 
@@ -216,5 +217,15 @@ export const useStyles = makeStyles({
             marginLeft: 10,
             fontSize: '1rem'
         }
-    }
+    },
+    contentDark: {
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        width: '100%',
+        height: '100vh',
+        overflow: "hidden",
+        flexGrow: 1,
+        background: darkBlue
+    },
 });

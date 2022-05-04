@@ -5,7 +5,6 @@ import {signUpValidation} from "../../helpers/validation";
 import {eventToggle} from "../../helpers/utils";
 import IconPassword from "../../assets/icons/auth/password";
 import {useStyles} from "../../components/forms/Authentication/style";
-import {darkBlue} from "../../helpers/styles";
 
 const ResetPassword = () => {
 
@@ -15,7 +14,9 @@ const ResetPassword = () => {
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
     return (
-        <Box style={{background: darkBlue}}>
+        <Box
+            className={classes.contentDark}
+        >
         <Container>
             <Typography>Восстановление пароля</Typography>
             <Formik
