@@ -5,8 +5,8 @@ import IconGoogleAuth from "../../../../../assets/icons/auth/googleAuth";
 import IconVkAuth from "../../../../../assets/icons/auth/vkAuth";
 import IconAppleAuth from "../../../../../assets/icons/auth/appleAuth";
 
-const AuthServices = (props) => {
-    const {} = props
+const AuthServices = () => {
+
     const classes = useStyles()
 
     return (

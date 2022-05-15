@@ -21,10 +21,10 @@ const InstrumentList = (props) => {
             name="instrumentId"
             classes={{noOptions: classes.noOptions}}
             noOptionsText='Инструмент не найден'
-            options={Array.isArray(instrumentsList) && instrumentsList.length > 0 && instrumentsList || []}
+            options={Array.isArray((instrumentsList) && instrumentsList.length > 0 && instrumentsList) || []}
             getOptionLabel={option => option.name}
             onChange={(event, value) => {
-                !!value.id ?  setFieldValue("instrumentId", value.id) : setFieldValue("instrumentId", 0)
+                !!value ?  setFieldValue("instrumentId", value.id) : setFieldValue("instrumentId", 0)
             }}
             renderInput={(params) => (
                 <TextField

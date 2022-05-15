@@ -45,7 +45,6 @@ const SignForms = () => {
                         <Typography className={classes.welcomeTitle}>Добро пожаловать!</Typography>
 
                         <Button
-                            style={{border: '1px solid white'}}
                             color='primary'
                             onClick={() => setActive(false)}
                         >
@@ -59,7 +58,6 @@ const SignForms = () => {
                     >
                         <Typography className={classes.welcomeTitle}>Впервые здесь?</Typography>
                         <Button
-                            style={{border: '1px solid white'}}
                             color='primary'
                             onClick={() => setActive(true)}
                         >

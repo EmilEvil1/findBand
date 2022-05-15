@@ -1,14 +1,11 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
-import {Box, IconButton, Input, TextField} from "@material-ui/core";
+import {Box, IconButton, TextField} from "@material-ui/core";
 import SearchIcon from "../../../assets/icons/search/search";
 import {useStyles} from "./style";
 
 
-const SearchField = (props) => {
+const SearchField = () => {
 
-    const {} = props
-    // const dispatch = useDispatch()
     const classes = useStyles()
 
     return (

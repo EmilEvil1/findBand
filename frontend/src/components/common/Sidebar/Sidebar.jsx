@@ -19,14 +19,13 @@ const Sidebar = () => {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     const [openNotification, setOpenNotification] = useState(false)
-    const [token, setToken, removeCookie] = useCookies(['access_token'])
+    const [ , , removeCookie] = useCookies(['access_token'])
     const history = useHistory()
 
     const logOut = () => {
         removeCookie('access_token')
         history.push('/auth')
     }
-
 
     return (
         <>
@@ -46,9 +45,9 @@ const Sidebar = () => {
                         <List className={classes.userInfo}>
                             <ListItem>
                                 <ListItemIcon>
-                                    <Avatar style={{width: 25, height: 25}} alt={'И'} src={''} />
+                                    <Avatar style={{width: 25, height: 25}} alt='И' src='' />
                                 </ListItemIcon>
-                                <ListItemText primary={'Иван'} />
+                                <ListItemText primary='Иван' />
                             </ListItem>
                         </List>
                         <List>
@@ -57,7 +56,7 @@ const Sidebar = () => {
                                     <ListItemIcon>
                                         <HomeIcon />
                                     </ListItemIcon>
-                                    <ListItemText primary={'Главная'} />
+                                    <ListItemText primary='Главная' />
                                 </ListItem>
                             </Link>
                             <Link to={'/profile'}>
@@ -65,7 +64,7 @@ const Sidebar = () => {
                                     <ListItemIcon>
                                         <ProfileIcon />
                                     </ListItemIcon>
-                                    <ListItemText primary={'Профиль'} />
+                                    <ListItemText primary='Профиль' />
                                 </ListItem>
                             </Link>
                             <Link to={'/profile-band'}>
@@ -83,7 +82,7 @@ const Sidebar = () => {
                             <ListItemIcon>
                                 <NotificationIcon />
                             </ListItemIcon>
-                            <ListItemText primary={'Уведомления'} />
+                            <ListItemText primary='Уведомления' />
                         </ListItem>
                         <ListItem
                             button
@@ -92,14 +91,14 @@ const Sidebar = () => {
                             <ListItemIcon>
                                 <LogOutIcon />
                             </ListItemIcon>
-                            <ListItemText primary={'Выйти'} />
+                            <ListItemText primary='Выйти' />
                         </ListItem>
                         <Divider />
                         <ListItem onClick={() => eventToggle(open, setOpen)} button>
                             <ListItemIcon className={open ? classes.arrowRotated : ''}>
                                 <ArrowIcon />
                             </ListItemIcon>
-                            <ListItemText primary={'Свернуть'} />
+                            <ListItemText primary='Свернуть' />
                         </ListItem>
                     </Box>
                 </Box>

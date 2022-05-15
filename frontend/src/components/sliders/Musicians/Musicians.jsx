@@ -16,30 +16,30 @@ const Musicians = () => {
     const items = [
         <Box className={classes.sliderWrapper}>
             <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={phote6}  />,
+            <img className={classes.slideImg} src={phote6} alt='' />,
         </Box>,
         <Box className={classes.sliderWrapper}>
             <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={phote7}  />,
+            <img className={classes.slideImg} src={phote7} alt='' />,
         </Box>,
         <Box className={classes.sliderWrapper}>
             <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={photo8} />,
+            <img className={classes.slideImg} src={photo8} alt='' />,
         </Box>,
         <Box className={classes.sliderWrapper}>
             <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={photo3} />
+            <img className={classes.slideImg} src={photo3} alt='' />
         </Box>,
         <Box className={classes.sliderWrapper}>
             <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={photo4} />
+            <img className={classes.slideImg} src={photo4} alt='' />
         </Box>
     ];
 
     return (
         <AliceCarousel
             items={items}
-            animationType={'fadeout'}
+            animationType='fadeout'
             autoPlayStrategy="none"
             autoPlayInterval={7000}
             animationDuration={500}

@@ -21,7 +21,7 @@ const RegionList = (props) => {
             name="regionId"
             noOptionsText='Регион не найден'
             classes={{noOptions: classes.noOptions}}
-            options={Array.isArray(regionList) && regionList.length> 0 && regionList || []}
+            options={(Array.isArray(regionList) && regionList.length> 0 && regionList) || []}
             getOptionLabel={option => option.name}
             onChange={(event, value) => {
                 !!value ?  setFieldValue("regionId", value.id) : setFieldValue("regionId", 0)

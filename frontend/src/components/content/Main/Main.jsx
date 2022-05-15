@@ -5,9 +5,8 @@ import Quotes from "../../sliders/Quotes/Quotes";
 import QuoteSymbolIcon from "../../../assets/icons/home/quoteSymbol";
 import GlobalSearch from "../../forms/GlobalSearch/GlobalSearch";
 
-const MainContent = (props) => {
+const MainContent = () => {
 
-    const {} = props
     const classes = useStyles()
 
     return (

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Avatar, Box, Button, Grid, IconButton, Tooltip, Typography} from "@material-ui/core";
+import {Avatar, Box, Grid, IconButton, Tooltip, Typography} from "@material-ui/core";
 import {useStyles} from "./style";
 
 const UploadPhoto = () => {
@@ -48,7 +48,7 @@ const UploadPhoto = () => {
                             component="div"
                         >
                             { selectedFile ?
-                                (<img className={classes.userPhoto} src={preview} />) :
+                                (<img className={classes.userPhoto} src={preview} alt={''} />) :
                                 (<Avatar style={{width: 150, height: 150}} alt={'E'} src={selectedFile ? preview : ''} />)
                             }
                         </IconButton>

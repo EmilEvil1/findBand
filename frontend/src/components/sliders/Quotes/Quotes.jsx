@@ -1,14 +1,11 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Box, Typography} from "@material-ui/core";
 import AliceCarousel from "react-alice-carousel";
 import {useStyles} from "./style";
 
+const Quotes = () => {
 
-const Quotes = (props) => {
-
-    const {} = props
-    const dispatch = useDispatch()
     const classes = useStyles()
     const quotes = useSelector(({ state }) => state.quotes);
 
@@ -27,12 +24,12 @@ const Quotes = (props) => {
             disableSlideInfo
             innerWidth
             disableButtonsControls
-            animationType={'fadeout'}
+            animationType='fadeout'
             autoPlay
             autoPlayStrategy="none"
             autoPlayInterval={7000}
             animationDuration={500}
-            animationEasingFunction={'ease-in-out'}
+            animationEasingFunction='ease-in-out'
             infinite
             touchTracking={false}
             touchMoveDefaultEvents={false}

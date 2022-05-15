@@ -243,9 +243,6 @@ export const useStyles = makeStyles({
         position: "relative",
         marginBottom: 35,
         width: 400,
-        // '& input': {
-        //     border: '1px solid white',
-        // },
         '& p': {
             position: "absolute",
             bottom: -25

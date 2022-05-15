@@ -1,6 +1,5 @@
 import React from 'react';
 import { Formik } from "formik";
-import {useDispatch} from "react-redux";
 import {Grid, TextField} from "@material-ui/core";
 import {profileFormValidation} from "../../../helpers/validation";
 import InputMask from "react-input-mask";
@@ -8,11 +7,7 @@ import RegionList from "../../common/RegionList/RegionList";
 import InstrumentList from "../../common/InstrumentList/InstrumentList";
 
 
-const ProfileData = (props) => {
-
-    const {} = props
-    // const dispatch = useDispatch()
-    // const classes = useStyles()
+const ProfileData = () => {
 
     return (
 
