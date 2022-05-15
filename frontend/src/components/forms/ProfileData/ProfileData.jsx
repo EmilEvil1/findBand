@@ -1,11 +1,10 @@
 import React from 'react';
-import { Formik } from "formik";
+import {Form, Formik} from "formik";
 import {Grid, TextField} from "@material-ui/core";
 import {profileFormValidation} from "../../../helpers/validation";
 import InputMask from "react-input-mask";
 import RegionList from "../../common/RegionList/RegionList";
 import InstrumentList from "../../common/InstrumentList/InstrumentList";
-
 
 const ProfileData = () => {
 
@@ -17,8 +16,8 @@ const ProfileData = () => {
                     name: 'Иван',
                     email: 'john@mail.ru',
                     phone: '+7 (999) 999 99 99',
-                    regionId: 'Владимир',
-                    instrument: 'Гитара',
+                    regionId: 8,
+                    instrumentId: 'Гитара',
                 }}
                 onSubmit={ values => console.log('sending Data', values)}
                 validationSchema={profileFormValidation}
@@ -31,9 +30,10 @@ const ProfileData = () => {
                         handleChange,
                         handleBlur,
                         handleSubmit,
+                        setFieldValue
                     } = props;
                     return (
-                        <form onSubmit={handleSubmit}>
+                        <Form onSubmit={handleSubmit}>
                             <TextField
                                 style={{marginBottom: 35}}
                                 name='name'
@@ -88,6 +88,7 @@ const ProfileData = () => {
                                 handleBlur={handleBlur}
                                 touched={touched}
                                 errors={errors}
+                                setFieldValue={setFieldValue}
                             />
                             <InstrumentList
                                 values={values}
@@ -95,8 +96,9 @@ const ProfileData = () => {
                                 handleBlur={handleBlur}
                                 touched={touched}
                                 errors={errors}
+                                setFieldValue={setFieldValue}
                             />
-                        </form>
+                        </Form>
                     )
                 }}
 

@@ -14,6 +14,8 @@ const RegionList = (props) => {
 
     useEffect(() => dispatch(getRegionList()), [])
 
+    console.log(values)
+
     return (
         <Autocomplete
             style={{marginTop: 35}}
