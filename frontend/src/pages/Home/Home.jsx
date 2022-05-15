@@ -4,6 +4,7 @@ import Musicians from "../../components/sliders/Musicians/Musicians";
 import Main from "../../components/content/Main/Main";
 import Layout from "../../components/common/Layout/Layout";
 import {useStyles} from "../style";
+import Loader from "../../components/common/Loader/Loader";
 
 const Home = () => {
 

@@ -4,13 +4,14 @@ import UploadPhoto from "../../components/common/UploadPhoto/UploadPhoto";
 import ProfileData from "../../components/forms/ProfileData/ProfileData";
 import Layout from "../../components/common/Layout/Layout";
 import {useStyles} from "../style";
+import Loader from "../../components/common/Loader/Loader";
 
 const Profile = () => {
 
     const classes = useStyles()
 
     return (
-        <Box className={classes.contentDark}>
+        <Box >
             <Layout>
                 <Typography
                     style={{marginTop: 35}}
@@ -22,6 +23,7 @@ const Profile = () => {
                     <UploadPhoto />
                     <ProfileData />
                 </Box>
+                <Loader />
             </Layout>
         </Box>
     );
