@@ -17,7 +17,7 @@ const ForgetPassword = (props) => {
     const {open, close} = props
     const classes = useStyles()
 
-    const onSubmit = email => sendPassword(email)
+    const onSubmit = email => sendPassword(email).then(() => closeModal(close))
 
     return (
         <Dialog

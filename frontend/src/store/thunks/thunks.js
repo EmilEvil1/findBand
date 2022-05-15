@@ -1,4 +1,4 @@
-import {getListRegion, searchByMusicians} from "../action/action";
+import {createPassword, getListRegion, searchByMusicians} from "../action/action";
 import service from "../../helpers/api";
 
 export const getRegionList = () => dispatch => {
@@ -32,5 +32,12 @@ export const sendPassword = ( data ) => {
 export const makeSearchForMembers = ( data ) => dispatch => {
     return service.post('searchForMembers ', {...data})
         .then(response => dispatch(searchByMusicians(response)))
+        .catch(err => console.log(err))
+}
+
+export const createNewPassword = ( data, history ) => dispatch => {
+    return service.post('createNewPassword ', {...data})
+        .then(response => dispatch(createPassword(response)))
+        .then(() => history.push('/'))
         .catch(err => console.log(err))
 }

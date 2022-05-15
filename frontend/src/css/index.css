@@ -43,3 +43,8 @@ input:focus {
   outline: none;
 }
 
+input:-webkit-autofill {
+  -webkit-background-clip: initial;
+  background: transparent;
+}
+

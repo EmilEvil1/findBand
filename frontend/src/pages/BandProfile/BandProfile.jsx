@@ -2,6 +2,7 @@ import React from 'react';
 import {Box, Typography} from "@material-ui/core";
 import {useStyles} from "../style";
 import Layout from "../../components/common/Layout/Layout";
+import {white} from "../../helpers/styles";
 
 const BandProfile = () => {
 
@@ -11,7 +12,7 @@ const BandProfile = () => {
         <Box className={classes.contentDark}>
             <Layout>
                 <Typography
-                    color='white'
+                    color={white}
                     variant='h4'
                 >
                     BandProfile

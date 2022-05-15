@@ -1,4 +1,4 @@
-import {GET_INSTRUMENT_LIST, REGIONS_LIST, SEARCH_MUSICIAN, SET_QUOTES} from "../types/types";
+import {GET_INSTRUMENT_LIST, REGIONS_LIST, SEARCH_MUSICIAN, SEND_NEW_PASSWORD, SET_QUOTES} from "../types/types";
 
 
 export const getListRegion = (payload) => {
@@ -31,3 +31,11 @@ export const searchByMusicians = payload => {
     }
 }
 
+// Create new password
+
+export const createPassword = payload => {
+    return {
+        type: SEND_NEW_PASSWORD,
+        payload
+    }
+}

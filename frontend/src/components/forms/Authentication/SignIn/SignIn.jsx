@@ -70,12 +70,12 @@ const SignIn = () => {
                                         name='password'
                                         label='Пароль'
                                         placeholder='Введите пароль'
+                                        variant='outlined'
                                         value={values.password}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         error={touched.password && Boolean(errors.password)}
                                         helperText={touched.password && errors.password}
-                                        variant='outlined'
                                         type={passwordShown ? "text" : "password"}
                                         fullWidth
                                     />

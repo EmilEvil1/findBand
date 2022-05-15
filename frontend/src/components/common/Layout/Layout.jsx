@@ -9,7 +9,7 @@ import {checkTokenValidate} from "../../../helpers/utils";
 const Layout = ({ children }) => {
 
     const classes = useStyles()
-    const [token, ] = useCookies(['access_token'])
+    const [token] = useCookies(['access_token'])
     const history = useHistory()
 
     useEffect(() => {

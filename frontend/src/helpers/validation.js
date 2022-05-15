@@ -53,6 +53,22 @@ export const signUpValidation = yup.object({
         .required('Выберите регион')
 });
 
+// Create new password
+
+export const newPassword = yup.object({
+    newPassword: yup
+        .string('Заполните поле')
+        .min(6, 'Минимум 6 символов')
+        .required('Заполните поле'),
+    confirmationNewPassword: yup
+        .string('Заполните поле')
+        .min(6, 'Минимум 6 символов')
+        .oneOf([yup.ref('newPassword'), null], 'Не совпадает')
+        .required('Заполните поле'),
+    resetPasswordId: yup
+        .string('Заполните поле')
+});
+
 // MusicianProfile
 
 export const profileFormValidation = yup.object({
@@ -82,7 +98,7 @@ export const searchMusician = yup.object({
     regionId: yup
         .string('Выберите регион')
         .required('Выберите регион'),
-    instrumentsIds: yup
-        .string('Выберите инструмент')
-        .required('Выберите инструмент'),
+    // instrumentId: yup
+        // .string('Выберите инструмент')
+        // .required('Выберите инструмент'),
 });

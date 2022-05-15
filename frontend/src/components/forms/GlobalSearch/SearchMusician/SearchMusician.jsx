@@ -1,9 +1,8 @@
 import React from 'react';
 import {useHistory} from "react-router-dom";
-import { Formik } from "formik";
+import {Form, Formik} from "formik";
 import {Button} from "@material-ui/core";
 import RegionList from "../../../common/RegionList/RegionList";
-import {useStyles} from "../../Authentication/style";
 import InstrumentList from "../../../common/InstrumentList/InstrumentList";
 import {searchMusician} from "../../../../helpers/validation";
 import {useDispatch} from "react-redux";
@@ -11,17 +10,19 @@ import {makeSearchForMembers} from "../../../../store/thunks/thunks";
 
 const SearchMusician = () => {
 
-    const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()
 
-    const onSubmit = data => dispatch(makeSearchForMembers(data))
+    const onSubmit = data => {
+        console.log('data', data)
+        dispatch(makeSearchForMembers(data))
+    }
 
     return (
         <Formik
             initialValues={{
                 regionId: '',
-                instrument: ''
+                instrumentIds: [2, 3]
             }}
             onSubmit={values => onSubmit(values)}
             validationSchema={searchMusician}
@@ -31,44 +32,43 @@ const SearchMusician = () => {
                     values,
                     touched,
                     errors,
-                    dirty,
-                    isSubmitting,
                     handleChange,
                     handleBlur,
                     handleSubmit,
                     handleReset,
                     setFieldValue,
-                    isValid
                 } = props;
                 return (
-                    <form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit}>
                         <RegionList
                             values={values}
                             handleChange={handleChange}
                             handleBlur={handleBlur}
                             touched={touched}
                             errors={errors}
+                            setFieldValue={setFieldValue}
                         />
-                        <InstrumentList
-                            values={values}
-                            handleChange={handleChange}
-                            handleBlur={handleBlur}
-                            touched={touched}
-                            errors={errors}
-                        />
+                        {/*<InstrumentList*/}
+                        {/*    values={values}*/}
+                        {/*    handleChange={handleChange}*/}
+                        {/*    handleBlur={handleBlur}*/}
+                        {/*    touched={touched}*/}
+                        {/*    errors={errors}*/}
+                        {/*    setFieldValue={setFieldValue}*/}
+                        {/*/>*/}
                         <Button
                             style={{marginTop: 40}}
                             color='primary'
                             onClick={() => {
                                  handleSubmit()
-                                if (values.regionId && values.instrument) {
-                                    history.push('/search')
-                                }
+                                // if (values.regionId && values.instrumentId) {
+                                //     history.push('/search')
+                                // }
                             }}
                         >
                             Найти
                         </Button>
-                    </form>
+                    </Form>
                 )
             }}
         </Formik>

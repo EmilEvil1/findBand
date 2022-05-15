@@ -24,10 +24,14 @@ export const theme = createTheme({
     },
     overrides: {
         MuiInputBase: {
+            root: {
+                '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: white,
+                }
+            },
             input: {
                 color: white,
-                borderRadius: 4
-            }
+            },
         },
         MuiMenu: {
             list: {

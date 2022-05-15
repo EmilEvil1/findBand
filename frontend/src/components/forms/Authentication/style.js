@@ -228,4 +228,31 @@ export const useStyles = makeStyles({
         flexGrow: 1,
         background: darkBlue
     },
+    formContainer: {
+        height: '100%',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    createNewPasswordFields: {
+        display: "flex",
+        flexDirection: "column"
+    },
+    inputBox: {
+        position: "relative",
+        marginBottom: 35,
+        width: 400,
+        // '& input': {
+        //     border: '1px solid white',
+        // },
+        '& p': {
+            position: "absolute",
+            bottom: -25
+        }
+    },
+    savePassword: {
+        marginTop: 20,
+        width: '100%'
+    }
 });

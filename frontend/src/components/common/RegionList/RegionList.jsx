@@ -3,14 +3,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {TextField} from "@material-ui/core";
 import {getRegionList} from "../../../store/thunks/thunks";
 import {Autocomplete} from "@material-ui/lab";
-// import {useStyles} from "../../forms/Authentication/style";
+import {useStyles} from "../../../pages/style";
 
 const RegionList = (props) => {
 
     const { values, handleChange, touched, errors, handleBlur, setFieldValue } = props
     const regionList = useSelector(({ state }) => state.regions)
-    // const classes = useStyles()
     const dispatch = useDispatch()
+    const classes = useStyles();
 
     useEffect(() => dispatch(getRegionList()), [])
 
@@ -20,6 +20,7 @@ const RegionList = (props) => {
             id="regionId"
             name="regionId"
             noOptionsText='Регион не найден'
+            classes={{noOptions: classes.noOptions}}
             options={Array.isArray(regionList) && regionList.length> 0 && regionList || []}
             getOptionLabel={option => option.name}
             onChange={(event, value) => {

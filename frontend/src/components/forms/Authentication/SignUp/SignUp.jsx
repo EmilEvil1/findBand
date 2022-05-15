@@ -40,12 +40,6 @@ const SignUp = () => {
     }, [token.access_token])
 
 
-    const cities = [
-        { name: "New York", value: 1 },
-        { name: "San Francisco", value: 2 },
-        { name: "Los Angeles", value: 3 }
-    ];
-
     return (
         <Formik
             initialValues={{
@@ -54,8 +48,8 @@ const SignUp = () => {
                 email: '',
                 password: '',
                 confirmationPassword: '',
-                regionId: [],
-                instrumentId: [],
+                regionId: '',
+                instrumentId: '',
                 bandName: '',
                 isBandOwner: isOwner
             }}
@@ -79,7 +73,7 @@ const SignUp = () => {
                         onSubmit={handleSubmit}
                     >
                         <Typography
-                            variant={'h4'}
+                            variant='h4'
                             style={{marginBottom: 35}}
                         >
                             Регистрация
@@ -187,7 +181,7 @@ const SignUp = () => {
                                     setFieldValue={setFieldValue}
                                 />
                                 <InstrumentList
-                                    values={cities}
+                                    values={values}
                                     handleChange={handleChange}
                                     handleBlur={handleBlur}
                                     touched={touched}
