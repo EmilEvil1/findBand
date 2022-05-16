@@ -50,4 +50,9 @@ public class UserJpaAdapter implements UserPort {
     public UserDomain updateUser(UserDomain userDomain) {
         return userJpaRepository.save(userDomain);
     }
+
+    @Override
+    public void updateUserAvatar(String avatarPath, String email) {
+        userJpaRepository.updateUserAvatarPath(avatarPath, email);
+    }
 }

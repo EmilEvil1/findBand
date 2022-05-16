@@ -17,5 +17,7 @@ public interface UserPort {
 
     UserDomain updateUser(UserDomain userDomain);
 
+    void updateUserAvatar(String avatarPath, String email);
+
     List<UserDomain> findByInstrumentsIdsAndRegionId(Set<Long> instrumentsIds, long regionId);
 }
