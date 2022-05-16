@@ -3,6 +3,8 @@ import {Box, Button, Grid, Typography} from "@material-ui/core";
 import {useStyles} from "./style";
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
+import HelloEmoji from "../../../assets/icons/emoji/hello";
+import RockEmoji from "../../../assets/icons/emoji/rock";
 
 const SignForms = () => {
 
@@ -42,7 +44,7 @@ const SignForms = () => {
                             `${classes.overlayPanel} ${classes.overlayLeftActive}`
                         }
                     >
-                        <Typography className={classes.welcomeTitle}>Добро пожаловать!</Typography>
+                        <Typography className={classes.welcomeTitle}>Добро пожаловать! <RockEmoji /></Typography>
 
                         <Button
                             color='primary'
@@ -56,7 +58,7 @@ const SignForms = () => {
                             `${classes.overlayPanel} ${classes.overlayRight}`
                         }
                     >
-                        <Typography className={classes.welcomeTitle}>Впервые здесь?</Typography>
+                        <Typography className={classes.welcomeTitle}>Впервые здесь? <HelloEmoji /></Typography>
                         <Button
                             color='primary'
                             onClick={() => setActive(true)}

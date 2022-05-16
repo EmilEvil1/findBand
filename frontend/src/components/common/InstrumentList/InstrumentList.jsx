@@ -7,7 +7,7 @@ import {useStyles} from "../../../pages/style";
 
 const InstrumentList = (props) => {
 
-    const { values, handleChange, touched, errors, setFieldValue, handleBlur } = props
+    const { values, handleChange, touched, errors, handleBlur, setFieldValue } = props
     const instrumentsList = useSelector(({ state }) => state.instruments)
     const dispatch = useDispatch()
     const classes = useStyles();
@@ -21,7 +21,7 @@ const InstrumentList = (props) => {
             name="instrumentId"
             classes={{noOptions: classes.noOptions}}
             noOptionsText='Инструмент не найден'
-            options={Array.isArray((instrumentsList) && instrumentsList.length > 0 && instrumentsList) || []}
+            options={(Array.isArray(instrumentsList) && instrumentsList.length > 0 && instrumentsList) || []}
             getOptionLabel={option => option.name}
             onChange={(event, value) => {
                 !!value ?  setFieldValue("instrumentId", value.id) : setFieldValue("instrumentId", 0)

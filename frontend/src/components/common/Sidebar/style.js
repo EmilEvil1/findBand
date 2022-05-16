@@ -34,9 +34,7 @@ export const useStyles = makeStyles({
         flexDirection: "column"
     },
     menuItem: {
-        marginTop: 30,
-        display: "flex",
-        alignItems: "center",
+        marginTop: 15,
     },
     logosWrapper: {
         paddingTop: 10,

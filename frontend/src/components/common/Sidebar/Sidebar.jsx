@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useCookies} from "react-cookie";
-import {Avatar, Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
+import {Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
 import {closeModal, eventToggle} from "../../../helpers/utils";
 import {useStyles} from "./style";
 import ShortLogo from "../../../assets/icons/logos/shortLogo";
@@ -13,6 +13,7 @@ import LogOutIcon from "../../../assets/icons/sidebar/logOut";
 import LongLogo from "../../../assets/icons/logos/longLogo";
 import HomeIcon from "../../../assets/icons/sidebar/home";
 import Notification from "../../notification/Notification";
+import UsersIcon from "../../../assets/icons/sidebar/account";
 
 const Sidebar = () => {
 
@@ -45,34 +46,34 @@ const Sidebar = () => {
                         <List className={classes.userInfo}>
                             <ListItem>
                                 <ListItemIcon>
-                                    <Avatar style={{width: 25, height: 25}} alt='И' src='' />
+                                    <ProfileIcon />
                                 </ListItemIcon>
-                                <ListItemText primary='Иван' />
+                                <ListItemText primary='admin' />
                             </ListItem>
                         </List>
                         <List>
-                            <Link to={'/'}>
-                                <ListItem button>
+                            <Link to='/'>
+                                <ListItem button className={classes.menuItem} >
                                     <ListItemIcon>
                                         <HomeIcon />
                                     </ListItemIcon>
                                     <ListItemText primary='Главная' />
                                 </ListItem>
                             </Link>
-                            <Link to={'/profile'}>
-                                <ListItem button>
+                            <Link to='/profile'>
+                                <ListItem className={classes.menuItem} button>
                                     <ListItemIcon>
-                                        <ProfileIcon />
+                                        <UsersIcon />
                                     </ListItemIcon>
                                     <ListItemText primary='Профиль' />
                                 </ListItem>
                             </Link>
-                            <Link to={'/profile-band'}>
-                                <ListItem button>
+                            <Link to='/profile-band'>
+                                <ListItem className={classes.menuItem} button>
                                     <ListItemIcon>
                                         <BandRoomIcon />
                                     </ListItemIcon>
-                                    <ListItemText primary={'Моя группа'} />
+                                    <ListItemText primary='Моя группа' />
                                 </ListItem>
                             </Link>
                         </List>
@@ -86,6 +87,7 @@ const Sidebar = () => {
                         </ListItem>
                         <ListItem
                             button
+                            className={classes.menuItem}
                             onClick={logOut}
                         >
                             <ListItemIcon>

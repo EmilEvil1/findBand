@@ -5,11 +5,13 @@ export const useStyles = makeStyles({
         width: '100%',
         height: '100%',
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
+        alignItems: "center"
     },
     content: {
-        minHeight: 'calc(100vh - 16px)',
+        width: '100%',
+        height: '100%',
         overflow: "hidden",
-        flexGrow: 1
+        flexGrow: 1,
     }
 });

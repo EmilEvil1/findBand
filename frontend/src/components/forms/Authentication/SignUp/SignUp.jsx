@@ -203,7 +203,7 @@ const SignUp = () => {
                                 ) : (
                                 <Box className={classes.addBandWrapper}>
                                     <PlusIcon />
-                                    <Typography style={{color: '#0047FF'}} variant={"body1"}>Добавить группу</Typography>
+                                    <Typography style={{color: '#0047FF'}} variant="body1">Добавить группу</Typography>
                                 </Box>
                             )}
                         </Button>
