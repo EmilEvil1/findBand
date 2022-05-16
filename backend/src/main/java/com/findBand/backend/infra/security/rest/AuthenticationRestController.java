@@ -52,7 +52,7 @@ public class AuthenticationRestController extends BaseController {
         UserDomain createdUser = publish(UserDomain.class, userCreate);
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                registerDTO.getUsername(),
+                registerDTO.getEmail(),
                 registerDTO.getPassword(),
                 Collections.singleton(new SimpleGrantedAuthority(createdUser.getUserRole().toString())));
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
