@@ -40,8 +40,6 @@ public class StorageServiceImpl implements StorageService {
             throw new StorageException("File is empty " + file.getName());
         }
 
-
-
         try (InputStream inputStream = file.getInputStream()) {
             Path userDirectory = createUserDirectory(userId);
             Files.copy(inputStream, userDirectory.resolve(filename),
