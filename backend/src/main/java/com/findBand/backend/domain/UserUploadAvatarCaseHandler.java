@@ -3,14 +3,15 @@ package com.findBand.backend.domain;
 import com.findBand.backend.domain.common.useCase.ObservableUseCasePublisher;
 import com.findBand.backend.domain.common.useCase.UseCaseHandler;
 import com.findBand.backend.domain.exceptions.FindBandCommonException;
+import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.port.UserPort;
+import com.findBand.backend.domain.services.StorageService;
 import com.findBand.backend.domain.useCase.user.UserUploadAvatar;
+import com.findBand.backend.infra.common.services.StorageException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -19,27 +20,26 @@ import java.net.URISyntaxException;
 public class UserUploadAvatarCaseHandler  extends ObservableUseCasePublisher implements UseCaseHandler<String, UserUploadAvatar> {
 
     private UserPort userPort;
+    private StorageService storageService;
 
-    public UserUploadAvatarCaseHandler() {
+    public UserUploadAvatarCaseHandler(UserPort userPort, StorageService storageService) {
+        this.userPort = userPort;
+        this.storageService = storageService;
         register(UserUploadAvatar.class, this);
     }
 
     @Override
     public String handle(UserUploadAvatar useCase) {
         MultipartFile file = useCase.getFile();
-        String fileName = file.getOriginalFilename();
-        String pathName = "~/uploads/" + fileName;
         try {
-            file.transferTo(new File(pathName));
-        } catch (IOException e) {
-            throw new FindBandCommonException();
-        }
+            UserDomain userDomain = userPort.findUserByEmail(useCase.getEmail()).orElseThrow(FindBandCommonException::new);
+            String filename = storageService.store(file, userDomain.getId());
 
-        userPort.updateUserAvatar(pathName, useCase.getEmail());
-        try {
-            URI uri = new URI("http", "findband.ru", pathName, null);
-            return uri.toString();
-        } catch (URISyntaxException e) {
+            userPort.updateUserAvatar(filename, useCase.getEmail());
+
+            return userDomain.getAvatarUri();
+        } catch (StorageException | URISyntaxException e) {
+            log.error("Error in file storing for filename: {}", file.getName(), e);
             throw new FindBandCommonException();
         }
     }

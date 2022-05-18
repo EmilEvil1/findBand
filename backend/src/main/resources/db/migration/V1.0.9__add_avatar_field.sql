@@ -1,1 +1,1 @@
-ALTER TABLE user ADD COLUMN avatar_path text null;
+ALTER TABLE findband_user ADD COLUMN avatar_filename text null;

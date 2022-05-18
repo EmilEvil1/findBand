@@ -23,7 +23,7 @@ public interface UserJpaRepository extends JpaRepository<UserDomain, Long> {
     @Query("SELECT u from user u join u.instruments i join u.region r where i.id in (:instrumentIds) and r.id = :regionId")
     List<UserDomain> findByInstrumentIdsAndRegionId(Set<Long> instrumentIds, long regionId);
 
-    @Query("UPDATE user u SET avatar_path = ?1 where u.email = ?2")
-    @Modifying
+    @Query("UPDATE user u SET avatar_filename = ?1 where u.email = ?2")
+    @Modifying(flushAutomatically = true)
     void updateUserAvatarPath(String avatarPath, String email);
 }

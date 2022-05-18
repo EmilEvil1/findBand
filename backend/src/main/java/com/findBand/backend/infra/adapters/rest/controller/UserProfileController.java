@@ -8,18 +8,21 @@ import com.findBand.backend.infra.adapters.rest.dto.profile.UserAvatarResponseDT
 import com.findBand.backend.infra.adapters.rest.dto.user.UserProfileRequestDTO;
 import com.findBand.backend.infra.adapters.rest.dto.user.UserProfileResponseDTO;
 import com.findBand.backend.infra.common.rest.BaseController;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URISyntaxException;
+
 @RestController
+@Slf4j
 @RequestMapping("/api/v1")
 public class UserProfileController extends BaseController {
 
-    @PostMapping("/upload")
-    public UserAvatarResponseDTO uploadFile(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/uploadAvatar")
+    public UserAvatarResponseDTO uploadAvatar(@RequestParam("file") MultipartFile file) {
         User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserUploadAvatar userUploadAvatar = new UserUploadAvatar(file, authenticatedUser.getUsername());
         String avatarUri = publish(String.class, userUploadAvatar);
@@ -42,12 +45,19 @@ public class UserProfileController extends BaseController {
     
 
     private UserProfileResponseDTO toDTO(UserDomain userDomain) {
+        String avatarUri = null;
+        try {
+            avatarUri = userDomain.getAvatarUri();
+        } catch (URISyntaxException e) {
+            log.error("Error in URI syntax of avatar for user: {}", userDomain.getId(), e);
+        }
         return UserProfileResponseDTO.builder()
           .userName(userDomain.getUsername())
           .emailAddress(userDomain.getEmail())
           .experienceAge(userDomain.getExperienceAge())
           .age(userDomain.getAge())
           .phone(userDomain.getPhone())
+          .avatarUri(avatarUri)
           .build();
     }
 }
