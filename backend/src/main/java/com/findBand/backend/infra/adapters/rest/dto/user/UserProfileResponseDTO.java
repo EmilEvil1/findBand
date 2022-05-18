@@ -11,4 +11,5 @@ public class UserProfileResponseDTO {
     private String phone;
     private Integer experienceAge;
     private Integer age;
+    private String avatarUri;
 }

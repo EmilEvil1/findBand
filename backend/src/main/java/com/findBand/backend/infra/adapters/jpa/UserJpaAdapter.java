@@ -6,6 +6,7 @@ import com.findBand.backend.domain.port.UserPort;
 import com.findBand.backend.infra.adapters.jpa.repository.UserJpaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,7 +53,8 @@ public class UserJpaAdapter implements UserPort {
     }
 
     @Override
-    public void updateUserAvatar(String avatarPath, String email) {
-        userJpaRepository.updateUserAvatarPath(avatarPath, email);
+    @Transactional
+    public void updateUserAvatar(String avatarFilename, String email) {
+        userJpaRepository.updateUserAvatarPath(avatarFilename, email);
     }
 }

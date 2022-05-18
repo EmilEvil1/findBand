@@ -6,6 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,6 +42,9 @@ public class UserDomain {
 
     @Column
     private Integer experienceAge;
+
+    @Column(name = "avatar_filename")
+    private String avatarFilename;
 
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
@@ -97,6 +102,14 @@ public class UserDomain {
             throw new FindBandValidationException("registration.username.empty");
         }
         this.username = username;
+    }
+
+    public String getAvatarUri() throws URISyntaxException {
+        //TODO: add default avatar
+        if (StringUtils.isEmpty(avatarFilename)) {
+            return "";
+        }
+        return "/uploads/" + id + "/" + avatarFilename;
     }
 
 }
