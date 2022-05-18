@@ -2,15 +2,22 @@ services:
   findband_web:
     build:
       context: .
-      dockerfile: ./docker-prod/Dockerfile
+      dockerfile: ./Dockerfile
     container_name: findband_web
+    image: findband_web
     ports:
       - 8080:8080
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_PROFILES_ACTIVE=${PROFILE}
+      - DB=${DB}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - STORAGE_FOLDER=${STORAGE_FOLDER}
     links:
       - findband_redis
       - findband_db
+    volumes:
+      - storage-data:${STORAGE_FOLDER}
   findband_redis:
     build: ./docker-redis
     container_name: findband_redis
@@ -28,3 +35,4 @@ services:
       - POSTGRES_PASSWORD=compose-postgres
 volumes:
   postgres-data:
+  storage-data:
