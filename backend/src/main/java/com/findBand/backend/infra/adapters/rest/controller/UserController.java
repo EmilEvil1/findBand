@@ -9,6 +9,7 @@ import com.findBand.backend.infra.adapters.rest.dto.user.UserCreateNewPasswordRe
 import com.findBand.backend.infra.adapters.rest.dto.user.ValidatePasswordRequestDTO;
 import com.findBand.backend.infra.adapters.rest.dto.user.ValidateResetPasswordDTO;
 import com.findBand.backend.infra.common.rest.BaseController;
+import com.findBand.backend.infra.common.rest.Response;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,8 +17,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserController extends BaseController {
 
     @PostMapping("/resetPassword")
-    public void resetPassword(@RequestBody ResetPasswordRequestDTO resetPasswordRequest) {
+    public Response<?> resetPassword(@RequestBody ResetPasswordRequestDTO resetPasswordRequest) {
         publish(UserDomain.class, new UserResetPassword(resetPasswordRequest.getEmailAddress()));
+        return new Response<>(true);
     }
 
     @GetMapping("/validateResetPassword")
@@ -27,13 +29,14 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/createNewPassword")
-    public void createNewPassword(@RequestBody UserCreateNewPasswordRequestDTO newPasswordRequestDTO) {
+    public Response<?> createNewPassword(@RequestBody UserCreateNewPasswordRequestDTO newPasswordRequestDTO) {
         //TODO: HOW TO GET USER ID?
         publish(Boolean.class, new UserCreateNewPassword(
           newPasswordRequestDTO.getNewPassword(),
           newPasswordRequestDTO.getConfirmationNewPassword(),
           newPasswordRequestDTO.getResetPasswordId()
         ));
+        return new Response<>();
     }
 
 }

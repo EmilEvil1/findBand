@@ -29,7 +29,7 @@ public class UserUpdateProfileUseCaseHandler extends ObservableUseCasePublisher 
         user.setPhone(useCase.getPhone());
         user.setAge(useCase.getAge());
         user.setExperienceAge(useCase.getExperienceAge());
-        user.setUsername(user.getUsername());
+        user.setUsername(useCase.getUsername());
         if (StringUtils.isNotEmpty(useCase.getPassword())) {
             user.setPassword(useCase.getPassword(), passwordEncoder, useCase.getConfirmationPassword());
         }

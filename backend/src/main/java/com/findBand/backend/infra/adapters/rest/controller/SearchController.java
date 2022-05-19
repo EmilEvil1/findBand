@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 public class SearchController extends BaseController {
 
     @GetMapping(value = "searchForMembers")
-    @RolesAllowed({"BAND_OWNER"})
     public DataResponse<BandSeekerDTO> doSearchForMember(@RequestBody SearchForMemberRequestDTO request) {
         SearchForMember searchForMember = new SearchForMember(request.getInstrumentIds(), request.getRegionId());
         List<UserDomain> bandSeekers = publish(List.class, searchForMember);

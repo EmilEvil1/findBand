@@ -2,7 +2,7 @@ services:
   findband_web:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ${PATH_DOCKERFILE}
     container_name: findband_web
     image: findband_web
     ports:
