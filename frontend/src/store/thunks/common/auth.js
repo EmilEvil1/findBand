@@ -1,12 +1,5 @@
-import {createPassword, getListRegion, searchByMusicians} from "../action/action";
-import service from "../../helpers/api";
-
-export const getRegionList = () => dispatch => {
-    return service.get('regions', {
-    })
-        .then((response) => dispatch(getListRegion(response)))
-        .catch((err) => console.log(err))
-}
+import service from "../../../helpers/api";
+import {createPassword} from "../../action/action";
 
 export const sendSignInFormData = ( data, setCookie ) => {
     return service.post('authenticate ', { ...data })
@@ -26,12 +19,6 @@ export const sendSignUpFormData = ( data, setCookie) => {
 
 export const sendPassword = ( data ) => {
     return service.post('resetPassword', {...data})
-        .catch(err => console.log(err))
-}
-
-export const makeSearchForMembers = ( data ) => dispatch => {
-    return service.post('searchForMembers ', {...data})
-        .then(response => dispatch(searchByMusicians(response)))
         .catch(err => console.log(err))
 }
 

@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
 import {Box, Button, Container, TextField, Typography} from "@material-ui/core";
 import {Formik, Form} from "formik";
 import {newPassword} from "../../helpers/validation";
 import {eventToggle} from "../../helpers/utils";
 import IconPassword from "../../assets/icons/auth/password";
 import {useStyles} from "../../components/forms/Authentication/style";
-import {createNewPassword} from "../../store/thunks/thunks";
-import {useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
+import {createNewPassword} from "../../store/thunks/common/auth";
 
 const ResetPassword = () => {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useHistory} from "react-router-dom";
-import {Formik} from "formik";
+import {Form, Formik} from "formik";
 import {Button} from "@material-ui/core";
 import {onSubmit} from "../../../../helpers/api";
 import {searchMusician} from "../../../../helpers/validation";
@@ -18,7 +18,7 @@ const SearchBand = () => {
                 region: '',
                 instrument: ''
             }}
-            onSubmit={(values) => {onSubmit(values)}}
+            onSubmit={(values) => onSubmit(values)}
             validationSchema={searchMusician}
         >
             {props => {
@@ -29,15 +29,17 @@ const SearchBand = () => {
                     handleChange,
                     handleBlur,
                     handleSubmit,
+                    setFieldValue
                 } = props;
                 return (
-                    <form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit}>
                         <RegionList
                             values={values}
                             handleChange={handleChange}
                             handleBlur={handleBlur}
                             touched={touched}
                             errors={errors}
+                            setFieldValue={setFieldValue}
                         />
                         <InstrumentList
                             values={values}
@@ -45,6 +47,7 @@ const SearchBand = () => {
                             handleBlur={handleBlur}
                             touched={touched}
                             errors={errors}
+                            setFieldValue={setFieldValue}
                         />
                         <Button
                             style={{marginTop: 40}}
@@ -58,7 +61,7 @@ const SearchBand = () => {
                         >
                             Найти
                         </Button>
-                    </form>
+                    </Form>
                 )
             }}
         </Formik>

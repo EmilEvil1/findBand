@@ -1,10 +1,10 @@
 import React from 'react';
+import {useDispatch} from "react-redux";
 import {Form, Formik} from "formik";
 import {Button} from "@material-ui/core";
-import RegionList from "../../../common/RegionList/RegionList";
 import {searchMusician} from "../../../../helpers/validation";
-import {useDispatch} from "react-redux";
-import {makeSearchForMembers} from "../../../../store/thunks/thunks";
+import {makeSearchForMembers} from "../../../../store/thunks/common/home";
+import RegionList from "../../../common/RegionList/RegionList";
 
 const SearchMusician = () => {
 

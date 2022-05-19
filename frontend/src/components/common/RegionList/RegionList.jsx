@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {TextField} from "@material-ui/core";
-import {getRegionList} from "../../../store/thunks/thunks";
+import {getRegionList} from "../../../store/thunks/common/regions";
 import {Autocomplete} from "@material-ui/lab";
 import {useStyles} from "../../../pages/style";
 

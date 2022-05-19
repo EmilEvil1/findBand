@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form, Formik} from "formik";
-import {Grid, TextField} from "@material-ui/core";
+import {Button, Grid, TextField} from "@material-ui/core";
 import {profileFormValidation} from "../../../helpers/validation";
 import InputMask from "react-input-mask";
 import RegionList from "../../common/RegionList/RegionList";
@@ -8,19 +8,21 @@ import InstrumentList from "../../common/InstrumentList/InstrumentList";
 
 const ProfileData = () => {
 
-    return (
+    const onSubmit = data => console.log(data)
 
+    return (
         <Grid style={{width: '50%'}}>
             <Formik
                 initialValues={{
                     name: 'Иван',
                     email: 'john@mail.ru',
                     phone: '+7 (999) 999 99 99',
-                    regionId: 8,
-                    instrumentId: 'Гитара',
+                    regionId: '8',
+                    instrumentIds: '123',
                 }}
-                onSubmit={ values => console.log('sending Data', values)}
+                onSubmit={values => onSubmit(values)}
                 validationSchema={profileFormValidation}
+                enableReintialize
             >
                 {props => {
                     const {
@@ -54,7 +56,6 @@ const ProfileData = () => {
                                 onBlur={handleBlur}
                                 error={touched.phone && Boolean(errors.phone)}
                                 helperText={touched.phone && errors.phone}
-
                             >
                                 <TextField
                                     style={{marginBottom: 35}}
@@ -98,13 +99,19 @@ const ProfileData = () => {
                                 errors={errors}
                                 setFieldValue={setFieldValue}
                             />
+                            <Button
+                                color='primary'
+                                onClick={handleSubmit}
+                            >
+                                SAVE
+                            </Button>
                         </Form>
                     )
                 }}
 
             </Formik>
         </Grid>
-    );
-};
+    )
+}
 
 export default ProfileData;

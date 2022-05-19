@@ -15,7 +15,7 @@ import RegionList from "../../../common/RegionList/RegionList";
 import InstrumentList from "../../../common/InstrumentList/InstrumentList";
 import BandRegistration from "../../../modals/BandRegistration/BandRegistration";
 import {checkTokenValidate, eventToggle} from "../../../../helpers/utils";
-import {sendSignUpFormData} from "../../../../store/thunks/thunks";
+import {sendSignUpFormData} from "../../../../store/thunks/common/auth";
 import {signUpValidation} from "../../../../helpers/validation";
 import IconPassword from "../../../../assets/icons/auth/password";
 import PlusIcon from "../../../../assets/icons/auth/plus";
@@ -32,13 +32,11 @@ const SignUp = () => {
     const [checked, setChecked] = useState(false);
     const [isOwner, setIsOwner] = useState(false)
 
-
     const onSubmit = data => dispatch(sendSignUpFormData(data, setToken))
 
     useEffect(() => {
         if (!checkTokenValidate(token.access_token)) history.push('/')
     }, [token.access_token])
-
 
     return (
         <Formik

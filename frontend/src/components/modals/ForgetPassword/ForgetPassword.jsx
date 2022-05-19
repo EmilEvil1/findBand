@@ -1,5 +1,5 @@
 import React from 'react';
-import {Formik} from "formik";
+import {Form, Formik} from "formik";
 import {
     Box,
     Button,
@@ -10,7 +10,8 @@ import {
 import {useStyles} from "./style";
 import {closeModal} from "../../../helpers/utils";
 import {forgetPassword} from "../../../helpers/validation";
-import {sendPassword} from "../../../store/thunks/thunks";
+import {sendPassword} from "../../../store/thunks/common/auth";
+
 
 const ForgetPassword = (props) => {
 
@@ -41,7 +42,7 @@ const ForgetPassword = (props) => {
                             handleSubmit,
                         } = props;
                         return (
-                            <form
+                            <Form
                                 className={classes.form}
                                 onSubmit={handleSubmit}
                             >
@@ -64,7 +65,7 @@ const ForgetPassword = (props) => {
                                 >
                                     Восстановить пароль
                                 </Button>
-                            </form>
+                            </Form>
                         )
                     }}
                 </Formik>

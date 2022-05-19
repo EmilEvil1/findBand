@@ -10,7 +10,7 @@ import AuthServices from "./AuthServices/AuthServices";
 import IconPassword from "../../../../assets/icons/auth/password";
 import {checkTokenValidate, eventToggle, openModal} from "../../../../helpers/utils";
 import ForgetPassword from "../../../modals/ForgetPassword/ForgetPassword";
-import {sendSignInFormData} from "../../../../store/thunks/thunks";
+import {sendSignInFormData} from "../../../../store/thunks/common/auth";
 
 const SignIn = () => {
 
