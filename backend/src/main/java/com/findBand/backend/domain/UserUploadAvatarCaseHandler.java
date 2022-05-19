@@ -36,6 +36,7 @@ public class UserUploadAvatarCaseHandler  extends ObservableUseCasePublisher imp
             String filename = storageService.store(file, userDomain.getId());
 
             userPort.updateUserAvatar(filename, useCase.getEmail());
+            userDomain.setAvatarFilename(filename);
 
             return userDomain.getAvatarUri();
         } catch (StorageException | URISyntaxException e) {

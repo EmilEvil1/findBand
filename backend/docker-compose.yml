@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: ${PATH_DOCKERFILE}
     container_name: findband_web
-    image: findband_web
+    image: findband_web:latest
     ports:
       - 8080:8080
     environment:
