@@ -1,9 +1,8 @@
 import service from "../../../helpers/api";
-import {getListRegion} from "../../action/action";
+import {getListRegion, saveErrorStatusCode} from "../../action/action";
 
 export const getRegionList = () => dispatch => {
-    return service.get('regions', {
-    })
+    return service.get('regions')
         .then((response) => dispatch(getListRegion(response)))
-        .catch((err) => console.log(err))
+        .catch(err => dispatch(saveErrorStatusCode(err.response.status)))
 }

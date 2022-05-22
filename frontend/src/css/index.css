@@ -48,3 +48,15 @@ input:-webkit-autofill {
   background: transparent;
 }
 
+
+.Crop-Controls {
+  margin-bottom: 10px;
+}
+.Crop-Controls > * {
+  margin-bottom: 3px;
+}
+
+img {
+  max-width: 100%;
+}
+

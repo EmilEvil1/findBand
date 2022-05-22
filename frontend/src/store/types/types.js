@@ -8,3 +8,10 @@ export const SEARCH_MUSICIAN = 'SEARCH_MUSICIAN'
 
 // Create password
 export const SEND_NEW_PASSWORD = 'SEND_NEW_PASSWORD'
+
+//Profile
+export const GET_PROFILE_DATA = 'GET_PROFILE_DATA'
+
+// Error Handling
+
+export const ERROR_CODE = 'ERROR_CODE'

@@ -9,3 +9,5 @@ export const handleChangeMultiSelect = (event, func) => {
     func(typeof value === 'string' ? value.split(',') : value,)
 }
 
+export const redirectToErrorPage = config => config.push('/error')
+

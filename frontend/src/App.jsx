@@ -35,7 +35,7 @@ const App = () => {
                 </ThemeProvider>
             </Provider>
         </CookiesProvider>
-    );
+    )
 }
 
 export default App;

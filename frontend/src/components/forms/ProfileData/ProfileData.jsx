@@ -6,19 +6,20 @@ import InputMask from "react-input-mask";
 import RegionList from "../../common/RegionList/RegionList";
 import InstrumentList from "../../common/InstrumentList/InstrumentList";
 
-const ProfileData = () => {
+const ProfileData = (props) => {
 
+    const { profileData } = props
     const onSubmit = data => console.log(data)
 
     return (
         <Grid style={{width: '50%'}}>
             <Formik
                 initialValues={{
-                    name: 'Иван',
-                    email: 'john@mail.ru',
-                    phone: '+7 (999) 999 99 99',
-                    regionId: '8',
-                    instrumentIds: '123',
+                    name: profileData.userName || '',
+                    email: profileData.emailAddress || '',
+                    phone: profileData.phone || '',
+                    regionId: profileData.regionId || '',
+                    instrumentId: profileData.instrumentId || '',
                 }}
                 onSubmit={values => onSubmit(values)}
                 validationSchema={profileFormValidation}
@@ -103,12 +104,11 @@ const ProfileData = () => {
                                 color='primary'
                                 onClick={handleSubmit}
                             >
-                                SAVE
+                                Сохранить
                             </Button>
                         </Form>
                     )
                 }}
-
             </Formik>
         </Grid>
     )

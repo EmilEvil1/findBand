@@ -1,4 +1,12 @@
-import {GET_INFO, GET_INSTRUMENT_LIST, REGIONS_LIST, SEARCH_MUSICIAN, SET_QUOTES} from "../types/types";
+import {
+    ERROR_CODE,
+    GET_INFO,
+    GET_INSTRUMENT_LIST,
+    GET_PROFILE_DATA,
+    REGIONS_LIST,
+    SEARCH_MUSICIAN,
+    SET_QUOTES
+} from "../types/types";
 
 const initialState = {
     info: {},
@@ -34,7 +42,9 @@ const initialState = {
             text: "«Лучше быть угрюмым мечтателем, чем безмозглым тусовщиком»"
         }
     ],
-    searchData: '',
+    searchData: null,
+    profileData: null,
+    error: null
 }
 
 export const reducer = (state = initialState, action) => {
@@ -49,7 +59,10 @@ export const reducer = (state = initialState, action) => {
             return {...state, quotes: action.payload}
         case SEARCH_MUSICIAN:
             return {...state, searchData: action.payload}
-
+        case GET_PROFILE_DATA:
+            return {...state, profileData: action.payload}
+        case ERROR_CODE:
+            return {...state, error: action.payload}
         default:
             return state;
     }

@@ -1,13 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Box, Typography} from "@material-ui/core";
 import UploadPhoto from "../../components/common/UploadPhoto/UploadPhoto";
 import ProfileData from "../../components/forms/ProfileData/ProfileData";
 import Layout from "../../components/common/Layout/Layout";
 import {useStyles} from "../style";
+import {useDispatch, useSelector} from "react-redux";
+import {getUserProfileData} from "../../store/thunks/common/profile";
+import {useHistory} from "react-router-dom";
 
 const Profile = () => {
 
     const classes = useStyles()
+    const history = useHistory()
+    const dispatch = useDispatch()
+    const profileData = useSelector(({ state }) => state.profileData)
+
+    useEffect(() => {
+        dispatch(getUserProfileData(history))
+    }, [])
 
     return (
         <Box className={classes.contentDark}>
@@ -18,10 +28,12 @@ const Profile = () => {
                 >
                     Личные данные
                 </Typography>
-                <Box className={classes.flexWrap}>
-                    <UploadPhoto />
-                    <ProfileData />
-                </Box>
+                {profileData && (
+                    <Box className={classes.flexWrap}>
+                        <UploadPhoto avatarUri={profileData.avatarUri} />
+                        <ProfileData profileData={profileData} />
+                    </Box>
+                )}
             </Layout>
         </Box>
     );

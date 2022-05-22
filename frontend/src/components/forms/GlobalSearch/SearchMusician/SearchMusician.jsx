@@ -5,12 +5,14 @@ import {Button} from "@material-ui/core";
 import {searchMusician} from "../../../../helpers/validation";
 import {makeSearchForMembers} from "../../../../store/thunks/common/home";
 import RegionList from "../../../common/RegionList/RegionList";
+import {useHistory} from "react-router-dom";
 
 const SearchMusician = () => {
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
-    const onSubmit = data => dispatch(makeSearchForMembers(data))
+    const onSubmit = data => dispatch(makeSearchForMembers(data, history))
 
     return (
         <Formik

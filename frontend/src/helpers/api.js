@@ -17,7 +17,9 @@ service.interceptors.request.use((config) => {
     return config
 })
 
-service.interceptors.response.use((r) => r.data)
+service.interceptors.response.use((r) => {
+     return  r.data
+})
 
 export default service
 

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useCookies} from "react-cookie";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import { Formik } from "formik";
+import {Form, Formik} from "formik";
 import {Box, Button, Grid, TextField, Typography} from "@material-ui/core";
 import {signInValidation} from "../../../../helpers/validation";
 import {useStyles} from "../style";
@@ -25,7 +25,7 @@ const SignIn = () => {
 
     useEffect(() => {
         if (!checkTokenValidate(token.access_token)) history.push('/')
-    }, [token.access_token])
+    }, [token.access_token, history])
 
     return (
         <Grid className={classes.formWrapper}>
@@ -47,10 +47,13 @@ const SignIn = () => {
                         handleSubmit,
                     } = props;
                     return (
-                        <form className={classes.signInForm} onSubmit={handleSubmit}>
+                        <Form
+                            className={classes.signInForm}
+                            onSubmit={handleSubmit}
+                        >
                             <Typography variant="h4">Вход</Typography>
                             <AuthServices/>
-                            <Typography component={'span'} style={{margin: '30px 0'}}>или</Typography>
+                            <Typography component='span' style={{margin: '30px 0'}}>или</Typography>
                             <Box className={classes.inputsWrapper}>
                                 <TextField
                                     style={{marginBottom: 35}}
@@ -101,11 +104,11 @@ const SignIn = () => {
                             >
                                 Войти
                             </Button>
-                        </form>
+                        </Form>
                     )
                 }}
             </Formik>
-            {open && (<ForgetPassword open={open} close={setOpen} />)}
+            {open && <ForgetPassword open={open} close={setOpen} />}
         </Grid>
     );
 };

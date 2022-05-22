@@ -86,7 +86,7 @@ export const profileFormValidation = yup.object({
     regionId: yup
         .string('Выберите регион')
         .required('Выберите регион'),
-    instrumentIds: yup
+    instrumentId: yup
         .string('Выберите инструмент')
         .required('Выберите инструмент'),
 });
