@@ -42,3 +42,12 @@ jobs:
 
     - name: Publish image
       run: cd backend && docker-compose push findband_web
+
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.BACKEND_HOST }}
+        username: ${{ secrets.BACKEND_USERNAME }}
+        key: ${{ secrets.BACKEND_SSH_KEY }}
+        port: 80
+        script: whoami
