@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: ${PATH_DOCKERFILE}
     container_name: findband_web
-    image: findband_web:latest
+    image: ghcr.io/dssorokin/findband_web:latest
     ports:
       - 8080:8080
     environment:
@@ -20,6 +20,7 @@ services:
       - storage-data:${STORAGE_FOLDER}
   findband_redis:
     build: ./docker-redis
+    image: ghcr.io/dssorokin/findband_web:latest
     container_name: findband_redis
     hostname: findband_redis
     ports:
@@ -30,9 +31,9 @@ services:
       - postgres-data:/var/lib/postgresql/data
     container_name: findband_db
     environment:
-      - POSTGRES_DB=findband
-      - POSTGRES_USER=compose-postgres
-      - POSTGRES_PASSWORD=compose-postgres
+      - POSTGRES_DB=${DB}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
 volumes:
   postgres-data:
   storage-data:
