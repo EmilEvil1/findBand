@@ -49,5 +49,4 @@ jobs:
         host: ${{ secrets.BACKEND_HOST }}
         username: ${{ secrets.BACKEND_USERNAME }}
         key: ${{ secrets.BACKEND_SSH_KEY }}
-        port: 80
         script: whoami
