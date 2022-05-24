@@ -5,6 +5,7 @@ import {useHistory} from "react-router-dom";
 import {Box, Container, Grid} from "@material-ui/core";
 import Sidebar from "../Sidebar/Sidebar";
 import {useStyles} from "./style";
+import {checkTokenValidate} from "../../../helpers/utils";
 
 const Layout = ({ children }) => {
 
@@ -14,6 +15,7 @@ const Layout = ({ children }) => {
     const errorStatusCode = useSelector(({ state }) => state.error)
 
     useEffect(() => {
+        if (checkTokenValidate(token.access_token)) history.push('/auth')
         switch (errorStatusCode) {
             case 404:
                 history.push('/404')
@@ -26,9 +28,8 @@ const Layout = ({ children }) => {
                 history.push('/auth')
                 break
             default:
-                console.log('hello')
+                break
         }
-
     }, [history, token.access_token, errorStatusCode])
 
     return (

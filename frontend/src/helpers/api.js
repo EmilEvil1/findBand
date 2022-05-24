@@ -13,7 +13,6 @@ service.interceptors.request.use((config) => {
     if (!!getCookie('access_token')) {
         config.headers.common['Authorization'] = `Bearer ${getCookie('access_token')}`
     }
-
     return config
 })
 
