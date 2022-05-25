@@ -27,18 +27,19 @@ jobs:
       run: cd frontend && rm -rf node_modules && yarn install --frozen-lockfile
     - name: Run build
       run: cd frontend && yarn build
-#    - name: Run tests
-#      run: cd frontend && yarn test
     - name: set global env
       id: global_env
       run: |
         echo "::set-output name=DOCKERHUB_IMAGE_NAME::ghcr.io/dssorokin/findband/findband_frontend:latest"
     - name: Build docker image Backend
       run: cd frontend && docker build . -t "${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}"
+
     - name: Docker login
       run: docker login ghcr.io -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
+
     - name: Publish frontend
       run: cd frontend && docker push ${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}
+
     - name: Deploy frontend
       uses: appleboy/ssh-action@master
       with:
