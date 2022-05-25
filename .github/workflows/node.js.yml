@@ -32,9 +32,9 @@ jobs:
     - name: set global env
       id: global_env
       run: |
-        echo "::set-output name=DOCKERHUB_IMAGE_NAME::ghcr.io/dssorkin/findband/findband_frontend"
+        echo "::set-output name=DOCKERHUB_IMAGE_NAME::ghcr.io/dssorokin/findband/findband_frontend:latest"
     - name: Build docker image Backend
-      run: cd frontend && docker build . -t "${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}:latest"
+      run: cd frontend && docker build -t "${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}"
     - name: Docker login
       run: docker login ghcr.io -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
     - name: Publish frontend
@@ -50,5 +50,5 @@ jobs:
           git pull origin prod
           echo $CR_PAT | sudo docker login ghcr.io -u dssorokin --password-stdin
           sudo docker pull ${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}
-          sudo docker run ${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}:latest -d -p 80:8080
+          sudo docker run ${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }} -d -p 80:8080
 
