@@ -32,15 +32,12 @@ jobs:
     - name: set global env
       id: global_env
       run: |
-        echo "::set-output name=IMAGE_NAME::${GITHUB_REPOSITORY#*/}"
-        echo "::set-output name=DOCKERHUB_IMAGE_NAME::ghcr.io/${GITHUB_REPOSITORY}/${GITHUB_REPOSITORY#*/}_frontend:latest"
+        echo "::set-output name=DOCKERHUB_IMAGE_NAME::ghcr.io/dssorkin/findband/findband_frontend:latest"
     - name: Build docker image Backend
       run: cd frontend && docker build -t "${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}"
     - name: Docker login
       run: docker login ghcr.io -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
     - name: Publish frontend
-      env:
-        IMAGE_NAME: $GITHUB_REPOSITORY
       run: cd frontend && docker push ${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}
     - name: Deploy frontend
       uses: appleboy/ssh-action@master
