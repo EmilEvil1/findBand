@@ -27,9 +27,7 @@ jobs:
     - name: Run build
     - run: cd frontend && npm run build --if-present
     - name: Run tests
-    - run: npm test
-      #Build Docker image:
-        #     Set global environment variables:
+    - run: cd frontend && npm test
     - name: set global env
       id: global_env
       run: |
@@ -37,7 +35,7 @@ jobs:
         echo "::set-output name=DOCKERHUB_IMAGE_NAME::ghcr.io/${GITHUB_REPOSITORY}/${GITHUB_REPOSITORY#*/}_frontend:latest"
     - name: Build docker image Backend
       run: cd frontend && docker build -t "${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}"
-     - name: Docker login
+    - name: Docker login
       run: docker login ghcr.io -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
     - name: Publish frontend
       env:
