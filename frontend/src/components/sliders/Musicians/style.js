@@ -8,8 +8,7 @@ export const useStyles = makeStyles({
         position: "absolute",
         width: '100%',
         height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-        backdropFilter: 'blur(2px)',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
         zIndex: 2
     },
     aliceCarousel: {
@@ -17,6 +16,6 @@ export const useStyles = makeStyles({
     },
     slideImg: {
         width: '100%',
-        objectFit: 'cover'
+        objectFit: 'cover',
     }
 });

@@ -6,6 +6,7 @@ import {searchMusician} from "../../../../helpers/validation";
 import {makeSearchForMembers} from "../../../../store/thunks/common/home";
 import RegionList from "../../../common/RegionList/RegionList";
 import {useHistory} from "react-router-dom";
+import InstrumentList from "../../../common/InstrumentList/InstrumentList";
 
 const SearchMusician = () => {
 
@@ -18,7 +19,7 @@ const SearchMusician = () => {
         <Formik
             initialValues={{
                 regionId: '',
-                instrumentIds: [2, 3]
+                instrumentIds: []
             }}
             onSubmit={values => onSubmit(values)}
             validationSchema={searchMusician}
@@ -43,14 +44,14 @@ const SearchMusician = () => {
                             errors={errors}
                             setFieldValue={setFieldValue}
                         />
-                        {/*<InstrumentList*/}
-                        {/*    values={values}*/}
-                        {/*    handleChange={handleChange}*/}
-                        {/*    handleBlur={handleBlur}*/}
-                        {/*    touched={touched}*/}
-                        {/*    errors={errors}*/}
-                        {/*    setFieldValue={setFieldValue}*/}
-                        {/*/>*/}
+                        <InstrumentList
+                            values={values}
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            touched={touched}
+                            errors={errors}
+                            setFieldValue={setFieldValue}
+                        />
                         <Button
                             style={{marginTop: 40}}
                             color='primary'

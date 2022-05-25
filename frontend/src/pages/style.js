@@ -7,7 +7,7 @@ export const useStyles = makeStyles({
         flexDirection: "column"
     },
     container: {
-        margin: '0 60px',
+        margin: 60,
     },
     content: {
         position: "relative",

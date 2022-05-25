@@ -13,7 +13,7 @@ const Auth = () => {
         if (!checkTokenValidate(token.access_token)) history.push('/')
     }, [history, token.access_token])
 
-    return (<Authentication />)
+    return <Authentication />
 };
 
 export default Auth;

@@ -251,5 +251,8 @@ export const useStyles = makeStyles({
     savePassword: {
         marginTop: 20,
         width: '100%'
+    },
+    marginBlock: {
+        marginBottom: 35,
     }
 });

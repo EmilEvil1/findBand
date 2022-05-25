@@ -13,8 +13,7 @@ const SignForms = () => {
 
     return (
         <Grid className={classes.wrapper}>
-            <Box
-                className={
+            <Box className={
                     !active ? `${classes.container} ${classes.signIn}` :
                     `${classes.container} ${classes.signIn} ${classes.signInActive}`
                 }

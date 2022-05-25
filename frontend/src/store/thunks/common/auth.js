@@ -15,8 +15,9 @@ export const sendSignUpFormData = ( data, setCookie) => dispatch => {
         .catch(err => dispatch(saveErrorStatusCode(err.response.status))))
 }
 
-export const sendPassword = data => dispatch => {
+export const sendPassword = (data, closeModal, close) => dispatch => {
     return service.post('resetPassword', {...data})
+        .then(() => closeModal(close))
         .catch(err => dispatch(saveErrorStatusCode(err.response.status)))
 }
 

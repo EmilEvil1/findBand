@@ -72,13 +72,13 @@ const SignUp = () => {
                     >
                         <Typography
                             variant='h4'
-                            style={{marginBottom: 35}}
+                            className={classes.marginBlock}
                         >
                             Регистрация
                         </Typography>
                         <Box className={classes.inputsWrapper}>
                             <TextField
-                                style={{marginBottom: 35}}
+                                className={classes.marginBlock}
                                 name='username'
                                 label='Имя'
                                 placeholder='Укажите имя'
@@ -99,7 +99,7 @@ const SignUp = () => {
                                 helperText={touched.phone && errors.phone}
                             >
                                 <TextField
-                                    style={{marginBottom: 35}}
+                                    className={classes.marginBlock}
                                     name='phone'
                                     label='Телефон'
                                     placeholder='Укажите телефон'
@@ -150,8 +150,8 @@ const SignUp = () => {
                                     <TextField
                                         style={{marginLeft: 10}}
                                         name='confirmationPassword'
-                                        label='Подтверждение'
-                                        placeholder='Потвердите пароль'
+                                        label='Повторите'
+                                        placeholder='Повторите'
                                         variant='outlined'
                                         value={values.confirmationPassword}
                                         onChange={handleChange}

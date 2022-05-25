@@ -44,10 +44,13 @@ input:focus {
 }
 
 input:-webkit-autofill {
-  -webkit-background-clip: initial;
+  border: none;
+  caret-color: #fff;
+  color: #fff;
   background: transparent;
+  -webkit-text-fill-color: #fff;
+  -webkit-background-clip: text;
 }
-
 
 .Crop-Controls {
   margin-bottom: 10px;

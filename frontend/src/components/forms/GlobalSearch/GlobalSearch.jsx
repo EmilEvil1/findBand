@@ -10,8 +10,12 @@ const GlobalSearch = () => {
     const handleChange = (event, newValue) => setValue(newValue)
 
     return (
-        <TabContext value={value}>
-            <TabList style={{padding: '0 24px', marginTop: 20}} onChange={handleChange}>
+        <TabContext  value={value}>
+            <TabList
+                indicatorColor="primary"
+                style={{padding: '0 24px', marginTop: 20}}
+                onChange={handleChange}
+            >
                 <Tab label="Найти музыканта" value="1"/>
                 <Tab label="Найти группу" value="2" />
             </TabList>

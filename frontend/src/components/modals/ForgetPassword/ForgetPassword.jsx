@@ -7,18 +7,19 @@ import {
     TextField,
     Typography
 } from "@material-ui/core";
+import {useDispatch} from "react-redux";
 import {useStyles} from "./style";
 import {closeModal} from "../../../helpers/utils";
 import {forgetPassword} from "../../../helpers/validation";
 import {sendPassword} from "../../../store/thunks/common/auth";
 
-
 const ForgetPassword = (props) => {
 
     const {open, close} = props
     const classes = useStyles()
+    const dispatch = useDispatch()
 
-    const onSubmit = email => sendPassword(email).then(() => closeModal(close))
+    const onSubmit = email => dispatch(sendPassword(email, closeModal, close))
 
     return (
         <Dialog
@@ -31,6 +32,7 @@ const ForgetPassword = (props) => {
                     initialValues={{emailAddress: ''}}
                     onSubmit={values => onSubmit(values)}
                     validationSchema={forgetPassword}
+                    enableReinitialize
                 >
                     {props => {
                         const {
@@ -50,7 +52,7 @@ const ForgetPassword = (props) => {
                                     name='emailAddress'
                                     label='Email'
                                     placeholder='Введите email'
-                                    value={values.resetEmail}
+                                    value={values.emailAddress}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     error={touched.emailAddress && Boolean(errors.emailAddress)}
@@ -61,7 +63,7 @@ const ForgetPassword = (props) => {
                                 <Button
                                     className={classes.btn}
                                     color='primary'
-                                    onClick={handleSubmit}
+                                    onClick={() => handleSubmit()}
                                 >
                                     Восстановить пароль
                                 </Button>
