@@ -2,7 +2,7 @@ import {
     ERROR_CODE,
     GET_INSTRUMENT_LIST,
     GET_PROFILE_DATA,
-    REGIONS_LIST,
+    REGIONS_LIST, SAVE_PROFILE_DATA,
     SEARCH_MUSICIAN,
     SEND_NEW_PASSWORD,
     SET_QUOTES
@@ -53,6 +53,13 @@ export const createPassword = payload => {
 export const getProfileData = payload => {
     return {
         type: GET_PROFILE_DATA,
+        payload
+    }
+}
+
+export const saveProfileData = payload => {
+    return {
+        type: SAVE_PROFILE_DATA,
         payload
     }
 }

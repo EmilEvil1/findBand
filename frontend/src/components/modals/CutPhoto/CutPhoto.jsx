@@ -18,16 +18,16 @@ const CutPhoto = (props) => {
                     onComplete={(c) => setCompletedCrop(c)}
                     aspect={aspect}
                 >
-                    <img
-                        ref={imgRef}
-                        alt="Crop preview"
-                        src={imgSrc}
-                        // style={{
-                        //     width: 250,
-                        //     height: 250
-                        // }}
-                        onLoad={onImageLoad}
-                    />
+                    {/*<img*/}
+                    {/*    ref={imgRef}*/}
+                    {/*    alt="Crop preview"*/}
+                    {/*    src={imgSrc}*/}
+                    {/*    // style={{*/}
+                    {/*    //     width: 250,*/}
+                    {/*    //     height: 250*/}
+                    {/*    // }}*/}
+                    {/*    onLoad={onImageLoad}*/}
+                    {/*/>*/}
                 </ReactCrop>
             )}
         </Dialog>

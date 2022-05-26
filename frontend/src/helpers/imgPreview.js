@@ -1,6 +1,6 @@
 import { canvasPreview } from './canvasPreview'
 
-let previewUrl = ``
+let previewUrl = `/uploads/29/2022-05-22 15.20.11.jpg`
 
 function toBlob(canvas) {
     return new Promise((resolve) => {

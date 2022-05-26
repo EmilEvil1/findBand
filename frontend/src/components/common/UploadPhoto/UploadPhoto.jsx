@@ -10,6 +10,7 @@ import CutPhoto from "../../modals/CutPhoto/CutPhoto";
 const UploadPhoto = (props) => {
 
     const {avatarUri} = props
+    console.log(avatarUri)
     const classes = useStyles()
     // const [crop, setCrop] = useState()
     const [crop, setCrop] = useState({

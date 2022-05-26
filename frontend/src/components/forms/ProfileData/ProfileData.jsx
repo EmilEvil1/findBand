@@ -1,15 +1,19 @@
 import React from 'react';
 import {Form, Formik} from "formik";
+import {useDispatch} from "react-redux";
 import {Button, Grid, TextField} from "@material-ui/core";
 import {profileFormValidation} from "../../../helpers/validation";
 import InputMask from "react-input-mask";
 import RegionList from "../../common/RegionList/RegionList";
 import InstrumentList from "../../common/InstrumentList/InstrumentList";
+import {sendNewUserProfileData} from "../../../store/thunks/common/profile";
 
 const ProfileData = (props) => {
 
     const { profileData } = props
-    const onSubmit = data => console.log(data)
+    const dispatch = useDispatch()
+
+    const onSubmit = data => dispatch(sendNewUserProfileData(data))
 
     return (
         <Grid style={{width: '50%'}}>
@@ -102,7 +106,7 @@ const ProfileData = (props) => {
                             />
                             <Button
                                 color='primary'
-                                onClick={handleSubmit}
+                                onClick={() => handleSubmit()}
                             >
                                 Сохранить
                             </Button>

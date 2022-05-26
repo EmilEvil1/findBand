@@ -11,6 +11,7 @@ export const SEND_NEW_PASSWORD = 'SEND_NEW_PASSWORD'
 
 //Profile
 export const GET_PROFILE_DATA = 'GET_PROFILE_DATA'
+export const SAVE_PROFILE_DATA = 'SAVE_PROFILE_DATA'
 
 // Error Handling
 

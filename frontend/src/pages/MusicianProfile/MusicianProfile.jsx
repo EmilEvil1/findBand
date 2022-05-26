@@ -7,6 +7,7 @@ import {useStyles} from "../style";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserProfileData} from "../../store/thunks/common/profile";
 import {useHistory} from "react-router-dom";
+import UploadUserPhoto from "../../components/common/UploadUserPhoto/UploadUserPhoto";
 
 const Profile = () => {
 
@@ -30,7 +31,8 @@ const Profile = () => {
                 </Typography>
                 {profileData && (
                     <Box className={classes.flexWrap}>
-                        <UploadPhoto avatarUri={profileData.avatarUri} />
+                        {/*<UploadPhoto avatarUri={profileData.avatarUri} />*/}
+                        {/*<UploadUserPhoto />*/}
                         <ProfileData profileData={profileData} />
                     </Box>
                 )}

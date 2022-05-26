@@ -6,3 +6,8 @@ export const getUserProfileData = () => dispatch => {
         .then(response => dispatch(getProfileData(response)))
         .catch(err => dispatch(saveErrorStatusCode(err.response.status)))
 }
+
+export const sendNewUserProfileData = data => dispatch => {
+    return service.put('profile', {...data})
+        .catch(err => dispatch(saveErrorStatusCode(err.response.status)))
+}

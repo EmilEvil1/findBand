@@ -3,7 +3,7 @@ import {
     GET_INFO,
     GET_INSTRUMENT_LIST,
     GET_PROFILE_DATA,
-    REGIONS_LIST,
+    REGIONS_LIST, SAVE_PROFILE_DATA,
     SEARCH_MUSICIAN,
     SET_QUOTES
 } from "../types/types";
