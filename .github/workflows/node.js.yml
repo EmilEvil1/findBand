@@ -51,5 +51,5 @@ jobs:
           git pull origin prod
           echo $CR_PAT | sudo docker login ghcr.io -u dssorokin --password-stdin
           sudo docker pull ${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}
-          sudo docker run ${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }} -d -p 80:8080
+          sudo docker run -d -p 80:8080 ${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}
 
