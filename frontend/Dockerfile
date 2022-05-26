@@ -7,7 +7,7 @@ COPY . ./
 RUN yarn build
 
 # Stage 2 - deploy on environment
-FROM  nginx:1.15.2-alpine
+FROM --platform=linux/arm64/v8 nginx:1.15.2-alpine
 COPY --from=build-deps /usr/src/app/build /var/www
 COPY config/nginx.conf /etc/nginx/nginx.conf
 ENTRYPOINT ["nginx","-g","daemon off;"]
