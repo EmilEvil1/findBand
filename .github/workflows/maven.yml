@@ -5,6 +5,8 @@ name: Java CI with Maven
 
 on:
   push:
+    paths:
+      - backend/**
     branches: [ prod ]
   pull_request:
     branches: [ prod ]
@@ -22,31 +24,30 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Build Backend with Maven
       run: cd backend && mvn -B package --file pom.xml
     - name: Test with Maven
       run: cd backend && mvn -B clean verify
-
-    - name: set global env
-      id: global_env
-      run: |
-        echo "::set-output name=IMAGE_NAME::${GITHUB_REPOSITORY#*/}"
-        echo "::set-output name=DOCKERHUB_IMAGE_NAME::docker.pkg.github.com/${GITHUB_REPOSITORY}/${GITHUB_REPOSITORY#*/}"
-        
     #Build Docker image:
-    - name: Build and tag image
+    - name: Build docker image Backend
       run: cd backend && docker-compose build findband_web
 
     - name: Docker login
       run: docker login ghcr.io -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
 
-    - name: Publish image
+    - name: Publish Backend
       run: cd backend && docker-compose push findband_web
 
-    - name: executing remote ssh commands using ssh key
+    - name: Deploy backend
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.BACKEND_HOST }}
         username: ${{ secrets.BACKEND_USERNAME }}
         key: ${{ secrets.BACKEND_SSH_KEY }}
-        script: whoami
+        script: |
+          cd findband/backend
+          git pull origin prod
+          echo $CR_PAT | sudo docker login ghcr.io -u dssorokin --password-stdin
+          sudo docker-compose pull findband_web
+          sudo docker-compose down
+          sudo docker-compose up -d
