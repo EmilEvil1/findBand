@@ -54,6 +54,10 @@ public class UserDomain {
     @JoinColumn(name = "region_id")
     private Region region;
 
+    @ManyToOne
+    @JoinColumn(name = "band_id")
+    private Band band;
+
     @ManyToMany
     @JoinTable(
       name = "users_instruments",

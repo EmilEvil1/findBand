@@ -1,22 +1,22 @@
 package com.findBand.backend.infra.adapters.rest.controller;
 
-import com.findBand.backend.domain.model.Band;
-import com.findBand.backend.domain.model.Instrument;
-import com.findBand.backend.domain.model.UserDomain;
-import com.findBand.backend.infra.adapters.rest.dto.BandDTO;
-import com.findBand.backend.infra.adapters.rest.dto.InstrumentDTO;
-import com.findBand.backend.infra.adapters.rest.dto.search.BandSeekerDTO;
-import com.findBand.backend.domain.model.Vacancy;
+import com.findBand.backend.domain.model.*;
 import com.findBand.backend.domain.useCase.search.SearchForMember;
 import com.findBand.backend.domain.useCase.search.SearchForVacancies;
+import com.findBand.backend.infra.adapters.rest.dto.BandDTO;
+import com.findBand.backend.infra.adapters.rest.dto.InstrumentDTO;
+import com.findBand.backend.infra.adapters.rest.dto.RegionDTO;
+import com.findBand.backend.infra.adapters.rest.dto.search.BandSeekerDTO;
 import com.findBand.backend.infra.adapters.rest.dto.search.SearchForBandRequestDTO;
 import com.findBand.backend.infra.adapters.rest.dto.search.SearchForMemberRequestDTO;
 import com.findBand.backend.infra.adapters.rest.dto.search.VacancyDTO;
 import com.findBand.backend.infra.common.rest.BaseController;
 import com.findBand.backend.infra.common.rest.DataResponse;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +36,13 @@ public class SearchController extends BaseController {
         SearchForVacancies searchForVacancies = new SearchForVacancies(request.getRegionId(), request.getInstrumentsIds());
         List<Vacancy> foundVacancies = publish(List.class, searchForVacancies);
         return new DataResponse<VacancyDTO>(foundVacancies.stream().map(this::toVacancyDTO).collect(Collectors.toList()), 1, 1, foundVacancies.size());
+    }
+
+    private RegionDTO toRegionDTO(Region region) {
+        return RegionDTO.builder()
+          .regionId(region.getId())
+          .regionName(region.getName())
+          .build();
     }
 
     private VacancyDTO toVacancyDTO(Vacancy vacancy) {
@@ -58,8 +65,12 @@ public class SearchController extends BaseController {
 
     private BandSeekerDTO toFoundMemberDTO(UserDomain bandSeeker) {
         return BandSeekerDTO.builder()
+          .id(bandSeeker.getId())
           .instruments(bandSeeker.getInstruments().stream().map(this::toInsrumentDTO).collect(Collectors.toSet()))
           .username(bandSeeker.getUsername())
+          .bandName(bandSeeker.getBand() != null ? bandSeeker.getBand().getName() : "")
+          .region(toRegionDTO(bandSeeker.getRegion()))
+          .experienceAge(bandSeeker.getExperienceAge())
           .build();
     }
 
