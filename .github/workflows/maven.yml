@@ -45,7 +45,7 @@ jobs:
         username: ${{ secrets.BACKEND_USERNAME }}
         key: ${{ secrets.BACKEND_SSH_KEY }}
         script: |
-          cd findband/backend
+          cd findBand/backend
           git pull origin prod
           echo $CR_PAT | sudo docker login ghcr.io -u dssorokin --password-stdin
           sudo docker-compose pull findband_web
