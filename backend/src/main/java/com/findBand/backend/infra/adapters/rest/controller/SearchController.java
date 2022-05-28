@@ -66,10 +66,10 @@ public class SearchController extends BaseController {
     private BandSeekerDTO toFoundMemberDTO(UserDomain bandSeeker) {
         return BandSeekerDTO.builder()
           .id(bandSeeker.getId())
-          .instruments(bandSeeker.getInstruments().stream().map(this::toInsrumentDTO).collect(Collectors.toSet()))
+          .instruments(bandSeeker.getInstruments().stream().map(Instrument::getName).collect(Collectors.toSet()))
           .username(bandSeeker.getUsername())
           .bandName(bandSeeker.getBand() != null ? bandSeeker.getBand().getName() : "")
-          .region(toRegionDTO(bandSeeker.getRegion()))
+          .regionName(bandSeeker.getRegion().getName())
           .experienceAge(bandSeeker.getExperienceAge())
           .build();
     }

@@ -12,8 +12,8 @@ import java.util.Set;
 @Data
 public class BandSeekerDTO implements Serializable {
     private long id;
-    private Set<InstrumentDTO> instruments;
-    private RegionDTO region;
+    private Set<String> instruments;
+    private String regionName;
     private String username;
     private String bandName;
     private Integer experienceAge;
