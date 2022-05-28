@@ -89,6 +89,10 @@ export const profileFormValidation = yup.object({
     instrumentId: yup
         .string('Выберите инструмент')
         .required('Выберите инструмент'),
+    age: yup
+        .number('must have'),
+    experienceAge: yup
+        .number('must have')
 });
 
 

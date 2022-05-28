@@ -11,3 +11,9 @@ export const sendNewUserProfileData = data => dispatch => {
     return service.put('profile', {...data})
         .catch(err => dispatch(saveErrorStatusCode(err.response.status)))
 }
+
+export const sendNewUserProfilePhoto = data => dispatch => {
+    return service.post('profile', {...data})
+        .then(() => dispatch(getUserProfileData))
+        .catch(err => dispatch(saveErrorStatusCode(err.response.status)))
+}

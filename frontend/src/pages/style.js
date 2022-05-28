@@ -54,5 +54,29 @@ export const useStyles = makeStyles({
     noOptions: {
         color: "red",
         backgroundColor: "pink"
+    },
+    profileForm: {
+        marginTop: 35,
+        display: "flex",
+        justifyContent: "space-between"
+    },
+    photoWrapper: {
+        display: "flex",
+        flexDirection: "column"
+    },
+    uploadPhotoLink: {
+        marginTop: 30,
+        fontSize: 20,
+        cursor: "pointer",
+        '&:hover': {
+            textDecoration: "underline"
+        }
+    },
+    uploadInfoText: {
+        color: '#869CB9',
+        fontSize: 20
+    },
+    marginValue: {
+        marginTop: 35
     }
 });

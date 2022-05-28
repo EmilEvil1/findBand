@@ -1,22 +1,24 @@
 import React from 'react';
 import {Form, Formik} from "formik";
-import {useDispatch} from "react-redux";
-import {Button, Grid, TextField} from "@material-ui/core";
-import {profileFormValidation} from "../../../helpers/validation";
 import InputMask from "react-input-mask";
+import {useDispatch} from "react-redux";
+import {Box, Button, Grid, TextField, Typography} from "@material-ui/core";
+import {profileFormValidation} from "../../../helpers/validation";
 import RegionList from "../../common/RegionList/RegionList";
 import InstrumentList from "../../common/InstrumentList/InstrumentList";
 import {sendNewUserProfileData} from "../../../store/thunks/common/profile";
+import {useStyles} from "./style";
 
 const ProfileData = (props) => {
 
     const { profileData } = props
     const dispatch = useDispatch()
+    const classes = useStyles()
 
     const onSubmit = data => dispatch(sendNewUserProfileData(data))
 
     return (
-        <Grid style={{width: '50%'}}>
+        <Grid className={classes.wrapper}>
             <Formik
                 initialValues={{
                     name: profileData.userName || '',
@@ -24,6 +26,8 @@ const ProfileData = (props) => {
                     phone: profileData.phone || '',
                     regionId: profileData.regionId || '',
                     instrumentId: profileData.instrumentId || '',
+                    age: profileData.age || '',
+                    experienceAge: profileData.experienceAge || ''
                 }}
                 onSubmit={values => onSubmit(values)}
                 validationSchema={profileFormValidation}
@@ -42,7 +46,7 @@ const ProfileData = (props) => {
                     return (
                         <Form onSubmit={handleSubmit}>
                             <TextField
-                                style={{marginBottom: 35}}
+                                className={classes.marginBlock}
                                 name='name'
                                 label='Имя'
                                 placeholder='Укажите имя'
@@ -63,7 +67,7 @@ const ProfileData = (props) => {
                                 helperText={touched.phone && errors.phone}
                             >
                                 <TextField
-                                    style={{marginBottom: 35}}
+                                    className={classes.marginBlock}
                                     name='phone'
                                     label='Телефон'
                                     placeholder='Укажите телефон'
@@ -105,6 +109,7 @@ const ProfileData = (props) => {
                                 setFieldValue={setFieldValue}
                             />
                             <Button
+                                className={classes.marginContainer}
                                 color='primary'
                                 onClick={() => handleSubmit()}
                             >
@@ -114,6 +119,10 @@ const ProfileData = (props) => {
                     )
                 }}
             </Formik>
+            <Box className={classes.marginContainer}>
+                <Typography>Сменить пароль</Typography>
+                <Typography>Выйти</Typography>
+            </Box>
         </Grid>
     )
 }

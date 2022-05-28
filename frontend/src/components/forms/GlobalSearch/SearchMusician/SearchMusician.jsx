@@ -18,8 +18,8 @@ const SearchMusician = () => {
     return (
         <Formik
             initialValues={{
-                regionId: '',
-                instrumentIds: []
+                regionId: 6,
+                instrumentIds: [4, 3, 5]
             }}
             onSubmit={values => onSubmit(values)}
             validationSchema={searchMusician}
