@@ -25,9 +25,6 @@ export function rotateSize(width, height, rotation) {
     }
 }
 
-/**
- * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
- */
 export async function getCroppedImg(
     imageSrc,
     pixelCrop,
@@ -77,7 +74,7 @@ export async function getCroppedImg(
     canvas.width = pixelCrop.width
     canvas.height = pixelCrop.height
 
-    // paste generated rotate image at the top left corner
+    // paste generated rotate image in the top left corner
     ctx.putImageData(data, 0, 0)
 
     // As Base64 string

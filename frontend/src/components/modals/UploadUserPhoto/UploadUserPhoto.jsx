@@ -2,11 +2,11 @@ import React, {useCallback, useState} from 'react';
 import {Box, Button, Dialog, Slider, Typography} from "@material-ui/core";
 import {getOrientation} from "get-orientation/browser";
 import Cropper from "react-easy-crop";
+import {useDispatch} from "react-redux";
 import {closeModal} from "../../../helpers/utils";
 import {getCroppedImg, getRotatedImage} from "./canvasUtils";
-import {useStyles} from "./style";
-import {useDispatch} from "react-redux";
 import {sendNewUserProfilePhoto} from "../../../store/thunks/common/profile";
+import {useStyles} from "./style";
 
 const ORIENTATION_TO_ANGLE = {
     '3': 180,
@@ -19,6 +19,7 @@ const UploadUserPhoto = (props) => {
     const {open, setOpen} = props
     const classes = useStyles()
     const dispatch = useDispatch()
+    // Вы можете загрузить изображение в формате JPG, GIF или PNG.
 
 
     const [imageSrc, setImageSrc] = useState(null)
@@ -26,7 +27,7 @@ const UploadUserPhoto = (props) => {
     const [rotation, setRotation] = useState(0)
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-    const [ , setCroppedImage] = useState(null)
+    const [ ,setCroppedImage] = useState(null)
 
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
