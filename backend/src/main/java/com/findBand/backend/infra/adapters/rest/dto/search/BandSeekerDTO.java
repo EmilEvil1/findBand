@@ -15,7 +15,6 @@ public class BandSeekerDTO implements Serializable {
     private Set<InstrumentDTO> instruments;
     private RegionDTO region;
     private String username;
-    private String shortDescription;
     private String bandName;
     private Integer experienceAge;
 }
