@@ -21,7 +21,7 @@ services:
       - storage-data:${STORAGE_FOLDER}
   findband_redis:
     build: ./docker-redis
-    image: ghcr.io/dssorokin/findband_web:latest
+    image: ghcr.io/dssorokin/findband/findband_redis:latest
     container_name: findband_redis
     hostname: findband_redis
     ports:
