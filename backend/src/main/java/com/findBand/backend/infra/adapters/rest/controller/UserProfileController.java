@@ -4,6 +4,7 @@ import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.useCase.user.UserGetProfile;
 import com.findBand.backend.domain.useCase.user.UserUpdateProfile;
 import com.findBand.backend.domain.useCase.user.UserUploadAvatar;
+import com.findBand.backend.infra.adapters.rest.dto.profile.UserAvatarRequestDTO;
 import com.findBand.backend.infra.adapters.rest.dto.profile.UserAvatarResponseDTO;
 import com.findBand.backend.infra.adapters.rest.dto.user.UserProfileRequestDTO;
 import com.findBand.backend.infra.adapters.rest.dto.user.UserProfileResponseDTO;
@@ -13,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URISyntaxException;
 
@@ -23,9 +23,9 @@ import java.net.URISyntaxException;
 public class UserProfileController extends BaseController {
 
     @PostMapping("/uploadAvatar")
-    public UserAvatarResponseDTO uploadAvatar(@RequestParam("file") MultipartFile file) {
+    public UserAvatarResponseDTO uploadAvatar(@RequestBody UserAvatarRequestDTO avatarRequest) {
         User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserUploadAvatar userUploadAvatar = new UserUploadAvatar(file, authenticatedUser.getUsername());
+        UserUploadAvatar userUploadAvatar = new UserUploadAvatar(avatarRequest.getImage(), authenticatedUser.getUsername());
         String avatarUri = publish(String.class, userUploadAvatar);
         return new UserAvatarResponseDTO(avatarUri);
     }

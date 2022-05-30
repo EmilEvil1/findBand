@@ -10,9 +10,7 @@ import com.findBand.backend.domain.useCase.user.UserUploadAvatar;
 import com.findBand.backend.infra.common.services.StorageException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 
 @Component
@@ -30,17 +28,19 @@ public class UserUploadAvatarCaseHandler  extends ObservableUseCasePublisher imp
 
     @Override
     public String handle(UserUploadAvatar useCase) {
-        MultipartFile file = useCase.getFile();
         try {
-            UserDomain userDomain = userPort.findUserByEmail(useCase.getEmail()).orElseThrow(FindBandCommonException::new);
-            String filename = storageService.store(file, userDomain.getId());
+            UserDomain userDomain = userPort.findUserByEmail(useCase.getEmail()).orElseThrow(() -> {
+                log.error("User with such email: {} doesn't exist", useCase.getEmail());
+                throw new FindBandCommonException();
+            });
+            String filename = storageService.store(useCase.getAvatarBase64(), "avatar", userDomain.getId());
 
             userPort.updateUserAvatar(filename, useCase.getEmail());
             userDomain.setAvatarFilename(filename);
 
             return userDomain.getAvatarUri();
         } catch (StorageException | URISyntaxException e) {
-            log.error("Error in file storing for filename: {}", file.getName(), e);
+            log.error("Error in file storing", e);
             throw new FindBandCommonException();
         }
     }

@@ -1,7 +1,9 @@
 package com.findBand.backend.infra.common.services;
 
 import com.findBand.backend.domain.services.StorageService;
+import com.findBand.backend.infra.common.util.ImageUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,10 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 
 @Service
 @Slf4j
@@ -50,6 +49,27 @@ public class StorageServiceImpl implements StorageService {
 
         return filename;
     }
+
+    @Override
+    public String store(String base64, String filename, long userId) throws StorageException {
+        if (StringUtils.isEmpty(filename)) {
+            throw new StorageException("Empty filename");
+        }
+        try {
+            byte[] base64Bytes = ImageUtil.convertImageBase64ToBytes(base64);
+            String extension = ImageUtil.resolveImageExtension(base64);
+
+            Path userDirectory = createUserDirectory(userId);
+            Path imageFilePath = userDirectory.resolve(filename + "." + extension);
+
+            Files.createFile(imageFilePath);
+            Files.write(imageFilePath, base64Bytes, StandardOpenOption.WRITE);
+            return filename + "." + extension;
+        } catch (IOException e) {
+            throw new StorageException("Error in file writing", e);
+        }
+    }
+
 
     private Path createUserDirectory(long userId) throws IOException {
         Path userDirectoryPath = this.rootLocation.resolve(String.valueOf(userId));
