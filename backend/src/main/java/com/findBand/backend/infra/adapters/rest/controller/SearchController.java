@@ -12,6 +12,7 @@ import com.findBand.backend.infra.adapters.rest.dto.search.SearchForMemberReques
 import com.findBand.backend.infra.adapters.rest.dto.search.VacancyDTO;
 import com.findBand.backend.infra.common.rest.BaseController;
 import com.findBand.backend.infra.common.rest.DataResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 public class SearchController extends BaseController {
 
     @PostMapping(value = "searchForMembers")
+    @Operation(summary = "Ищет музыкантов")
     public DataResponse<BandSeekerDTO> doSearchForMember(@RequestBody SearchForMemberRequestDTO request) {
         SearchForMember searchForMember = new SearchForMember(request.getInstrumentIds(), request.getRegionId());
         List<UserDomain> bandSeekers = publish(List.class, searchForMember);

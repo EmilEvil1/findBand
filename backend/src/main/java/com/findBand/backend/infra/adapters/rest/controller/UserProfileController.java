@@ -10,6 +10,8 @@ import com.findBand.backend.infra.adapters.rest.dto.user.UserProfileRequestDTO;
 import com.findBand.backend.infra.adapters.rest.dto.user.UserProfileResponseDTO;
 import com.findBand.backend.infra.common.rest.BaseController;
 import com.findBand.backend.infra.common.rest.Response;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -20,9 +22,11 @@ import java.net.URISyntaxException;
 @RestController
 @Slf4j
 @RequestMapping("/api/v1")
+@SecurityRequirement(name = "Bearer")
 public class UserProfileController extends BaseController {
 
     @PostMapping("/uploadAvatar")
+    @Operation(summary = "Запрос на создание аватара")
     public UserAvatarResponseDTO uploadAvatar(@RequestBody UserAvatarRequestDTO avatarRequest) {
         User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserUploadAvatar userUploadAvatar = new UserUploadAvatar(avatarRequest.getImage(), authenticatedUser.getUsername());
@@ -31,6 +35,7 @@ public class UserProfileController extends BaseController {
     }
 
     @GetMapping("/profile")
+    @Operation(summary = "Получение профайла музыканта")
     public UserProfileResponseDTO getProfile() {
         User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDomain user = publish(UserDomain.class, new UserGetProfile(authenticatedUser.getUsername()));
@@ -38,6 +43,7 @@ public class UserProfileController extends BaseController {
     }
 
     @PutMapping("/profile")
+    @Operation( summary = "Заполнение профайла музыканта")
     public Response<?> updateProfile(@RequestBody UserProfileRequestDTO userProfileRequest) {
         publish(UserDomain.class, UserUpdateProfile.fromDTO(userProfileRequest));
         return new Response<>();

@@ -1,6 +1,5 @@
 package com.findBand.backend.infra.common.rest;
 
-import com.findBand.backend.domain.exceptions.FindBandValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;

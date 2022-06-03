@@ -2,6 +2,7 @@ package com.findBand.backend.infra.adapters.rest.controller;
 
 import com.findBand.backend.domain.model.Region;
 import com.findBand.backend.domain.port.RegionsPort;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class RegionsController {
 	private final RegionsPort regionsPort;
 
 	@GetMapping(value = "regions")
+	@Operation(summary = "Возвращает все регионы России")
 	public Set<Region> getRegions() {
 		return regionsPort.findAllRegions();
 	}

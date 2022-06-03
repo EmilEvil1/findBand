@@ -10,6 +10,7 @@ import com.findBand.backend.infra.adapters.rest.dto.user.ValidatePasswordRequest
 import com.findBand.backend.infra.adapters.rest.dto.user.ValidateResetPasswordDTO;
 import com.findBand.backend.infra.common.rest.BaseController;
 import com.findBand.backend.infra.common.rest.Response;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,18 +18,14 @@ import org.springframework.web.bind.annotation.*;
 public class UserController extends BaseController {
 
     @PostMapping("/resetPassword")
+    @Operation(summary = "Сбрасывает пароль и отправляет письмо")
     public Response<?> resetPassword(@RequestBody ResetPasswordRequestDTO resetPasswordRequest) {
         publish(UserDomain.class, new UserResetPassword(resetPasswordRequest.getEmailAddress()));
         return new Response<>(true);
     }
 
-    @GetMapping("/validateResetPassword")
-    public ValidateResetPasswordDTO validateResetPassword(@RequestBody ValidatePasswordRequestDTO validatePasswordRequest) {
-        boolean isValid = publish(Boolean.class, new UserValidateResetPassword(validatePasswordRequest.getResetPasswordId()));
-        return new ValidateResetPasswordDTO(isValid);
-    }
-
     @PostMapping("/createNewPassword")
+    @Operation(summary = "Создает новый пароль")
     public Response<?> createNewPassword(@RequestBody UserCreateNewPasswordRequestDTO newPasswordRequestDTO) {
         //TODO: HOW TO GET USER ID?
         publish(Boolean.class, new UserCreateNewPassword(

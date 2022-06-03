@@ -64,7 +64,6 @@ public class RegionsRedisAdapter implements RegionsPort {
 
 	private Region toDomain(Object regionRedisObj) {
 		LinkedHashMap regionRedisMap = (LinkedHashMap) regionRedisObj;
-		log.info("RegionRedisEntity: {}", regionRedisMap);
 		return new Region((Integer) regionRedisMap.get("regionId"),
 		(String) regionRedisMap.get("regionName"));
 	}

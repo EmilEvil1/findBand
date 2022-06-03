@@ -3,6 +3,7 @@ package com.findBand.backend.infra.adapters.rest.controller;
 import com.findBand.backend.domain.model.Instrument;
 import com.findBand.backend.domain.port.InstrumentsPort;
 import com.findBand.backend.infra.adapters.rest.dto.InstrumentDTO;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class InstrumentsController {
     }
 
     @GetMapping("/instruments")
+    @Operation(summary = "Возвращает все инструменты")
     public List<InstrumentDTO> getAllInstruments() {
         return instrumentsPort.getAllInstruments().stream().map(this::toInstrumentDTO).collect(Collectors.toList());
     }

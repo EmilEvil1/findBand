@@ -10,6 +10,7 @@ import com.findBand.backend.infra.security.jwt.JWTFilter;
 import com.findBand.backend.infra.security.jwt.TokenProvider;
 import com.findBand.backend.infra.security.rest.dto.LoginDTO;
 import com.findBand.backend.infra.security.rest.dto.RegisterDTO;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,7 @@ public class AuthenticationRestController extends BaseController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Регистрация пользователя")
     @ResponseStatus(HttpStatus.CREATED)
     public Response<JWTToken> register(@RequestBody RegisterDTO registerDTO) {
         UserCreate userCreate = new UserCreate();
@@ -66,6 +68,7 @@ public class AuthenticationRestController extends BaseController {
     }
 
     @PostMapping("/authenticate")
+    @Operation(summary = "Авторизация пользователя")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<JWTToken> authorize(@RequestBody LoginDTO loginDTO) {
         UsernamePasswordAuthenticationToken authenticationToken =
