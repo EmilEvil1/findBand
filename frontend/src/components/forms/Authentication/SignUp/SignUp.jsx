@@ -3,23 +3,14 @@ import {useCookies} from "react-cookie";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {Formik, Form} from "formik";
-import InputMask from 'react-input-mask';
-import {
-    Box,
-    Button,
-    TextField,
-    Typography,
-} from "@material-ui/core";
+import {Box, Button, TextField, Typography} from "@material-ui/core";
 import {useStyles} from "../style";
 import RegionList from "../../../common/RegionList/RegionList";
 import InstrumentList from "../../../common/InstrumentList/InstrumentList";
-import BandRegistration from "../../../modals/BandRegistration/BandRegistration";
 import {checkTokenValidate, eventToggle} from "../../../../helpers/utils";
 import {sendSignUpFormData} from "../../../../store/thunks/common/auth";
 import {signUpValidation} from "../../../../helpers/validation";
 import IconPassword from "../../../../assets/icons/auth/password";
-import PlusIcon from "../../../../assets/icons/auth/plus";
-import EditIcon from "../../../../assets/icons/auth/edit";
 
 const SignUp = () => {
 
@@ -29,8 +20,6 @@ const SignUp = () => {
     const [token, setToken] = useCookies(['access_token'])
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
-    const [checked, setChecked] = useState(false);
-    const [isOwner, setIsOwner] = useState(false)
 
     const onSubmit = data => dispatch(sendSignUpFormData(data, setToken))
 
@@ -42,14 +31,11 @@ const SignUp = () => {
         <Formik
             initialValues={{
                 username: '',
-                phone: '',
                 email: '',
                 password: '',
                 confirmationPassword: '',
                 regionId: '',
                 instrumentId: '',
-                bandName: '',
-                isBandOwner: isOwner
             }}
             onSubmit={values => onSubmit(values)}
             validationSchema={signUpValidation}
@@ -90,28 +76,28 @@ const SignUp = () => {
                                 variant='outlined'
                                 fullWidth
                             />
-                            <InputMask
-                                mask="+7 (999) 999-9999"
-                                value={values.phone}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                error={touched.phone && Boolean(errors.phone)}
-                                helperText={touched.phone && errors.phone}
-                            >
-                                <TextField
-                                    className={classes.marginBlock}
-                                    name='phone'
-                                    label='Телефон'
-                                    placeholder='Укажите телефон'
-                                    value={values.phone}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    error={touched.phone && Boolean(errors.phone)}
-                                    helperText={touched.phone && errors.phone}
-                                    variant='outlined'
-                                    fullWidth
-                                />
-                            </InputMask>
+                            {/*<InputMask*/}
+                            {/*    mask="+7 (999) 999-9999"*/}
+                            {/*    value={values.phone}*/}
+                            {/*    onChange={handleChange}*/}
+                            {/*    onBlur={handleBlur}*/}
+                            {/*    error={touched.phone && Boolean(errors.phone)}*/}
+                            {/*    helperText={touched.phone && errors.phone}*/}
+                            {/*>*/}
+                            {/*    <TextField*/}
+                            {/*        className={classes.marginBlock}*/}
+                            {/*        name='phone'*/}
+                            {/*        label='Телефон'*/}
+                            {/*        placeholder='Укажите телефон'*/}
+                            {/*        value={values.phone}*/}
+                            {/*        onChange={handleChange}*/}
+                            {/*        onBlur={handleBlur}*/}
+                            {/*        error={touched.phone && Boolean(errors.phone)}*/}
+                            {/*        helperText={touched.phone && errors.phone}*/}
+                            {/*        variant='outlined'*/}
+                            {/*        fullWidth*/}
+                            {/*    />*/}
+                            {/*</InputMask>*/}
                             <TextField
                                 name='email'
                                 label='Email'
@@ -188,35 +174,6 @@ const SignUp = () => {
                                 />
                             </Box>
                         </Box>
-                        <Button
-                            color='primary'
-                            onClick={() => setChecked(true)}
-                            className={classes.createBandButton}
-                        >
-                            {values.bandName ? (
-                                <Box className={classes.addBandWrapper}>
-                                    <EditIcon />
-                                    <Typography style={{color: '#0F5D62'}}>Изменить группу</Typography>
-                                </Box>
-                                ) : (
-                                <Box className={classes.addBandWrapper}>
-                                    <PlusIcon />
-                                    <Typography style={{color: '#0047FF'}} variant="body1">Добавить группу</Typography>
-                                </Box>
-                            )}
-                        </Button>
-                        {checked && (
-                            <BandRegistration
-                                open={checked}
-                                close={setChecked}
-                                touched={touched}
-                                handleBlur={handleBlur}
-                                handleChange={handleChange}
-                                errors={errors}
-                                values={values}
-                                setIsOwner={setIsOwner}
-                            />
-                        )}
                         <Button
                             className={classes.signUpBtn}
                             color='primary'

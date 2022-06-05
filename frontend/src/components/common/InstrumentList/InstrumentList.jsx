@@ -32,7 +32,7 @@ const InstrumentList = (props) => {
                     label='Инструмент'
                     placeholder='Введите название'
                     onChange={handleChange}
-                    value={values.instrumentId || ''}
+                    value={!!values.instrumentId && values.instrumentId}
                     onBlur={handleBlur}
                     error={touched.instrumentId && Boolean(errors.instrumentId)}
                     // helperText={touched.instrumentId && errors.instrumentId}

@@ -7,6 +7,10 @@ import {
     SEARCH_MUSICIAN,
     SET_QUOTES
 } from "../types/types";
+import photo1  from './../../assets/img/mainSlider/bob-marley.jpg'
+import photo2  from './../../assets/img/mainSlider/beatles.jpg'
+import photo3  from './../../assets/img/mainSlider/bethoven.jpg'
+import photo4  from './../../assets/img/mainSlider/mike.jpg'
 
 const initialState = {
     info: {},
@@ -15,19 +19,23 @@ const initialState = {
     quotes: [
         {
             author: 'Людвиг ван Бетховен',
-            text: '«Музыка — это откровение более высокое, чем мудрость и философия»'
+            text: '«Музыка — это откровение более высокое, чем мудрость и философия»',
+            img: photo3
         },
         {
             author: 'Пол Маккартни, Beatles',
-            text: '«Я всегда играл только ту музыку, в которую верил. Ведь, знаете ли, фанаты очень чётко чувствуют обман»'
+            text: '«Я всегда играл только ту музыку, в которую верил. Ведь, знаете ли, фанаты очень чётко чувствуют обман»',
+            img: photo2
         },
         {
             author: 'Боб Марли',
-            text: '«В музыке есть прекрасная вещь — когда она попадает в тебя, ты не чувствуешь боли.»'
+            text: '«В музыке есть прекрасная вещь — когда она попадает в тебя, ты не чувствуешь боли.»',
+            img: photo1
         },
         {
             author: 'Майкл Джексон',
-            text: "«Мне нравится создавать музыку, которая понятна всем, от фермера в Ирландии до уборщицы туалетов в Гарлеме»"
+            text: "«Мне нравится создавать музыку, которая понятна всем, от фермера в Ирландии до уборщицы туалетов в Гарлеме»",
+            img: photo4
         }
     ],
     searchData: null,

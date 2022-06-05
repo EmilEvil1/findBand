@@ -164,7 +164,7 @@ export const useStyles = makeStyles({
         }
     },
     signUpBtn: {
-        marginTop: 20
+        marginTop: 35
     },
     passwordField: {
         marginTop: 30,

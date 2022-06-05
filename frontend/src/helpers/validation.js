@@ -27,9 +27,9 @@ export const signUpValidation = yup.object({
     username: yup
         .string('Заполните поле')
         .required('Заполните поле'),
-    phone: yup
-        .string('Заполните поле')
-        .required('Заполните поле'),
+    // phone: yup
+    //     .string('Заполните поле')
+    //     .required('Заполните поле'),
     email: yup
         .string('Заполните поле')
         .email('Введите корректную почту')
@@ -46,8 +46,8 @@ export const signUpValidation = yup.object({
     regionId: yup
         .string('Выберите регион')
         .required('Выберите регион'),
-    isBandOwner: yup
-        .boolean().default(true),
+    // isBandOwner: yup
+    //     .boolean().default(true),
     instrumentId : yup
         .number('Некоректный иструмент')
         .required('Выберите регион')

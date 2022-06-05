@@ -1,44 +1,34 @@
 import React from 'react';
 import {Box} from "@material-ui/core";
+import {useSelector} from "react-redux";
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import photo1  from '../../../assets/img/mainSlider/bethoven.jpg'
-import photo2  from '../../../assets/img/mainSlider/beatles.jpg'
-import photo3  from '../../../assets/img/mainSlider/bob-marley.jpg'
-import photo4  from '../../../assets/img/mainSlider/mike.jpg'
 import {useStyles} from "./style";
+import Quotes from "../Quotes/Quotes";
 
 const Musicians = () => {
 
     const classes = useStyles()
+    const quotes = useSelector(({ state }) => state.quotes)
 
-    const items = [
-        <Box className={classes.sliderWrapper}>
-            <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={photo1} alt='' />,
-        </Box>,
-        <Box className={classes.sliderWrapper}>
-            <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={photo2} alt='' />,
-        </Box>,
-        <Box className={classes.sliderWrapper}>
-            <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={photo3} alt='' />,
-        </Box>,
-        <Box className={classes.sliderWrapper}>
-            <Box className={classes.shadowBackground} />
-            <img className={classes.slideImg} src={photo4} alt='' />
-        </Box>
-    ]
-
-    // function randomIntFromInterval(min, max) { // min and max included
-    //     return Math.floor(Math.random() * (max - min + 1) + min)
-    // }
+    const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
     return (
         <AliceCarousel
-            // activeIndex={randomIntFromInterval(0, 4)}
-            items={items}
+            activeIndex={randomIntFromInterval(0, quotes.length)}
+            items={quotes.length && quotes.map((element, index) => {
+                return (
+                    <Box key={index} className={classes.sliderWrapper}>
+                        <Box className={classes.shadowBackground} />
+                        <img className={classes.slideImg} src={element.img} alt='' />,
+                        <Quotes
+                            text={element.text}
+                            author={element.author}
+                            index={index}
+                        />
+                    </Box>
+                )
+            })}
             animationType='fadeout'
             autoPlayStrategy="none"
             autoPlayInterval={7000}

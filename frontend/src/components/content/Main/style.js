@@ -3,9 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles({
     searchPanelWrapper: {
         width: '100%',
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center'
     },
     formWrapper: {
         position: "relative",
@@ -23,7 +20,8 @@ export const useStyles = makeStyles({
         zIndex: -1
     },
     quotesSliderWrapper: {
-        padding: '30px 40px',
+        marginBottom: 35,
+        padding: '30px',
         zIndex: 2
     }
 });

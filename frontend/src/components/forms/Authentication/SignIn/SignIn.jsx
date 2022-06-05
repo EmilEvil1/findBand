@@ -5,12 +5,11 @@ import {useHistory} from "react-router-dom";
 import {Form, Formik} from "formik";
 import {Box, Button, Grid, TextField, Typography} from "@material-ui/core";
 import {signInValidation} from "../../../../helpers/validation";
-import {useStyles} from "../style";
-import AuthServices from "./AuthServices/AuthServices";
-import IconPassword from "../../../../assets/icons/auth/password";
-import {checkTokenValidate, eventToggle, openModal} from "../../../../helpers/utils";
-import ForgetPassword from "../../../modals/ForgetPassword/ForgetPassword";
 import {sendSignInFormData} from "../../../../store/thunks/common/auth";
+import {checkTokenValidate, eventToggle, openModal} from "../../../../helpers/utils";
+import IconPassword from "../../../../assets/icons/auth/password";
+import ForgetPassword from "../../../modals/ForgetPassword/ForgetPassword";
+import {useStyles} from "../style";
 
 const SignIn = () => {
 
@@ -51,9 +50,7 @@ const SignIn = () => {
                             className={classes.signInForm}
                             onSubmit={handleSubmit}
                         >
-                            <Typography variant="h4">Вход</Typography>
-                            <AuthServices/>
-                            <Typography component='span' style={{margin: '30px 0'}}>или</Typography>
+                            <Typography style={{marginBottom: 50}} variant="h4">Вход</Typography>
                             <Box className={classes.inputsWrapper}>
                                 <TextField
                                     style={{marginBottom: 35}}
