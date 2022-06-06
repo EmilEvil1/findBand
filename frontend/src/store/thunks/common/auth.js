@@ -1,8 +1,10 @@
 import service from "../../../helpers/api";
 import {createPassword, saveErrorStatusCode} from "../../action/action";
+import {saveRestStatusCode} from "./restStatus";
 
 export const sendSignInFormData = ( data, setCookie ) => dispatch => {
     return service.post('authenticate ', { ...data })
+
         .then((response) => {
             if (response.token) setCookie('access_token', response.token)
         })
@@ -17,6 +19,7 @@ export const sendSignUpFormData = ( data, setCookie) => dispatch => {
 
 export const sendPassword = (data, closeModal, close) => dispatch => {
     return service.post('resetPassword', {...data})
+        .then((response) => dispatch(saveRestStatusCode(response)))
         .then(() => closeModal(close))
         .catch(err => dispatch(saveErrorStatusCode(err.response.status)))
 }

@@ -4,34 +4,27 @@ import {white} from "../../../helpers/styles";
 export const useStyles = makeStyles({
     '@keyframes pendulum': {
         '0%': {
-            transform: 'rotate(40deg)'
-        },
-        '20%': {
-            transform: 'rotate(-30deg)'
+            transform: 'rotate(35deg)',
         },
         '50%': {
-            transform: 'rotate(0deg)'
-        },
-        '80%': {
-            transform: 'rotate(-30deg)'
+            transform: 'rotate(-35deg)',
         },
         '100%': {
-            transform: 'rotate(40deg)'
+            transform: 'rotate(35deg)',
         }
     },
     metronomeStick: {
         position: 'absolute',
         width: '50px',
-        top: '-10%',
+        top: '-5%',
         left: '25%',
         zIndex: 2,
-        animation: '$pendulum 5s infinite lineae',
+        animation: '$pendulum 1.5s infinite ease',
         transformOrigin: '50% 100%',
-        // transform: 'translate(-50%, -50%)'
     },
     stick: {
-        width: 2,
-        height: 85,
+        width: 3,
+        height: 80,
         backgroundColor: white,
         margin: '0 auto'
     }

@@ -2,7 +2,7 @@ import {
     ERROR_CODE,
     GET_INSTRUMENT_LIST,
     GET_PROFILE_DATA,
-    REGIONS_LIST, SAVE_PROFILE_DATA,
+    REGIONS_LIST, REST_STATUS, SAVE_PROFILE_DATA,
     SEARCH_MUSICIAN,
     SEND_NEW_PASSWORD,
     SET_QUOTES
@@ -69,6 +69,13 @@ export const saveProfileData = payload => {
 export const saveErrorStatusCode = payload => {
     return {
         type: ERROR_CODE,
+        payload
+    }
+}
+
+export const saveRestStatus = payload => {
+    return {
+        type: REST_STATUS,
         payload
     }
 }

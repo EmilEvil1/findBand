@@ -13,7 +13,7 @@ export const sendNewUserProfileData = data => dispatch => {
 }
 
 export const sendNewUserProfilePhoto = data => dispatch => {
-    return service.post('profile', {...data})
+    return service.post('uploadAvatar', {...data})
         .then(() => dispatch(getUserProfileData))
         .catch(err => dispatch(saveErrorStatusCode(err.response.status)))
 }

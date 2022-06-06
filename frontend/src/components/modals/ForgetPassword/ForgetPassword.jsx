@@ -12,6 +12,7 @@ import {useStyles} from "./style";
 import {closeModal} from "../../../helpers/utils";
 import {forgetPassword} from "../../../helpers/validation";
 import {sendPassword} from "../../../store/thunks/common/auth";
+import {saveRestStatusCode} from "../../../store/thunks/common/restStatus";
 
 const ForgetPassword = (props) => {
 
@@ -19,7 +20,10 @@ const ForgetPassword = (props) => {
     const classes = useStyles()
     const dispatch = useDispatch()
 
-    const onSubmit = email => dispatch(sendPassword(email, closeModal, close))
+    const onSubmit = email =>{
+        dispatch(saveRestStatusCode(false))
+        dispatch(sendPassword(email, closeModal, close))
+    }
 
     return (
         <Dialog
@@ -73,8 +77,7 @@ const ForgetPassword = (props) => {
                 </Formik>
             </Box>
         </Dialog>
-    );
-
+    )
 };
 
 export default ForgetPassword;

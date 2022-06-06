@@ -16,3 +16,4 @@ export const SAVE_PROFILE_DATA = 'SAVE_PROFILE_DATA'
 // Error Handling
 
 export const ERROR_CODE = 'ERROR_CODE'
+export const REST_STATUS = 'REST_STATUS'

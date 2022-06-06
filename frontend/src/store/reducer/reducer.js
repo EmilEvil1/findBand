@@ -3,7 +3,7 @@ import {
     GET_INFO,
     GET_INSTRUMENT_LIST,
     GET_PROFILE_DATA,
-    REGIONS_LIST,
+    REGIONS_LIST, REST_STATUS,
     SEARCH_MUSICIAN,
     SET_QUOTES
 } from "../types/types";
@@ -76,7 +76,8 @@ const initialState = {
     ],
     searchData: null,
     profileData: null,
-    error: null
+    error: null,
+    restStatus: true
 }
 
 export const reducer = (state = initialState, action) => {
@@ -95,6 +96,8 @@ export const reducer = (state = initialState, action) => {
             return {...state, profileData: action.payload}
         case ERROR_CODE:
             return {...state, error: action.payload}
+        case REST_STATUS:
+            return {...state, restStatus: action.payload}
         default:
             return state;
     }

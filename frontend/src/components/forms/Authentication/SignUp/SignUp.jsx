@@ -1,13 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useCookies} from "react-cookie";
 import {useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
 import {Formik, Form} from "formik";
 import {Box, Button, TextField, Typography} from "@material-ui/core";
 import {useStyles} from "../style";
 import RegionList from "../../../common/RegionList/RegionList";
 import InstrumentList from "../../../common/InstrumentList/InstrumentList";
-import {checkTokenValidate, eventToggle} from "../../../../helpers/utils";
+import {eventToggle} from "../../../../helpers/utils";
 import {sendSignUpFormData} from "../../../../store/thunks/common/auth";
 import {signUpValidation} from "../../../../helpers/validation";
 import IconPassword from "../../../../assets/icons/auth/password";
@@ -16,16 +15,11 @@ const SignUp = () => {
 
     const classes = useStyles()
     const dispatch = useDispatch()
-    const history = useHistory()
-    const [token, setToken] = useCookies(['access_token'])
+    const [,setToken] = useCookies(['access_token'])
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
     const onSubmit = data => dispatch(sendSignUpFormData(data, setToken))
-
-    useEffect(() => {
-        if (!checkTokenValidate(token.access_token)) history.push('/')
-    }, [token.access_token])
 
     return (
         <Formik

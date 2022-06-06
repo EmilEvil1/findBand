@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useCookies} from "react-cookie";
 import {useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
 import {Form, Formik} from "formik";
 import {Box, Button, Grid, TextField, Typography} from "@material-ui/core";
 import {signInValidation} from "../../../../helpers/validation";
 import {sendSignInFormData} from "../../../../store/thunks/common/auth";
-import {checkTokenValidate, eventToggle, openModal} from "../../../../helpers/utils";
+import {eventToggle, openModal} from "../../../../helpers/utils";
 import IconPassword from "../../../../assets/icons/auth/password";
 import ForgetPassword from "../../../modals/ForgetPassword/ForgetPassword";
 import {useStyles} from "../style";
@@ -15,16 +14,11 @@ const SignIn = () => {
 
     const dispatch = useDispatch()
     const classes = useStyles()
-    const history = useHistory()
     const [open, setOpen] = useState(false);
-    const [token, setToken] = useCookies(['access_token'])
+    const [,setToken] = useCookies(['access_token'])
     const [passwordShown, setPasswordShown] = useState(false)
 
     const onSubmit = data => dispatch(sendSignInFormData(data, setToken))
-
-    useEffect(() => {
-        if (!checkTokenValidate(token.access_token)) history.push('/')
-    }, [token.access_token, history])
 
     return (
         <Grid className={classes.formWrapper}>
