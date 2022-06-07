@@ -1,6 +1,5 @@
 package com.findBand.backend.infra.common.rest;
 
-import com.findBand.backend.domain.exceptions.FindBandValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -26,6 +25,8 @@ public class RestExceptionHandler extends BaseController {
 
     private final MessageSource messageSource;
 
+    private static final String messageKeyNotFound = "Message key not found";
+
     public RestExceptionHandler(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
@@ -39,8 +40,9 @@ public class RestExceptionHandler extends BaseController {
 
     @ExceptionHandler(ApiErrorException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Response<ErrorResponse> handleFindBandValidationError(ApiErrorException e) {
-        return respond(new ErrorResponse(e.getErrorCode(), e.getErrorCode()));
+    public Response<ErrorResponse> handleFindBandValidationError(ApiErrorException e, Locale locale) {
+        return respond(new ErrorResponse(e.getErrorCode(),
+                retrieveLocalizationMessage(e.getErrorCode(), locale).get(0)));
     }
 
     @ExceptionHandler(WebExchangeBindException.class)
@@ -101,7 +103,7 @@ public class RestExceptionHandler extends BaseController {
     }
 
     private List<String> retrieveLocalizationMessage(String key, Locale locale, String... args) {
-        String message = messageSource.getMessage(key, args, locale);
+        String message = messageSource.getMessage(key, args, messageKeyNotFound, locale);
         return Pattern.compile(";").splitAsStream(message).collect(Collectors.toList());
     }
 }
