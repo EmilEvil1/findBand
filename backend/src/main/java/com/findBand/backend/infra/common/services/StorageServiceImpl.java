@@ -62,6 +62,7 @@ public class StorageServiceImpl implements StorageService {
             Path userDirectory = createUserDirectory(userId);
             Path imageFilePath = userDirectory.resolve(filename + "." + extension);
 
+            Files.deleteIfExists(imageFilePath);
             Files.createFile(imageFilePath);
             Files.write(imageFilePath, base64Bytes, StandardOpenOption.WRITE);
             return filename + "." + extension;
