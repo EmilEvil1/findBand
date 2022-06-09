@@ -39,7 +39,7 @@ public class UserCreateResetPasswordUseCaseHandler extends ObservableUseCasePubl
 
     @Override
     public UserDomain handle(UserResetPassword useCase) {
-        UserDomain user = userPort.findUserByEmail(useCase.getEmailAddress()).orElseThrow(() -> new NoSuchUserException("User with such email " + useCase.getEmailAddress() + " doesn't exist"));
+        UserDomain user = userPort.findUserByEmail(useCase.getEmailAddress()).orElseThrow(() -> new NoSuchUserException("authorization.email.not.exist"));
         ResetPassword resetPassword = new ResetPassword();
         resetPassword.setUser(user);
         resetPassword.setId(UUID.randomUUID().toString());
