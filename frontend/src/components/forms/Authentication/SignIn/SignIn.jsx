@@ -9,6 +9,7 @@ import {eventToggle, openModal} from "../../../../helpers/utils";
 import IconPassword from "../../../../assets/icons/auth/password";
 import ForgetPassword from "../../../modals/ForgetPassword/ForgetPassword";
 import {useStyles} from "../style";
+import TelegramAccount from "../../../common/TelegramAccount/TelegramAccount";
 
 const SignIn = () => {
 
@@ -45,6 +46,7 @@ const SignIn = () => {
                             onSubmit={handleSubmit}
                         >
                             <Typography style={{marginBottom: 50}} variant="h4">Вход</Typography>
+                            <TelegramAccount />
                             <Box className={classes.inputsWrapper}>
                                 <TextField
                                     style={{marginBottom: 35}}
