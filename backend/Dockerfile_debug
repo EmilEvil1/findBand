@@ -1,0 +1,4 @@
+FROM openjdk:11
+WORKDIR /findband
+COPY target/backend-0.0.1-SNAPSHOT.jar .
+ENTRYPOINT ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005", "-jar", "/findband/backend-0.0.1-SNAPSHOT.jar", "-DspringActiveProfiles=prod"]

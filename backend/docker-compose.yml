@@ -6,6 +6,8 @@ services:
     container_name: findband_web
     image: ghcr.io/dssorokin/findband/findband_web:latest
     ports:
+#      - Use it only for debugging purposes
+#      - 5005:5005
       - 80:80
     environment:
       - SPRING_PROFILES_ACTIVE=${PROFILE}
