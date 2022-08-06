@@ -20,6 +20,11 @@ public class SearchForVacanciesUseCaseHandler extends ObservableUseCasePublisher
     }
 
     @Override
+    public Class<SearchForVacancies> useCaseClass() {
+        return SearchForVacancies.class;
+    }
+
+    @Override
     public List<Vacancy> handle(SearchForVacancies useCase) {
         return vacationPort.findVacanciesByInstrumentIds(useCase.getInstrumentsIds());
     }

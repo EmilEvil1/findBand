@@ -1,5 +1,6 @@
 package com.findBand.backend.infra.adapters.rest.controller;
 
+import com.findBand.backend.domain.common.useCase.UseCasePublisher;
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.useCase.user.UserGetProfile;
 import com.findBand.backend.domain.useCase.user.UserUpdateProfile;
@@ -22,18 +23,24 @@ import java.net.URISyntaxException;
 @RequestMapping("/api/v1")
 public class UserProfileController extends BaseController {
 
+    private UseCasePublisher useCasePublisher;
+
+    public UserProfileController(UseCasePublisher useCasePublisher) {
+        this.useCasePublisher = useCasePublisher;
+    }
+
     @PostMapping("/uploadAvatar")
     public UserAvatarResponseDTO uploadAvatar(@RequestBody UserAvatarRequestDTO avatarRequest) {
         User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserUploadAvatar userUploadAvatar = new UserUploadAvatar(avatarRequest.getImage(), authenticatedUser.getUsername());
-        String avatarUri = publish(String.class, userUploadAvatar);
+        String avatarUri = useCasePublisher.publish(String.class, userUploadAvatar);
         return new UserAvatarResponseDTO(avatarUri);
     }
 
     @GetMapping("/profile")
     public UserProfileResponseDTO getProfile() {
         User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDomain user = publish(UserDomain.class, new UserGetProfile(authenticatedUser.getUsername()));
+        UserDomain user = useCasePublisher.publish(UserDomain.class, new UserGetProfile(authenticatedUser.getUsername()));
         return toDTO(user);
     }
 

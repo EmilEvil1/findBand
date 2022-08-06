@@ -23,6 +23,11 @@ public class UserUpdateProfileUseCaseHandler extends ObservableUseCasePublisher 
     }
 
     @Override
+    public Class<UserUpdateProfile> useCaseClass() {
+        return UserUpdateProfile.class;
+    }
+
+    @Override
     public UserDomain handle(UserUpdateProfile useCase) {
         UserDomain user = userPort.findUserByEmail(useCase.getEmailAddress()).orElseThrow(() -> new NoSuchUserException("No user exists with such id: " + useCase.getEmailAddress()));
         user.setEmail(useCase.getEmailAddress());

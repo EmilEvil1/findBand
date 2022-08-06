@@ -20,6 +20,10 @@ public class UserGetProfileUseCaseHandler extends ObservableUseCasePublisher imp
         register(UserGetProfile.class, this);
     }
 
+    @Override
+    public Class<UserGetProfile> useCaseClass() {
+        return UserGetProfile.class;
+    }
 
     @Override
     public UserDomain handle(UserGetProfile useCase) {

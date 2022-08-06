@@ -1,5 +1,7 @@
 package com.findBand.backend.infra.adapters.rest.controller;
 
+import com.findBand.backend.domain.common.useCase.UseCaseHandler;
+import com.findBand.backend.domain.common.useCase.UseCasePublisher;
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.useCase.user.UserCreateNewPassword;
 import com.findBand.backend.domain.useCase.user.UserResetPassword;
@@ -16,22 +18,28 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class UserController extends BaseController {
 
+    private UseCasePublisher useCasePublisher;
+
+    public UserController(UseCasePublisher useCasePublisher) {
+        this.useCasePublisher = useCasePublisher;
+    }
+
     @PostMapping("/resetPassword")
     public Response<?> resetPassword(@RequestBody ResetPasswordRequestDTO resetPasswordRequest) {
-        publish(UserDomain.class, new UserResetPassword(resetPasswordRequest.getEmailAddress()));
+        useCasePublisher.publish(UserDomain.class, new UserResetPassword(resetPasswordRequest.getEmailAddress()));
         return new Response<>(true);
     }
 
     @GetMapping("/validateResetPassword")
     public ValidateResetPasswordDTO validateResetPassword(@RequestBody ValidatePasswordRequestDTO validatePasswordRequest) {
-        boolean isValid = publish(Boolean.class, new UserValidateResetPassword(validatePasswordRequest.getResetPasswordId()));
+        boolean isValid = useCasePublisher.publish(Boolean.class, new UserValidateResetPassword(validatePasswordRequest.getResetPasswordId()));
         return new ValidateResetPasswordDTO(isValid);
     }
 
     @PostMapping("/createNewPassword")
     public Response<?> createNewPassword(@RequestBody UserCreateNewPasswordRequestDTO newPasswordRequestDTO) {
         //TODO: HOW TO GET USER ID?
-        publish(Boolean.class, new UserCreateNewPassword(
+        useCasePublisher.publish(Boolean.class, new UserCreateNewPassword(
           newPasswordRequestDTO.getNewPassword(),
           newPasswordRequestDTO.getConfirmationNewPassword(),
           newPasswordRequestDTO.getResetPasswordId()

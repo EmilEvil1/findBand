@@ -19,6 +19,11 @@ public class UserValidateResetPasswordUseCaseHandler extends ObservableUseCasePu
     }
 
     @Override
+    public Class<UserValidateResetPassword> useCaseClass() {
+        return UserValidateResetPassword.class;
+    }
+
+    @Override
     public Boolean handle(UserValidateResetPassword useCase) {
        ResetPassword resetPassword = resetPasswordPort.findResetPasswordById(useCase.getResetPasswordId()).orElseThrow(() -> new NoSuchResetPasswordException("No such reset password exists with id: " + useCase.getResetPasswordId()));
        return !resetPassword.isActivated();

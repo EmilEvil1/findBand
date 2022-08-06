@@ -27,6 +27,11 @@ public class UserUploadAvatarCaseHandler  extends ObservableUseCasePublisher imp
     }
 
     @Override
+    public Class<UserUploadAvatar> useCaseClass() {
+        return UserUploadAvatar.class;
+    }
+
+    @Override
     public String handle(UserUploadAvatar useCase) {
         try {
             UserDomain userDomain = userPort.findUserByEmail(useCase.getEmail()).orElseThrow(() -> {

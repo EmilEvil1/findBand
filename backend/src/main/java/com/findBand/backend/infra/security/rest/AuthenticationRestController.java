@@ -1,5 +1,6 @@
 package com.findBand.backend.infra.security.rest;
 
+import com.findBand.backend.domain.common.useCase.UseCasePublisher;
 import com.findBand.backend.domain.exceptions.FindBandValidationException;
 import com.findBand.backend.domain.model.UserDomain;
 import com.findBand.backend.domain.model.UserRoleEnum;
@@ -30,10 +31,14 @@ public class AuthenticationRestController extends BaseController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
+    private final UseCasePublisher useCasePublisher;
+
     public AuthenticationRestController(TokenProvider tokenProvider,
-                                        AuthenticationManagerBuilder authenticationManagerBuilder) {
+                                        AuthenticationManagerBuilder authenticationManagerBuilder,
+                                        UseCasePublisher useCasePublisher) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.useCasePublisher = useCasePublisher;
     }
 
     @PostMapping("/register")
@@ -49,7 +54,7 @@ public class AuthenticationRestController extends BaseController {
         userCreate.setUserRoleEnum(registerDTO.getIsBandOwner() ? UserRoleEnum.BAND_OWNER : UserRoleEnum.BAND_SEEKER);
         userCreate.setInstrumentId(registerDTO.getInstrumentId());
         userCreate.setRegionId(registerDTO.getRegionId());
-        UserDomain createdUser = publish(UserDomain.class, userCreate);
+        UserDomain createdUser = useCasePublisher.publish(UserDomain.class, userCreate);
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 registerDTO.getEmail(),

@@ -15,6 +15,8 @@ import com.findBand.backend.domain.useCase.user.UserCreate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -38,8 +40,13 @@ public class UserCreateUseCaseHandler extends ObservableUseCasePublisher impleme
     }
 
     @Override
-    public UserDomain handle(UserCreate useCase) {
+    public Class<UserCreate> useCaseClass() {
+        return UserCreate.class;
+    }
 
+    @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public UserDomain handle(UserCreate useCase) {
         if (userPort.doUserExists(useCase.getEmail())) {
             log.info("User with such email: {} already exists", useCase.getEmail());
             throw new FindBandValidationException("registration.email.already.exists");
@@ -55,7 +62,7 @@ public class UserCreateUseCaseHandler extends ObservableUseCasePublisher impleme
         userDomain.setUserRole(isBandOwner ? UserRole.BAND_OWNER : UserRole.BAND_SEEKER);
         userDomain.setInstruments(new HashSet<>(Arrays.asList(new Instrument(useCase.getInstrumentId()))));
         userDomain.setRegion(regionsPort.findById(useCase.getRegionId()));
-        //TODO: CREATING USER METHOD SHOULD BE TRANSACTIONAL AND INCLUDES LOGIC OF BAND CREATION
+
         userPort.createUser(userDomain);
         if (isBandOwner) {
             Band newBand = new Band();

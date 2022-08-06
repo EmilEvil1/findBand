@@ -26,6 +26,11 @@ public class UserCreateNewPasswordUseCaseHandler extends ObservableUseCasePublis
     }
 
     @Override
+    public Class<UserCreateNewPassword> useCaseClass() {
+        return UserCreateNewPassword.class;
+    }
+
+    @Override
     public Boolean handle(UserCreateNewPassword useCase) {
         boolean isValidResetPassword = publish(Boolean.class, new UserValidateResetPassword(useCase.getResetPasswordId()));
 

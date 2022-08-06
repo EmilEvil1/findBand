@@ -20,6 +20,11 @@ public class SearchForMemberUseCaseHandler extends ObservableUseCasePublisher im
     }
 
     @Override
+    public Class<SearchForMember> useCaseClass() {
+        return SearchForMember.class;
+    }
+
+    @Override
     public List<UserDomain> handle(SearchForMember useCase) {
         return userPort.findByInstrumentsIdsAndRegionId(
                 useCase.getInstrumentalIds(), useCase.getRegionId()

@@ -1,5 +1,6 @@
 package com.findBand.backend.infra.adapters.rest.controller;
 
+import com.findBand.backend.domain.common.useCase.UseCasePublisher;
 import com.findBand.backend.domain.model.*;
 import com.findBand.backend.domain.useCase.search.SearchForMember;
 import com.findBand.backend.domain.useCase.search.SearchForVacancies;
@@ -24,17 +25,23 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1")
 public class SearchController extends BaseController {
 
+    private UseCasePublisher useCasePublisher;
+
+    public SearchController(UseCasePublisher useCasePublisher) {
+        this.useCasePublisher = useCasePublisher;
+    }
+
     @PostMapping(value = "searchForMembers")
     public DataResponse<BandSeekerDTO> doSearchForMember(@RequestBody SearchForMemberRequestDTO request) {
         SearchForMember searchForMember = new SearchForMember(request.getInstrumentIds(), request.getRegionId());
-        List<UserDomain> bandSeekers = publish(List.class, searchForMember);
+        List<UserDomain> bandSeekers = useCasePublisher.publish(List.class, searchForMember);
         return new DataResponse<BandSeekerDTO>(bandSeekers.stream().map(this::toFoundMemberDTO).collect(Collectors.toList()), 1, 1,bandSeekers.size());
     }
 
     @PostMapping(value = "searchForVacancies")
     public DataResponse<VacancyDTO> doSearchForVacancies(@RequestBody SearchForBandRequestDTO request) {
         SearchForVacancies searchForVacancies = new SearchForVacancies(request.getRegionId(), request.getInstrumentsIds());
-        List<Vacancy> foundVacancies = publish(List.class, searchForVacancies);
+        List<Vacancy> foundVacancies = useCasePublisher.publish(List.class, searchForVacancies);
         return new DataResponse<VacancyDTO>(foundVacancies.stream().map(this::toVacancyDTO).collect(Collectors.toList()), 1, 1, foundVacancies.size());
     }
 
