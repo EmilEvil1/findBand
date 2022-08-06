@@ -17,6 +17,8 @@ services:
       - STORAGE_FOLDER=${STORAGE_FOLDER}
       - REDIS_PASSWORD=${REDIS_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
     links:
       - findband_redis
       - findband_db

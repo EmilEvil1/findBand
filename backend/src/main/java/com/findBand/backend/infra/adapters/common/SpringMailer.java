@@ -19,12 +19,13 @@ public class SpringMailer implements MailerPort {
     }
 
     @Override
-    public void sendEmail(String fromEmailAddress, String toEmailAddress, String body) {
+    public void sendEmail(String fromEmailAddress, String toEmailAddress, String subject, String body) {
        try {
            MimeMessage mimeMessage = mailSender.createMimeMessage();
            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+           mimeMessageHelper.setSubject(subject);
            mimeMessageHelper.setTo(toEmailAddress);
-           mimeMessageHelper.setFrom("dssorokin94@gmail.com");
+           mimeMessageHelper.setFrom(fromEmailAddress);
            mimeMessageHelper.setText(body);
 
            mailSender.send(mimeMessage);

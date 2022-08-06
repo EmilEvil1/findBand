@@ -20,7 +20,7 @@ import java.util.UUID;
 @Component
 public class UserCreateResetPasswordUseCaseHandler extends ObservableUseCasePublisher implements UseCaseHandler<UserDomain, UserResetPassword> {
 
-    @Value("email.from")
+    @Value("${email.from}")
     private String EMAIL_FROM;
 
     private String HOST = InetAddress.getLoopbackAddress().getHostName();
@@ -50,7 +50,7 @@ public class UserCreateResetPasswordUseCaseHandler extends ObservableUseCasePubl
         resetPassword.setId(UUID.randomUUID().toString());
         resetPasswordPort.createResetPasswordRequest(resetPassword);
         final String resetPasswordLink = generateResetPasswordLink(resetPassword.getId());
-        mailerPort.sendEmail(EMAIL_FROM, useCase.getEmailAddress(), resetPasswordLink);
+        mailerPort.sendEmail(EMAIL_FROM, useCase.getEmailAddress(), "Сброс пароля", resetPasswordLink);
         return user;
     }
 
@@ -58,7 +58,7 @@ public class UserCreateResetPasswordUseCaseHandler extends ObservableUseCasePubl
         UriBuilder uriBuilder = UriComponentsBuilder.newInstance();
         return uriBuilder.host(HOST)
           .scheme("http")
-          .path("/reset").port(80)
+          .path("/reset")
           .queryParam("resetPasswordId", resetPasswordId)
           .build().toString();
     }
