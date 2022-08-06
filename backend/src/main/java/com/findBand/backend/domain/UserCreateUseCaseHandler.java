@@ -52,25 +52,16 @@ public class UserCreateUseCaseHandler extends ObservableUseCasePublisher impleme
             throw new FindBandValidationException("registration.email.already.exists");
         }
 
-        //TODO: refactore to using factory
         boolean isBandOwner = useCase.getUserRoleEnum() == UserRoleEnum.BAND_OWNER;
         UserDomain userDomain = new UserDomain();
         userDomain.setEmail(useCase.getEmail());
         userDomain.setPassword(useCase.getPassword(), passwordEncoder, useCase.getConfirmationPassword());
         userDomain.setUsername(useCase.getUserName());
-        userDomain.setPhone(useCase.getPhone());
         userDomain.setUserRole(isBandOwner ? UserRole.BAND_OWNER : UserRole.BAND_SEEKER);
         userDomain.setInstruments(new HashSet<>(Arrays.asList(new Instrument(useCase.getInstrumentId()))));
         userDomain.setRegion(regionsPort.findById(useCase.getRegionId()));
 
         userPort.createUser(userDomain);
-        if (isBandOwner) {
-            Band newBand = new Band();
-            newBand.setName(useCase.getBandName());
-
-            newBand.setBandOwner(userDomain);
-            bandPort.createBand(newBand);
-        }
 
         return userDomain;
     }

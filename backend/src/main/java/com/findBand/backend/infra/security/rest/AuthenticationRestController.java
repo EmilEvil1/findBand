@@ -48,10 +48,8 @@ public class AuthenticationRestController extends BaseController {
         userCreate.setUserName(registerDTO.getUsername());
         userCreate.setEmail(registerDTO.getEmail());
         userCreate.setPassword(registerDTO.getPassword());
-        userCreate.setPhone(registerDTO.getPhone());
         userCreate.setConfirmationPassword(registerDTO.getConfirmationPassword());
-        userCreate.setBandName(registerDTO.getBandName());
-        userCreate.setUserRoleEnum(registerDTO.getIsBandOwner() ? UserRoleEnum.BAND_OWNER : UserRoleEnum.BAND_SEEKER);
+        userCreate.setUserRoleEnum(UserRoleEnum.BAND_SEEKER);
         userCreate.setInstrumentId(registerDTO.getInstrumentId());
         userCreate.setRegionId(registerDTO.getRegionId());
         UserDomain createdUser = useCasePublisher.publish(UserDomain.class, userCreate);

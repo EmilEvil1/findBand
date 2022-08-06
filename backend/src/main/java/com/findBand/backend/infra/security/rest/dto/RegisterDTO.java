@@ -10,9 +10,6 @@ public class RegisterDTO {
     private String email;
     private String password;
     private String confirmationPassword;
-    private String phone;
-    private Boolean isBandOwner;
-    private String bandName;
     private Long instrumentId;
     private long regionId;
 }
