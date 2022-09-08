@@ -19,7 +19,7 @@ const ResetPassword = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    useEffect(() => !resetPasswordId && history.push('/auth'), [resetPasswordId])
+    useEffect(() => !resetPasswordId && history.push('/auth'), [resetPasswordId, history])
 
     const onSubmit = data => dispatch(createNewPassword(data, history))
 

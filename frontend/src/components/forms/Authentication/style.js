@@ -108,18 +108,19 @@ export const useStyles = makeStyles({
     },
     signUpWrapper : {
         width: 400,
-        height: '100%',
+        // height: '100%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
     },
     inputsWrapper: {
+        position: "relative",
         width: '100%',
         display: "flex",
         flexDirection: "column",
         color: "white",
-        '& p': {
+        '& p.MuiFormHelperText-root': {
             position: "absolute",
             bottom: -25
         }
@@ -154,7 +155,7 @@ export const useStyles = makeStyles({
         marginTop: 35
     },
     forgotPasswordLink: {
-        margin: '50px 0 25px',
+        margin: '60px 0 25px',
         height: 30,
         cursor: "pointer",
         transition: 'all 0.5s ease-out',
@@ -164,7 +165,7 @@ export const useStyles = makeStyles({
         }
     },
     signUpBtn: {
-        marginTop: 35
+        marginTop: 60
     },
     passwordField: {
         marginTop: 30,
@@ -173,12 +174,11 @@ export const useStyles = makeStyles({
     },
     passwordIcon: {
         position: "absolute",
-        right: 0,
+        right: -20,
         top: '50%',
         display: "flex",
         cursor: "pointer",
         transform: 'translate(-50%, -50%)'
-
     },
     passwordFieldWithHelper: {
         top: '33%',
@@ -186,9 +186,6 @@ export const useStyles = makeStyles({
     errorText: {
         color: '#f44336',
         position: "absolute"
-    },
-    selectField: {
-        // background: '#272727'
     },
     select: {
         width: '100%'
@@ -243,10 +240,11 @@ export const useStyles = makeStyles({
         position: "relative",
         marginBottom: 35,
         width: 400,
-        '& p': {
+        '& .MuiFormHelperText-root': {
             position: "absolute",
             bottom: -25
-        }
+        },
+
     },
     savePassword: {
         marginTop: 20,
@@ -254,5 +252,13 @@ export const useStyles = makeStyles({
     },
     marginBlock: {
         marginBottom: 35,
+    },
+    errorMessage: {
+        position: "absolute",
+        bottom: -45,
+        width: '100%',
+        display: "flex",
+        justifyContent: "center",
+        color: '#f44336'
     }
 });

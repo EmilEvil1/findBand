@@ -7,7 +7,7 @@ import {useStyles} from "../../../pages/style";
 
 const RegionList = (props) => {
 
-    const { values, handleChange, touched, errors, handleBlur, setFieldValue } = props
+    const { values, handleChange, touched, errors, handleBlur, setFieldValue, errorText } = props
     const regionList = useSelector(({ state }) => state.regions)
     const dispatch = useDispatch()
     const classes = useStyles();
@@ -34,8 +34,8 @@ const RegionList = (props) => {
                     onChange={handleChange}
                     value={values.regionId || ''}
                     onBlur={handleBlur}
-                    error={!!touched.regionId && Boolean(errors.regionId)}
-                    // helperText={touched.instrumentId && errors.instrumentId}
+                    error={!!touched.regionId && Boolean(errors.regionId || errorText)}
+                    helperText={touched.regionId && errors.regionId}
                     variant='outlined'
                     fullWidth
                 />

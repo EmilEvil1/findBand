@@ -18,8 +18,9 @@ const SignIn = () => {
     const [open, setOpen] = useState(false);
     const [,setToken] = useCookies(['access_token'])
     const [passwordShown, setPasswordShown] = useState(false)
+    const [errorText, setErrorText] = useState('')
 
-    const onSubmit = data => dispatch(sendSignInFormData(data, setToken))
+    const onSubmit = data => dispatch(sendSignInFormData(data, setToken, setErrorText))
 
     return (
         <Grid className={classes.formWrapper}>
@@ -56,7 +57,7 @@ const SignIn = () => {
                                     value={values.email}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    error={touched.email && Boolean(errors.email)}
+                                    error={touched.email && Boolean(errors.email || errorText)}
                                     helperText={touched.email && errors.email}
                                     variant='outlined'
                                     fullWidth
@@ -70,7 +71,7 @@ const SignIn = () => {
                                         value={values.password}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        error={touched.password && Boolean(errors.password)}
+                                        error={touched.password && Boolean(errors.password || errorText)}
                                         helperText={touched.password && errors.password}
                                         type={passwordShown ? "text" : "password"}
                                         fullWidth
@@ -82,7 +83,9 @@ const SignIn = () => {
                                         <IconPassword />
                                     </Box>
                                 </Box>
+                                <Typography className={classes.errorMessage}>{errorText && errorText}</Typography>
                             </Box>
+
                             <Typography
                                 className={classes.forgotPasswordLink}
                                 onClick={() => openModal(setOpen, open)}
@@ -92,7 +95,10 @@ const SignIn = () => {
                             <Button
                                 style={{border: '1px solid white', width: '70%'}}
                                 color='primary'
-                                onClick={handleSubmit}
+                                onClick={(event) => {
+                                    setErrorText('')
+                                    handleSubmit(event)
+                                }}
                                 className={classes.signInBtn}
                             >
                                 Войти

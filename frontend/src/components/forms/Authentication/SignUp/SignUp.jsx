@@ -16,10 +16,11 @@ const SignUp = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const [,setToken] = useCookies(['access_token'])
+    const [errorText, setErrorText] = useState('')
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
-    const onSubmit = data => dispatch(sendSignUpFormData(data, setToken))
+    const onSubmit = data => dispatch(sendSignUpFormData(data, setToken, setErrorText))
 
     return (
         <Formik
@@ -35,6 +36,7 @@ const SignUp = () => {
             validationSchema={signUpValidation}
             enableReintialize
         >
+
             {props => {
                 const {
                     values,
@@ -65,7 +67,7 @@ const SignUp = () => {
                                 value={values.name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                error={touched.username && Boolean(errors.username)}
+                                error={touched.username && Boolean(errors.username || errorText)}
                                 helperText={touched.username && errors.username}
                                 variant='outlined'
                                 fullWidth
@@ -99,7 +101,7 @@ const SignUp = () => {
                                 value={values.email}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                error={touched.email && Boolean(errors.email)}
+                                error={touched.email && Boolean(errors.email || errorText)}
                                 helperText={touched.email && errors.email}
                                 variant='outlined'
                                 fullWidth
@@ -113,7 +115,7 @@ const SignUp = () => {
                                         value={values.password}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        error={touched.password && Boolean(errors.password)}
+                                        error={touched.password && Boolean(errors.password || errorText)}
                                         helperText={touched.password && errors.password}
                                         variant='outlined'
                                         fullWidth
@@ -136,7 +138,7 @@ const SignUp = () => {
                                         value={values.confirmationPassword}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        error={touched.confirmationPassword && Boolean(errors.confirmationPassword)}
+                                        error={touched.confirmationPassword && Boolean(errors.confirmationPassword || errorText)}
                                         helperText={touched.confirmationPassword && errors.confirmationPassword}
                                         fullWidth
                                         type={confirmPasswordShown ? "text" : "password"}
@@ -156,6 +158,7 @@ const SignUp = () => {
                                     handleBlur={handleBlur}
                                     touched={touched}
                                     errors={errors}
+                                    errorText={errorText}
                                     setFieldValue={setFieldValue}
                                 />
                                 <InstrumentList
@@ -164,14 +167,19 @@ const SignUp = () => {
                                     handleBlur={handleBlur}
                                     touched={touched}
                                     errors={errors}
+                                    errorText={errorText}
                                     setFieldValue={setFieldValue}
                                 />
                             </Box>
+                            <Typography className={classes.errorMessage}>{errorText && errorText}</Typography>
                         </Box>
                         <Button
                             className={classes.signUpBtn}
                             color='primary'
-                            onClick={handleSubmit}
+                            onClick={(event) => {
+                                setErrorText('')
+                                handleSubmit(event)
+                            }}
                         >
                             Зарегистрироваться
                         </Button>

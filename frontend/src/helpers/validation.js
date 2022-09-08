@@ -46,11 +46,9 @@ export const signUpValidation = yup.object({
     regionId: yup
         .string('Выберите регион')
         .required('Выберите регион'),
-    // isBandOwner: yup
-    //     .boolean().default(true),
     instrumentId : yup
         .number('Некоректный иструмент')
-        .required('Выберите регион')
+        .required('Выберите инструмент')
 });
 
 // Create new password

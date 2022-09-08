@@ -8,7 +8,7 @@ const SnackBar = () => {
 
     useEffect(() => {
         setTimeout(() => setState(false), 3000)
-    }, [])
+    }, [state])
 
     return (
         <Snackbar
@@ -19,7 +19,7 @@ const SnackBar = () => {
             transitionDuration={{ enter: 2000, exit: 3000 }}
         >
             <Alert severity="success" sx={{ width: "100%" }}>
-                This is a success message!
+                Отправлено Вам на почту
             </Alert>
         </Snackbar>
     )

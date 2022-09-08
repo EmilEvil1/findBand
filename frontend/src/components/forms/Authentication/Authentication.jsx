@@ -11,7 +11,9 @@ const SignForms = () => {
     const classes = useStyles()
     const [active, setActive] = useState(false)
 
+
     return (
+
         <Grid className={classes.wrapper}>
             <Box className={
                     !active ? `${classes.container} ${classes.signIn}` :
@@ -68,7 +70,8 @@ const SignForms = () => {
                 </Box>
             </Box>
         </Grid>
-    );
-};
+
+    )
+}
 
 export default SignForms;

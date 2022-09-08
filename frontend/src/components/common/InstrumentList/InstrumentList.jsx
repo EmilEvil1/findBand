@@ -7,7 +7,7 @@ import {useStyles} from "../../../pages/style";
 
 const InstrumentList = (props) => {
 
-    const { values, handleChange, touched, errors, handleBlur, setFieldValue } = props
+    const { values, handleChange, touched, errors, handleBlur, setFieldValue, errorText } = props
     const instrumentsList = useSelector(({ state }) => state.instruments)
     const dispatch = useDispatch()
     const classes = useStyles();
@@ -34,8 +34,8 @@ const InstrumentList = (props) => {
                     onChange={handleChange}
                     value={!!values.instrumentId && values.instrumentId}
                     onBlur={handleBlur}
-                    error={touched.instrumentId && Boolean(errors.instrumentId)}
-                    // helperText={touched.instrumentId && errors.instrumentId}
+                    error={touched.instrumentId && Boolean(errors.instrumentId || errorText)}
+                    helperText={touched.instrumentId && errors.instrumentId}
                     variant='outlined'
                     fullWidth
                 />
