@@ -67,7 +67,7 @@ const SignUp = () => {
                                 value={values.name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                error={touched.username && Boolean(errors.username || errorText)}
+                                error={touched.username && Boolean(errors.username)}
                                 helperText={touched.username && errors.username}
                                 variant='outlined'
                                 fullWidth
@@ -99,7 +99,10 @@ const SignUp = () => {
                                 label='Email'
                                 placeholder='Укажите Email'
                                 value={values.email}
-                                onChange={handleChange}
+                                onChange={(event) => {
+                                    setErrorText('')
+                                    handleChange(event)
+                                }}
                                 onBlur={handleBlur}
                                 error={touched.email && Boolean(errors.email || errorText)}
                                 helperText={touched.email && errors.email}
@@ -115,7 +118,7 @@ const SignUp = () => {
                                         value={values.password}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        error={touched.password && Boolean(errors.password || errorText)}
+                                        error={touched.password && Boolean(errors.password)}
                                         helperText={touched.password && errors.password}
                                         variant='outlined'
                                         fullWidth
@@ -138,7 +141,7 @@ const SignUp = () => {
                                         value={values.confirmationPassword}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        error={touched.confirmationPassword && Boolean(errors.confirmationPassword || errorText)}
+                                        error={touched.confirmationPassword && Boolean(errors.confirmationPassword)}
                                         helperText={touched.confirmationPassword && errors.confirmationPassword}
                                         fullWidth
                                         type={confirmPasswordShown ? "text" : "password"}
@@ -158,7 +161,7 @@ const SignUp = () => {
                                     handleBlur={handleBlur}
                                     touched={touched}
                                     errors={errors}
-                                    errorText={errorText}
+                                    // errorText={errorText}
                                     setFieldValue={setFieldValue}
                                 />
                                 <InstrumentList
@@ -167,7 +170,7 @@ const SignUp = () => {
                                     handleBlur={handleBlur}
                                     touched={touched}
                                     errors={errors}
-                                    errorText={errorText}
+                                    // errorText={errorText}
                                     setFieldValue={setFieldValue}
                                 />
                             </Box>
@@ -176,6 +179,7 @@ const SignUp = () => {
                         <Button
                             className={classes.signUpBtn}
                             color='primary'
+                            disabled={!!errorText}
                             onClick={(event) => {
                                 setErrorText('')
                                 handleSubmit(event)
