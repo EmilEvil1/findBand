@@ -1,26 +1,32 @@
-import React, {useState} from 'react';
-import {useCookies} from "react-cookie";
-import {useDispatch} from "react-redux";
-import {Form, Formik} from "formik";
-import {Box, Button, Grid, TextField, Typography} from "@material-ui/core";
-import {signInValidation} from "../../../../helpers/validation";
-import {sendSignInFormData} from "../../../../store/thunks/common/auth";
-import {eventToggle, openModal} from "../../../../helpers/utils";
-import IconPassword from "../../../../assets/icons/auth/password";
-import ForgetPassword from "../../../modals/ForgetPassword/ForgetPassword";
-import {useStyles} from "../style";
-import TelegramAccount from "../../../common/TelegramAccount/TelegramAccount";
+import React, {useState} from 'react'
+import {useCookies} from "react-cookie"
+import {Form, Formik} from "formik"
+import {Box, Button, Grid, TextField, Typography} from "@material-ui/core"
+import {signInValidation} from "../../../../helpers/validation"
+import {eventToggle, openModal} from "../../../../helpers/utils"
+import IconPassword from "../../../../assets/icons/auth/password"
+import ForgetPassword from "../../../modals/ForgetPassword/ForgetPassword"
+import {useStyles} from "../style"
+import TelegramAccount from "../../../common/TelegramAccount/TelegramAccount"
+import {useSignIn} from "../../../../dto/hooks/Auth";
 
 const SignIn = () => {
 
-    const dispatch = useDispatch()
     const classes = useStyles()
     const [open, setOpen] = useState(false);
     const [,setToken] = useCookies(['access_token'])
     const [passwordShown, setPasswordShown] = useState(false)
     const [errorText, setErrorText] = useState('')
+    const signIn = useSignIn()
+    const isLoading = signIn.isLoading
 
-    const onSubmit = data => dispatch(sendSignInFormData(data, setToken, setErrorText))
+    const onAuth = (data) =>
+        signIn.mutateAsync(data)
+            .then((response) => {
+                if (response.token) setToken('access_token', response.token)
+            }).catch(err => setErrorText(err.response.data.errors.errorDescription))
+
+    const onSubmit = data => onAuth(data)
 
     return (
         <Grid className={classes.formWrapper}>
@@ -55,7 +61,10 @@ const SignIn = () => {
                                     label='Логин'
                                     placeholder='Email или телефон'
                                     value={values.email}
-                                    onChange={handleChange}
+                                    onChange={(event) => {
+                                        setErrorText('')
+                                        handleChange(event)
+                                    }}
                                     onBlur={handleBlur}
                                     error={touched.email && Boolean(errors.email || errorText)}
                                     helperText={touched.email && errors.email}
@@ -69,7 +78,10 @@ const SignIn = () => {
                                         placeholder='Введите пароль'
                                         variant='outlined'
                                         value={values.password}
-                                        onChange={handleChange}
+                                        onChange={(event) => {
+                                            setErrorText('')
+                                            handleChange(event)
+                                        }}
                                         onBlur={handleBlur}
                                         error={touched.password && Boolean(errors.password || errorText)}
                                         helperText={touched.password && errors.password}
@@ -95,6 +107,7 @@ const SignIn = () => {
                             <Button
                                 style={{border: '1px solid white', width: '70%'}}
                                 color='primary'
+                                disabled={isLoading}
                                 onClick={(event) => {
                                     setErrorText('')
                                     handleSubmit(event)

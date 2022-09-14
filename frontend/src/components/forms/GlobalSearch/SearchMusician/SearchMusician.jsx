@@ -1,19 +1,32 @@
-import React from 'react';
-import {useDispatch} from "react-redux";
-import {Form, Formik} from "formik";
-import {Button} from "@material-ui/core";
-import {searchMusician} from "../../../../helpers/validation";
-import {makeSearchForMembers} from "../../../../store/thunks/common/home";
-import RegionList from "../../../common/RegionList/RegionList";
-import {useHistory} from "react-router-dom";
-import InstrumentList from "../../../common/InstrumentList/InstrumentList";
+import React from 'react'
+import {useCookies} from "react-cookie"
+import {Form, Formik} from "formik"
+import {Button} from "@material-ui/core"
+import {useSearchForMembers} from "../../../../dto/hooks/Home"
+import {searchMusician} from "../../../../helpers/validation"
+import RegionList from "../../../common/RegionList/RegionList"
+import {useHistory} from "react-router-dom"
+import InstrumentList from "../../../common/InstrumentList/InstrumentList"
 
 const SearchMusician = () => {
 
-    const dispatch = useDispatch()
     const history = useHistory()
+    const searchForMembers = useSearchForMembers()
+    const [, , removeToken] = useCookies(['access_token'])
 
-    const onSubmit = data => dispatch(makeSearchForMembers(data, history))
+    // TODO: errorHandling hook use
+
+    const onSearch = (data) =>
+        searchForMembers.mutateAsync(data)
+            .then((response) => response && history.push(`/search`))
+            .catch(err => {
+                if (err.response.status === 401) {
+                    removeToken("access_token")
+                    history.push(`/auth`)
+                }
+            })
+
+    const onSubmit = data => onSearch(data)
 
     return (
         <Formik
@@ -55,12 +68,7 @@ const SearchMusician = () => {
                         <Button
                             style={{marginTop: 40}}
                             color='primary'
-                            onClick={() => {
-                                 handleSubmit()
-                                // if (values.regionId && values.instrumentId) {
-                                //     history.push('/search')
-                                // }
-                            }}
+                            onClick={handleSubmit}
                         >
                             Найти
                         </Button>
@@ -68,7 +76,7 @@ const SearchMusician = () => {
                 )
             }}
         </Formik>
-    );
-};
+    )
+}
 
-export default SearchMusician;
+export default SearchMusician

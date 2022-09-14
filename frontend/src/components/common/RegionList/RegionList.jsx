@@ -1,18 +1,15 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {TextField} from "@material-ui/core";
-import {getRegionList} from "../../../store/thunks/common/regions";
-import {Autocomplete} from "@material-ui/lab";
-import {useStyles} from "../../../pages/style";
+import React from 'react'
+import {TextField} from "@material-ui/core"
+import {Autocomplete} from "@material-ui/lab"
+import {useStyles} from "../../../pages/style"
+import {useRegionList} from "../../../dto/hooks/Regions"
 
 const RegionList = (props) => {
 
     const { values, handleChange, touched, errors, handleBlur, setFieldValue, errorText } = props
-    const regionList = useSelector(({ state }) => state.regions)
-    const dispatch = useDispatch()
-    const classes = useStyles();
 
-    useEffect(() => dispatch(getRegionList()), [])
+    const regionList = useRegionList()
+    const classes = useStyles()
 
     return (
         <Autocomplete
@@ -21,7 +18,7 @@ const RegionList = (props) => {
             name="regionId"
             noOptionsText='Регион не найден'
             classes={{noOptions: classes.noOptions}}
-            options={(Array.isArray(regionList) && regionList.length > 0 && regionList) || []}
+            options={(Array.isArray(regionList.data) && regionList.data.length > 0 && regionList.data) || []}
             getOptionLabel={option => option.name}
             onChange={(event, value) => {
                 !!value ?  setFieldValue("regionId", value.id) : setFieldValue("regionId", 0)

@@ -1,29 +1,32 @@
-import React from 'react';
-import {Form, Formik} from "formik";
+import React, {useState} from 'react'
+import {Form, Formik} from "formik"
 import {
     Box,
     Button,
     Dialog,
     TextField,
     Typography
-} from "@material-ui/core";
-import {useDispatch} from "react-redux";
-import {useStyles} from "./style";
-import {closeModal} from "../../../helpers/utils";
-import {forgetPassword} from "../../../helpers/validation";
-import {sendPassword} from "../../../store/thunks/common/auth";
-import {saveRestStatusCode} from "../../../store/thunks/common/restStatus";
+} from "@material-ui/core"
+import {useStyles} from "./style"
+import {closeModal} from "../../../helpers/utils"
+import {forgetPassword} from "../../../helpers/validation"
+import {useResetPassword} from "../../../dto/hooks/Auth"
 
 const ForgetPassword = (props) => {
 
     const {open, close} = props
     const classes = useStyles()
-    const dispatch = useDispatch()
+    const [errorText, setErrorText] = useState('')
+    const resetPassword = useResetPassword()
+    const isLoading = resetPassword.isLoading
 
-    const onSubmit = email =>{
-        dispatch(saveRestStatusCode(false))
-        dispatch(sendPassword(email, closeModal, close))
-    }
+    const onAuth = (data) =>
+        resetPassword.mutateAsync(data)
+            .then((response) => {
+                response.data && close(false)
+            }).catch(err => setErrorText(err.response.data.errors.errorDescription))
+
+    const onSubmit = email => onAuth(email)
 
     return (
         <Dialog
@@ -48,26 +51,33 @@ const ForgetPassword = (props) => {
                             handleSubmit,
                         } = props;
                         return (
-                            <Form
-                                className={classes.form}
-                                onSubmit={handleSubmit}
-                            >
-                                <TextField
-                                    name='emailAddress'
-                                    label='Email'
-                                    placeholder='Введите email'
-                                    value={values.emailAddress}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    error={touched.emailAddress && Boolean(errors.emailAddress)}
-                                    helperText={touched.emailAddress && errors.emailAddress}
-                                    variant='outlined'
-                                    fullWidth
-                                />
+                            <Form onSubmit={handleSubmit} className={classes.form}>
+                                <Box className={classes.inputsWrapper}>
+                                    <TextField
+                                        name='emailAddress'
+                                        label='Email'
+                                        placeholder='Введите email'
+                                        value={values.emailAddress}
+                                        onChange={(event) => {
+                                            setErrorText('')
+                                            handleChange(event)
+                                        }}
+                                        onBlur={handleBlur}
+                                        error={touched.emailAddress && (Boolean(errors.emailAddress) || Boolean(errorText))}
+                                        helperText={touched.emailAddress && (errors.emailAddress || errorText)}
+                                        variant='outlined'
+                                        fullWidth
+                                    />
+                                </Box>
+                                <Typography className={classes.errorMessage}>{errorText && errorText}</Typography>
                                 <Button
                                     className={classes.btn}
                                     color='primary'
-                                    onClick={() => handleSubmit()}
+                                    disabled={isLoading}
+                                    onClick={() => {
+                                        setErrorText('')
+                                        handleSubmit()
+                                    }}
                                 >
                                     Восстановить пароль
                                 </Button>

@@ -4,7 +4,7 @@ import {useStyles} from "./style";
 import ProfileIcon from "../../../assets/icons/sidebar/profile";
 import {useHistory} from "react-router-dom";
 
-const MusicianCard = () => {
+const MusicianCard = ({item}) => {
 
     const classes = useStyles()
     const history = useHistory()
@@ -14,25 +14,28 @@ const MusicianCard = () => {
             <Box className={classes.info}>
                 <ProfileIcon />
                 <Box>
-                    <Typography>Иван</Typography>
+                    <Typography>{item.username}</Typography>
                     <Box>
                         <Typography>Инструмент</Typography>
-                        <Typography>Басс-гитара, ударные</Typography>
+                        {item.instruments.map((instrumentName, index) => {
+                            return (<Typography key={index}>{instrumentName}</Typography>)
+                        })}
+
                     </Box>
                 </Box>
             </Box>
             <Box className={classes.additionalInfo}>
                 <Box>
                     <Typography>Город</Typography>
-                    <Typography>Владимир</Typography>
+                    <Typography>{item.regionName}</Typography>
                 </Box>
                 <Box>
                     <Typography>Стаж</Typography>
-                    <Typography>3 года</Typography>
+                    <Typography>{item.experienceAge}</Typography>
                 </Box>
                 <Box>
                     <Typography>Группа</Typography>
-                    <Typography>Metallica</Typography>
+                    <Typography>{item.bandName ? item.bandName : `Не состоит`}</Typography>
                 </Box>
             </Box>
             <Button

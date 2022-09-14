@@ -1,18 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {TextField} from "@material-ui/core";
 import {Autocomplete} from "@material-ui/lab";
-import {useDispatch, useSelector} from "react-redux";
-import {getInstrumentsListData} from "../../../store/thunks/common/instruments";
 import {useStyles} from "../../../pages/style";
+import {useInstrumentsList} from "../../../dto/hooks/Instruments";
 
 const InstrumentList = (props) => {
 
     const { values, handleChange, touched, errors, handleBlur, setFieldValue, errorText } = props
-    const instrumentsList = useSelector(({ state }) => state.instruments)
-    const dispatch = useDispatch()
-    const classes = useStyles();
 
-    useEffect(() => dispatch(getInstrumentsListData()), [])
+    const instrumentsList = useInstrumentsList()
+    const classes = useStyles()
 
     return (
         <Autocomplete
@@ -21,7 +18,7 @@ const InstrumentList = (props) => {
             name="instrumentId"
             classes={{noOptions: classes.noOptions}}
             noOptionsText='Инструмент не найден'
-            options={(Array.isArray(instrumentsList) && instrumentsList.length > 0 && instrumentsList) || []}
+            options={(Array.isArray(instrumentsList.data) && instrumentsList.data.length > 0 && instrumentsList.data) || []}
             getOptionLabel={option => option.name}
             onChange={(event, value) => {
                 !!value ?  setFieldValue("instrumentId", value.id) : setFieldValue("instrumentId", 0)

@@ -1,9 +1,9 @@
-import React from 'react';
-import {Box} from "@material-ui/core";
-import Musicians from "../../components/sliders/Musicians/Musicians";
-import Main from "../../components/content/Main/Main";
-import Layout from "../../components/common/Layout/Layout";
-import {useStyles} from "../style";
+import React from 'react'
+import {Box} from "@material-ui/core"
+import Musicians from "../../components/sliders/Musicians/Musicians"
+import Main from "../../components/content/Main/Main"
+import Layout from "../../components/common/Layout/Layout"
+import {useStyles} from "../style"
 
 const Home = () => {
 
@@ -21,4 +21,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Home
