@@ -27,20 +27,18 @@ const App = () => {
                     <AppWrapper>
                         <Provider store={store}>
                             <ThemeProvider theme={theme}>
-                                {/*<AppWrapper>*/}
-                                    <BrowserRouter>
-                                        <Switch>
-                                            <Route exact path='/' component={Home} />
-                                            <Route exact path='/auth' component={Auth} />
-                                            <Route exact path='/profile' component={Profile} />
-                                            <Route exact path='/profile-band' component={BandProfile} />
-                                            <Route exact path='/search' component={SearchResult} />
-                                            <Route exact path='/detailed' component={MusicianDetailed} />
-                                            <Route exact path='/reset' component={ResetPassword} />
-                                            <Route component={Error} />
-                                        </Switch>
-                                    </BrowserRouter>
-                                {/*</AppWrapper>*/}
+                                <BrowserRouter>
+                                    <Switch>
+                                        <Route exact path='/' component={Home} />
+                                        <Route exact path='/auth' component={Auth} />
+                                        <Route exact path='/profile' component={Profile} />
+                                        <Route exact path='/profile-band' component={BandProfile} />
+                                        <Route exact path='/search' component={SearchResult} />
+                                        <Route exact path='/detailed' component={MusicianDetailed} />
+                                        <Route exact path='/reset' component={ResetPassword} />
+                                        <Route component={Error} />
+                                    </Switch>
+                                </BrowserRouter>
                             </ThemeProvider>
                         </Provider>
                     </AppWrapper>

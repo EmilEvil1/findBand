@@ -70,14 +70,14 @@ export const newPassword = yup.object({
 // MusicianProfile
 
 export const profileFormValidation = yup.object({
-    name: yup
+    userName: yup
         .string('Заполните поле')
         .required('Заполните поле'),
-    phone: yup
-        .string('Заполните поле')
-        // .matches(phoneRegExp, 'Phone number is not valid')
-        .required('Заполните поле'),
-    email: yup
+    // phone: yup
+    //     .string('Заполните поле')
+    //     // .matches(phoneRegExp, 'Phone number is not valid')
+    //     .required('Заполните поле'),
+    emailAddress: yup
         .string('Заполните поле')
         .email('Введите корректную почту')
         .required('Заполните поле'),

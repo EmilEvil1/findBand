@@ -63,8 +63,8 @@ const ForgetPassword = (props) => {
                                             handleChange(event)
                                         }}
                                         onBlur={handleBlur}
-                                        error={touched.emailAddress && Boolean(errors.emailAddress) || Boolean(errorText)}
-                                        helperText={touched.emailAddress && errors.emailAddress || errorText}
+                                        error={touched.emailAddress && (Boolean(errors.emailAddress) || Boolean(errorText))}
+                                        helperText={touched.emailAddress && (errors.emailAddress || errorText)}
                                         variant='outlined'
                                         fullWidth
                                     />

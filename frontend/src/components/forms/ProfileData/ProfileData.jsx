@@ -1,28 +1,30 @@
-import React from 'react';
-import {Form, Formik} from "formik";
-import InputMask from "react-input-mask";
-import {useDispatch} from "react-redux";
-import {Box, Button, Grid, TextField, Typography} from "@material-ui/core";
-import {profileFormValidation} from "../../../helpers/validation";
-import RegionList from "../../common/RegionList/RegionList";
-import InstrumentList from "../../common/InstrumentList/InstrumentList";
-import {sendNewUserProfileData} from "../../../store/thunks/common/profile";
-import {useStyles} from "./style";
+import React from 'react'
+import {Form, Formik} from "formik"
+import {Box, Button, Grid, TextField, Typography} from "@material-ui/core"
+import {profileFormValidation} from "../../../helpers/validation"
+import RegionList from "../../common/RegionList/RegionList"
+import InstrumentList from "../../common/InstrumentList/InstrumentList"
+import {useSaveNewData} from "../../../dto/hooks/Profile"
+import {useStyles} from "./style"
 
 const ProfileData = (props) => {
 
-    const { profileData } = props
-    const dispatch = useDispatch()
+    const { profileData, refetch } = props
     const classes = useStyles()
+    const sendNewData = useSaveNewData()
 
-    const onSubmit = data => dispatch(sendNewUserProfileData(data))
+    const onUpdate = (data) => sendNewData.mutateAsync(data)
+            .then(refetch)
+            .catch(err => console.log(err.response.data.errors.errorDescription))
+
+    const onSubmit = data => onUpdate(data)
 
     return (
         <Grid className={classes.wrapper}>
             <Formik
                 initialValues={{
-                    name: profileData.userName || '',
-                    email: profileData.emailAddress || '',
+                    userName: profileData.userName || '',
+                    emailAddress: profileData.emailAddress || '',
                     phone: profileData.phone || '',
                     regionId: profileData.regionId || '',
                     instrumentId: profileData.instrumentId || '',
@@ -46,49 +48,14 @@ const ProfileData = (props) => {
                     return (
                         <Form onSubmit={handleSubmit}>
                             <TextField
-                                className={classes.marginBlock}
-                                name='name'
+                                name='userName'
                                 label='Имя'
                                 placeholder='Укажите имя'
-                                value={values.name}
+                                value={values.userName}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                error={touched.name && Boolean(errors.name)}
-                                helperText={touched.name && errors.name}
-                                variant='outlined'
-                                fullWidth
-                            />
-                            <InputMask
-                                mask="+7 (999) 999-9999"
-                                value={values.phone}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                error={touched.phone && Boolean(errors.phone)}
-                                helperText={touched.phone && errors.phone}
-                            >
-                                <TextField
-                                    className={classes.marginBlock}
-                                    name='phone'
-                                    label='Телефон'
-                                    placeholder='Укажите телефон'
-                                    value={values.phone}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    error={touched.phone && Boolean(errors.phone)}
-                                    helperText={touched.phone && errors.phone}
-                                    variant='outlined'
-                                    fullWidth
-                                />
-                            </InputMask>
-                            <TextField
-                                name='email'
-                                label='Email'
-                                placeholder='Укажите Email'
-                                value={values.email}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                error={touched.email && Boolean(errors.email)}
-                                helperText={touched.email && errors.email}
+                                error={touched.userName && Boolean(errors.userName)}
+                                helperText={touched.userName && errors.userName}
                                 variant='outlined'
                                 fullWidth
                             />
@@ -127,4 +94,4 @@ const ProfileData = (props) => {
     )
 }
 
-export default ProfileData;
+export default ProfileData

@@ -1,6 +1,5 @@
 import service from "../../../helpers/api";
 import {createPassword, saveErrorStatusCode} from "../../action/action";
-import {saveRestStatusCode} from "./restStatus";
 
 // export const sendSignInFormData = ( data, setCookie, setErrorText ) => dispatch => {
 //     return service.post('authenticate ', { ...data })
@@ -24,12 +23,12 @@ import {saveRestStatusCode} from "./restStatus";
 //         })
 // }
 
-export const sendPassword = (data, closeModal, close) => dispatch => {
-    return service.post('resetPassword', {...data})
-        .then((response) => dispatch(saveRestStatusCode(response)))
-        .then(() => closeModal(close))
-        .catch(err => dispatch(saveErrorStatusCode(err.response.status)))
-}
+// export const sendPassword = (data, closeModal, close) => dispatch => {
+//     return service.post('resetPassword', {...data})
+//         .then((response) => dispatch(saveRestStatusCode(response)))
+//         .then(() => closeModal(close))
+//         .catch(err => dispatch(saveErrorStatusCode(err.response.status)))
+// }
 
 export const createNewPassword = ( data, history ) => dispatch => {
     return service.post('createNewPassword ', {...data})

@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react';
-import {useCookies} from "react-cookie";
-import {useHistory} from "react-router-dom";
-import Authentication from "../../components/forms/Authentication/Authentication";
-import {checkTokenValidate} from "../../helpers/utils";
-import AppWrapper from "../../components/wrappers/AppWrapper";
+import React, {useEffect} from 'react'
+import {useCookies} from "react-cookie"
+import {useHistory} from "react-router-dom"
+import Authentication from "../../components/forms/Authentication/Authentication"
+import {checkTokenValidate} from "../../helpers/utils"
 
 const Auth = () => {
 
@@ -15,6 +14,6 @@ const Auth = () => {
     }, [history, token.access_token])
 
     return <Authentication />
-};
+}
 
-export default Auth;
+export default Auth

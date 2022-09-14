@@ -1,25 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react'
 import {Box, Typography} from "@material-ui/core";
-import {useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import ProfileData from "../../components/forms/ProfileData/ProfileData";
-import Layout from "../../components/common/Layout/Layout";
-import UserPhoto from "../../components/common/UserPhoto/UserPhoto";
-import UploadUserPhoto from "../../components/modals/UploadUserPhoto/UploadUserPhoto";
-import {getUserProfileData} from "../../store/thunks/common/profile";
-import {openModal} from "../../helpers/utils";
-
-import {useStyles} from "../style";
+import {useProfileData} from "../../dto/hooks/Profile"
+import ProfileData from "../../components/forms/ProfileData/ProfileData"
+import Layout from "../../components/common/Layout/Layout"
+import UserPhoto from "../../components/common/UserPhoto/UserPhoto"
+import UploadUserPhoto from "../../components/modals/UploadUserPhoto/UploadUserPhoto"
+import {openModal} from "../../helpers/utils"
+import {useStyles} from "../style"
 
 const Profile = () => {
 
     const classes = useStyles()
-    const history = useHistory()
-    const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
-    const profileData = useSelector(({ state }) => state.profileData)
-
-    useEffect(() => dispatch(getUserProfileData(history)), [])
+    const profileData = useProfileData()
 
     return (
         <Box className={classes.contentDark}>
@@ -30,10 +23,10 @@ const Profile = () => {
                 >
                     Личные данные
                 </Typography>
-                {profileData && (
+                {profileData.data && (
                     <Box className={classes.profileForm}>
                         <Box className={classes.photoWrapper}>
-                            <UserPhoto avatarUri={profileData.avatarUri}  />
+                            <UserPhoto avatarUri={profileData.data.avatarUri}  />
                             <Typography
                                 className={classes.uploadPhotoLink}
                                 onClick={() => openModal(setOpen)}
@@ -42,7 +35,7 @@ const Profile = () => {
                             </Typography>
                             <Typography className={classes.uploadInfoText}>Изображение не должно превышать 5 мб</Typography>
                         </Box>
-                        <ProfileData profileData={profileData} />
+                        <ProfileData profileData={profileData.data} refetch={profileData.refetch} />
                     </Box>
                 )}
                 {open && (
@@ -53,7 +46,7 @@ const Profile = () => {
                 )}
             </Layout>
         </Box>
-    );
-};
+    )
+}
 
-export default Profile;
+export default Profile

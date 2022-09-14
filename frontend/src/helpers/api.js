@@ -8,7 +8,6 @@ const getCookie = function(name) {
     if (match) return match[2];
 }
 
-
 service.interceptors.request.use((config) => {
     if (!!getCookie('access_token')) {
         config.headers.common['Authorization'] = `Bearer ${getCookie('access_token')}`
@@ -22,8 +21,4 @@ service.interceptors.response.use((r) => {
 
 export default service
 
-export const onSubmit = (data) => alert(JSON.stringify(data));
-
-
-
-
+export const onSubmit = (data) => alert(JSON.stringify(data))
