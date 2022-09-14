@@ -14,7 +14,7 @@ export const useStyles = makeStyles({
         marginTop: 40,
         display: "flex",
         flexDirection: "column",
-        '& p': {
+        '& p.MuiFormHelperText-root': {
             position: "absolute",
             bottom: -25
         }
@@ -22,4 +22,16 @@ export const useStyles = makeStyles({
     btn: {
         marginTop: 40
     },
+    errorText: {
+        color: '#f44336',
+        position: "absolute"
+    },
+    errorMessage: {
+        position: "absolute",
+        bottom: -45,
+        width: '100%',
+        display: "flex",
+        justifyContent: "center",
+        color: '#f44336'
+    }
 });

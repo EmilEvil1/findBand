@@ -3,6 +3,7 @@ import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
 import Authentication from "../../components/forms/Authentication/Authentication";
 import {checkTokenValidate} from "../../helpers/utils";
+import AppWrapper from "../../components/wrappers/AppWrapper";
 
 const Auth = () => {
 

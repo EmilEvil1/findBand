@@ -14,29 +14,38 @@ import MusicianDetailed from "./pages/MusicanDetailed/MusicianDetailed";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Error from "./pages/Error/Error";
 import "./css/banner.css";
-import AppWrapper from "./components/common/AppWrapper/AppWrapper";
+
+import ErrorContext from "./context/errorContext";
+import QueryContext from "./context/queryContext";
+import AppWrapper from "./components/wrappers/AppWrapper";
 
 const App = () => {
     return (
         <CookiesProvider>
-            <Provider store={store}>
-                <ThemeProvider theme={theme}>
+            <ErrorContext>
+                <QueryContext>
                     <AppWrapper>
-                        <BrowserRouter>
-                            <Switch>
-                                <Route exact path='/' component={Home} />
-                                <Route exact path='/auth' component={Auth} />
-                                <Route exact path='/profile' component={Profile} />
-                                <Route exact path='/profile-band' component={BandProfile} />
-                                <Route exact path='/search' component={SearchResult} />
-                                <Route exact path='/detailed' component={MusicianDetailed} />
-                                <Route exact path='/reset' component={ResetPassword} />
-                                <Route component={Error} />
-                            </Switch>
-                        </BrowserRouter>
+                        <Provider store={store}>
+                            <ThemeProvider theme={theme}>
+                                {/*<AppWrapper>*/}
+                                    <BrowserRouter>
+                                        <Switch>
+                                            <Route exact path='/' component={Home} />
+                                            <Route exact path='/auth' component={Auth} />
+                                            <Route exact path='/profile' component={Profile} />
+                                            <Route exact path='/profile-band' component={BandProfile} />
+                                            <Route exact path='/search' component={SearchResult} />
+                                            <Route exact path='/detailed' component={MusicianDetailed} />
+                                            <Route exact path='/reset' component={ResetPassword} />
+                                            <Route component={Error} />
+                                        </Switch>
+                                    </BrowserRouter>
+                                {/*</AppWrapper>*/}
+                            </ThemeProvider>
+                        </Provider>
                     </AppWrapper>
-                </ThemeProvider>
-            </Provider>
+                </QueryContext>
+            </ErrorContext>
         </CookiesProvider>
     )
 }

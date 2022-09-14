@@ -1,26 +1,31 @@
 import React, {useState} from 'react';
 import {useCookies} from "react-cookie";
-import {useDispatch} from "react-redux";
 import {Formik, Form} from "formik";
 import {Box, Button, TextField, Typography} from "@material-ui/core";
 import {useStyles} from "../style";
 import RegionList from "../../../common/RegionList/RegionList";
 import InstrumentList from "../../../common/InstrumentList/InstrumentList";
 import {eventToggle} from "../../../../helpers/utils";
-import {sendSignUpFormData} from "../../../../store/thunks/common/auth";
 import {signUpValidation} from "../../../../helpers/validation";
 import IconPassword from "../../../../assets/icons/auth/password";
+import {useSignUp} from "../../../../dto/hooks/Auth";
 
 const SignUp = () => {
 
     const classes = useStyles()
-    const dispatch = useDispatch()
     const [,setToken] = useCookies(['access_token'])
     const [errorText, setErrorText] = useState('')
     const [passwordShown, setPasswordShown] = useState(false);
-    const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+    const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
+    const signUp = useSignUp()
 
-    const onSubmit = data => dispatch(sendSignUpFormData(data, setToken, setErrorText))
+    const onAuth = (data) =>
+        signUp.mutateAsync(data)
+            .then((response) => {
+                if (response.data.token) setToken('access_token', response.data.token)
+            }).catch(err => {setErrorText(err.response.data.errors.errorDescription)})
+
+    const onSubmit = data => onAuth(data)
 
     return (
         <Formik
