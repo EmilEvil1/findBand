@@ -19,14 +19,15 @@ const MusicianSearchResult = () => {
             <Layout>
                 <SearchFilter />
                 <Box className={classes.wrapper}>
-                    {searchForMembers.data && Array.isArray(searchForMembers.data.items) && searchForMembers.data.items.length > 0 ?
-                        searchForMembers.data.items.map((item, index) => {
-                            return <MusicianCard item={item} key={index} />
-                        }) : 'Данные отсувствуют'}
+                    {searchForMembers.data &&
+                        Array.isArray(searchForMembers.data.items) && searchForMembers.data.items.length > 0 ?
+                        searchForMembers.data.items.map((item, index) => <MusicianCard item={item} key={index} />)
+                        : 'Данные отсувствуют'
+                    }
                 </Box>
             </Layout>
         </Grid>
     )
 }
 
-export default MusicianSearchResult;
+export default MusicianSearchResult

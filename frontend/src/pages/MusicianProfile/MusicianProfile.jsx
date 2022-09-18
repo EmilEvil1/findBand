@@ -17,20 +17,12 @@ const Profile = () => {
     return (
         <Box className={classes.contentDark}>
             <Layout>
-                <Typography
-                    className={classes.marginValue}
-                    variant='h4'
-                >
-                    Личные данные
-                </Typography>
+                <Typography className={classes.marginValue} variant='h4'>Личные данные</Typography>
                 {profileData.data && (
                     <Box className={classes.profileForm}>
                         <Box className={classes.photoWrapper}>
-                            <UserPhoto avatarUri={profileData.data.avatarUri}  />
-                            <Typography
-                                className={classes.uploadPhotoLink}
-                                onClick={() => openModal(setOpen)}
-                            >
+                            <UserPhoto avatarUri={profileData.data && profileData.data.avatarUri}  />
+                            <Typography className={classes.uploadPhotoLink} onClick={() => openModal(setOpen)}>
                                 Загрузить новый аватар
                             </Typography>
                             <Typography className={classes.uploadInfoText}>Изображение не должно превышать 5 мб</Typography>
@@ -38,12 +30,7 @@ const Profile = () => {
                         <ProfileData profileData={profileData.data} refetch={profileData.refetch} />
                     </Box>
                 )}
-                {open && (
-                    <UploadUserPhoto
-                        open={open}
-                        setOpen={setOpen}
-                    />
-                )}
+                {open && <UploadUserPhoto open={open} setOpen={setOpen} />}
             </Layout>
         </Box>
     )
