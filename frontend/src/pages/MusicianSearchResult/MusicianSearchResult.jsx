@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Box, Grid} from "@material-ui/core"
 import MusicianCard from "../../components/common/MusicianCard/MusicianCard"
 import SearchFilter from "../../components/filters/SearchFilter/SearchFilter"
@@ -9,26 +9,10 @@ import {useStyles} from "../style"
 const MusicianSearchResult = () => {
 
     const classes = useStyles()
-    const searchForMembers = useSearchForMembers()
 
-    useEffect(() => {onSearch()}, [])
-
-    const onSearch = () =>
-        searchForMembers.mutateAsync({
-            regionId: 6,
-            instrumentIds: [4, 3, 5]
-        })
-            .then((response) => {
-                // console.log('response', response)
-            })
-            .catch(err => {
-                // if (err.response.status === 401) {
-                //     removeToken("access_token")
-                //     history.push(`/auth`)
-                // }
-            })
-
-    // console.log('searchForMembers', searchForMembers.data)
+    const regionId = (new URLSearchParams(window.location.search)).get("regionId")
+    const instrumentId = (new URLSearchParams(window.location.search)).get("instrumentId")
+    const searchForMembers = useSearchForMembers(regionId, instrumentId)
 
     return (
         <Grid className={classes.layout}>

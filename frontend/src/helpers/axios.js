@@ -4,7 +4,7 @@ const service = axios.create({
     headers: { accept: "application/json" },
 })
 
-export const fetchParams = async (): Promise => {
+export const fetchParams = (): Promise => {
     return axios.get(`/params.json?timestamp=${Date.now()}`).then((response) => {
         service.defaults.baseURL = response.data.host
         return response
@@ -16,6 +16,7 @@ service.interceptors.request.use((config) => {
     config.headers.common.Authorization = `Bearer ${getTokenFromCookie()}`
     return config
 })
+
 
 service.interceptors.response.use((response) => response.data)
 

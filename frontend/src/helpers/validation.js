@@ -100,7 +100,7 @@ export const searchMusician = yup.object({
     regionId: yup
         .string('Выберите регион')
         .required('Выберите регион'),
-    // instrumentId: yup
-        // .string('Выберите инструмент')
-        // .required('Выберите инструмент'),
+    instrumentId: yup
+        .string('Выберите инструмент')
+        .required('Выберите инструмент'),
 });
