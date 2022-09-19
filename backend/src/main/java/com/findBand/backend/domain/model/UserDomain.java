@@ -108,7 +108,7 @@ public class UserDomain {
         this.username = username;
     }
 
-    public String getAvatarUri() throws URISyntaxException {
+    public String getAvatarUri() {
         //TODO: add default avatar
         if (StringUtils.isEmpty(avatarFilename)) {
             return "";

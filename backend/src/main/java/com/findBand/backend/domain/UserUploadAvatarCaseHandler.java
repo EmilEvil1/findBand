@@ -44,7 +44,7 @@ public class UserUploadAvatarCaseHandler  extends ObservableUseCasePublisher imp
             userDomain.setAvatarFilename(filename);
 
             return userDomain.getAvatarUri();
-        } catch (StorageException | URISyntaxException e) {
+        } catch (StorageException e) {
             log.error("Error in file storing", e);
             throw new FindBandCommonException();
         }

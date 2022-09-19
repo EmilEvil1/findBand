@@ -53,18 +53,14 @@ public class UserProfileController extends BaseController {
 
     private UserProfileResponseDTO toDTO(UserDomain userDomain) {
         String avatarUri = null;
-        try {
-            avatarUri = userDomain.getAvatarUri();
-        } catch (URISyntaxException e) {
-            log.error("Error in URI syntax of avatar for user: {}", userDomain.getId(), e);
-        }
+
         return UserProfileResponseDTO.builder()
           .userName(userDomain.getUsername())
           .emailAddress(userDomain.getEmail())
           .experienceAge(userDomain.getExperienceAge())
           .age(userDomain.getAge())
           .phone(userDomain.getPhone())
-          .avatarUri(avatarUri)
+          .avatarUri(userDomain.getAvatarUri())
           .build();
     }
 }

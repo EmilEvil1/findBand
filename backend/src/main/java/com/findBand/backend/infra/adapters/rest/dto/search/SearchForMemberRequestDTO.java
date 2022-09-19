@@ -6,6 +6,6 @@ import java.util.List;
 
 @Data
 public class SearchForMemberRequestDTO {
-    private List<Long> instrumentIds;
+    private Long instrumentId;
     private long regionId;
 }
