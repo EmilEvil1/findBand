@@ -30,8 +30,8 @@ public class SearchController extends BaseController {
     }
 
     @GetMapping(value = "searchForMembers")
-    public DataResponse<BandSeekerDTO> doSearchForMember(@RequestBody SearchForMemberRequestDTO request) {
-        SearchForMember searchForMember = new SearchForMember(Collections.singletonList(request.getInstrumentId()), request.getRegionId());
+    public DataResponse<BandSeekerDTO> doSearchForMember(@RequestParam Long instrumentId, @RequestParam Long regionId) {
+        SearchForMember searchForMember = new SearchForMember(Collections.singletonList(instrumentId), regionId);
         List<UserDomain> bandSeekers = useCasePublisher.publish(List.class, searchForMember);
         return new DataResponse<BandSeekerDTO>(bandSeekers.stream().map(this::toFoundMemberDTO).collect(Collectors.toList()), 1, 1,bandSeekers.size());
     }
