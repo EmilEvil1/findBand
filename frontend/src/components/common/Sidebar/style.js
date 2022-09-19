@@ -10,6 +10,7 @@ export const useStyles = makeStyles({
         justifyContent: "space-between",
         transition: 'width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms',
         flexShrink: 0,
+        overflow: "hidden",
         zIndex: 1300
     },
     drawerSize: {

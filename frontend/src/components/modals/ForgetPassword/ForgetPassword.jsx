@@ -11,6 +11,7 @@ import {useStyles} from "./style"
 import {closeModal} from "../../../helpers/utils"
 import {forgetPassword} from "../../../helpers/validation"
 import {useResetPassword} from "../../../dto/hooks/Auth"
+import {LoaderWrapper} from "../../wrappers/LoaderWrapper";
 
 const ForgetPassword = (props) => {
 
@@ -33,59 +34,61 @@ const ForgetPassword = (props) => {
             open={open}
             onClose={() => closeModal(close)}
         >
-            <Box className={classes.wrapper}>
-                <Typography className={classes.text}>Забыли пароль?</Typography>
-                <Formik
-                    initialValues={{emailAddress: ''}}
-                    onSubmit={values => onSubmit(values)}
-                    validationSchema={forgetPassword}
-                    enableReinitialize
-                >
-                    {props => {
-                        const {
-                            values,
-                            touched,
-                            errors,
-                            handleChange,
-                            handleBlur,
-                            handleSubmit,
-                        } = props;
-                        return (
-                            <Form onSubmit={handleSubmit} className={classes.form}>
-                                <Box className={classes.inputsWrapper}>
-                                    <TextField
-                                        name='emailAddress'
-                                        label='Email'
-                                        placeholder='Введите email'
-                                        value={values.emailAddress}
-                                        onChange={(event) => {
+            <LoaderWrapper isLoad={resetPassword.isLoading}>
+                <Box className={classes.wrapper}>
+                    <Typography className={classes.text}>Забыли пароль?</Typography>
+                    <Formik
+                        initialValues={{emailAddress: ''}}
+                        onSubmit={values => onSubmit(values)}
+                        validationSchema={forgetPassword}
+                        enableReinitialize
+                    >
+                        {props => {
+                            const {
+                                values,
+                                touched,
+                                errors,
+                                handleChange,
+                                handleBlur,
+                                handleSubmit,
+                            } = props;
+                            return (
+                                <Form onSubmit={handleSubmit} className={classes.form}>
+                                    <Box className={classes.inputsWrapper}>
+                                        <TextField
+                                            name='emailAddress'
+                                            label='Email'
+                                            placeholder='Введите email'
+                                            value={values.emailAddress}
+                                            onChange={(event) => {
+                                                setErrorText('')
+                                                handleChange(event)
+                                            }}
+                                            onBlur={handleBlur}
+                                            error={touched.emailAddress && (Boolean(errors.emailAddress) || Boolean(errorText))}
+                                            helperText={touched.emailAddress && (errors.emailAddress || errorText)}
+                                            variant='outlined'
+                                            fullWidth
+                                        />
+                                    </Box>
+                                    <Typography className={classes.errorMessage}>{errorText && errorText}</Typography>
+                                    <Button
+                                        className={classes.btn}
+                                        color='primary'
+                                        disabled={isLoading}
+                                        onClick={() => {
                                             setErrorText('')
-                                            handleChange(event)
+                                            handleSubmit()
                                         }}
-                                        onBlur={handleBlur}
-                                        error={touched.emailAddress && (Boolean(errors.emailAddress) || Boolean(errorText))}
-                                        helperText={touched.emailAddress && (errors.emailAddress || errorText)}
-                                        variant='outlined'
-                                        fullWidth
-                                    />
-                                </Box>
-                                <Typography className={classes.errorMessage}>{errorText && errorText}</Typography>
-                                <Button
-                                    className={classes.btn}
-                                    color='primary'
-                                    disabled={isLoading}
-                                    onClick={() => {
-                                        setErrorText('')
-                                        handleSubmit()
-                                    }}
-                                >
-                                    Восстановить пароль
-                                </Button>
-                            </Form>
-                        )
-                    }}
-                </Formik>
-            </Box>
+                                    >
+                                        Восстановить пароль
+                                    </Button>
+                                </Form>
+                            )
+                        }}
+                    </Formik>
+                </Box>
+            </LoaderWrapper>
         </Dialog>
     )
 };

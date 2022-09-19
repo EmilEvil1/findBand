@@ -30,6 +30,7 @@ const UploadUserPhoto = (props) => {
     const sendNewUserPhoto = useNewUserPhoto()
     const profileData = useProfileData()
     const isLoading = sendNewUserPhoto.isLoading
+    const [errorText, setErrorText] = useState('')
 
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
@@ -54,10 +55,10 @@ const UploadUserPhoto = (props) => {
         }
     }, [imageSrc, croppedAreaPixels, rotation])
 
-    const onClose = useCallback(() => setCroppedImage(null), [])
+    const clearState = useCallback(() => setCroppedImage(null), [])
 
     const onFileChange = async (e) => {
-        if (e.target.files && e.target.files.length > 0) {
+        if (e.target.files[0].size < 5000000 && e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0]
             let imageDataUrl = await readFile(file)
             // apply rotation if needed
@@ -67,6 +68,9 @@ const UploadUserPhoto = (props) => {
                 imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
             }
             setImageSrc(imageDataUrl)
+            setErrorText('')
+        } else {
+            setErrorText('Фотография превышает 5 МБ')
         }
     }
 
@@ -75,12 +79,12 @@ const UploadUserPhoto = (props) => {
             open={open}
             onClose={() => {
                 closeModal(setOpen)
-                onClose()
+                clearState()
             }}
         >
             <LoaderWrapper isLoad={isLoading}>
                 <Box className={classes.wrapper}>
-                    <Typography className={classes.title} variant='h6'>Выбор миниатюры</Typography>
+                    {!!imageSrc ? <Typography className={classes.title} variant='h6'>Выбор миниатюры</Typography> : <Typography className={classes.title} variant='h6'>Загрузите фотографию</Typography>}
                     <Box>
                         {imageSrc ? (
                             <>
@@ -132,7 +136,14 @@ const UploadUserPhoto = (props) => {
                                 </Box>
                             </>
                         ) : (
-                            <input type="file" onChange={onFileChange} accept="image/png" />
+                            <Box>
+                                <input style={{marginBottom: 20}} type="file" onChange={onFileChange} accept=".png, .jpg, .jpeg" />
+                                <Typography>Изображение не должно превышать 5 мб</Typography>
+                                <Typography>Вы можете загрузить изображение в формате JPG, GIF или PNG.</Typography>
+                                <Typography color={'error'}>{errorText}</Typography>
+                            </Box>
+
+
                         )}
                     </Box>
                 </Box>

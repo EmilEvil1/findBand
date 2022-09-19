@@ -10,6 +10,9 @@ const authService = {
     resetPassword: (data): Promise => {
         return service.post(`resetPassword`, data)
     },
+    createNewPassword: (data): Promise => {
+        return service.post(`createNewPassword`, data)
+    },
 }
 
 export default authService

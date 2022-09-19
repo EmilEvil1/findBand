@@ -2,13 +2,13 @@ import React, {useState} from 'react'
 import {useCookies} from "react-cookie"
 import {Form, Formik} from "formik"
 import {Box, Button, Grid, TextField, Typography} from "@material-ui/core"
-import {signInValidation} from "../../../../helpers/validation"
-import {eventToggle, openModal} from "../../../../helpers/utils"
 import IconPassword from "../../../../assets/icons/auth/password"
 import ForgetPassword from "../../../modals/ForgetPassword/ForgetPassword"
-import {useStyles} from "../style"
 import TelegramAccount from "../../../common/TelegramAccount/TelegramAccount"
-import {useSignIn} from "../../../../dto/hooks/Auth";
+import {useSignIn} from "../../../../dto/hooks/Auth"
+import {signInValidation} from "../../../../helpers/validation"
+import {eventToggle, openModal} from "../../../../helpers/utils"
+import {useStyles} from "../style"
 
 const SignIn = () => {
 
@@ -46,7 +46,7 @@ const SignIn = () => {
                         handleChange,
                         handleBlur,
                         handleSubmit,
-                    } = props;
+                    } = props
                     return (
                         <Form
                             className={classes.signInForm}

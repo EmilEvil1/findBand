@@ -21,11 +21,15 @@ const Profile = () => {
                 {profileData.data && (
                     <Box className={classes.profileForm}>
                         <Box className={classes.photoWrapper}>
-                            <UserPhoto avatarUri={profileData.data && profileData.data.avatarUri}  />
+                            <UserPhoto
+                                avatarUri={profileData.data && profileData.data.avatarUri}
+                                width={150}
+                                height={150}
+                                shortName={profileData.data.userName}
+                            />
                             <Typography className={classes.uploadPhotoLink} onClick={() => openModal(setOpen)}>
                                 Загрузить новый аватар
                             </Typography>
-                            <Typography className={classes.uploadInfoText}>Изображение не должно превышать 5 мб</Typography>
                         </Box>
                         <ProfileData profileData={profileData.data} refetch={profileData.refetch} />
                     </Box>

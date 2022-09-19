@@ -1,29 +1,34 @@
-import React, {useState} from 'react';
-import {useCookies} from "react-cookie";
-import {Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
-import {closeModal, eventToggle} from "../../../helpers/utils";
-import {useStyles} from "./style";
-import ShortLogo from "../../../assets/icons/logos/shortLogo";
-import ProfileIcon from "../../../assets/icons/sidebar/profile";
-import {Link, useHistory} from "react-router-dom";
-import NotificationIcon from "../../../assets/icons/sidebar/notification";
-import BandRoomIcon from "../../../assets/icons/sidebar/band";
-import ArrowIcon from "../../../assets/icons/sidebar/arrow";
-import LogOutIcon from "../../../assets/icons/sidebar/logOut";
-import LongLogo from "../../../assets/icons/logos/longLogo";
-import HomeIcon from "../../../assets/icons/sidebar/home";
-import Notification from "../../notification/Notification";
-import UsersIcon from "../../../assets/icons/sidebar/account";
+import React, {useState} from 'react'
+import {useCookies} from "react-cookie"
+import {Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core"
+import {closeModal, eventToggle} from "../../../helpers/utils"
+import {useStyles} from "./style"
+import ShortLogo from "../../../assets/icons/logos/shortLogo"
+import {Link, useHistory} from "react-router-dom"
+import NotificationIcon from "../../../assets/icons/sidebar/notification"
+import BandRoomIcon from "../../../assets/icons/sidebar/band"
+import ArrowIcon from "../../../assets/icons/sidebar/arrow"
+import LogOutIcon from "../../../assets/icons/sidebar/logOut"
+import LongLogo from "../../../assets/icons/logos/longLogo"
+import HomeIcon from "../../../assets/icons/sidebar/home"
+import Notification from "../../notification/Notification"
+import UsersIcon from "../../../assets/icons/sidebar/account"
+import {useProfileData} from "../../../dto/hooks/Profile";
+import UserPhoto from "../UserPhoto/UserPhoto";
 
 const Sidebar = () => {
 
     const classes = useStyles()
+    const profileData = useProfileData()
     const [open, setOpen] = useState(false)
     const [openNotification, setOpenNotification] = useState(false)
     const [ , , removeCookie] = useCookies(['access_token'])
     const history = useHistory()
 
+    console.log('profileData', profileData)
+
     const logOut = () => {
+        // TODO: Send token to backend
         removeCookie('access_token')
         history.push('/auth')
     }
@@ -31,24 +36,29 @@ const Sidebar = () => {
     return (
         <>
             <Drawer
+                style={{overflow: "hidden"}}
                 open={open}
                 onClose={() => closeModal(setOpen)}
                 variant="permanent"
                 anchor="left"
-                className={open ? classes.drawerSize : ''}
+                className={open && classes.drawerSize}
             >
                 <Box className={!open ? classes.sidebarWrapper : classes.sidebarWrapper + ' ' + classes.sidebarOpened}>
                     <Box>
                         <Box className={classes.logosWrapper}>
-                            {!open ? (<ShortLogo />) : (<LongLogo />)}
+                            {!open ? <ShortLogo /> : <LongLogo />}
                         </Box>
                         <Divider />
                         <List className={classes.userInfo}>
                             <ListItem>
                                 <ListItemIcon>
-                                    <ProfileIcon />
+                                    <UserPhoto
+                                        width={25}
+                                        height={25}
+                                        shortName={profileData.data && profileData.data.userName}
+                                    />
                                 </ListItemIcon>
-                                <ListItemText primary='admin' />
+                                <ListItemText primary={profileData.data && profileData.data.userName} />
                             </ListItem>
                         </List>
                         <List>

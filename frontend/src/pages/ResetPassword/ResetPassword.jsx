@@ -1,13 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
-import {Box, Button, Container, TextField, Typography} from "@material-ui/core";
-import {Formik, Form} from "formik";
-import {newPassword} from "../../helpers/validation";
-import {eventToggle} from "../../helpers/utils";
-import IconPassword from "../../assets/icons/auth/password";
-import {useStyles} from "../../components/forms/Authentication/style";
-import {createNewPassword} from "../../store/thunks/common/auth";
+import React, {useEffect, useState} from 'react'
+import {useHistory} from "react-router-dom"
+import {Formik, Form} from "formik"
+import {Box, Button, Container, TextField, Typography} from "@material-ui/core"
+import {newPassword} from "../../helpers/validation"
+import {eventToggle} from "../../helpers/utils"
+import IconPassword from "../../assets/icons/auth/password"
+import {useStyles} from "../../components/forms/Authentication/style"
+import {useCreateNewPassword} from "../../dto/hooks/Auth"
 
 const ResetPassword = () => {
 
@@ -16,13 +15,13 @@ const ResetPassword = () => {
     const query = new URLSearchParams(window.location.search);
     const resetPasswordId = query.get('resetPasswordId')
     const classes = useStyles()
-    const dispatch = useDispatch()
     const history = useHistory()
+    const sendNewPassword = useCreateNewPassword()
 
     useEffect(() => !resetPasswordId && history.push('/auth'), [resetPasswordId, history])
 
     const onSubmit = data => {
-        dispatch(createNewPassword(data, history))
+        sendNewPassword.mutateAsync(data).then((response) => response.success && history.push(`/auth`))
     }
 
     return (
@@ -49,7 +48,7 @@ const ResetPassword = () => {
                                 handleChange,
                                 handleBlur,
                                 handleSubmit,
-                            } = props;
+                            } = props
                             return (
                                 <Form onSubmit={handleSubmit}>
                                     <Box className={classes.createNewPasswordFields}>
