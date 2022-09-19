@@ -25,8 +25,6 @@ const Sidebar = () => {
     const [ , , removeCookie] = useCookies(['access_token'])
     const history = useHistory()
 
-    console.log('profileData', profileData)
-
     const logOut = () => {
         // TODO: Send token to backend
         removeCookie('access_token')
@@ -41,7 +39,7 @@ const Sidebar = () => {
                 onClose={() => closeModal(setOpen)}
                 variant="permanent"
                 anchor="left"
-                className={open && classes.drawerSize}
+                className={open ? classes.drawerSize : ``}
             >
                 <Box className={!open ? classes.sidebarWrapper : classes.sidebarWrapper + ' ' + classes.sidebarOpened}>
                     <Box>
