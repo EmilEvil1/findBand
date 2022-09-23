@@ -1,4 +1,4 @@
-import service from "../../helpers/api";
+import service from "../../helpers/axios";
 
 const authService = {
     signIn: (data: { email: string; password: string }): Promise<{ token?: string }> => {

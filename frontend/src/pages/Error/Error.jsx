@@ -1,15 +1,12 @@
-import React from 'react';
-import {useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
-import {Box, Button, Typography} from "@material-ui/core";
-import {useStyles} from "../style";
-import {saveErrorStatusCode} from "../../store/action/action";
+import React from 'react'
+import {useHistory} from "react-router-dom"
+import {Box, Button, Typography} from "@material-ui/core"
+import {useStyles} from "../style"
 
 const Error = () => {
 
     const classes = useStyles()
     const history = useHistory()
-    const dispatch = useDispatch()
 
     return (
         <Box className={classes.contentDark}>
@@ -19,7 +16,6 @@ const Error = () => {
                 <Button
                     className={classes.backButton}
                     onClick={() => {
-                        dispatch(saveErrorStatusCode(null))
                         history.push('/')
                     }}
                 >

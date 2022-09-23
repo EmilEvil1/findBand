@@ -1,7 +1,7 @@
 import React from "react"
+import { QueryClientProvider } from "react-query"
 import { getQueryClient } from "../helpers/query"
 import { useErrorContext } from "./errorContext"
-import { QueryClientProvider } from "react-query"
 
 const QueryContext= ({ children }) => {
     const [, setError] = useErrorContext()

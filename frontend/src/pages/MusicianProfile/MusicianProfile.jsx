@@ -28,7 +28,7 @@ const Profile = () => {
                                 shortName={profileData.data.userName}
                             />
                             <Typography className={classes.uploadPhotoLink} onClick={() => openModal(setOpen)}>
-                                Загрузить новый аватар
+                                {profileData.data.avatarUri ? `Изменить фотографию` : `Загрузить фотографию`}
                             </Typography>
                         </Box>
                         <ProfileData profileData={profileData.data} refetch={profileData.refetch} />

@@ -1,11 +1,12 @@
 import React from 'react'
 import {Form, Formik} from "formik"
-import {Box, Button, Grid, TextField, Typography} from "@material-ui/core"
+import {Box, Button, Grid, TextField} from "@material-ui/core"
 import {profileFormValidation} from "../../../helpers/validation"
 import RegionList from "../../common/RegionList/RegionList"
 import InstrumentList from "../../common/InstrumentList/InstrumentList"
 import {useSaveNewData} from "../../../dto/hooks/Profile"
 import {useStyles} from "./style"
+import AgeSelect from "../../common/AgeSelect/AgeSelect";
 
 const ProfileData = (props) => {
 
@@ -25,7 +26,6 @@ const ProfileData = (props) => {
                 initialValues={{
                     userName: profileData.userName || '',
                     emailAddress: profileData.emailAddress || '',
-                    phone: profileData.phone || '',
                     regionId: profileData.regionId || '',
                     instrumentId: profileData.instrumentId || '',
                     age: profileData.age || '',
@@ -44,21 +44,40 @@ const ProfileData = (props) => {
                         handleBlur,
                         handleSubmit,
                         setFieldValue
-                    } = props;
+                    } = props
                     return (
                         <Form onSubmit={handleSubmit}>
-                            <TextField
-                                name='userName'
-                                label='Имя'
-                                placeholder='Укажите имя'
-                                value={values.userName}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                error={touched.userName && Boolean(errors.userName)}
-                                helperText={touched.userName && errors.userName}
-                                variant='outlined'
-                                fullWidth
-                            />
+                            <Box display='flex'>
+                                <TextField
+                                    name='userName'
+                                    label='Имя'
+                                    placeholder='Укажите имя'
+                                    value={values.userName}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    error={touched.userName && Boolean(errors.userName)}
+                                    helperText={touched.userName && errors.userName}
+                                    variant='outlined'
+                                    fullWidth
+                                />
+                                <AgeSelect
+                                    vakue={values.age}
+                                    onChange={handleChange}
+                                    name='age'
+                                />
+                            </Box>
+                            {/*<TextField*/}
+                            {/*    name='userDescription'*/}
+                            {/*    label='Имя'*/}
+                            {/*    placeholder='Укажите имя'*/}
+                            {/*    value={values.userName}*/}
+                            {/*    onChange={handleChange}*/}
+                            {/*    onBlur={handleBlur}*/}
+                            {/*    error={touched.userName && Boolean(errors.userName)}*/}
+                            {/*    helperText={touched.userName && errors.userName}*/}
+                            {/*    variant='outlined'*/}
+                            {/*    fullWidth*/}
+                            {/*/>*/}
                             <RegionList
                                 values={values}
                                 handleChange={handleChange}
@@ -86,10 +105,10 @@ const ProfileData = (props) => {
                     )
                 }}
             </Formik>
-            <Box className={classes.marginContainer}>
-                <Typography>Сменить пароль</Typography>
-                <Typography>Выйти</Typography>
-            </Box>
+            {/*<Box className={classes.marginContainer}>*/}
+            {/*    <Typography>Сменить пароль</Typography>*/}
+            {/*    <Typography>Выйти</Typography>*/}
+            {/*</Box>*/}
         </Grid>
     )
 }

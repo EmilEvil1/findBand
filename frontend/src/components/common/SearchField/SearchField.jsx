@@ -1,6 +1,6 @@
 import React from 'react';
-import {Box, IconButton, TextField} from "@material-ui/core";
-import SearchIcon from "../../../assets/icons/search/search";
+import {Box, IconButton} from "@material-ui/core";
+// import SearchIcon from "../../../assets/icons/search/search";
 import {useStyles} from "./style";
 
 
@@ -10,13 +10,13 @@ const SearchField = () => {
 
     return (
         <Box className={classes.wrapper}>
-            <TextField
-                className={classes.input}
-                name='search'
-                variant='outlined'
-            />
+            {/*<TextField*/}
+            {/*    className={classes.input}*/}
+            {/*    name='search'*/}
+            {/*    variant='outlined'*/}
+            {/*/>*/}
             <IconButton className={classes.searchBtn}>
-                <SearchIcon />
+                {/*<SearchIcon />*/}
             </IconButton>
         </Box>
     );

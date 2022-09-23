@@ -1,13 +1,10 @@
 import React from 'react'
-import {Provider} from "react-redux"
 import {BrowserRouter, Route, Switch} from "react-router-dom"
 import {CookiesProvider} from 'react-cookie'
 import {ThemeProvider} from "@material-ui/styles"
-import store from "./store/store"
 import {theme} from "./helpers/theme"
 import ErrorContext from "./context/errorContext"
 import QueryContext from "./context/queryContext"
-import AppWrapper from "./components/wrappers/AppWrapper"
 import Home from "./pages/Home/Home"
 import Auth from "./pages/Auth/Auth"
 import Profile from "./pages/MusicianProfile/MusicianProfile"
@@ -23,8 +20,7 @@ const App = () => {
         <CookiesProvider>
             <ErrorContext>
                 <QueryContext>
-                    <AppWrapper>
-                        <Provider store={store}>
+                    {/*<AppWrapper>*/}
                             <ThemeProvider theme={theme}>
                                 <BrowserRouter>
                                     <Switch>
@@ -39,8 +35,7 @@ const App = () => {
                                     </Switch>
                                 </BrowserRouter>
                             </ThemeProvider>
-                        </Provider>
-                    </AppWrapper>
+                    {/*</AppWrapper>*/}
                 </QueryContext>
             </ErrorContext>
         </CookiesProvider>

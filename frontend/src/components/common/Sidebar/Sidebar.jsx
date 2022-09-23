@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {useCookies} from "react-cookie"
 import {Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core"
 import {closeModal, eventToggle} from "../../../helpers/utils"
-import {useStyles} from "./style"
 import ShortLogo from "../../../assets/icons/logos/shortLogo"
 import {Link, useHistory} from "react-router-dom"
 import NotificationIcon from "../../../assets/icons/sidebar/notification"
@@ -13,8 +12,9 @@ import LongLogo from "../../../assets/icons/logos/longLogo"
 import HomeIcon from "../../../assets/icons/sidebar/home"
 import Notification from "../../notification/Notification"
 import UsersIcon from "../../../assets/icons/sidebar/account"
-import {useProfileData} from "../../../dto/hooks/Profile";
-import UserPhoto from "../UserPhoto/UserPhoto";
+import {useProfileData} from "../../../dto/hooks/Profile"
+import UserPhoto from "../UserPhoto/UserPhoto"
+import {useStyles} from "./style"
 
 const Sidebar = () => {
 
@@ -54,6 +54,7 @@ const Sidebar = () => {
                                         width={25}
                                         height={25}
                                         shortName={profileData.data && profileData.data.userName}
+                                        // avatarUri={profileData.data.avatarUri}
                                     />
                                 </ListItemIcon>
                                 <ListItemText primary={profileData.data && profileData.data.userName} />

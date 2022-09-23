@@ -2,7 +2,6 @@ import React from 'react';
 import {useHistory} from "react-router-dom";
 import {Form, Formik} from "formik";
 import {Button} from "@material-ui/core";
-import {onSubmit} from "../../../../helpers/api";
 import {searchMusician} from "../../../../helpers/validation";
 import RegionList from "../../../common/RegionList/RegionList";
 import InstrumentList from "../../../common/InstrumentList/InstrumentList";
@@ -18,7 +17,7 @@ const SearchBand = () => {
                 region: '',
                 instrument: ''
             }}
-            onSubmit={(values) => onSubmit(values)}
+            onSubmit={(values) => alert(values)}
             validationSchema={searchMusician}
         >
             {props => {
