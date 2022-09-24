@@ -9,22 +9,27 @@ import {useSignIn} from "../../../../dto/hooks/Auth"
 import {signInValidation} from "../../../../helpers/validation"
 import {eventToggle, openModal} from "../../../../helpers/utils"
 import {useStyles} from "../style"
+import {useHistory} from "react-router-dom";
 
 const SignIn = () => {
 
     const classes = useStyles()
     const [open, setOpen] = useState(false);
-    const [,setToken] = useCookies(['access_token'])
+    const [token ,setToken] = useCookies(['access_token'])
     const [passwordShown, setPasswordShown] = useState(false)
     const [errorText, setErrorText] = useState('')
     const signIn = useSignIn()
     const isLoading = signIn.isLoading
+    const history = useHistory()
 
     const onAuth = (data) =>
         signIn.mutateAsync(data)
             .then((response) => {
-                if (response.token) setToken('access_token', response.token)
+                if (response.token) {
+                    setToken('access_token', response.token)
+                }
             })
+            .then(() => !!token.access_token && history.push(`/`))
             .catch(err => setErrorText(err.response.data.errors.errorDescription))
 
     const onSubmit = data => onAuth(data)

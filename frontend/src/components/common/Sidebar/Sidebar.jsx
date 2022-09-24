@@ -19,10 +19,10 @@ import {useStyles} from "./style"
 const Sidebar = () => {
 
     const classes = useStyles()
+    const [, , removeCookie] = useCookies(['access_token'])
     const profileData = useProfileData()
     const [open, setOpen] = useState(false)
     const [openNotification, setOpenNotification] = useState(false)
-    const [ , , removeCookie] = useCookies(['access_token'])
     const history = useHistory()
 
     const logOut = () => {

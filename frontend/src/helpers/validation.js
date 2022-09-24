@@ -96,8 +96,7 @@ export const profileFormValidation = yup.object({
         .max(60, "You must be at most 60 years"),
     experienceAge: yup
         .number('must have')
-
-});
+})
 
 // Home
 
@@ -108,4 +107,4 @@ export const searchMusician = yup.object({
     instrumentId: yup
         .string('Выберите инструмент')
         .required('Выберите инструмент'),
-});
+})
