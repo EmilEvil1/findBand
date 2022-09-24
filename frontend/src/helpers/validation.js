@@ -73,6 +73,8 @@ export const profileFormValidation = yup.object({
     userName: yup
         .string('Заполните поле')
         .required('Заполните поле'),
+    userDescription: yup
+        .string('Заполните поле'),
     // phone: yup
     //     .string('Заполните поле')
     //     // .matches(phoneRegExp, 'Phone number is not valid')
@@ -88,11 +90,14 @@ export const profileFormValidation = yup.object({
         .string('Выберите инструмент')
         .required('Выберите инструмент'),
     age: yup
-        .number('must have'),
+        .number()
+        // .default(0)
+        .min(10, "You must be at least 18 years")
+        .max(60, "You must be at most 60 years"),
     experienceAge: yup
         .number('must have')
-});
 
+});
 
 // Home
 

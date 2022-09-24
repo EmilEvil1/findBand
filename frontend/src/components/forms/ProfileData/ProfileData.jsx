@@ -6,7 +6,6 @@ import RegionList from "../../common/RegionList/RegionList"
 import InstrumentList from "../../common/InstrumentList/InstrumentList"
 import {useSaveNewData} from "../../../dto/hooks/Profile"
 import {useStyles} from "./style"
-import AgeSelect from "../../common/AgeSelect/AgeSelect";
 
 const ProfileData = (props) => {
 
@@ -25,6 +24,7 @@ const ProfileData = (props) => {
             <Formik
                 initialValues={{
                     userName: profileData.userName || '',
+                    userDescription: profileData.userDescription || '',
                     emailAddress: profileData.emailAddress || '',
                     regionId: profileData.regionId || '',
                     instrumentId: profileData.instrumentId || '',
@@ -60,24 +60,46 @@ const ProfileData = (props) => {
                                     variant='outlined'
                                     fullWidth
                                 />
-                                <AgeSelect
-                                    vakue={values.age}
-                                    onChange={handleChange}
-                                    name='age'
-                                />
+                                {/*<InputMask*/}
+                                {/*    mask="99"*/}
+                                {/*    // maskChar=" "*/}
+                                {/*    value={values.age}*/}
+                                {/*    onChange={handleChange}*/}
+                                {/*    onBlur={handleBlur}*/}
+                                {/*    error={touched.age && Boolean(errors.age)}*/}
+                                {/*    helperText={touched.age && errors.age}*/}
+                                {/*>*/}
+                                {/*    {() => <TextField*/}
+                                {/*                className={classes.marginBlock}*/}
+                                {/*                name='age'*/}
+                                {/*                label='Возраст'*/}
+                                {/*                placeholder='Укажите возраст'*/}
+                                {/*                value={values.age}*/}
+                                {/*                onChange={handleChange}*/}
+                                {/*                onBlur={handleBlur}*/}
+                                {/*                error={touched.age && Boolean(errors.age)}*/}
+                                {/*                helperText={touched.age && errors.age}*/}
+                                {/*                variant='outlined'*/}
+                                {/*                fullWidth*/}
+                                {/*                inputProps={{maxLength: 2}}*/}
+                                {/*             />*/}
+                                {/*    }*/}
+                                {/*</InputMask>*/}
                             </Box>
-                            {/*<TextField*/}
-                            {/*    name='userDescription'*/}
-                            {/*    label='Имя'*/}
-                            {/*    placeholder='Укажите имя'*/}
-                            {/*    value={values.userName}*/}
-                            {/*    onChange={handleChange}*/}
-                            {/*    onBlur={handleBlur}*/}
-                            {/*    error={touched.userName && Boolean(errors.userName)}*/}
-                            {/*    helperText={touched.userName && errors.userName}*/}
-                            {/*    variant='outlined'*/}
-                            {/*    fullWidth*/}
-                            {/*/>*/}
+                            <TextField
+                                style={{marginTop: 35}}
+                                name='userDescription'
+                                label='О себе'
+                                placeholder='Расскажите о себе'
+                                value={values.userDescription}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                error={touched.userDescription && Boolean(errors.userDescription)}
+                                helperText={touched.userDescription && errors.userDescription}
+                                variant='outlined'
+                                fullWidth
+
+                            />
                             <RegionList
                                 values={values}
                                 handleChange={handleChange}

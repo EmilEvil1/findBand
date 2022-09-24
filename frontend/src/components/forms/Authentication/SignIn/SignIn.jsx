@@ -24,7 +24,8 @@ const SignIn = () => {
         signIn.mutateAsync(data)
             .then((response) => {
                 if (response.token) setToken('access_token', response.token)
-            }).catch(err => setErrorText(err.response.data.errors.errorDescription))
+            })
+            .catch(err => setErrorText(err.response.data.errors.errorDescription))
 
     const onSubmit = data => onAuth(data)
 
