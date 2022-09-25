@@ -13,7 +13,8 @@ const RegionList = (props) => {
 
     return (
         <Autocomplete
-            style={{marginTop: 35}}
+            // style={{marginTop: 35, width: `100%`}}
+            style={{marginTop: 0, width: `100%`}}
             id="regionId"
             name="regionId"
             noOptionsText='Регион не найден'

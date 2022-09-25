@@ -13,7 +13,8 @@ const InstrumentList = (props) => {
 
     return (
         <Autocomplete
-            style={{marginTop: 35}}
+            // style={{marginTop: 35, width: `100%`}}
+            style={{marginTop: 0, width: `100%`}}
             id="instrumentId"
             name="instrumentId"
             classes={{noOptions: classes.noOptions}}

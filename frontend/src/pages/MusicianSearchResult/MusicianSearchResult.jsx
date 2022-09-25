@@ -14,12 +14,13 @@ const MusicianSearchResult = () => {
     const regionId = getUrlQueryParams(`regionId`)
     const instrumentId = getUrlQueryParams(`instrumentId`)
     const searchForMembers = useSearchForMembers(regionId, instrumentId)
-    const isLoading = searchForMembers.isLoading
+    const isLoading = searchForMembers.isLoading || searchForMembers.isFetching
+
 
     return (
         <Grid className={classes.layout}>
             <Layout>
-                <SearchFilter />
+                <SearchFilter refetch={searchForMembers.refetch} />
                 <LoaderWrapper isLoad={isLoading}>
                     <Box className={classes.wrapper}>
                         {searchForMembers.data &&
