@@ -77,12 +77,12 @@ const Sidebar = () => {
                                     <ListItemText primary='Профиль' />
                                 </ListItem>
                             </Link>
-                            <Link to='/profile-band'>
+                            <Link to='/profile-bands'>
                                 <ListItem className={classes.menuItem} button>
                                     <ListItemIcon>
                                         <BandRoomIcon />
                                     </ListItemIcon>
-                                    <ListItemText primary='Моя группа' />
+                                    <ListItemText primary='Профиль групп' />
                                 </ListItem>
                             </Link>
                         </List>

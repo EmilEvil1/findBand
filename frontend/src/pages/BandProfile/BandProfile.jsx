@@ -10,7 +10,7 @@ const BandProfile = () => {
     return (
         <Box className={classes.contentDark}>
             <Layout>
-                <Typography style={{marginTop: 35}} color='primary' variant='h4'>Профиль группы</Typography>
+                <Typography className={classes.marginValue} color='primary' variant='h4'>Профиль группы</Typography>
             </Layout>
         </Box>
     )

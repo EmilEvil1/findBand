@@ -1,32 +1,29 @@
-import React, {useState} from 'react';
-import {Tab} from "@material-ui/core";
-import {TabContext, TabList, TabPanel} from "@material-ui/lab";
-import SearchBand from "./SearchBand/SearchBand";
-import SearchMusician from "./SearchMusician/SearchMusician";
+import React, {useState} from 'react'
+import {Box} from "@material-ui/core"
+import {ToggleButton, ToggleButtonGroup} from "@material-ui/lab"
+import Search from "../Search/Search"
 
 const GlobalSearch = () => {
 
-    const [value, setValue] = useState('1');
-    const handleChange = (event, newValue) => setValue(newValue)
+    const [searchType, setSearchType] = useState(`musician`)
+    const handleChange = (event, newValue) => setSearchType(newValue)
 
     return (
-        <TabContext  value={value}>
-            <TabList
-                indicatorColor="primary"
-                style={{padding: '0 24px', marginTop: 20}}
+        <Box>
+            <ToggleButtonGroup
+                color="primary"
+                value={searchType}
+                exclusive
                 onChange={handleChange}
+                defaultValue={searchType}
+                aria-label="Platform"
             >
-                <Tab label="Найти музыканта" value="1"/>
-                <Tab label="Найти группу" value="2" />
-            </TabList>
-            <TabPanel value="1">
-                <SearchMusician />
-            </TabPanel>
-            <TabPanel value="2">
-                <SearchBand />
-            </TabPanel>
-        </TabContext>
-    );
-};
+                <ToggleButton value="musician">Найти музыканта</ToggleButton>
+                <ToggleButton value="band">Найти группу</ToggleButton>
+            </ToggleButtonGroup>
+            <Search searchType={searchType} />
+        </Box>
+    )
+}
 
 export default GlobalSearch;

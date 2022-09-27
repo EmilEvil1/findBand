@@ -108,7 +108,6 @@ export const useStyles = makeStyles({
     },
     signUpWrapper : {
         width: 400,
-        // height: '100%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

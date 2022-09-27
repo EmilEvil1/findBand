@@ -16,7 +16,6 @@ const MusicianSearchResult = () => {
     const searchForMembers = useSearchForMembers(regionId, instrumentId)
     const isLoading = searchForMembers.isLoading || searchForMembers.isFetching
 
-
     return (
         <Grid className={classes.layout}>
             <Layout>

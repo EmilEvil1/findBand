@@ -1,5 +1,5 @@
 import React from 'react'
-import {TextField} from "@material-ui/core"
+import {Box, TextField} from "@material-ui/core"
 import {Autocomplete} from "@material-ui/lab"
 import {useStyles} from "../../../pages/style"
 import {useRegionList} from "../../../dto/hooks/Regions"
@@ -13,10 +13,9 @@ const RegionList = (props) => {
 
     return (
         <Autocomplete
-            // style={{marginTop: 35, width: `100%`}}
-            style={{marginTop: 0, width: `100%`}}
             id="regionId"
             name="regionId"
+            className={classes.autocomplete}
             noOptionsText='Регион не найден'
             classes={{noOptions: classes.noOptions}}
             options={(Array.isArray(regionList.data) && regionList.data.length > 0 && regionList.data) || []}
@@ -25,18 +24,20 @@ const RegionList = (props) => {
                 !!value ?  setFieldValue("regionId", value.id) : setFieldValue("regionId", 0)
             }}
             renderInput={(params) => (
-                <TextField
-                    {...params}
-                    label='Регион'
-                    placeholder='Введите название'
-                    onChange={handleChange}
-                    value={values.regionId || ''}
-                    onBlur={handleBlur}
-                    error={!!touched.regionId && Boolean(errors.regionId || errorText)}
-                    helperText={touched.regionId && errors.regionId}
-                    variant='outlined'
-                    fullWidth
-                />
+                <Box className={classes.textField}>
+                    <TextField
+                        {...params}
+                        label='Регион'
+                        placeholder='Введите название'
+                        onChange={handleChange}
+                        value={values.regionId || ''}
+                        onBlur={handleBlur}
+                        error={!!touched.regionId && Boolean(errors.regionId || errorText)}
+                        helperText={touched.regionId && errors.regionId}
+                        variant='outlined'
+                        fullWidth
+                    />
+                </Box>
             )}
         />
     );

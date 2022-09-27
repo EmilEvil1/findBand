@@ -1,8 +1,8 @@
 import React from 'react';
-import {TextField} from "@material-ui/core";
+import {Box, TextField} from "@material-ui/core"
 import {Autocomplete} from "@material-ui/lab";
-import {useStyles} from "../../../pages/style";
-import {useInstrumentsList} from "../../../dto/hooks/Instruments";
+import {useInstrumentsList} from "../../../dto/hooks/Instruments"
+import {useStyles} from "../../../pages/style"
 
 const InstrumentList = (props) => {
 
@@ -13,10 +13,9 @@ const InstrumentList = (props) => {
 
     return (
         <Autocomplete
-            // style={{marginTop: 35, width: `100%`}}
-            style={{marginTop: 0, width: `100%`}}
             id="instrumentId"
             name="instrumentId"
+            className={classes.autocomplete}
             classes={{noOptions: classes.noOptions}}
             noOptionsText='Инструмент не найден'
             options={(Array.isArray(instrumentsList.data) && instrumentsList.data.length > 0 && instrumentsList.data) || []}
@@ -25,18 +24,20 @@ const InstrumentList = (props) => {
                 !!value ?  setFieldValue("instrumentId", value.id) : setFieldValue("instrumentId", 0)
             }}
             renderInput={(params) => (
-                <TextField
-                    {...params}
-                    label='Инструмент'
-                    placeholder='Введите название'
-                    onChange={handleChange}
-                    value={!!values.instrumentId && values.instrumentId}
-                    onBlur={handleBlur}
-                    error={touched.instrumentId && Boolean(errors.instrumentId || errorText)}
-                    helperText={touched.instrumentId && errors.instrumentId}
-                    variant='outlined'
-                    fullWidth
-                />
+                <Box className={classes.textField}>
+                    <TextField
+                        {...params}
+                        label='Инструмент'
+                        placeholder='Введите название'
+                        onChange={handleChange}
+                        value={!!values.instrumentId && values.instrumentId}
+                        onBlur={handleBlur}
+                        error={touched.instrumentId && Boolean(errors.instrumentId || errorText)}
+                        helperText={touched.instrumentId && errors.instrumentId}
+                        variant='outlined'
+                        fullWidth
+                    />
+                </Box>
             )}
         />
     )

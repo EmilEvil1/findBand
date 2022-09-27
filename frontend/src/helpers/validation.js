@@ -103,8 +103,10 @@ export const profileFormValidation = yup.object({
 export const searchMusician = yup.object({
     regionId: yup
         .string('Выберите регион')
+        .nullable()
         .required('Выберите регион'),
     instrumentId: yup
         .string('Выберите инструмент')
+        .nullable()
         .required('Выберите инструмент'),
 })

@@ -1,23 +1,34 @@
-import React from 'react';
-import {useHistory} from "react-router-dom";
-import {Form, Formik} from "formik";
-import {Button} from "@material-ui/core";
-import {searchMusician} from "../../../../helpers/validation";
-import RegionList from "../../../common/RegionList/RegionList";
-import InstrumentList from "../../../common/InstrumentList/InstrumentList";
+import React from 'react'
+import {Form, Formik} from "formik"
+import {Button} from "@material-ui/core"
+import {useHistory} from "react-router-dom"
+import {searchMusician} from "../../../helpers/validation"
+import RegionList from "../../common/RegionList/RegionList";
+import InstrumentList from "../../common/InstrumentList/InstrumentList"
 
-const SearchBand = () => {
+const Search = ({searchType}) => {
 
     const history = useHistory()
 
-    return (
+    const onSubmit = data => {
+        switch (searchType) {
+            case `musician`:
+                history.push(`/search?regionId=${data.regionId}&instrumentId=${data.instrumentId}`)
+                break
+            case `band`:
+                history.push(`/searchBand?regionId=${data.regionId}&instrumentId=${data.instrumentId}`)
+                break
+            default: history.push(`/404`)
+        }
+    }
 
+    return (
         <Formik
             initialValues={{
-                region: '',
-                instrument: ''
+                regionId: null,
+                instrumentId: null
             }}
-            onSubmit={(values) => alert(values)}
+            onSubmit={values => onSubmit(values)}
             validationSchema={searchMusician}
         >
             {props => {
@@ -28,10 +39,11 @@ const SearchBand = () => {
                     handleChange,
                     handleBlur,
                     handleSubmit,
-                    setFieldValue
-                } = props;
+                    setFieldValue,
+                } = props
                 return (
                     <Form onSubmit={handleSubmit}>
+
                         <RegionList
                             values={values}
                             handleChange={handleChange}
@@ -50,13 +62,9 @@ const SearchBand = () => {
                         />
                         <Button
                             style={{marginTop: 40}}
+                            disabled={!searchType}
                             color='primary'
-                            onClick={() => {
-                                handleSubmit()
-                                if (values.region && values.instrument) {
-                                    history.push('/search')
-                                }
-                            }}
+                            onClick={handleSubmit}
                         >
                             Найти
                         </Button>
@@ -64,7 +72,7 @@ const SearchBand = () => {
                 )
             }}
         </Formik>
-    );
-};
+    )
+}
 
-export default SearchBand;
+export default Search

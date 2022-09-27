@@ -80,5 +80,20 @@ export const useStyles = makeStyles({
     },
     marginValue: {
         marginTop: 35
+    },
+    textField: {
+        position: "relative",
+        width: '100%',
+        display: "flex",
+        flexDirection: "column",
+        color: "white",
+        '& p.MuiFormHelperText-root': {
+            position: "absolute",
+            bottom: -25
+        }
+    },
+    autocomplete: {
+        marginTop: 35,
+        width: `100%`
     }
 });
