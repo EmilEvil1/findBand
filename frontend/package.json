@@ -14,6 +14,7 @@
     "formik": "^2.2.9",
     "formik-material-ui": "^4.0.0-alpha.2",
     "get-orientation": "^1.1.2",
+    "material-ui-image": "^3.3.2",
     "react": "^17.0.2",
     "react-alice-carousel": "^2.5.1",
     "react-cookie": "^4.1.1",

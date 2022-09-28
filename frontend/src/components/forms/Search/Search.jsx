@@ -43,7 +43,6 @@ const Search = ({searchType}) => {
                 } = props
                 return (
                     <Form onSubmit={handleSubmit}>
-
                         <RegionList
                             values={values}
                             handleChange={handleChange}

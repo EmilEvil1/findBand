@@ -26,6 +26,7 @@ const Profile = () => {
                                 width={150}
                                 height={150}
                                 shortName={profileData.data.userName}
+                                variant='circular'
                             />
                             <Typography className={classes.uploadPhotoLink} onClick={() => openModal(setOpen)}>
                                 {profileData.data.avatarUri ? `Изменить фотографию` : `Загрузить фотографию`}
@@ -34,7 +35,7 @@ const Profile = () => {
                         <ProfileData profileData={profileData.data} refetch={profileData.refetch} />
                     </Box>
                 )}
-                {open && <UploadUserPhoto open={open} setOpen={setOpen} />}
+                {open && <UploadUserPhoto type='musicianProfile' open={open} setOpen={setOpen} />}
             </Layout>
         </Box>
     )

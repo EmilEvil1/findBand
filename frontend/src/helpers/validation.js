@@ -110,3 +110,24 @@ export const searchMusician = yup.object({
         .nullable()
         .required('Выберите инструмент'),
 })
+
+// BandInformation
+
+export const bandInformation = yup.object({
+    bandName: yup
+        .string('Заполните поле')
+        .required('Заполните поле'),
+    bandPhoto: yup
+        .string('Заполните поле')
+        .required('Заполните поле'),
+    bandDescription: yup
+        .string('Заполните поле')
+        .required('Заполните поле'),
+    bandGenre: yup
+        .string('Заполните поле')
+        .required('Заполните поле'),
+    regionId: yup
+        .string('Выберите регион')
+        .nullable()
+        .required('Выберите регион'),
+})

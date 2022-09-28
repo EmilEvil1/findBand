@@ -98,7 +98,6 @@ const ProfileData = (props) => {
                                 helperText={touched.userDescription && errors.userDescription}
                                 variant='outlined'
                                 fullWidth
-
                             />
                             <RegionList
                                 values={values}

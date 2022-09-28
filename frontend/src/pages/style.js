@@ -95,5 +95,6 @@ export const useStyles = makeStyles({
     autocomplete: {
         marginTop: 35,
         width: `100%`
-    }
+    },
+
 });

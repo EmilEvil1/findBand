@@ -54,6 +54,7 @@ const Sidebar = () => {
                                         width={25}
                                         height={25}
                                         shortName={profileData.data && profileData.data.userName}
+                                        variant='circular'
                                         // avatarUri={profileData.data.avatarUri}
                                     />
                                 </ListItemIcon>

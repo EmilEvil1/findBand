@@ -16,7 +16,7 @@ const ORIENTATION_TO_ANGLE = {
 
 const UploadUserPhoto = (props) => {
 
-    const {open, setOpen} = props
+    const {open, setOpen, type, setFieldValue, setUploadedPhoto} = props
     const classes = useStyles()
 
     // Вы можете загрузить изображение в формате JPG, GIF или PNG.
@@ -48,7 +48,16 @@ const UploadUserPhoto = (props) => {
                 croppedAreaPixels,
                 rotation
             )
-            await sendNewPhoto({image: croppedImage})
+            switch (type) {
+                case 'musicianProfile':
+                    await sendNewPhoto({image: croppedImage})
+                    break
+                case 'bandInformation':
+                    await setUploadedPhoto(croppedImage)
+                    await setFieldValue('bandPhoto', croppedImage)
+                    break
+                default: return false
+            }
             await closeModal(setOpen)
         } catch (e) {
             console.error(e)
