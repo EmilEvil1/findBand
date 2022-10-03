@@ -11,13 +11,13 @@ const BandsInformation = () => {
     // TODO: написать API
 
     const mockData = [
-        {
-            bandName: 'Группа 1',
-            memberCount: 2,
-            createData: '1/01/2000',
-            bandId: 123,
-            bandPhoto: ''
-        },
+        // {
+        //     bandName: 'Группа 1',
+        //     memberCount: 2,
+        //     createData: '1/01/2000',
+        //     bandId: 123,
+        //     bandPhoto: ''
+        // },
         // {
         //     bandName: 'Группа 2',
         //     memberCount: 3,

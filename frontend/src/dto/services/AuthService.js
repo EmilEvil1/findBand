@@ -13,6 +13,9 @@ const authService = {
     createNewPassword: (data): Promise => {
         return service.post(`createNewPassword`, data)
     },
+    telegramAuth: (data): Promise => {
+        return service.post(`telegram`, data)
+    },
 }
 
 export default authService
