@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Box, Typography} from "@material-ui/core";
+import {Box, Checkbox, FormControlLabel, FormGroup, Typography} from "@material-ui/core";
 import {useProfileData} from "../../dto/hooks/Profile"
 import ProfileData from "../../components/forms/ProfileData/ProfileData"
 import Layout from "../../components/common/Layout/Layout"
@@ -31,6 +31,17 @@ const Profile = () => {
                             <Typography className={classes.uploadPhotoLink} onClick={() => openModal(setOpen)}>
                                 {profileData.data.avatarUri ? `Изменить фотографию` : `Загрузить фотографию`}
                             </Typography>
+                            <FormGroup>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            color='primary'
+                                            defaultChecked={profileData.data.view || true}
+                                            // onChange={ha}
+                                        />}
+                                        label="Показывать Ваш профиле в поиске"
+                                />
+                            </FormGroup>
                         </Box>
                         <ProfileData profileData={profileData.data} refetch={profileData.refetch} />
                     </Box>

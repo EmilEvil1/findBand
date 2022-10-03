@@ -42,7 +42,13 @@ const CreateBand = () => {
                             <Box display='flex' justifyContent={'flex-end'} style={{gap: 20}}>
                                 <Box>
                                     {!!uploadedPhoto ? (
-                                        <img style={{objectFit: "cover"}} width={100} height={100} src={uploadedPhoto} alt="Загруженное фото"/>
+                                        <img
+                                            style={{objectFit: "cover"}}
+                                            width={150}
+                                            height={150}
+                                            src={uploadedPhoto}
+                                            alt="Загруженное фото"
+                                        />
                                     ) : (
                                         <UserPhoto
                                             avatarUri={uploadedPhoto}

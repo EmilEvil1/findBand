@@ -148,8 +148,8 @@ const UploadUserPhoto = (props) => {
                             <Box>
                                 <input style={{marginBottom: 20}} type="file" onChange={onFileChange} accept=".png, .jpg, .jpeg" />
                                 <Typography>Изображение не должно превышать 5 мб</Typography>
-                                <Typography>Вы можете загрузить изображение в формате JPG, GIF или PNG.</Typography>
-                                <Typography color={'error'}>{errorText}</Typography>
+                                <Typography>Вы можете загрузить изображение в формате PNG, JPEG или JPG.</Typography>
+                                <Typography color='error'>{errorText}</Typography>
                             </Box>
 
 

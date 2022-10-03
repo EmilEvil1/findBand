@@ -11,13 +11,13 @@ const BandsInformation = () => {
     // TODO: написать API
 
     const mockData = [
-        // {
-        //     bandName: 'Группа 1',
-        //     memberCount: 2,
-        //     createData: '1/01/2000',
-        //     bandId: 123,
-        //     bandPhoto: ''
-        // },
+        {
+            bandName: 'Группа 1',
+            memberCount: 2,
+            createData: '1/01/2000',
+            bandId: 123,
+            bandPhoto: ''
+        },
         // {
         //     bandName: 'Группа 2',
         //     memberCount: 3,
@@ -35,12 +35,12 @@ const BandsInformation = () => {
                     {mockData.length > 0 ? (
                         <>
                             <BandsList list={mockData} />
-                            <Typography style={{width: '50%'}}>Вы можете иметь не более двух групп</Typography>
+                            <Typography style={{width: '50%'}}>Вы можете иметь только одну группу.</Typography>
                         </>
 
                         ) : (
                             <>
-                                <Typography style={{width: '50%'}}>У вас пока нет группы.</Typography>
+                                <Typography style={{width: '50%'}}>У вас пока нет группы. Вы можете создать или присоедениться к существующей.</Typography>
                                 <CreateBand />
                             </>
                         )
