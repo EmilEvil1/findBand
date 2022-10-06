@@ -10,7 +10,7 @@ export const fetchParams = (): Promise => {
         return response
     })
 }
-service.defaults.baseURL = "http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/"
+service.defaults.baseURL = "/api/v1"
 
 service.interceptors.request.use((config) => {
     config.headers.common.Authorization = `Bearer ${getTokenFromCookie()}`
