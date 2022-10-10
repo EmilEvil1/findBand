@@ -48,5 +48,5 @@ jobs:
           cd findBand
           git pull origin prod
           echo $CR_PAT | sudo docker login ghcr.io -u dssorokin --password-stdin
-          sudo docker-compose pull findband_web
-          sudo docker-compose restart findband_web
+          docker compose pull findband_web
+          docker compose restart findband_web
