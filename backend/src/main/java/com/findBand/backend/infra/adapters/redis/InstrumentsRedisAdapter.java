@@ -49,7 +49,6 @@ public class InstrumentsRedisAdapter implements InstrumentsPort{
 
     private Instrument toDomain(Object instrumentRedisObj) {
         LinkedHashMap instrumentRedisMap = (LinkedHashMap) instrumentRedisObj;
-        log.info("instrumentRedisObj: {}", instrumentRedisMap);
         return new Instrument(
                 (Integer) instrumentRedisMap.get("instrumentId"),
                 (String) instrumentRedisMap.get("instrumentName")
