@@ -3,16 +3,18 @@ import {useCookies} from "react-cookie"
 import {useHistory} from "react-router-dom"
 import Authentication from "../../components/forms/Authentication/Authentication"
 import {checkTokenValidate} from "../../helpers/utils"
-import {useErrorContext} from "../../context/errorContext";
+import {useErrorContext} from "../../context/errorContext"
+import {handleRemoveQuery} from "../../helpers/query"
 
 const Auth = () => {
 
     const [token, ] = useCookies(['access_token'])
     const history = useHistory()
-
     const [error, setError] = useErrorContext()
 
     useEffect(() => setError(undefined), [error])
+
+    useEffect(() => handleRemoveQuery(`ProfileData`), [])
 
     useEffect(() => {
         if (!checkTokenValidate(token.access_token)) history.push('/')

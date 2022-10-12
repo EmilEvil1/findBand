@@ -56,6 +56,12 @@ const SignUp = () => {
                     <Form
                         className={classes.signUpWrapper}
                         onSubmit={handleSubmit}
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                setErrorText('')
+                                handleSubmit(e)
+                            }
+                        }}
                     >
                         <Typography
                             variant='h4'

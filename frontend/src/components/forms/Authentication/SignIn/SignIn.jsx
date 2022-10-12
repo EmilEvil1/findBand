@@ -57,10 +57,10 @@ const SignIn = () => {
                         <Form
                             className={classes.signInForm}
                             onSubmit={handleSubmit}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
+                            onKeyPress={(event) => {
+                                if (event.key === 'Enter') {
                                     setErrorText('')
-                                    handleSubmit()
+                                    handleSubmit(event)
                                 }
                             }}
                         >

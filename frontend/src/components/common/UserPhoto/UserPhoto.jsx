@@ -1,6 +1,8 @@
 import React from 'react'
 import {Avatar} from "@material-ui/core"
-import 'react-lazy-load-image-component/src/effects/blur.css'
+// import 'react-lazy-load-image-component/src/effects/blur.css'
+// import 'react-lazy-load-image-component/src/effects/black-and-white.css'
+import 'react-lazy-load-image-component/src/effects/opacity.css'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import {currentLocation} from "../../../helpers/axios"
 
@@ -16,7 +18,7 @@ const UserPhoto = (props) => {
                     alt={shortName}
                     height={height}
                     src={src || ''}
-                    effect="blur"// use normal <img> attributes as props
+                    effect="opacity"// use normal <img> attributes as props
                     width={width}
                 />
             ) : (
