@@ -30,13 +30,13 @@ jobs:
       run: cd backend && mvn -B clean verify
     #Build Docker image:
     - name: Build docker image Backend
-      run: cd backend && docker-compose build findband_web
+      run: docker-compose build findband-web
 
     - name: Docker login
       run: docker login ghcr.io -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
 
     - name: Publish Backend
-      run: cd backend && docker-compose push findband_web
+      run: docker-compose push findband-web
 
     - name: Deploy backend
       uses: appleboy/ssh-action@master
@@ -45,9 +45,8 @@ jobs:
         username: ${{ secrets.BACKEND_USERNAME }}
         key: ${{ secrets.BACKEND_SSH_KEY }}
         script: |
-          cd findBand/backend
+          cd findBand
           git pull origin prod
           echo $CR_PAT | sudo docker login ghcr.io -u dssorokin --password-stdin
-          sudo docker-compose pull findband_web
-          sudo docker-compose down
-          sudo docker-compose up -d
+          docker compose pull findband-web
+          docker compose restart findband-web
