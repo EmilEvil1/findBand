@@ -5,7 +5,7 @@ import {handleRemoveQuery} from "../../../helpers/query"
 import ReSearch from "../../forms/ReSearch/ReSearch"
 import {useStyles} from "./style"
 
-const SearchFilter = ({refetch}) => {
+const SearchFilter = ({data, refetch, regionId, instrumentId, setRegionId, setInstrumentId}) => {
 
     const classes = useStyles()
     const history = useHistory()
@@ -14,9 +14,15 @@ const SearchFilter = ({refetch}) => {
         <Grid className={classes.container}>
             <Box className={classes.wrapper}>
                 <Typography variant='h5' className={classes.title}>Результаты поиска</Typography>
-                <ReSearch refetch={refetch} />
+                <ReSearch
+                    refetch={refetch}
+                    regionId={regionId}
+                    instrumentId={instrumentId}
+                    setRegionId={setRegionId}
+                    setInstrumentId={setInstrumentId}
+                />
                 <Button onClick={() => {
-                    history.goBack()
+                    history.push(`/`)
                     handleRemoveQuery(`SearchForMembers`)
                 }}>
                     Назад

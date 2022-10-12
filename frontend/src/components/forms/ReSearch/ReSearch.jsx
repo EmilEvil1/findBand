@@ -6,23 +6,26 @@ import {searchMusician} from "../../../helpers/validation";
 import RegionList from "../../common/RegionList/RegionList";
 import InstrumentList from "../../common/InstrumentList/InstrumentList";
 
-const ReSearch = ({refetch}) => {
+const ReSearch = ({refetch, regionId, instrumentId, setRegionId, setInstrumentId}) => {
 
     const history = useHistory()
 
-    const onSubmit = data => {
-        history.push(`/search?regionId=${data.regionId}&instrumentId=${data.instrumentId}`)
-        refetch()
+    const onSubmit = async (data) => {
+        await setInstrumentId(data.instrumentId)
+        await setRegionId(data.regionId)
+        await history.push(`/search?regionId=${data.regionId}&instrumentId=${data.instrumentId}`)
+        await refetch()
     }
 
     return (
         <Formik
             initialValues={{
-                regionId: null,
-                instrumentId: null
+                regionId: Number(regionId),
+                instrumentId: Number(instrumentId)
             }}
             validationSchema={searchMusician}
             onSubmit={values => onSubmit(values)}
+            enableReinitialize
         >
             {props => {
                 const {
@@ -36,7 +39,7 @@ const ReSearch = ({refetch}) => {
                 } = props
                 return (
                     <Form onSubmit={handleSubmit}>
-                        <Box width={'500px'} display={'flex'}>
+                        <Box width='500px' display='flex' alignItems={"center"}>
                             <RegionList
                                 values={values}
                                 handleChange={handleChange}

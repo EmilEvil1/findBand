@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Box, Grid, Typography} from "@material-ui/core"
 import {LoaderWrapper} from "../../components/wrappers/LoaderWrapper"
 import MusicianCard from "../../components/common/MusicianCard/MusicianCard"
@@ -11,15 +11,21 @@ import {useStyles} from "../style"
 const MusicianSearchResult = () => {
 
     const classes = useStyles()
-    const regionId = getUrlQueryParams(`regionId`)
-    const instrumentId = getUrlQueryParams(`instrumentId`)
+    const [regionId, setRegionId] = useState(getUrlQueryParams(`regionId`))
+    const [instrumentId, setInstrumentId] = useState(getUrlQueryParams(`instrumentId`))
     const searchForMembers = useSearchForMembers(regionId, instrumentId)
     const isLoading = searchForMembers.isLoading || searchForMembers.isFetching
 
     return (
         <Grid className={classes.layout}>
             <Layout>
-                <SearchFilter refetch={searchForMembers.refetch} />
+                <SearchFilter
+                    refetch={searchForMembers.refetch}
+                    regionId={regionId}
+                    instrumentId={instrumentId}
+                    setRegionId={setRegionId}
+                    setInstrumentId={setInstrumentId}
+                />
                 <LoaderWrapper isLoad={isLoading}>
                     <Box className={classes.wrapper}>
                         {searchForMembers.data &&

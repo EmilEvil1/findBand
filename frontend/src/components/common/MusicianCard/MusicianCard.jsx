@@ -20,7 +20,6 @@ const MusicianCard = ({item}) => {
                         {item.instruments.map((instrumentName, index) => {
                             return (<Typography key={index}>{instrumentName}</Typography>)
                         })}
-
                     </Box>
                 </Box>
             </Box>
@@ -40,7 +39,7 @@ const MusicianCard = ({item}) => {
             </Box>
             <Button
                 className={classes.redirectBtn}
-                onClick={() => history.push('/detailed')}
+                onClick={() => history.push(`/detailed?ID=${item.id}`)}
             >
                 Перейти в профиль
             </Button>

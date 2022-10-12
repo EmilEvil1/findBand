@@ -14,7 +14,7 @@ const authService = {
         return service.post(`createNewPassword`, data)
     },
     telegramAuth: (data): Promise => {
-        return service.post(`telegram`, data)
+        return service.post(`telegramAuthenticate`, data)
     },
 }
 

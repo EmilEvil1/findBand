@@ -10,7 +10,6 @@ const RegionList = (props) => {
 
     const regionList = useRegionList()
     const classes = useStyles()
-
     return (
         <Autocomplete
             id="regionId"
@@ -21,7 +20,7 @@ const RegionList = (props) => {
             options={(Array.isArray(regionList.data) && regionList.data.length > 0 && regionList.data) || []}
             getOptionLabel={option => option.name}
             onChange={(event, value) => {
-                !!value ?  setFieldValue("regionId", value.id) : setFieldValue("regionId", 0)
+                !!value ? setFieldValue("regionId", value.id) : setFieldValue("regionId", 0)
             }}
             renderInput={(params) => (
                 <Box className={classes.textField}>

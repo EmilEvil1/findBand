@@ -21,7 +21,7 @@ export const getQueryClient = (errorHandle) => {
         defaultOptions: {
             queries: { refetchOnWindowFocus: false, staleTime: Infinity, retry}},
             queryCache: new QueryCache({ onError }),
-            mutationCache: new MutationCache({ onError })
+            mutationCache: new MutationCache({ onError }),
         }
     )
     return queryClient

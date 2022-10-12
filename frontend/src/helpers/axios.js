@@ -1,5 +1,7 @@
 import axios from "axios"
 
+export const currentLocation = window.location.hostname
+
 const service = axios.create({
     headers: { accept: "application/json" },
 })
@@ -10,7 +12,7 @@ export const fetchParams = (): Promise => {
         return response
     })
 }
-service.defaults.baseURL = "http://ec2-3-14-79-158.us-east-2.compute.amazonaws.com/api/v1/"
+service.defaults.baseURL = currentLocation === 'localhost' ? "http://findband.ru:8080/api/v1/" : '/api/v1/'
 
 service.interceptors.request.use((config) => {
     config.headers.common.Authorization = `Bearer ${getTokenFromCookie()}`

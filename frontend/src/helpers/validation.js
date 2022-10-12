@@ -45,11 +45,13 @@ export const signUpValidation = yup.object({
         .required('Заполните поле'),
     regionId: yup
         .string('Выберите регион')
+        .nullable()
         .required('Выберите регион'),
     instrumentId : yup
-        .number('Некоректный иструмент')
+        .string('Некоректный иструмент')
+        .nullable()
         .required('Выберите инструмент')
-});
+})
 
 // Create new password
 
@@ -124,8 +126,8 @@ export const bandInformation = yup.object({
         .string('Заполните поле')
         .required('Заполните поле'),
     bandGenre: yup
-        .string('Заполните поле')
-        .required('Заполните поле'),
+        .string('Заполните поле'),
+        // .required('Заполните поле'),
     regionId: yup
         .string('Выберите регион')
         .nullable()

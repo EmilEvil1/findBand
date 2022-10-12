@@ -22,7 +22,7 @@ const Profile = () => {
                     <Box className={classes.profileForm}>
                         <Box className={classes.photoWrapper}>
                             <UserPhoto
-                                avatarUri={profileData.data && profileData.data.avatarUri}
+                                avatarUri={profileData.data.avatarUri}
                                 width={150}
                                 height={150}
                                 shortName={profileData.data.userName}

@@ -1,12 +1,18 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Layout from "../../components/common/Layout/Layout"
 import {Box, Button, Typography} from "@material-ui/core"
 import {useStyles} from "../style"
 import UserPhoto from "../../components/common/UserPhoto/UserPhoto";
+import {getUrlQueryParams} from "../../helpers/utils";
+import {useHistory} from "react-router-dom";
 
 const MusicianDetailed = () => {
 
     const classes = useStyles()
+    const history = useHistory()
+    const id = getUrlQueryParams(`ID`)
+
+    useEffect(() => !id && history.push(`/404`), [id])
 
     return (
         <Box className={classes.contentDark}>

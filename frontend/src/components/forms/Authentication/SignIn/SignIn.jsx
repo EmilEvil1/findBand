@@ -57,6 +57,12 @@ const SignIn = () => {
                         <Form
                             className={classes.signInForm}
                             onSubmit={handleSubmit}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    setErrorText('')
+                                    handleSubmit()
+                                }
+                            }}
                         >
                             <Typography style={{marginBottom: 50}} variant="h4">Вход</Typography>
                             <TelegramAccount />
@@ -111,6 +117,7 @@ const SignIn = () => {
                                 Забыли пароль?
                             </Typography>
                             <Button
+                                className={classes.signInBtn}
                                 style={{border: '1px solid white', width: '70%'}}
                                 color='primary'
                                 disabled={isLoading}
@@ -118,7 +125,6 @@ const SignIn = () => {
                                     setErrorText('')
                                     handleSubmit(event)
                                 }}
-                                className={classes.signInBtn}
                             >
                                 Войти
                             </Button>
